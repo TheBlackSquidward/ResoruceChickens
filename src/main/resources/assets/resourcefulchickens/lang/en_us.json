@@ -1,0 +1,26 @@
+{
+    "item.resourcefulchickens.chicken_catcher": "Chicken Catcher",
+    "item.resourcefulchickens.chicken_stick": "Chicken Stick",
+
+    "entity.resourcefulchickens.emerald_chicken": "Emerald Chicken",
+    "item.resourcefulchickens.emerald_chicken_item": "Emerald Chicken",
+    "item.resourcefulchickens.emerald_chicken_spawn_egg": "Emerald Chicken Spawn Egg",
+    "item.resourcefulchickens.emerald_chicken_feather": "Emerald Feather",
+
+    "entity.resourcefulchickens.gold_chicken": "Gold Chicken",
+    "item.resourcefulchickens.gold_chicken_item": "Gold Chicken",
+    "item.resourcefulchickens.gold_chicken_spawn_egg": "Gold Chicken Spawn Egg",
+    "item.resourcefulchickens.gold_chicken_feather": "Gold Feather",
+
+    "entity.resourcefulchickens.diamond_chicken": "Diamond Chicken",
+    "item.resourcefulchickens.diamond_chicken_item": "Diamond Chicken",
+    "item.resourcefulchickens.diamond_chicken_spawn_egg": "Diamond Chicken Spawn Egg",
+    "item.resourcefulchickens.diamond_chicken_feather": "Diamond Feather",
+
+    "entity.resourcefulchickens.iron_chicken": "Iron Chicken",
+    "item.resourcefulchickens.iron_chicken_item": "Iron Chicken",
+    "item.resourcefulchickens.iron_chicken_spawn_egg": "Iron Chicken Spawn Egg",
+    "item.resourcefulchickens.iron_chicken_feather": "Iron Feather",
+
+    "itemGroup.resourcefulchickens": "Resourceful Chickens"
+}
