@@ -101,6 +101,7 @@ public class CustomChickenEntity extends AnimalEntity {
             this.entityDropItem(Items.EGG);
             this.timeUntilNextLay = layTime;
             //TODO change this;
+            // For example shed feathers?
         }
     }
 
