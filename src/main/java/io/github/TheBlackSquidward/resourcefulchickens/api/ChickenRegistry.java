@@ -1,14 +1,10 @@
-package io.github.TheBlackSquidward.resourcefulchickens.utils;
+package io.github.TheBlackSquidward.resourcefulchickens.api;
 
 import io.github.TheBlackSquidward.resourcefulchickens.ResourcefulChickens;
-import io.github.TheBlackSquidward.resourcefulchickens.chickens.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcefulchickens.chickens.CustomChickenEntity;
-import io.github.TheBlackSquidward.resourcefulchickens.chickens.chickens.GoldChickenEntity;
 import io.github.TheBlackSquidward.resourcefulchickens.common.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcefulchickens.common.items.CustomSpawnEggItem;
 import io.github.TheBlackSquidward.resourcefulchickens.init.EntityInit;
 import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -24,10 +20,10 @@ public class ChickenRegistry {
     private final static HashMap<String, ChickenRegistryObject> chickenRegistry = new HashMap<>();
 
     public static void initChickens() {
-        ChickenRegistryObject ironChicken = new ChickenRegistryObject("iron_chicken", new ResourceLocation(ResourcefulChickens.MODID, "textures/entity/iron_chicken.png"), new ItemStack(Items.IRON_INGOT), 16777164, 16764108, null, null, true);
+        ChickenRegistryObject ironChicken = new ChickenRegistryObject("iron_chicken", new ResourceLocation(ResourcefulChickens.MODID, "textures/entity/iron_chicken_item.png"), new ItemStack(Items.IRON_INGOT), 16777164, 16764108, null, null, true);
         getChickenRegistry().put(ironChicken.getEntityName(), ironChicken);
 
-        ChickenRegistryObject goldChicken = new ChickenRegistryObject("gold_chicken", new ResourceLocation(ResourcefulChickens.MODID, "textures/entity/gold_chicken.png"), new ItemStack(Items.GOLD_INGOT), 13421568, 16777088, null, null, true);
+        ChickenRegistryObject goldChicken = new ChickenRegistryObject("gold_chicken", new ResourceLocation(ResourcefulChickens.MODID, "textures/entity/gold_chicken_item.png"), new ItemStack(Items.GOLD_INGOT), 13421568, 16777088, null, null, true);
         getChickenRegistry().put(goldChicken.getEntityName(), goldChicken);
 
         ChickenRegistryObject diamondChicken = new ChickenRegistryObject("diamond_chicken", new ResourceLocation(ResourcefulChickens.MODID, "textures/entity/diamond_chicken.png"), new ItemStack(Items.DIAMOND), 10079487, 15135487, null, null, true);
@@ -67,6 +63,15 @@ public class ChickenRegistry {
     public static ChickenRegistryObject getChickenRegistryObjectbyEntity(CustomChickenEntity entity) {
         for(ChickenRegistryObject chickenRegistryObject : chickenRegistry.values()) {
             if(chickenRegistryObject.getChickenEntityRegisryObject().get() == (EntityType) entity.getType()) {
+                return chickenRegistryObject;
+            }
+        }
+        return null;
+    }
+
+    public static ChickenRegistryObject getChickenRegistryObjectbyChickenItem(Item item) {
+        for(ChickenRegistryObject chickenRegistryObject : chickenRegistry.values()) {
+            if(chickenRegistryObject.getChickenItemRegistryObject().get() == item) {
                 return chickenRegistryObject;
             }
         }

@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcefulchickens.chickens;
+package io.github.TheBlackSquidward.resourcefulchickens.api;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;

@@ -1,12 +1,13 @@
 package io.github.TheBlackSquidward.resourcefulchickens;
 
-import io.github.TheBlackSquidward.resourcefulchickens.chickens.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcefulchickens.chickens.CustomChickenEntity;
-import io.github.TheBlackSquidward.resourcefulchickens.chickens.chickens.GoldChickenEntity;
-import io.github.TheBlackSquidward.resourcefulchickens.chickens.chickens.IronChickenEntity;
+import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
+import io.github.TheBlackSquidward.resourcefulchickens.api.CreativeTab;
+import io.github.TheBlackSquidward.resourcefulchickens.api.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcefulchickens.common.items.ChickenCatcherItem;
+import io.github.TheBlackSquidward.resourcefulchickens.init.BlockInit;
 import io.github.TheBlackSquidward.resourcefulchickens.init.EntityInit;
 import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
-import io.github.TheBlackSquidward.resourcefulchickens.utils.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
@@ -33,12 +34,15 @@ public class ResourcefulChickens {
 
         ItemInit.ITEMS.register(iEventBus);
         EntityInit.ENTITY_TYPES.register(iEventBus);
+        BlockInit.BLOCKS.register(iEventBus);
 
         registerChickens();
         ChickenRegistry.initChickens();
         ChickenRegistry.registerChickens();
 
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new ChickenCatcherEvent());
+        MinecraftForge.EVENT_BUS.register(new ChickenItemEvent());
     }
 
     private void registerChickens() {

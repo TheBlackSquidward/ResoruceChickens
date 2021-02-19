@@ -13,66 +13,10 @@ public class ItemInit {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ResourcefulChickens.MODID);
 
-    //Seeds
-    public static final RegistryObject<Item> IRON_SEEDS = ITEMS.register("iron_seeds", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> GOLD_SEEDS = ITEMS.register("gold_seeds", () -> new Item(new Item.Properties()));
+    //Chickens - Vanilla
+    public static final RegistryObject<ChickenItem> VANILLA_CHICKEN = ITEMS.register("vanilla_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
 
     /*
-
-    //Chickens - Vanilla
-    public static final RegistryObject<ChickenItem> BLACK_CHICKEN = ITEMS.register("black_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> BLAZE_CHICKEN = ITEMS.register("blaze_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> BLUE_CHICKEN = ITEMS.register("blue_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> BROWN_CHICKEN = ITEMS.register("brown_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> CLAY_CHICKEN = ITEMS.register("clay_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> COAL_CHICKEN = ITEMS.register("coal_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> COW_CHICKEN = ITEMS.register("cow_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> CYAN_CHICKEN = ITEMS.register("cyan_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> DIAMOND_CHICKEN = ITEMS.register("diamond_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> EMERALD_CHICKEN = ITEMS.register("emerald_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> ENDER_CHICKEN = ITEMS.register("ender_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> ENDER_DRAGON_CHICKEN = ITEMS.register("ender_dragon_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> EXPERIENCE_CHICKEN = ITEMS.register("experience_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> FLINT_CHICKEN = ITEMS.register("flint_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> GHAST_CHICKEN = ITEMS.register("ghast_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> GLASS_CHICKEN = ITEMS.register("glass_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> GLOWSTONE_CHICKEN = ITEMS.register("glowstone_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> GOLD_CHICKEN = ITEMS.register("gold_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> GRAY_CHICKEN = ITEMS.register("gray_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> GREEN_CHICKEN = ITEMS.register("green_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> GUNPOWDER_CHICKEN = ITEMS.register("gunpowder_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> HONEY_CHICKEN = ITEMS.register("honey_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> IRON_CHICKEN = ITEMS.register("iron_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> LAVA_CHICKEN = ITEMS.register("lava_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> LIGHT_BLUE_CHICKEN = ITEMS.register("light_blue_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> LIME_CHICKEN = ITEMS.register("lime_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> MAGENTA_CHICKEN = ITEMS.register("magenta_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> MAGMA_SLIME_CHICKEN = ITEMS.register("magma_slime_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> NETHER_WART_CHICKEN = ITEMS.register("nether_wart_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> NETHERITE_CHICKEN = ITEMS.register("netherite_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> OAK_LOG_CHICKEN = ITEMS.register("oak_log_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> OBSIDIAN_CHICKEN = ITEMS.register("obsidian_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> PINK_CHICKEN = ITEMS.register("pink_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> PURPLE_CHICKEN = ITEMS.register("purple_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> QUARTZ_CHICKEN = ITEMS.register("quartz_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> RED_CHICKEN = ITEMS.register("red_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> REDSTONE_CHICKEN = ITEMS.register("redstone_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> SAND_CHICKEN = ITEMS.register("sand_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> SLIME_CHICKEN = ITEMS.register("slime_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> SNOWBALL_CHICKEN = ITEMS.register("snowball_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> SOUL_SAND_CHICKEN = ITEMS.register("soul_sand_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> SPIDER_CHICKEN = ITEMS.register("spider_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> SUGAR_CANE_CHICKEN = ITEMS.register("suagr_cane_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> VANILLA_CHICKEN = ITEMS.register("vanilla_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> WATER_CHICKEN = ITEMS.register("water_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> WHITE_CHICKEN = ITEMS.register("white_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> WITHER_CHICKEN = ITEMS.register("wither_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> WITHER_SKELETON_CHICKEN = ITEMS.register("wither_skeleton_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> YELLOW_CHICKEN = ITEMS.register("yellow_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-
-    public static final RegistryObject<ChickenItem> ENCHANTED_CHICKEN = ITEMS.register("enchanted_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-    public static final RegistryObject<ChickenItem> POTION_CHICKEN = ITEMS.register("potion_chicken", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-
     //Spawn Eggs
     public static final RegistryObject<CustomSpawnEggItem> BLACK_CHICKEN_SPAWN_EGG = ITEMS.register("black_chicken_spawn_egg", () -> new CustomSpawnEggItem(new Item.Properties().maxStackSize(16)));
     public static final RegistryObject<CustomSpawnEggItem> BLAZE_CHICKEN_SPAWN_EGG = ITEMS.register("blaze_chicken_spawn_egg", () -> new CustomSpawnEggItem(new Item.Properties().maxStackSize(16)));

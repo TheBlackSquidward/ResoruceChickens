@@ -1,12 +1,12 @@
 package io.github.TheBlackSquidward.resourcefulchickens.utils;
 
 import io.github.TheBlackSquidward.resourcefulchickens.ResourcefulChickens;
-import io.github.TheBlackSquidward.resourcefulchickens.chickens.ChickenRegistryObject;
+import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcefulchickens.client.render.CustomChickenRenderer;
-import io.github.TheBlackSquidward.resourcefulchickens.init.EntityInit;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;

@@ -1,16 +1,13 @@
 package io.github.TheBlackSquidward.resourcefulchickens.client.render;
 
 import io.github.TheBlackSquidward.resourcefulchickens.ResourcefulChickens;
-import io.github.TheBlackSquidward.resourcefulchickens.chickens.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcefulchickens.chickens.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
+import io.github.TheBlackSquidward.resourcefulchickens.api.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcefulchickens.client.model.CustomChickenModel;
-import io.github.TheBlackSquidward.resourcefulchickens.init.EntityInit;
-import io.github.TheBlackSquidward.resourcefulchickens.utils.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
-
-import javax.swing.text.html.parser.Entity;
 
 public class CustomChickenRenderer extends MobRenderer<CustomChickenEntity, CustomChickenModel<CustomChickenEntity>> {
     public CustomChickenRenderer(EntityRendererManager rendererManager) {

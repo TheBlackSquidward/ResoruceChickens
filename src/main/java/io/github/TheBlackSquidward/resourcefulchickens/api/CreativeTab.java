@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcefulchickens;
+package io.github.TheBlackSquidward.resourcefulchickens.api;
 
 import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
 import net.minecraft.item.Item;

@@ -1,8 +1,6 @@
-package io.github.TheBlackSquidward.resourcefulchickens.chickens;
+package io.github.TheBlackSquidward.resourcefulchickens.api;
 
-import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
 import net.minecraft.block.BlockState;
-import net.minecraft.command.arguments.NBTCompoundTagArgument;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -10,11 +8,9 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
