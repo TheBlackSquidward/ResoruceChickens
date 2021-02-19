@@ -2,8 +2,7 @@ package io.github.TheBlackSquidward.resourcefulchickens;
 
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcefulchickens.api.CreativeTab;
-import io.github.TheBlackSquidward.resourcefulchickens.api.CustomChickenEntity;
-import io.github.TheBlackSquidward.resourcefulchickens.common.items.ChickenCatcherItem;
+import io.github.TheBlackSquidward.resourcefulchickens.common.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcefulchickens.init.BlockInit;
 import io.github.TheBlackSquidward.resourcefulchickens.init.EntityInit;
 import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
@@ -42,7 +41,6 @@ public class ResourcefulChickens {
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ChickenCatcherEvent());
-        MinecraftForge.EVENT_BUS.register(new ChickenItemEvent());
     }
 
     private void registerChickens() {

@@ -2,9 +2,11 @@ package io.github.TheBlackSquidward.resourcefulchickens;
 
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcefulchickens.api.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcefulchickens.common.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcefulchickens.common.items.ChickenCatcherItem;
+import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
@@ -23,13 +25,19 @@ public class ChickenCatcherEvent {
             if (e.getHand() == Hand.MAIN_HAND) {
                 if (entity instanceof CustomChickenEntity) {
                     CustomChickenEntity customChickenEntity = (CustomChickenEntity) entity;
-                    if (p.getHeldItemMainhand() != null) {
-                        if (p.getHeldItemMainhand().getItem() instanceof ChickenCatcherItem) {
-                            ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(customChickenEntity);
-                            //TODO maybe some cool particle effects
-                            p.addItemStackToInventory(new ItemStack(chickenRegistryObject.getChickenItemRegistryObject().get()));
-                            customChickenEntity.remove();
-                        }
+                    if (p.getHeldItemMainhand().getItem() instanceof ChickenCatcherItem) {
+                        ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(customChickenEntity);
+                        //TODO maybe some cool particle effects
+                        p.addItemStackToInventory(new ItemStack(chickenRegistryObject.getChickenItemRegistryObject().get()));
+                        customChickenEntity.remove();
+                    }
+                }
+                if(entity instanceof ChickenEntity) {
+                    ChickenEntity chickenEntity = (ChickenEntity) entity;
+                    if (p.getHeldItemMainhand().getItem() instanceof ChickenCatcherItem) {
+                        //TODO maybe some cool particle effects
+                        p.addItemStackToInventory(new ItemStack(ItemInit.VANILLA_CHICKEN.get()));
+                        chickenEntity.remove();
                     }
                 }
             }

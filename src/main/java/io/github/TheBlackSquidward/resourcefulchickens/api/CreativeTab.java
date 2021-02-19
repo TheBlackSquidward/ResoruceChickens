@@ -15,7 +15,7 @@ public class CreativeTab extends ItemGroup {
 
     @Override
     public ItemStack createIcon() {
-        return ItemInit.CHICKEN_STICK.get().getDefaultInstance();
+        return ItemInit.VANILLA_CHICKEN.get().getDefaultInstance();
     }
 
     @Override

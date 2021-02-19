@@ -1,5 +1,6 @@
 package io.github.TheBlackSquidward.resourcefulchickens.api;
 
+import io.github.TheBlackSquidward.resourcefulchickens.common.entities.CustomChickenEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

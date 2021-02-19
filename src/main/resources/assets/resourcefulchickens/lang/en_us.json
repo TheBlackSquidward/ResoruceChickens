@@ -2,6 +2,15 @@
     "item.resourcefulchickens.chicken_catcher": "Chicken Catcher",
     "item.resourcefulchickens.chicken_stick": "Chicken Stick",
 
+    "item.resourcefulchickens.chicken_manure": "Chicken Manure",
+    "item.resourcefulchickens.fertilizer": "Fertilizer",
+
+    "item.resourcefulchickens.vanilla_chicken_item": "Chicken",
+
+    "entity.resourcefulchickens.green_chicken": "Green Dye Chicken",
+    "item.resourcefulchickens.green_chicken_item": "Green Dye Chicken",
+    "item.resourcefulchickens.green_chicken_spawn_egg": "Green Dye Chicken Spawn Egg",
+
     "entity.resourcefulchickens.emerald_chicken": "Emerald Chicken",
     "item.resourcefulchickens.emerald_chicken_item": "Emerald Chicken",
     "item.resourcefulchickens.emerald_chicken_spawn_egg": "Emerald Chicken Spawn Egg",

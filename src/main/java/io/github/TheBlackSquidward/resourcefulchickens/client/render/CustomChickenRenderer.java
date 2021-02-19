@@ -2,7 +2,7 @@ package io.github.TheBlackSquidward.resourcefulchickens.client.render;
 
 import io.github.TheBlackSquidward.resourcefulchickens.ResourcefulChickens;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcefulchickens.api.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcefulchickens.common.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcefulchickens.client.model.CustomChickenModel;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

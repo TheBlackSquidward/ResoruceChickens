@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcefulchickens.api;
+package io.github.TheBlackSquidward.resourcefulchickens.common.entities;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
@@ -11,6 +11,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -26,20 +27,23 @@ import javax.annotation.Nullable;
 public class CustomChickenEntity extends AnimalEntity {
 
     private static Ingredient TEMPTATION_ITEM = Ingredient.fromItems(Items.WHEAT_SEEDS);
+    private static transient int layTime;
 
-    private static final DataParameter<String> CHICKEN_TYPE = EntityDataManager.createKey(CustomChickenEntity.class, DataSerializers.STRING);
     private static final DataParameter<Integer> CHICKEN_GROWTH = EntityDataManager.createKey(CustomChickenEntity.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> CHICKEN_GAIN = EntityDataManager.createKey(CustomChickenEntity.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> CHICKEN_STRENGTH = EntityDataManager.createKey(CustomChickenEntity.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> CHICKEN_LAY_PROGRESS = EntityDataManager.createKey(CustomChickenEntity.class, DataSerializers.VARINT);
 
-    private static final String TYPE_NBT = "Type";
     private static final String CHICKEN_GROWTH_NBT = "Growth";
     private static final String CHICKEN_GAIN_NBT = "Gain";
     private static final String CHICKEN_STRENGTH_NBT = "Strength";
+    private static final String CHICKEN_LAY_PROGRESS_NBT = "ChickenLayProgress";
+
+    public int timeUntilNextLay = layTime;
 
     public CustomChickenEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
+        layTime = this.rand.nextInt(6000) + 6000;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -89,17 +93,36 @@ public class CustomChickenEntity extends AnimalEntity {
         return null;
     }
 
+    @Override
+    public void livingTick() {
+        super.livingTick();
+        if (!this.world.isRemote && this.isAlive() && !this.isChild() && --this.timeUntilNextLay <= 0) {
+            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+            this.entityDropItem(Items.EGG);
+            this.timeUntilNextLay = layTime;
+            //TODO change this;
+        }
+    }
+
     /*
+    @Override
+    public CompoundNBT serializeNBT() {
+        CompoundNBT compoundNBT = new CompoundNBT();
+        compoundNBT.putInt(CHICKEN_GAIN_NBT, 1);
+        compoundNBT.putInt(CHICKEN_GROWTH_NBT, 1);
+        compoundNBT.putInt(CHICKEN_STRENGTH_NBT, 1);
+        compoundNBT.putInt(CHICKEN_LAY_PROGRESS_NBT, 0);
+        return compoundNBT;
+    }
+
     @Override
     protected void registerData() {
         super.registerData();
-        this.dataManager.register(CHICKEN_TYPE, "");
         this.dataManager.register(CHICKEN_GROWTH, Integer.valueOf(1));
         this.dataManager.register(CHICKEN_GAIN, Integer.valueOf(1));
         this.dataManager.register(CHICKEN_STRENGTH, Integer.valueOf(1));
         this.dataManager.register(CHICKEN_LAY_PROGRESS, Integer.valueOf(0));
     }
-
     public void readEntityfromNBT(CompoundNBT compound) {
         super.read(compound);
         this.dataManager.set(CHICKEN_TYPE, compound.getString(TYPE_NBT));
