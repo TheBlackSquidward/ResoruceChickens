@@ -5,6 +5,13 @@
     "item.resourcefulchickens.chicken_manure": "Chicken Manure",
     "item.resourcefulchickens.fertilizer": "Fertilizer",
 
+    "block.resourcefulchickens.electric_roost": "Electric Roost",
+    "block.resourcefulchickens.roost": "Roost",
+    "block.resourcefulchickens.electric_chicken_breeder": "Electric Chicken Breeder",
+    "block.resourcefulchickens.chicken_breeder": "Chicken Breeder",
+    "block.resourcefulchickens.electric_incubator": "Electric Incubator",
+    "block.resourcefulchickens.incubator": "Incubator",
+
     "item.resourcefulchickens.vanilla_chicken_item": "Chicken",
 
     "entity.resourcefulchickens.green_chicken": "Green Dye Chicken",

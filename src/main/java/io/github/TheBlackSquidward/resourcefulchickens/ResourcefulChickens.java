@@ -40,7 +40,6 @@ public class ResourcefulChickens {
         ChickenRegistry.registerChickens();
 
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new ChickenCatcherEvent());
     }
 
     private void registerChickens() {

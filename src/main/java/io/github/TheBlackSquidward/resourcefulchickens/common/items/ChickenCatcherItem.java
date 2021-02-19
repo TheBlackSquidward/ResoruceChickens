@@ -8,7 +8,7 @@ import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.AxeItem;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResultType;
@@ -21,7 +21,7 @@ import java.util.Random;
 public class ChickenCatcherItem extends Item {
 
     public ChickenCatcherItem() {
-        super(new Item.Properties().maxDamage(128).maxStackSize(1).setNoRepair());
+        super(new Item.Properties().maxStackSize(1).maxDamage(128));
     }
 
     @Override
@@ -34,9 +34,13 @@ public class ChickenCatcherItem extends Item {
             if (!entity.isChild()) {
                 if (world.isRemote) {
                     p.getEntityWorld().playSound(p, pos.x, pos.y, pos.z, SoundEvents.ENTITY_CHICKEN_EGG, entity.getSoundCategory(), 1.0F, 1.0F);
+                    //TODO add particles
+                }else{
                     p.addItemStackToInventory(new ItemStack(chickenRegistryObject.getChickenItemRegistryObject().get(), 1));
+                    itemStack.damageItem(1, p,(p_220045_0_) -> {
+                        p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+                    });
                     entity.remove();
-                    //TODO add pretty particles and do damage to the catcher
                 }
             } else {
                 return ActionResultType.SUCCESS;
@@ -45,9 +49,13 @@ public class ChickenCatcherItem extends Item {
             if(!entity.isChild()) {
                 if(world.isRemote()) {
                     p.getEntityWorld().playSound(p, pos.x, pos.y, pos.z, SoundEvents.ENTITY_CHICKEN_EGG, entity.getSoundCategory(), 1.0F, 1.0F);
+                    //TODO add particles
+                }else{
                     p.addItemStackToInventory(new ItemStack(ItemInit.VANILLA_CHICKEN.get(), 1));
+                    itemStack.damageItem(1, p,(p_220045_0_) -> {
+                        p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+                    });
                     entity.remove();
-                    //TODO add pretty particles and do damage to the catcher
                 }
             }
         }

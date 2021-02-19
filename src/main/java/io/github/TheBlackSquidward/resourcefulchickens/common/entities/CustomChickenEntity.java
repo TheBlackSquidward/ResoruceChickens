@@ -102,6 +102,7 @@ public class CustomChickenEntity extends AnimalEntity {
             this.timeUntilNextLay = layTime;
             //TODO change this;
             // For example shed feathers?
+            // Also drop manure every now and again.
         }
     }
 
