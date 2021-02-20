@@ -14,6 +14,54 @@
 
     "item.resourcefulchickens.vanilla_chicken_item": "Chicken",
 
+    "entity.resourcefulchickens.lime_chicken": "Lime Dye Chicken",
+    "item.resourcefulchickens.lime_chicken_item": "Lime Dye Chicken",
+    "item.resourcefulchickens.lime_chicken_spawn_egg": "Lime Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.blue_chicken": "Blue Dye Chicken",
+    "item.resourcefulchickens.blue_chicken_item": "Blue Dye Chicken",
+    "item.resourcefulchickens.blue_chicken_spawn_egg": "Blue Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.light_blue_chicken": "Light Blue Dye Chicken",
+    "item.resourcefulchickens.light_blue_chicken_item": "Light Blue Dye Chicken",
+    "item.resourcefulchickens.light_blue_chicken_spawn_egg": "Light Blue Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.yellow_chicken": "Yellow Dye Chicken",
+    "item.resourcefulchickens.yellow_chicken_item": "Yellow Dye Chicken",
+    "item.resourcefulchickens.yellow_chicken_spawn_egg": "Yellow Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.light_gray_chicken": "Light Gray Dye Chicken",
+    "item.resourcefulchickens.light_gray_chicken_item": "Light Gray Dye Chicken",
+    "item.resourcefulchickens.light_gray_chicken_spawn_egg": "Light Gray Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.white_chicken": "White Dye Chicken",
+    "item.resourcefulchickens.white_chicken_item": "White Dye Chicken",
+    "item.resourcefulchickens.white_chicken_spawn_egg": "White Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.red_chicken": "Red Dye Chicken",
+    "item.resourcefulchickens.red_chicken_item": "Red Dye Chicken",
+    "item.resourcefulchickens.red_chicken_spawn_egg": "Red Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.cyan_chicken": "Cyan Dye Chicken",
+    "item.resourcefulchickens.cyan_chicken_item": "Cyan Dye Chicken",
+    "item.resourcefulchickens.cyan_chicken_spawn_egg": "Cyan Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.pink_chicken": "Pink Dye Chicken",
+    "item.resourcefulchickens.pink_chicken_item": "Pink Dye Chicken",
+    "item.resourcefulchickens.pink_chicken_spawn_egg": "Pink Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.magenta_chicken": "Magenta Dye Chicken",
+    "item.resourcefulchickens.magenta_chicken_item": "Magenta Dye Chicken",
+    "item.resourcefulchickens.magenta_chicken_spawn_egg": "Magenta Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.black_chicken": "Black Dye Chicken",
+    "item.resourcefulchickens.black_chicken_item": "Black Dye Chicken",
+    "item.resourcefulchickens.black_chicken_spawn_egg": "Black Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.gray_chicken": "Gray Dye Chicken",
+    "item.resourcefulchickens.gray_chicken_item": "Gray Dye Chicken",
+    "item.resourcefulchickens.gray_chicken_spawn_egg": "Gray Dye Chicken Spawn Egg",
+
     "entity.resourcefulchickens.green_chicken": "Green Dye Chicken",
     "item.resourcefulchickens.green_chicken_item": "Green Dye Chicken",
     "item.resourcefulchickens.green_chicken_spawn_egg": "Green Dye Chicken Spawn Egg",
@@ -22,6 +70,10 @@
     "item.resourcefulchickens.emerald_chicken_item": "Emerald Chicken",
     "item.resourcefulchickens.emerald_chicken_spawn_egg": "Emerald Chicken Spawn Egg",
     "item.resourcefulchickens.emerald_chicken_feather": "Emerald Feather",
+
+    "entity.resourcefulchickens.flint_chicken": "Flint Chicken",
+    "item.resourcefulchickens.flint_chicken_item": "Flint Chicken",
+    "item.resourcefulchickens.flint_chicken_spawn_egg": "Flint Chicken Spawn Egg",
 
     "entity.resourcefulchickens.gold_chicken": "Gold Chicken",
     "item.resourcefulchickens.gold_chicken_item": "Gold Chicken",

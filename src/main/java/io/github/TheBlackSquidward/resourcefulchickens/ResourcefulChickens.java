@@ -21,6 +21,20 @@ import org.apache.logging.log4j.Logger;
 @Mod(ResourcefulChickens.MODID)
 public class ResourcefulChickens {
 
+    /*
+    TODO:
+        - Add textures to items and update the lang file.
+        - Add JEI integration
+        - Add mod support
+        - Make chickens breedable (breeding two parents to produce their respective child)
+        - Add blocks
+        - Add TOP integration
+        - Make chickens shed feathers and drop manure periodically
+        - Add advanced versions of electric blokcs that can take upgrades.
+        - Add recipes for base chickens and dye chickens.
+        - Add forge tags
+     */
+
     public static final String MODID = "resourcefulchickens";
 
     public static final Logger LOGGER = LogManager.getLogger();
@@ -35,11 +49,11 @@ public class ResourcefulChickens {
         EntityInit.ENTITY_TYPES.register(iEventBus);
         BlockInit.BLOCKS.register(iEventBus);
 
+        MinecraftForge.EVENT_BUS.register(this);
+
         registerChickens();
         ChickenRegistry.initChickens();
         ChickenRegistry.registerChickens();
-
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void registerChickens() {

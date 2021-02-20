@@ -16,8 +16,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class ChickenCatcherItem extends Item {
 
     public ChickenCatcherItem() {

@@ -12,13 +12,13 @@ import javax.annotation.Nullable;
 public class ChickenRegistryObject {
 
     private final String entityName;
-    private final ItemStack layItem;
-    private final int bgColor;
-    private final int fgColor;
     private final ResourceLocation texture;
     private final ChickenRegistryObject parent1;
     private final ChickenRegistryObject parent2;
     private transient boolean hasFeather;
+
+    private transient ChickenDrop chickenDrop;
+    private transient ItemStack layItem;
 
     private transient RegistryObject<Item> chickenFeatherRegistryObject;
     private transient RegistryObject<Item> chickenItemRegistryObject;
@@ -27,20 +27,24 @@ public class ChickenRegistryObject {
     private transient ResourceLocation registryID;
 
 
-    public ChickenRegistryObject(String entityName, ResourceLocation texture, ItemStack layItem, int bgColor, int fgColor, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2) {
+    public ChickenRegistryObject(String entityName, ResourceLocation texture, ItemStack layItem, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2) {
         this.entityName = entityName;
         this.layItem = layItem;
-        this.bgColor = bgColor;
-        this.fgColor = fgColor;
         this.texture = texture;
         this.parent1 = parent1;
         this.parent2 = parent2;
     }
-    public ChickenRegistryObject(String entityName, ResourceLocation texture, ItemStack layItem, int bgColor, int fgColor, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2, boolean hasFeather) {
+    public ChickenRegistryObject(String entityName, ResourceLocation texture, ItemStack layItem, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2, boolean hasFeather) {
         this.entityName = entityName;
         this.layItem = layItem;
-        this.bgColor = bgColor;
-        this.fgColor = fgColor;
+        this.texture = texture;
+        this.parent1 = parent1;
+        this.parent2 = parent2;
+        this.hasFeather = hasFeather;
+    }
+    public ChickenRegistryObject(String entityName, ResourceLocation texture, ChickenDrop chickenDrop, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2, boolean hasFeather) {
+        this.entityName = entityName;
+        this.chickenDrop = chickenDrop;
         this.texture = texture;
         this.parent1 = parent1;
         this.parent2 = parent2;

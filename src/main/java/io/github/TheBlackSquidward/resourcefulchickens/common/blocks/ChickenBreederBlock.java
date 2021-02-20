@@ -4,8 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
 
-public class ChickenBreeder extends Block {
-    public ChickenBreeder() {
+public class ChickenBreederBlock extends Block {
+    public ChickenBreederBlock() {
         super(Properties.create(Material.WOOD).harvestTool(ToolType.AXE));
     }
 }

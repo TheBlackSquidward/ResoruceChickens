@@ -4,9 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
 
-public class ElectricChickenBreeder extends Block {
+public class ElectricChickenBreederBlock extends Block {
 
-    public ElectricChickenBreeder() {
+    public ElectricChickenBreederBlock() {
         super(Properties.create(Material.IRON).harvestTool(ToolType.PICKAXE));
     }
 

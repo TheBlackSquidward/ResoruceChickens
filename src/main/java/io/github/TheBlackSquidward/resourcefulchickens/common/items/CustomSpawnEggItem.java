@@ -17,8 +17,6 @@ import net.minecraft.world.server.ServerWorld;
 
 public class CustomSpawnEggItem extends Item {
 
-    //TODO render spawnegg texture
-
     public CustomSpawnEggItem(Properties properties) {
         super(properties);
     }
@@ -49,4 +47,5 @@ public class CustomSpawnEggItem extends Item {
         }
         return ActionResultType.SUCCESS;
     }
+
 }
