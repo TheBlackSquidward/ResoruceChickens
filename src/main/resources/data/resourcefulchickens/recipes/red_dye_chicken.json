@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SES",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:red_dye"
+    },
+    "E": {
+      "item": "minecraft:egg"
+    }
+  },
+  "result": {
+    "item": "resourcefulchickens:red_chicken_spawn_egg",
+    "count": 1
+  }
+}

@@ -9,7 +9,6 @@ import io.github.TheBlackSquidward.resourcefulchickens.registries.ItemRegistry;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
@@ -62,7 +61,7 @@ public class ChickenRegistry {
         getChickenRegistry().put(orangeChicken.getEntityName(), orangeChicken);
         ChickenRegistryObject flintChicken = new ChickenRegistryObject("flint_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.FLINT, 1, 3))), null, null, false);
         getChickenRegistry().put(flintChicken.getEntityName(), flintChicken);
-        ChickenRegistryObject ironChicken = new ChickenRegistryObject("iron_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.IRON_INGOT, 1, 3))),  null, null, true);
+        ChickenRegistryObject ironChicken = new ChickenRegistryObject("iron_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.IRON_INGOT, 1, 3))),  flintChicken, whiteChicken, true);
         getChickenRegistry().put(ironChicken.getEntityName(), ironChicken);
         ChickenRegistryObject goldChicken = new ChickenRegistryObject("gold_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GOLD_INGOT, 1, 3))), null, null, true);
         getChickenRegistry().put(goldChicken.getEntityName(), goldChicken);

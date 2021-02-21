@@ -32,7 +32,7 @@ public class ResourcefulChickens {
         - Add blocks
         - Add TOP integration
         - Make chickens shed feathers and drop manure periodically
-        - Add advanced versions of electric blokcs that can take upgrades.
+        - Add advanced versions of electric blocks that can take upgrades.
         - Add recipes for base chickens and dye chickens.
         - Add forge tags
      */

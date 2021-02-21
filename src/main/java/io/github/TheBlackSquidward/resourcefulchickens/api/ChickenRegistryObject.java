@@ -79,4 +79,16 @@ public class ChickenRegistryObject {
     public void setChickenEntityRegistryObject(RegistryObject<EntityType<CustomChickenEntity>> chickenEntityRegistryObject) {
         this.chickenEntityRegistryObject = chickenEntityRegistryObject;
     }
+
+    public boolean isBreedable() {
+        return parent1 != null && parent2 != null;
+    }
+
+    public ChickenRegistryObject getParent1() {
+        return parent1;
+    }
+
+    public ChickenRegistryObject getParent2() {
+        return parent2;
+    }
 }
