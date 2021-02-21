@@ -2,12 +2,11 @@ package io.github.TheBlackSquidward.resourcefulchickens.common.items;
 
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
+import io.github.TheBlackSquidward.resourcefulchickens.registries.ItemRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -45,7 +44,7 @@ public class ChickenItem extends Item {
             BlockPos finalBlockpos;
             World world = context.getWorld();
             if (!world.isRemote()) {
-                if (itemStack.getItem() != ItemInit.VANILLA_CHICKEN.get()) {
+                if (itemStack.getItem() != ItemRegistry.VANILLA_CHICKEN.get()) {
                     BlockPos blockpos = context.getPos();
                     Direction direction = context.getFace();
                     BlockState blockstate = world.getBlockState(blockpos);

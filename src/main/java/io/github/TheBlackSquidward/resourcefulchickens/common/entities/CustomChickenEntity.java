@@ -1,5 +1,9 @@
 package io.github.TheBlackSquidward.resourcefulchickens.common.entities;
 
+import io.github.TheBlackSquidward.resourcefulchickens.ResourcefulChickens;
+import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenDrop;
+import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -7,8 +11,10 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
@@ -23,6 +29,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class CustomChickenEntity extends AnimalEntity {
 
@@ -104,6 +112,21 @@ public class CustomChickenEntity extends AnimalEntity {
             // For example shed feathers?
             // Also drop manure every now and again.
         }
+    }
+
+    @Override
+    public void onDeath(DamageSource cause) {
+        ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(this);
+        ArrayList<ChickenDrop> chickenDrops = chickenRegistryObject.getChickenDrops();
+        for(ChickenDrop chickenDrop : chickenDrops) {
+            //DEBUG msg
+            ResourcefulChickens.LOGGER.debug("Drop Amount: " + chickenDrop.getDropAmount(world) + " Min Bound: " + chickenDrop.getMinAmount() + " Max Bound: " + chickenDrop.getMaxAmount());
+
+            ItemStack itemStack = new ItemStack(chickenDrop.getItem(), chickenDrop.getDropAmount(world));
+            ItemEntity itemEntity = new ItemEntity(world, getPosX(), getPosY(), getPosZ(), itemStack);
+            world.addEntity(itemEntity);
+        }
+        super.onDeath(cause);
     }
 
     /*

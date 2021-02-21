@@ -5,6 +5,10 @@
     "item.resourcefulchickens.chicken_manure": "Chicken Manure",
     "item.resourcefulchickens.fertilizer": "Fertilizer",
 
+    "item.resourcefulchickens.lava_infused_egg": "Lava Infused Egg",
+    "item.resourcefulchickens.water_infused_egg": "Water Infused Egg",
+    "item.resourcefulchickens.solidified_experience": "Solidified Experience",
+
     "block.resourcefulchickens.electric_roost": "Electric Roost",
     "block.resourcefulchickens.roost": "Roost",
     "block.resourcefulchickens.electric_chicken_breeder": "Electric Chicken Breeder",
@@ -17,6 +21,18 @@
     "entity.resourcefulchickens.lime_chicken": "Lime Dye Chicken",
     "item.resourcefulchickens.lime_chicken_item": "Lime Dye Chicken",
     "item.resourcefulchickens.lime_chicken_spawn_egg": "Lime Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.orange_chicken": "Orange Dye Chicken",
+    "item.resourcefulchickens.orange_chicken_item": "Orange Dye Chicken",
+    "item.resourcefulchickens.orange_chicken_spawn_egg": "Orange Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.brown_chicken": "Brown Dye Chicken",
+    "item.resourcefulchickens.brown_chicken_item": "Brown Dye Chicken",
+    "item.resourcefulchickens.brown_chicken_spawn_egg": "Brown Dye Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.purple_chicken": "Purple Dye Chicken",
+    "item.resourcefulchickens.purple_chicken_item": "Purple Dye Chicken",
+    "item.resourcefulchickens.purple_chicken_spawn_egg": "Purple Dye Chicken Spawn Egg",
 
     "entity.resourcefulchickens.blue_chicken": "Blue Dye Chicken",
     "item.resourcefulchickens.blue_chicken_item": "Blue Dye Chicken",
@@ -69,7 +85,6 @@
     "entity.resourcefulchickens.emerald_chicken": "Emerald Chicken",
     "item.resourcefulchickens.emerald_chicken_item": "Emerald Chicken",
     "item.resourcefulchickens.emerald_chicken_spawn_egg": "Emerald Chicken Spawn Egg",
-    "item.resourcefulchickens.emerald_chicken_feather": "Emerald Feather",
 
     "entity.resourcefulchickens.flint_chicken": "Flint Chicken",
     "item.resourcefulchickens.flint_chicken_item": "Flint Chicken",
@@ -83,7 +98,142 @@
     "entity.resourcefulchickens.diamond_chicken": "Diamond Chicken",
     "item.resourcefulchickens.diamond_chicken_item": "Diamond Chicken",
     "item.resourcefulchickens.diamond_chicken_spawn_egg": "Diamond Chicken Spawn Egg",
-    "item.resourcefulchickens.diamond_chicken_feather": "Diamond Feather",
+
+    "entity.resourcefulchickens.obsidian_chicken": "Obsidian Chicken",
+    "item.resourcefulchickens.obsidian_chicken_item": "Obsidian Chicken",
+    "item.resourcefulchickens.obsidian_chicken_spawn_egg": "Obsidian Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.quartz_chicken": "Quartz Chicken",
+    "item.resourcefulchickens.quartz_chicken_item": "Quartz Chicken",
+    "item.resourcefulchickens.quartz_chicken_spawn_egg": "Quartz Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.coal_chicken": "Coal Chicken",
+    "item.resourcefulchickens.coal_chicken_item": "Coal Chicken",
+    "item.resourcefulchickens.coal_chicken_spawn_egg": "Coal Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.netherite_chicken": "Netherite Chicken",
+    "item.resourcefulchickens.netherite_chicken_item": "Netherite Chicken",
+    "item.resourcefulchickens.netherite_chicken_spawn_egg": "Netherite Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.soul_sand_chicken": "Soul Sand Chicken",
+    "item.resourcefulchickens.soul_sand_chicken_item": "Soul Sand Chicken",
+    "item.resourcefulchickens.soul_sand_chicken_spawn_egg": "Soul Sand Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.snowball_chicken": "Snowball Chicken",
+    "item.resourcefulchickens.snowball_chicken_item": "Snowball Chicken",
+    "item.resourcefulchickens.snowball_chicken_spawn_egg": "Snowball Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.slime_chicken": "Slime Chicken",
+    "item.resourcefulchickens.slime_chicken_item": "Slime Chicken",
+    "item.resourcefulchickens.slime_chicken_spawn_egg": "Slime Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.sand_chicken": "Sand Chicken",
+    "item.resourcefulchickens.sand_chicken_item": "Sand Chicken",
+    "item.resourcefulchickens.sand_chicken_spawn_egg": "Sand Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.glowstone_chicken": "Glowstone Chicken",
+    "item.resourcefulchickens.glowstone_chicken_item": "Glowstone Chicken",
+    "item.resourcefulchickens.glowstone_chicken_spawn_egg": "Glowstone Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.lava_chicken": "Lava Chicken",
+    "item.resourcefulchickens.lava_chicken_item": "Lava Chicken",
+    "item.resourcefulchickens.lava_chicken_spawn_egg": "Lava Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.water_chicken": "Water Chicken",
+    "item.resourcefulchickens.water_chicken_item": "Water Chicken",
+    "item.resourcefulchickens.water_chicken_spawn_egg": "Water Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.experience_chicken": "Experience Chicken",
+    "item.resourcefulchickens.experience_chicken_item": "Experience Chicken",
+    "item.resourcefulchickens.experience_chicken_spawn_egg": "Experience Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.clay_chicken": "Clay Chicken",
+    "item.resourcefulchickens.clay_chicken_item": "Clay Chicken",
+    "item.resourcefulchickens.clay_chicken_spawn_egg": "Clay Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.magma_slime_chicken": "Magma Slime Chicken",
+    "item.resourcefulchickens.magma_slime_chicken_item": "Magma Slime Chicken",
+    "item.resourcefulchickens.magma_slime_chicken_spawn_egg": "Magma Slime Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.spider_chicken": "Spider Chicken",
+    "item.resourcefulchickens.spider_chicken_item": "Spider Chicken",
+    "item.resourcefulchickens.spider_chicken_spawn_egg": "Spider Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.lapis_chicken": "Lapis Chicken",
+    "item.resourcefulchickens.lapis_chicken_item": "Lapis Chicken",
+    "item.resourcefulchickens.lapis_chicken_spawn_egg": "Lapis Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.blaze_chicken": "Blaze Chicken",
+    "item.resourcefulchickens.blaze_chicken_item": "Blaze Chicken",
+    "item.resourcefulchickens.blaze_chicken_spawn_egg": "Blaze Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.ender_chicken": "Ender Chicken",
+    "item.resourcefulchickens.ender_chicken_item": "Ender Chicken",
+    "item.resourcefulchickens.ender_chicken_spawn_egg": "Ender Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.ghast_chicken": "Ghast Chicken",
+    "item.resourcefulchickens.ghast_chicken_item": "Ghast Chicken",
+    "item.resourcefulchickens.ghast_chicken_spawn_egg": "Ghast Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.glass_chicken": "Glass Chicken",
+    "item.resourcefulchickens.glass_chicken_item": "Glass Chicken",
+    "item.resourcefulchickens.glass_chicken_spawn_egg": "Glass Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.gunpowder_chicken": "Gunpowder Chicken",
+    "item.resourcefulchickens.gunpowder_chicken_item": "Gunpowder Chicken",
+    "item.resourcefulchickens.gunpowder_chicken_spawn_egg": "Gunpowder Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.redstone_chicken": "Redstone Chicken",
+    "item.resourcefulchickens.redstone_chicken_item": "Redstone Chicken",
+    "item.resourcefulchickens.redstone_chicken_spawn_egg": "Redstone Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.birch_chicken": "Birch Chicken",
+    "item.resourcefulchickens.birch_chicken_item": "Birch Chicken",
+    "item.resourcefulchickens.birch_chicken_spawn_egg": "Birch Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.oak_chicken": "Oak Chicken",
+    "item.resourcefulchickens.oak_chicken_item": "Oak Chicken",
+    "item.resourcefulchickens.oak_chicken_spawn_egg": "Oak Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.jungle_chicken": "Jungle Chicken",
+    "item.resourcefulchickens.jungle_chicken_item": "Jungle Chicken",
+    "item.resourcefulchickens.jungle_chicken_spawn_egg": "Jungle Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.spruce_chicken": "Jungle Chicken",
+    "item.resourcefulchickens.spruce_chicken_item": "Jungle Chicken",
+    "item.resourcefulchickens.spruce_chicken_spawn_egg": "Jungle Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.dark_oak_chicken": "Dark Oak Chicken",
+    "item.resourcefulchickens.dark_oak_chicken_item": "Dark Oak Chicken",
+    "item.resourcefulchickens.dark_oak_chicken_spawn_egg": "Dark Oak Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.acacia_chicken": "Acacia Chicken",
+    "item.resourcefulchickens.acacia_chicken_item": "Acacia Chicken",
+    "item.resourcefulchickens.acacia_chicken_spawn_egg": "Acacia Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.honey_chicken": "Honey Chicken",
+    "item.resourcefulchickens.honey_chicken_item": "Honey Chicken",
+    "item.resourcefulchickens.honey_chicken_spawn_egg": "Honey Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.ender_dragon_chicken": "Ender Dragon Chicken",
+    "item.resourcefulchickens.ender_dragon_chicken_item": "Ender Dragon Chicken",
+    "item.resourcefulchickens.ender_dragon_chicken_spawn_egg": "Ender Dragon Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.wither_chicken": "Wither Chicken",
+    "item.resourcefulchickens.wither_chicken_item": "Wither Chicken",
+    "item.resourcefulchickens.wither_chicken_spawn_egg": "Wither Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.cow_chicken": "Cow Chicken",
+    "item.resourcefulchickens.cow_chicken_item": "Cow Chicken",
+    "item.resourcefulchickens.cow_chicken_spawn_egg": "Cow Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.nether_wart_chicken": "Nether Wart Chicken",
+    "item.resourcefulchickens.nether_wart_chicken_item": "Nether Wart Chicken",
+    "item.resourcefulchickens.nether_wart_chicken_spawn_egg": "Nether Wart Chicken Spawn Egg",
+
+    "entity.resourcefulchickens.wither_skeleton_chicken": "Wither Skeleton Chicken",
+    "item.resourcefulchickens.wither_skeleton_chicken_item": "Wither Skeleton Chicken",
+    "item.resourcefulchickens.wither_skeleton_chicken_spawn_egg": "Wither Skeleton Chicken Spawn Egg",
 
     "entity.resourcefulchickens.iron_chicken": "Iron Chicken",
     "item.resourcefulchickens.iron_chicken_item": "Iron Chicken",

@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcefulchickens.init;
+package io.github.TheBlackSquidward.resourcefulchickens.registries;
 
 import io.github.TheBlackSquidward.resourcefulchickens.ResourcefulChickens;
 import io.github.TheBlackSquidward.resourcefulchickens.common.blocks.*;
@@ -7,7 +7,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class BlockInit {
+public class BlockRegistry {
 
     public static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ResourcefulChickens.MODID);
 
@@ -17,6 +17,5 @@ public class BlockInit {
     public static final RegistryObject<Block> ELECTRIC_INCUBATOR = BLOCKS.register("electric_incubator", ElectricIncubatorBlock::new);
     public static final RegistryObject<Block> CHICKEN_BREEDER = BLOCKS.register("chicken_breeder", ChickenBreederBlock::new);
     public static final RegistryObject<Block> ELECTRIC_CHICKEN_BREEDER = BLOCKS.register("electric_chicken_breeder", ElectricChickenBreederBlock::new);
-
 
 }

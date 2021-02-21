@@ -4,7 +4,7 @@ import com.sun.javafx.geom.Vec3d;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcefulchickens.common.entities.CustomChickenEntity;
-import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
+import io.github.TheBlackSquidward.resourcefulchickens.registries.ItemRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -49,7 +49,7 @@ public class ChickenCatcherItem extends Item {
                     p.getEntityWorld().playSound(p, pos.x, pos.y, pos.z, SoundEvents.ENTITY_CHICKEN_EGG, entity.getSoundCategory(), 1.0F, 1.0F);
                     //TODO add particles
                 }else{
-                    p.addItemStackToInventory(new ItemStack(ItemInit.VANILLA_CHICKEN.get(), 1));
+                    p.addItemStackToInventory(new ItemStack(ItemRegistry.VANILLA_CHICKEN.get(), 1));
                     itemStack.damageItem(1, p,(p_220045_0_) -> {
                         p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
                     });

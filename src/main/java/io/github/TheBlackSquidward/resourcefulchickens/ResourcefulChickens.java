@@ -3,9 +3,9 @@ package io.github.TheBlackSquidward.resourcefulchickens;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcefulchickens.api.CreativeTab;
 import io.github.TheBlackSquidward.resourcefulchickens.common.entities.CustomChickenEntity;
-import io.github.TheBlackSquidward.resourcefulchickens.init.BlockInit;
-import io.github.TheBlackSquidward.resourcefulchickens.init.EntityInit;
-import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
+import io.github.TheBlackSquidward.resourcefulchickens.registries.BlockRegistry;
+import io.github.TheBlackSquidward.resourcefulchickens.registries.EntityRegistry;
+import io.github.TheBlackSquidward.resourcefulchickens.registries.ItemRegistry;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.ItemGroup;
@@ -17,6 +17,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.Random;
 
 @Mod(ResourcefulChickens.MODID)
 public class ResourcefulChickens {
@@ -35,29 +37,26 @@ public class ResourcefulChickens {
         - Add forge tags
      */
 
+    public static final Random RANDOM =  new Random();
+
     public static final String MODID = "resourcefulchickens";
 
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static final ItemGroup creativeTab = new CreativeTab();
+    public static final ItemGroup ITEM_GROUP = new CreativeTab();
 
     public ResourcefulChickens() {
         IEventBus iEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         iEventBus.addListener(this::setup);
 
-        ItemInit.ITEMS.register(iEventBus);
-        EntityInit.ENTITY_TYPES.register(iEventBus);
-        BlockInit.BLOCKS.register(iEventBus);
+        ItemRegistry.ITEMS.register(iEventBus);
+        EntityRegistry.ENTITY_TYPES.register(iEventBus);
+        BlockRegistry.BLOCKS.register(iEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        registerChickens();
         ChickenRegistry.initChickens();
         ChickenRegistry.registerChickens();
-    }
-
-    private void registerChickens() {
-
     }
 
     private void setup(final FMLCommonSetupEvent e) {

@@ -1,6 +1,6 @@
 package io.github.TheBlackSquidward.resourcefulchickens.api;
 
-import io.github.TheBlackSquidward.resourcefulchickens.init.ItemInit;
+import io.github.TheBlackSquidward.resourcefulchickens.registries.ItemRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -15,12 +15,12 @@ public class CreativeTab extends ItemGroup {
 
     @Override
     public ItemStack createIcon() {
-        return ItemInit.VANILLA_CHICKEN.get().getDefaultInstance();
+        return ItemRegistry.VANILLA_CHICKEN.get().getDefaultInstance();
     }
 
     @Override
     public void fill(NonNullList<ItemStack> items) {
-        for(RegistryObject<Item> item : ItemInit.ITEMS.getEntries()) {
+        for(RegistryObject<Item> item : ItemRegistry.ITEMS.getEntries()) {
             items.add(item.get().getDefaultInstance());
         }
     }
