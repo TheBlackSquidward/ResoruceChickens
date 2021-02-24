@@ -15,6 +15,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -26,14 +27,27 @@ import java.util.List;
 
 public class ChickenItem extends Item {
 
+    private int gain = 0;
+    private int growth = 0;
+    private int strength = 0;
+
     public ChickenItem(Properties properties) {
         super(properties);
+    }
+
+    public ChickenItem(Properties properties, int gain, int growth, int strength) {
+        super(properties);
+        this.gain = gain;
+        this.growth = growth;
+        this.strength = strength;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
+        if(!(gain == 0 && growth == 0 && strength == 0)) {
+        }
     }
 
     @Override

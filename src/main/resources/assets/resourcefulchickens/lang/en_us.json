@@ -240,5 +240,7 @@
     "item.resourcefulchickens.iron_chicken_spawn_egg": "Iron Chicken Spawn Egg",
     "item.resourcefulchickens.iron_chicken_feather": "Iron Feather",
 
-    "itemGroup.resourcefulchickens": "Resourceful Chickens"
+    "itemGroup.resourcefulchickens": "Resourceful Chickens",
+
+    "gui.resourcefulchickens.chicken_breeder": "Chicken Breeder"
 }

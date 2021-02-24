@@ -206,4 +206,18 @@ public class ChickenRegistry {
         return null;
     }
 
+    public static boolean canBeBred(ChickenRegistryObject parent1, ChickenRegistryObject parent2) {
+        for(ChickenRegistryObject chickenRegistryObject : chickenRegistry.values()) {
+            if(chickenRegistryObject.isBreedable()) {
+                if (chickenRegistryObject.getParent1() == parent1 && chickenRegistryObject.getParent2() == parent2) {
+                    return true;
+                }
+                if (chickenRegistryObject.getParent1() == parent2 && chickenRegistryObject.getParent2() == parent1) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

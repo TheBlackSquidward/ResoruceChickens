@@ -3,9 +3,7 @@ package io.github.TheBlackSquidward.resourcefulchickens;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcefulchickens.api.CreativeTab;
 import io.github.TheBlackSquidward.resourcefulchickens.common.entities.CustomChickenEntity;
-import io.github.TheBlackSquidward.resourcefulchickens.registries.BlockRegistry;
-import io.github.TheBlackSquidward.resourcefulchickens.registries.EntityRegistry;
-import io.github.TheBlackSquidward.resourcefulchickens.registries.ItemRegistry;
+import io.github.TheBlackSquidward.resourcefulchickens.registries.*;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.item.ItemGroup;
@@ -26,7 +24,7 @@ public class ResourcefulChickens {
     /*
     TODO:
         - Add textures to items and update the lang file.
-        - Add JEI integration
+        - Add JEI integration -Started
         - Add mod support
         - Make chickens breedable (breeding two parents to produce their respective child)
         - Add blocks
@@ -35,6 +33,7 @@ public class ResourcefulChickens {
         - Add advanced versions of electric blocks that can take upgrades.
         - Add recipes for base chickens and dye chickens.
         - Add forge tags
+        - Crashes when shift clicking into custom container
      */
 
     public static final Random RANDOM =  new Random();
@@ -52,6 +51,8 @@ public class ResourcefulChickens {
         ItemRegistry.ITEMS.register(iEventBus);
         EntityRegistry.ENTITY_TYPES.register(iEventBus);
         BlockRegistry.BLOCKS.register(iEventBus);
+        TileEntityRegistry.TILE_ENTITY.register(iEventBus);
+        ContainerRegistry.CONTAINERS.register(iEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
