@@ -2,7 +2,22 @@
 
 # Resource Chickens - Minecraft Mod
 
+#### Overview
+
 Resource Chickens is a minecraft mod that provides an alternative way to acquire resources through chickens. 
+
+#### Features
+
+-
+
+-
+
+-
+
+#### Mod Support
+
+- [The One Probe](https://www.curseforge.com/minecraft/mc-mods/the-one-probe) - Provides in depth information on all things chicken. 
+- [Just Enough Items](https://www.curseforge.com/minecraft/mc-mods/jei) - Shows all custom recipes. 
 
 ***
 
