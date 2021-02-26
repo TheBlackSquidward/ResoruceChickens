@@ -29,7 +29,7 @@ This mod is licenced under the GNU General Public License v3.0. To see the full 
 
 #### Modpack Permission
 
-You're free to use the mod in your modpack.
+You're free to use this mod in your modpack just do not claim this work as your own. 
 
 ***
 
