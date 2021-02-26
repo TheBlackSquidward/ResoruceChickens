@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "resourcefulchickens:items/spawn_eggs/gold_chicken_spawn_egg"
-  }
-}

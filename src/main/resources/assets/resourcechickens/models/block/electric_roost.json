@@ -1,0 +1,11 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "up": "resourcechickens:blocks/machine_top",
+        "down": "resourcechickens:blocks/machine_bottom",
+        "north": "resourcechickens:blocks/machine_side",
+        "east": "resourcechickens:blocks/machine_side",
+        "south": "resourcechickens:blocks/machine_side",
+        "west": "resourcechickens:blocks/machine_side"
+    }
+}
