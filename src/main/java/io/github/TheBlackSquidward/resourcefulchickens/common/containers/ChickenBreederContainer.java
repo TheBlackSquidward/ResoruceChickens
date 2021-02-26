@@ -5,6 +5,7 @@ import io.github.TheBlackSquidward.resourcefulchickens.registries.ContainerRegis
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.BlockPos;
@@ -69,5 +70,9 @@ public class ChickenBreederContainer extends Container {
         addSlotRange(playerInventory, 0, leftCol, topRow, 9, 18);
     }
 
-
+    @Override
+    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+        //TODO
+        return super.transferStackInSlot(playerIn, index);
+    }
 }

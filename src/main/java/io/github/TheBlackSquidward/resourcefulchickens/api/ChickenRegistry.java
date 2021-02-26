@@ -61,19 +61,23 @@ public class ChickenRegistry {
         getChickenRegistry().put(orangeChicken.getEntityName(), orangeChicken);
         ChickenRegistryObject flintChicken = new ChickenRegistryObject("flint_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.FLINT, 1, 3))), null, null, false);
         getChickenRegistry().put(flintChicken.getEntityName(), flintChicken);
+        ChickenRegistryObject glassChicken = new ChickenRegistryObject("glass_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GREEN_DYE, 1, 2))), null, null, false);
+        getChickenRegistry().put(glassChicken.getEntityName(), glassChicken);
+        ChickenRegistryObject sandChicken = new ChickenRegistryObject("sand_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.SAND, 1, 3))), null, null, false);
+        getChickenRegistry().put(sandChicken.getEntityName(), sandChicken);
         ChickenRegistryObject ironChicken = new ChickenRegistryObject("iron_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.IRON_INGOT, 1, 3))),  flintChicken, whiteChicken, true);
         getChickenRegistry().put(ironChicken.getEntityName(), ironChicken);
-        ChickenRegistryObject goldChicken = new ChickenRegistryObject("gold_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GOLD_INGOT, 1, 3))), null, null, true);
+        ChickenRegistryObject goldChicken = new ChickenRegistryObject("gold_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GOLD_INGOT, 1, 3))), yellowChicken, ironChicken, true);
         getChickenRegistry().put(goldChicken.getEntityName(), goldChicken);
-        ChickenRegistryObject diamondChicken = new ChickenRegistryObject("diamond_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.DIAMOND, 1, 2))), null, null, false);
+        ChickenRegistryObject diamondChicken = new ChickenRegistryObject("diamond_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.DIAMOND, 1, 2))), glassChicken, goldChicken, false);
         getChickenRegistry().put(diamondChicken.getEntityName(), diamondChicken);
-        ChickenRegistryObject emeraldChicken = new ChickenRegistryObject("emerald_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.EMERALD, 1, 2))), null, null, false);
+        ChickenRegistryObject emeraldChicken = new ChickenRegistryObject("emerald_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.EMERALD, 1, 2))), diamondChicken, greenChicken, false);
         getChickenRegistry().put(emeraldChicken.getEntityName(), emeraldChicken);
-        ChickenRegistryObject redstoneChicken = new ChickenRegistryObject("redstone_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.REDSTONE, 1, 3))), null, null, false);
+        ChickenRegistryObject redstoneChicken = new ChickenRegistryObject("redstone_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.REDSTONE, 1, 3))), redChicken, sandChicken, false);
         getChickenRegistry().put(redstoneChicken.getEntityName(), redstoneChicken);
         ChickenRegistryObject lapisChicken = new ChickenRegistryObject("lapis_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.LAPIS_LAZULI, 1, 3))), null, null, false);
         getChickenRegistry().put(lapisChicken.getEntityName(), lapisChicken);
-        ChickenRegistryObject blazeChicken = new ChickenRegistryObject("blaze_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.BLAZE_ROD, 1, 2))), null, null, false);
+        ChickenRegistryObject blazeChicken = new ChickenRegistryObject("blaze_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.BLAZE_ROD, 1, 2))), goldChicken, null, false);
         getChickenRegistry().put(blazeChicken.getEntityName(), blazeChicken);
         ChickenRegistryObject clayChicken = new ChickenRegistryObject("clay_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.CLAY_BALL, 1, 3))), null, null, false);
         getChickenRegistry().put(clayChicken.getEntityName(), clayChicken);
@@ -87,8 +91,6 @@ public class ChickenRegistry {
         getChickenRegistry().put(experienceChicken.getEntityName(), experienceChicken);
         ChickenRegistryObject ghastChicken = new ChickenRegistryObject("ghast_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GHAST_TEAR, 1, 2))), null, null, false);
         getChickenRegistry().put(ghastChicken.getEntityName(), ghastChicken);
-        ChickenRegistryObject glassChicken = new ChickenRegistryObject("glass_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GREEN_DYE, 1, 2))), null, null, false);
-        getChickenRegistry().put(glassChicken.getEntityName(), glassChicken);
         ChickenRegistryObject glowstoneChicken = new ChickenRegistryObject("glowstone_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GLOWSTONE_DUST, 1, 2))), null, null, false);
         getChickenRegistry().put(glowstoneChicken.getEntityName(), glowstoneChicken);
         ChickenRegistryObject gunpowderChicken = new ChickenRegistryObject("gunpowder_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GUNPOWDER, 1, 2))), null, null, false);
@@ -115,8 +117,6 @@ public class ChickenRegistry {
         getChickenRegistry().put(obsidianChicken.getEntityName(), obsidianChicken);
         ChickenRegistryObject quartzChicken = new ChickenRegistryObject("quartz_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.QUARTZ, 1, 3))), null, null, false);
         getChickenRegistry().put(quartzChicken.getEntityName(), quartzChicken);
-        ChickenRegistryObject sandChicken = new ChickenRegistryObject("sand_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.SAND, 1, 3))), null, null, false);
-        getChickenRegistry().put(sandChicken.getEntityName(), sandChicken);
         ChickenRegistryObject slimeChicken = new ChickenRegistryObject("slime_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.SLIME_BALL, 1, 2))), null, null, false);
         getChickenRegistry().put(slimeChicken.getEntityName(), slimeChicken);
         ChickenRegistryObject snowballChicken = new ChickenRegistryObject("snowball_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.SNOWBALL, 1, 3))), null, null, false);
@@ -137,16 +137,7 @@ public class ChickenRegistry {
         getChickenRegistry().put(witherChicken.getEntityName(), witherChicken);
         ChickenRegistryObject witherSkeletonChicken = new ChickenRegistryObject("wither_skeleton_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.WITHER_SKELETON_SKULL, 1, 1))), null, null, false);
         getChickenRegistry().put(witherSkeletonChicken.getEntityName(), witherSkeletonChicken);
-        /*
-            TODO add the final vanilla chickens
-                - Netherite Chicken
-                - Ender Dragon Chicken
-                - Wither Chicken
-                - Wither Skeleton Chicken
-                -
-         */
-
-    }
+            }
 
     private static void initModChickens() {
 
@@ -218,6 +209,20 @@ public class ChickenRegistry {
             }
         }
         return false;
+    }
+
+    public static ChickenRegistryObject getChild(ChickenRegistryObject parent1, ChickenRegistryObject parent2) {
+        for(ChickenRegistryObject chickenRegistryObject : chickenRegistry.values()) {
+            if(chickenRegistryObject.isBreedable()) {
+                if (chickenRegistryObject.getParent1() == parent1 && chickenRegistryObject.getParent2() == parent2) {
+                    return chickenRegistryObject;
+                }
+                if (chickenRegistryObject.getParent1() == parent2 && chickenRegistryObject.getParent2() == parent1) {
+                    return chickenRegistryObject;
+                }
+            }
+        }
+        return null;
     }
 
 }

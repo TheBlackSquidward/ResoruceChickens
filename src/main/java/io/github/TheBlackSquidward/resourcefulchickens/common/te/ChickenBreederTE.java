@@ -4,6 +4,7 @@ import io.github.TheBlackSquidward.resourcefulchickens.ResourcefulChickens;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcefulchickens.common.items.ChickenItem;
+import io.github.TheBlackSquidward.resourcefulchickens.registries.ItemRegistry;
 import io.github.TheBlackSquidward.resourcefulchickens.registries.TileEntityRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -20,45 +21,39 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class ChickenBreederTE extends TileEntity implements ITickableTileEntity {
 
-    /*
-    - Slots start at 0!
-    - Slot 1 = Seeds
-    - Slot 2 = Chicken (Parent 1)
-    - Slot 3 = Chicken (Parent 2)
-    - Slot 4 = Output Chicken
-    - Slot 5 = Output Chicken
-    - Slot 6 = Output Chicken
+    private final ItemStackHandler itemStackHandler = createHandler();
 
-    Base time should be a minute for it to breed. Sped up by nbt data.
-     */
-
-    private ItemStackHandler itemStackHandler = createHandler();
-
-    private LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
+    private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
     public ChickenBreederTE() {
         super(TileEntityRegistry.CHICKEN_BREEDER_TE.get());
     }
 
+    //TODO add timer
     @Override
     public void tick() {
-        if(itemStackHandler.getStackInSlot(0).getCount() >= 2) {
-            if(itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem) {
+        if (itemStackHandler.getStackInSlot(0).getCount() >= 2) {
+            ItemStack itemSlot0 = itemStackHandler.getStackInSlot(0);
+            if (itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem) {
                 ItemStack itemSlot1 = itemStackHandler.getStackInSlot(1);
-                ChickenRegistryObject parent1 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot1.getItem());
-                if(itemStackHandler.getStackInSlot(2).getItem() instanceof ChickenItem) {
-                    ItemStack itemSlot2 = itemStackHandler.getStackInSlot(2);
-                    ChickenRegistryObject parent2 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot2.getItem());
-                    if(itemSlot1.getItem() == itemSlot2.getItem()) {
-                        ResourcefulChickens.LOGGER.debug("Contains 2 Chicken Items of the same type and 2 seeds");
-                        //TODO cross breed
-                    }
-                    if(ChickenRegistry.canBeBred(parent1, parent2)) {
-                        ResourcefulChickens.LOGGER.debug("Contains 2 Chicken Items that can be bred and 2 seeds");
-                        //TODO breed
+                if (!(itemSlot1.getItem() == ItemRegistry.VANILLA_CHICKEN.get())) {
+                    ChickenRegistryObject parent1 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot1.getItem());
+                    if (itemStackHandler.getStackInSlot(2).getItem() instanceof ChickenItem) {
+                        ItemStack itemSlot2 = itemStackHandler.getStackInSlot(2);
+                        ChickenRegistryObject parent2 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot2.getItem());
+                        if (itemSlot1.getItem() == itemSlot2.getItem()) {
+                            ItemStack result = crossBreed(itemSlot1, itemSlot2, parent1, parent2);
+                            addResult(result);
+                        }
+                        if (ChickenRegistry.canBeBred(parent1, parent2)) {
+                            ItemStack result = new ItemStack(ItemRegistry.VANILLA_CHICKEN.get(), 1);
+                            //TODO mutate method
+                            addResult(result);
+                        }
                     }
                 }
             }
@@ -69,6 +64,91 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     public void remove() {
         super.remove();
         handler.invalidate();
+    }
+
+    public void addResult(ItemStack result) {
+        ItemStack item3 = itemStackHandler.getStackInSlot(3);
+        ItemStack item4 = itemStackHandler.getStackInSlot(4);
+        ItemStack item5 = itemStackHandler.getStackInSlot(5);
+        if(item3.isEmpty()) {
+            itemStackHandler.setStackInSlot(3, result);
+            itemStackHandler.getStackInSlot(0).shrink(2);
+        }else if(item3.getOrCreateTag().equals(result.getOrCreateTag()) && item3.getCount() < 16){
+            int amount = item3.getCount() + 1;
+            result.setCount(amount);
+            itemStackHandler.setStackInSlot(3, result);
+            itemStackHandler.getStackInSlot(0).shrink(2);
+        }else if(item4.isEmpty()) {
+            itemStackHandler.setStackInSlot(4, result);
+            itemStackHandler.getStackInSlot(0).shrink(2);
+        }else if(item4.getOrCreateTag().equals(result.getOrCreateTag()) && item4.getCount() < 16) {
+            int amount = item4.getCount() + 1;
+            result.setCount(amount);
+            itemStackHandler.setStackInSlot(4, result);
+            itemStackHandler.getStackInSlot(0).shrink(2);
+        }else if(item5.isEmpty()) {
+            itemStackHandler.setStackInSlot(5, result);
+            itemStackHandler.getStackInSlot(0).shrink(2);
+        }else if(item5.getOrCreateTag().equals(result.getOrCreateTag()) && item5.getCount() < 16) {
+            int amount = item5.getCount() + 1;
+            result.setCount(amount);
+            itemStackHandler.setStackInSlot(5, result);
+            itemStackHandler.getStackInSlot(0).shrink(2);
+        }
+    }
+
+    private ItemStack crossBreed(ItemStack parent1Item, ItemStack parent2Item, ChickenRegistryObject parent1, ChickenRegistryObject parent2) {
+        ItemStack result = new ItemStack(parent1.getChickenItemRegistryObject().get());
+        CompoundNBT nbt = result.getOrCreateTag();
+
+        int parent1Gain = parent1Item.getOrCreateTag().getInt(ResourcefulChickens.MODID + "_chicken_gain");
+        int parent1Growth = parent1Item.getOrCreateTag().getInt(ResourcefulChickens.MODID + "_chicken_growth");
+        int parent1Strength = parent1Item.getOrCreateTag().getInt(ResourcefulChickens.MODID + "_chicken_strength");
+
+        int parent2Gain = parent2Item.getOrCreateTag().getInt(ResourcefulChickens.MODID + "_chicken_gain");
+        int parent2Growth = parent2Item.getOrCreateTag().getInt(ResourcefulChickens.MODID + "_chicken_growth");
+        int parent2Strength = parent2Item.getOrCreateTag().getInt(ResourcefulChickens.MODID + "_chicken_strength");
+
+
+        if(parent1Gain == 0) {
+            parent1Gain = 1;
+        }
+        if(parent1Growth == 0) {
+            parent1Growth = 1;
+        }
+        if(parent1Strength == 0) {
+            parent1Strength = 1;
+        }
+        if(parent2Gain == 0) {
+            parent2Gain = 1;
+        }
+        if(parent2Growth == 0) {
+            parent2Growth = 1;
+        }
+        if(parent2Strength == 0) {
+            parent2Strength = 1;
+        }
+
+        int newGain = calculateNewStat(parent1Strength, parent2Strength, parent1Gain, parent2Gain, world.rand);
+        int newGrowth = calculateNewStat(parent1Strength, parent2Strength, parent1Growth, parent2Growth, world.rand);
+        int newStrength = calculateNewStat(parent1Strength, parent2Strength, parent1Strength, parent2Strength, world.rand);
+
+        nbt.putInt(ResourcefulChickens.MODID + "_chicken_gain", newGain);
+        nbt.putInt(ResourcefulChickens.MODID + "_chicken_growth", newGrowth);
+        nbt.putInt(ResourcefulChickens.MODID + "_chicken_strength", newStrength);
+        result.write(nbt);
+        result.setTag(nbt);
+        return result;
+    }
+
+    private static int calculateNewStat(int parent1Strength, int parent2Strength, int parent1Stat, int parent2Stat, Random rand) {
+        int mutation = rand.nextInt(2) + 1;
+        int newStatValue = (parent1Stat * parent1Strength + parent2Stat * parent2Strength) / (parent1Strength + parent2Strength) + mutation;
+        if (newStatValue <= 1)
+            return 1;
+        if (newStatValue >= 10)
+            return 10;
+        return newStatValue;
     }
 
     private ItemStackHandler createHandler() {
@@ -85,16 +165,15 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
                     return stack.getItem() == Items.WHEAT_SEEDS;
                 }
                 if(slot == 1 || slot == 2) {
-                    return stack.getItem() instanceof ChickenItem;
+                    if(stack.getItem() instanceof ChickenItem) {
+                        if(stack.getItem() == ItemRegistry.VANILLA_CHICKEN.get()) {
+                            return false;
+                        }else{
+                            return true;
+                        }
+                    }
                 }
                 return false;
-            }
-
-            @Nonnull
-            @Override
-            public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                ResourcefulChickens.LOGGER.debug("inserting item to slot " + slot);
-                return super.insertItem(slot, stack, simulate);
             }
         };
     }

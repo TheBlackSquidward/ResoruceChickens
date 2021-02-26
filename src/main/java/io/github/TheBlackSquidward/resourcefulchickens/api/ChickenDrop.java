@@ -1,6 +1,5 @@
 package io.github.TheBlackSquidward.resourcefulchickens.api;
 
-import io.github.TheBlackSquidward.resourcefulchickens.api.utils.MathHelper;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
@@ -36,7 +35,7 @@ public class ChickenDrop {
     }
 
     public int getDropAmount(World world) {
-        return MathHelper.getRandomIntbyBounds(minAmount, maxAmount, world);
+        return world.rand.nextInt((maxAmount - minAmount) + minAmount) + 1;
     }
 
     public int getMinAmount() {

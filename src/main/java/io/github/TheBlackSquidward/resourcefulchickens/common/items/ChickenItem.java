@@ -1,5 +1,6 @@
 package io.github.TheBlackSquidward.resourcefulchickens.common.items;
 
+import io.github.TheBlackSquidward.resourcefulchickens.ResourcefulChickens;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcefulchickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcefulchickens.registries.ItemRegistry;
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -27,26 +29,26 @@ import java.util.List;
 
 public class ChickenItem extends Item {
 
-    private int gain = 0;
-    private int growth = 0;
-    private int strength = 0;
-
     public ChickenItem(Properties properties) {
         super(properties);
-    }
-
-    public ChickenItem(Properties properties, int gain, int growth, int strength) {
-        super(properties);
-        this.gain = gain;
-        this.growth = growth;
-        this.strength = strength;
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        if(!(gain == 0 && growth == 0 && strength == 0)) {
+        CompoundNBT nbt = stack.getOrCreateTag();
+        int gain = nbt.getInt(ResourcefulChickens.MODID + "_chicken_gain");
+        int growth = nbt.getInt(ResourcefulChickens.MODID + "_chicken_growth");
+        int strength = nbt.getInt(ResourcefulChickens.MODID + "_chicken_strength");
+        if(gain != 0) {
+            tooltip.add(new StringTextComponent("Gain: " + gain));
+        }
+        if(growth != 0) {
+            tooltip.add(new StringTextComponent("Growth: " + growth));
+        }
+        if(strength != 0) {
+            tooltip.add(new StringTextComponent("Strength: " + strength));
         }
     }
 
