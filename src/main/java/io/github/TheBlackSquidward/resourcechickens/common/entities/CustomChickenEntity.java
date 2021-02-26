@@ -106,9 +106,6 @@ public class CustomChickenEntity extends AnimalEntity {
             this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.entityDropItem(Items.EGG);
             this.timeUntilNextLay = layTime;
-            //TODO change this;
-            // For example shed feathers?
-            // Also drop manure every now and again.
         }
     }
 

@@ -4,8 +4,8 @@ import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.common.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.common.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.common.items.CustomSpawnEggItem;
-import io.github.TheBlackSquidward.resourcechickens.registries.EntityRegistry;
-import io.github.TheBlackSquidward.resourcechickens.registries.ItemRegistry;
+import io.github.TheBlackSquidward.resourcechickens.init.EntityInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -87,7 +87,7 @@ public class ChickenRegistry {
         getChickenRegistry().put(cowChicken.getEntityName(), cowChicken);
         ChickenRegistryObject enderChicken = new ChickenRegistryObject("ender_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.ENDER_PEARL, 1, 2))), null, null, false);
         getChickenRegistry().put(enderChicken.getEntityName(), enderChicken);
-        ChickenRegistryObject experienceChicken = new ChickenRegistryObject("experience_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(ItemRegistry.SOLIDIFIED_EXPERIENCE, 1, 2))), null, null, false);
+        ChickenRegistryObject experienceChicken = new ChickenRegistryObject("experience_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(ItemInit.SOLIDIFIED_EXPERIENCE, 1, 2))), null, null, false);
         getChickenRegistry().put(experienceChicken.getEntityName(), experienceChicken);
         ChickenRegistryObject ghastChicken = new ChickenRegistryObject("ghast_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GHAST_TEAR, 1, 2))), null, null, false);
         getChickenRegistry().put(ghastChicken.getEntityName(), ghastChicken);
@@ -95,7 +95,7 @@ public class ChickenRegistry {
         getChickenRegistry().put(glowstoneChicken.getEntityName(), glowstoneChicken);
         ChickenRegistryObject gunpowderChicken = new ChickenRegistryObject("gunpowder_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GUNPOWDER, 1, 2))), null, null, false);
         getChickenRegistry().put(gunpowderChicken.getEntityName(), gunpowderChicken);
-        ChickenRegistryObject lavaChicken = new ChickenRegistryObject("lava_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(ItemRegistry.LAVA_INFUSED_EGG, 1, 2))), null, null, false);
+        ChickenRegistryObject lavaChicken = new ChickenRegistryObject("lava_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(ItemInit.LAVA_INFUSED_EGG, 1, 2))), null, null, false);
         getChickenRegistry().put(lavaChicken.getEntityName(), lavaChicken);
         ChickenRegistryObject magamaSlimeChicken = new ChickenRegistryObject("magma_slime_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.MAGMA_CREAM, 1, 2))), null, null, false);
         getChickenRegistry().put(magamaSlimeChicken.getEntityName(), magamaSlimeChicken);
@@ -125,7 +125,7 @@ public class ChickenRegistry {
         getChickenRegistry().put(soulSandChicken.getEntityName(), soulSandChicken);
         ChickenRegistryObject spiderChicken = new ChickenRegistryObject("spider_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.STRING, 1, 2))), null, null, false);
         getChickenRegistry().put(spiderChicken.getEntityName(), spiderChicken);
-        ChickenRegistryObject waterChicken = new ChickenRegistryObject("water_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(ItemRegistry.WATER_INFUSED_EGG, 1, 1))), null, null, false);
+        ChickenRegistryObject waterChicken = new ChickenRegistryObject("water_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(ItemInit.WATER_INFUSED_EGG, 1, 1))), null, null, false);
         getChickenRegistry().put(waterChicken.getEntityName(), waterChicken);
         ChickenRegistryObject netheriteChicken = new ChickenRegistryObject("netherite_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.NETHERITE_INGOT, 1, 2))), null, null, false);
         getChickenRegistry().put(netheriteChicken.getEntityName(), netheriteChicken);
@@ -154,14 +154,14 @@ public class ChickenRegistry {
     }
 
     public static void registerChicken(ChickenRegistryObject chicken) {
-        RegistryObject<EntityType<CustomChickenEntity>> customChickenEntity = EntityRegistry.ENTITY_TYPES.register(chicken.getEntityName() + "",
+        RegistryObject<EntityType<CustomChickenEntity>> customChickenEntity = EntityInit.ENTITY_TYPES.register(chicken.getEntityName() + "",
                 () -> EntityType.Builder.create(CustomChickenEntity::new, EntityClassification.CREATURE)
                         .size(1.0f, 1.0f)
                         .build(new ResourceLocation(ResourceChickens.MODID, chicken.getEntityName()).toString()));
-        RegistryObject<Item> customChickenItem = ItemRegistry.ITEMS.register(chicken.getEntityName() + "_item", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
-        RegistryObject<Item> customChickenSpawnEgg = ItemRegistry.ITEMS.register(chicken.getEntityName() + "_spawn_egg", () -> new CustomSpawnEggItem(new Item.Properties()));
+        RegistryObject<Item> customChickenItem = ItemInit.ITEMS.register(chicken.getEntityName() + "_item", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
+        RegistryObject<Item> customChickenSpawnEgg = ItemInit.ITEMS.register(chicken.getEntityName() + "_spawn_egg", () -> new CustomSpawnEggItem(new Item.Properties()));
         if(chicken.isHasFeather()) {
-            RegistryObject<Item> customChickenFeather = ItemRegistry.ITEMS.register(chicken.getEntityName() + "_feather", () -> new Item(new Item.Properties()));
+            RegistryObject<Item> customChickenFeather = ItemInit.ITEMS.register(chicken.getEntityName() + "_feather", () -> new Item(new Item.Properties()));
         }
 
         chicken.setChickenEntityRegistryObject(customChickenEntity);

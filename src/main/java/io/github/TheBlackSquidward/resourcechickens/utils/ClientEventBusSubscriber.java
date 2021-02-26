@@ -4,7 +4,7 @@ import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.client.render.CustomChickenRenderer;
 import io.github.TheBlackSquidward.resourcechickens.common.screens.ChickenBreederScreen;
-import io.github.TheBlackSquidward.resourcechickens.registries.ContainerRegistry;
+import io.github.TheBlackSquidward.resourcechickens.init.ContainerInit;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,7 +19,7 @@ public class ClientEventBusSubscriber {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent e) {
         ChickenRegistry.getChickenRegistry().forEach((s, customChicken) -> RenderingRegistry.registerEntityRenderingHandler((EntityType)customChicken.getChickenEntityRegisryObject().get(), CustomChickenRenderer::new));
-        ScreenManager.registerFactory(ContainerRegistry.CHICKEN_BREEDER_CONTAINER.get(), ChickenBreederScreen::new);
+        ScreenManager.registerFactory(ContainerInit.CHICKEN_BREEDER_CONTAINER.get(), ChickenBreederScreen::new);
     }
 
 }

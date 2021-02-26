@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.registries;
+package io.github.TheBlackSquidward.resourcechickens.init;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.common.containers.ChickenBreederContainer;
@@ -10,7 +10,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class ContainerRegistry {
+public class ContainerInit {
 
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, ResourceChickens.MODID);
 

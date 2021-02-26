@@ -1,7 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.common.containers;
 
-import io.github.TheBlackSquidward.resourcechickens.registries.BlockRegistry;
-import io.github.TheBlackSquidward.resourcechickens.registries.ContainerRegistry;
+import io.github.TheBlackSquidward.resourcechickens.init.BlockInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ContainerInit;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -17,12 +17,12 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class ChickenBreederContainer extends Container {
 
-    private TileEntity tileEntity;
-    private PlayerEntity playerEntity;
-    private IItemHandler playerInventory;
+    private final TileEntity tileEntity;
+    private final PlayerEntity playerEntity;
+    private final IItemHandler playerInventory;
 
     public ChickenBreederContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
-        super(ContainerRegistry.CHICKEN_BREEDER_CONTAINER.get(), windowId);
+        super(ContainerInit.CHICKEN_BREEDER_CONTAINER.get(), windowId);
         tileEntity = world.getTileEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
@@ -42,7 +42,7 @@ public class ChickenBreederContainer extends Container {
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), playerEntity, BlockRegistry.CHICKEN_BREEDER.get());
+        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), playerEntity, BlockInit.CHICKEN_BREEDER.get());
     }
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
@@ -63,16 +63,13 @@ public class ChickenBreederContainer extends Container {
     }
 
     private void layoutPlayerInventorySlots(int leftCol, int topRow) {
-        // Player inventory
         addSlotBox(playerInventory, 9, leftCol, topRow, 9, 18, 3, 18);
-        // Hotbar
         topRow += 58;
         addSlotRange(playerInventory, 0, leftCol, topRow, 9, 18);
     }
 
     @Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        //TODO
         return super.transferStackInSlot(playerIn, index);
     }
 }

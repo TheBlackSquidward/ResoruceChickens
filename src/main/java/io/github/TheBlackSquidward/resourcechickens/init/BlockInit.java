@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.registries;
+package io.github.TheBlackSquidward.resourcechickens.init;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.common.blocks.*;
@@ -7,7 +7,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class BlockRegistry {
+public class BlockInit {
 
     public static DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ResourceChickens.MODID);
 

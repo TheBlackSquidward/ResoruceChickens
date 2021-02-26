@@ -4,8 +4,8 @@ import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.common.items.ChickenItem;
-import io.github.TheBlackSquidward.resourcechickens.registries.ItemRegistry;
-import io.github.TheBlackSquidward.resourcechickens.registries.TileEntityRegistry;
+import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
+import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -30,17 +30,16 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
     public ChickenBreederTE() {
-        super(TileEntityRegistry.CHICKEN_BREEDER_TE.get());
+        super(TileEntityInit.CHICKEN_BREEDER_TE.get());
     }
 
-    //TODO add timer
     @Override
     public void tick() {
         if (itemStackHandler.getStackInSlot(0).getCount() >= 2) {
             ItemStack itemSlot0 = itemStackHandler.getStackInSlot(0);
             if (itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem) {
                 ItemStack itemSlot1 = itemStackHandler.getStackInSlot(1);
-                if (!(itemSlot1.getItem() == ItemRegistry.VANILLA_CHICKEN.get())) {
+                if (!(itemSlot1.getItem() == ItemInit.VANILLA_CHICKEN.get())) {
                     ChickenRegistryObject parent1 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot1.getItem());
                     if (itemStackHandler.getStackInSlot(2).getItem() instanceof ChickenItem) {
                         ItemStack itemSlot2 = itemStackHandler.getStackInSlot(2);
@@ -50,8 +49,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
                             addResult(result);
                         }
                         if (ChickenRegistry.canBeBred(parent1, parent2)) {
-                            ItemStack result = new ItemStack(ItemRegistry.VANILLA_CHICKEN.get(), 1);
-                            //TODO mutate method
+                            ItemStack result = new ItemStack(ItemInit.VANILLA_CHICKEN.get(), 1);
                             addResult(result);
                         }
                     }
@@ -166,7 +164,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
                 }
                 if(slot == 1 || slot == 2) {
                     if(stack.getItem() instanceof ChickenItem) {
-                        if(stack.getItem() == ItemRegistry.VANILLA_CHICKEN.get()) {
+                        if(stack.getItem() == ItemInit.VANILLA_CHICKEN.get()) {
                             return false;
                         }else{
                             return true;

@@ -3,7 +3,7 @@ package io.github.TheBlackSquidward.resourcechickens.common.items;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.registries.ItemRegistry;
+import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityType;
@@ -60,7 +60,7 @@ public class ChickenItem extends Item {
             BlockPos finalBlockpos;
             World world = context.getWorld();
             if (!world.isRemote()) {
-                if (itemStack.getItem() != ItemRegistry.VANILLA_CHICKEN.get()) {
+                if (itemStack.getItem() != ItemInit.VANILLA_CHICKEN.get()) {
                     BlockPos blockpos = context.getPos();
                     Direction direction = context.getFace();
                     BlockState blockstate = world.getBlockState(blockpos);
