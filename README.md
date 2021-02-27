@@ -1,6 +1,6 @@
 # Resource Chickens - Minecraft Mod
 
-#### Overview
+## Overview
 
 Resource Chickens is a minecraft mod that provides an alternative way to acquire resources through chickens. 
 
