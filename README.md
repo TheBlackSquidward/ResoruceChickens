@@ -1,6 +1,4 @@
-## Resource Chickens - Minecraft Mod
-
-***
+# Resource Chickens - Minecraft Mod
 
 #### Overview
 
