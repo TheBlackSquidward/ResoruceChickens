@@ -16,6 +16,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Random;
 
+import static io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry.initChickens;
+
 @Mod(ResourceChickens.MODID)
 public class ResourceChickens {
 
@@ -39,7 +41,7 @@ public class ResourceChickens {
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        ChickenRegistry.initChickens();
+        initChickens();
         ChickenRegistry.registerChickens();
     }
 
@@ -50,7 +52,7 @@ public class ResourceChickens {
     private void setupChickens() {
         DeferredWorkQueue.runLater(() -> {
             for(ChickenRegistryObject chicken : ChickenRegistry.getChickenRegistry().values()) {
-                GlobalEntityTypeAttributes.put(chicken.getChickenEntityRegisryObject().get(), CustomChickenEntity.setCustomAttributes().create());
+                GlobalEntityTypeAttributes.put(chicken.getChickenEntityRegisryObject().get(), CustomChickenEntity.setCustomAttributes().build());
             }
         });
     }

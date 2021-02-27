@@ -37,7 +37,7 @@ public class ChickenBreederContainer extends Container {
                 addSlot(new SlotItemHandler(h, 5, 152, 20));
             });
         }
-        layoutPlayerInventorySlots(8, 51);
+        layoutPlayerInventorySlots(8, 84);
     }
 
     @Override

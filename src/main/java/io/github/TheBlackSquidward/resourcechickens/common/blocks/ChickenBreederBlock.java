@@ -37,9 +37,8 @@ public class ChickenBreederBlock extends Block {
         return new ChickenBreederTE();
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult trace) {
+    public void onBlockClicked(BlockState blockState, World world, BlockPos pos, PlayerEntity player) {
         if (!world.isRemote) {
             TileEntity tileEntity = world.getTileEntity(pos);
             if (tileEntity instanceof ChickenBreederTE) {
@@ -59,6 +58,31 @@ public class ChickenBreederBlock extends Block {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
         }
-        return ActionResultType.SUCCESS;
+    }
+
+    @Override
+    public ActionResultType onUse(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
+        if (!world.isRemote) {
+            TileEntity tileEntity = world.getTileEntity(pos);
+            if (tileEntity instanceof ChickenBreederTE) {
+                INamedContainerProvider containerProvider = new INamedContainerProvider() {
+                    @Override
+                    public ITextComponent getDisplayName() {
+                        return new TranslationTextComponent("gui.resourcechickens.chicken_breeder");
+                    }
+
+                    @Override
+                    public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+                        return new ChickenBreederContainer(i, world, pos, playerInventory, playerEntity);
+                    }
+                };
+                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
+                return ActionResultType.SUCCESS;
+            } else {
+                throw new IllegalStateException("Our named container provider is missing!");
+            }
+        }else{
+            return ActionResultType.FAIL;
+        }
     }
 }

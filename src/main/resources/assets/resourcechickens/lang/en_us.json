@@ -9,6 +9,9 @@
     "item.resourcechickens.water_infused_egg": "Water Infused Egg",
     "item.resourcechickens.solidified_experience": "Solidified Experience",
 
+    "item.resourcechickens.speed_upgrade": "Speed Upgrade",
+    "item.resourcechickens.energy_upgrade": "Energy Upgrade",
+
     "block.resourcechickens.electric_roost": "Electric Roost",
     "block.resourcechickens.roost": "Roost",
     "block.resourcechickens.electric_chicken_breeder": "Electric Chicken Breeder",

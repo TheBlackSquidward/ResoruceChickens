@@ -24,7 +24,7 @@ public class ChickenCatcherItem extends Item {
 
     @Override
     public ActionResultType itemInteractionForEntity(ItemStack itemStack, PlayerEntity p, LivingEntity entity, Hand hand) {
-        Vec3d pos = new Vec3d(entity.getPosX(), entity.getPosY(), entity.getPosZ());
+        Vec3d pos = new Vec3d(entity.getX(), entity.getY(), entity.getZ());
         World world = p.getEntityWorld();
         if (entity instanceof CustomChickenEntity) {
             CustomChickenEntity chickenEntity = (CustomChickenEntity) entity;

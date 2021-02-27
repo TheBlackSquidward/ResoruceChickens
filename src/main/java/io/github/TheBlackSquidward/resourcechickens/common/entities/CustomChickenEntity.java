@@ -1,6 +1,5 @@
 package io.github.TheBlackSquidward.resourcechickens.common.entities;
 
-import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenDrop;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
@@ -52,11 +51,7 @@ public class CustomChickenEntity extends AnimalEntity {
         layTime = this.rand.nextInt(6000) + 6000;
     }
 
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.func_233666_p_()
-                .createMutableAttribute(Attributes.MAX_HEALTH, 4.0D)
-                .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.25D);
-    }
+
 
     @Override
     protected void registerGoals() {
@@ -93,10 +88,15 @@ public class CustomChickenEntity extends AnimalEntity {
         return null;
     }
 
-    @Nullable
     @Override
-    public AgeableEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
+    public AgeableEntity createChild(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
         return null;
+    }
+
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+        return MobEntity.createMobAttributes()
+                .add(Attributes.GENERIC_MAX_HEALTH, 4.0D)
+                .add(Attributes.GENERIC_MOVEMENT_SPEED, 0.25D);
     }
 
     @Override
@@ -114,11 +114,8 @@ public class CustomChickenEntity extends AnimalEntity {
         ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(this);
         ArrayList<ChickenDrop> chickenDrops = chickenRegistryObject.getChickenDrops();
         for(ChickenDrop chickenDrop : chickenDrops) {
-            //DEBUG msg
-            ResourceChickens.LOGGER.debug("Drop Amount: " + chickenDrop.getDropAmount(world) + " Min Bound: " + chickenDrop.getMinAmount() + " Max Bound: " + chickenDrop.getMaxAmount());
-
             ItemStack itemStack = new ItemStack(chickenDrop.getItem(), chickenDrop.getDropAmount(world));
-            ItemEntity itemEntity = new ItemEntity(world, getPosX(), getPosY(), getPosZ(), itemStack);
+            ItemEntity itemEntity = new ItemEntity(world, getX(), getY(), getZ(), itemStack);
             world.addEntity(itemEntity);
         }
         super.onDeath(cause);

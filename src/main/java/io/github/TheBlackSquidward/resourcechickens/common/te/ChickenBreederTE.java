@@ -176,17 +176,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         };
     }
 
-    @Override
-    public void read(BlockState state, CompoundNBT nbt) {
-        itemStackHandler.deserializeNBT(nbt.getCompound("inv"));
-        super.read(state, nbt);
-    }
-
-    @Override
-    public CompoundNBT write(CompoundNBT nbt) {
-        nbt.put("inv", itemStackHandler.serializeNBT());
-        return super.write(nbt);
-    }
+    //TODO nbt
 
     @Nonnull
     @Override
