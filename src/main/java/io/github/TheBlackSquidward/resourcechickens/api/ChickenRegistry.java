@@ -167,7 +167,7 @@ public class ChickenRegistry {
         getChickenRegistry().put(cowChicken.getEntityName(), cowChicken);
         enderChicken = new ChickenRegistryObject("ender_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.ENDER_PEARL, 1, 2))), null, null, false);
         getChickenRegistry().put(enderChicken.getEntityName(), enderChicken);
-        experienceChicken = new ChickenRegistryObject("experience_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(ItemInit.SOLIDIFIED_EXPERIENCE, 1, 2))), null, null, false);
+        experienceChicken = new ChickenRegistryObject("experience_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(ItemInit.EXPERIENCE_IMBUED_EGG, 1, 2))), null, null, false);
         getChickenRegistry().put(experienceChicken.getEntityName(), experienceChicken);
         ghastChicken = new ChickenRegistryObject("ghast_chicken", new ArrayList<ChickenDrop>(Arrays.asList(new ChickenDrop(Items.GHAST_TEAR, 1, 2))), null, null, false);
         getChickenRegistry().put(ghastChicken.getEntityName(), ghastChicken);

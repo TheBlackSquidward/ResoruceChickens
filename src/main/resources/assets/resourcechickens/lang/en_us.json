@@ -245,5 +245,10 @@
 
     "itemGroup.resourcechickens": "Resource Chickens",
 
-    "gui.resourcechickens.chicken_breeder": "Chicken Breeder"
+    "gui.resourcechickens.chicken_breeder": "Chicken Breeder",
+    "gui.resourcechickens.electric_chicken_breeder": "Electric Chicken Breeder",
+    "gui.resourcechickens.roost": "Roost",
+    "gui.resourcechickens.electric_roost": "Electric Roost",
+    "gui.resourcechickens.incubator": "Incubator",
+    "gui.resourcechickens.electric_incubator": "Electric Incubator"
 }

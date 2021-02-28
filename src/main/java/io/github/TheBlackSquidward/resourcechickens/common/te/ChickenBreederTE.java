@@ -21,13 +21,22 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class ChickenBreederTE extends TileEntity implements ITickableTileEntity {
 
+    private static final DecimalFormat FORMATTER = new DecimalFormat("0.0%");
+
     private final ItemStackHandler itemStackHandler = createHandler();
 
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
+
+    //1 Min in ticks
+    private final int totalBreedTime = 1200;
+    private int progress = 0;
+    private int breedTime;
+    private boolean isBreeding;
 
     public ChickenBreederTE() {
         super(TileEntityInit.CHICKEN_BREEDER_TE.get());
@@ -35,24 +44,28 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
 
     @Override
     public void tick() {
-        if (itemStackHandler.getStackInSlot(0).getCount() >= 2) {
-            ItemStack itemSlot0 = itemStackHandler.getStackInSlot(0);
-            if (itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem) {
-                ItemStack itemSlot1 = itemStackHandler.getStackInSlot(1);
-                if (!(itemSlot1.getItem() == ItemInit.VANILLA_CHICKEN.get())) {
-                    ChickenRegistryObject parent1 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot1.getItem());
-                    if (itemStackHandler.getStackInSlot(2).getItem() instanceof ChickenItem) {
-                        ItemStack itemSlot2 = itemStackHandler.getStackInSlot(2);
-                        ChickenRegistryObject parent2 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot2.getItem());
-                        if (itemSlot1.getItem() == itemSlot2.getItem()) {
-                            ItemStack result = crossBreed(itemSlot1, itemSlot2, parent1, parent2);
-                            addResult(result);
-                        }
-                        if (ChickenRegistry.canBeBred(parent1, parent2)) {
-                            ItemStack result = new ItemStack(ItemInit.VANILLA_CHICKEN.get(), 1);
-                            addResult(result);
-                        }
-                    }
+        if (!this.world.isRemote) {
+            ResourceChickens.LOGGER.debug(progress);
+            if(isBreeding) {
+                if(!(hasChickens() && hasSeeds())) {
+                    this.breedTime = 0;
+                    this.isBreeding = false;
+                    this.progress = 0;
+                }
+                if(breedTime > 0) {
+                    breedTime--;
+                    updateProgress();
+                }else{
+                    spawnChickenIfNeeded();
+                    this.breedTime = 0;
+                    this.isBreeding = false;
+                    this.progress = 0;
+                }
+            }
+            if(!isBreeding) {
+                if(hasChickens() && hasSeeds()) {
+                    this.isBreeding = true;
+                    this.breedTime = totalBreedTime;
                 }
             }
         }
@@ -62,6 +75,58 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     public void remove() {
         super.remove();
         handler.invalidate();
+    }
+
+    private void updateProgress() {
+        this.progress = this.breedTime / this.totalBreedTime;
+    }
+
+
+    public String getFormattedProgress() {
+        return formatProgress(this.progress);
+    }
+
+    public String formatProgress(double progress) {
+        return FORMATTER.format(progress);
+    }
+
+
+    private void spawnChickenIfNeeded() {
+        if(hasSeeds()) {
+            if(hasChickens()) {
+                ItemStack itemSlot1 = itemStackHandler.getStackInSlot(1);
+                ChickenRegistryObject parent1 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot1.getItem());
+                ItemStack itemSlot2 = itemStackHandler.getStackInSlot(2);
+                ChickenRegistryObject parent2 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot2.getItem());
+                if (sameChicken(itemSlot1, itemSlot2)) {
+                    ItemStack result = crossBreed(itemSlot1, itemSlot2, parent1, parent2);
+                    addResult(result);
+                }
+                if (ChickenRegistry.canBeBred(parent1, parent2)) {
+                    ChickenRegistryObject newChicken = ChickenRegistry.getChild(parent1, parent2);
+                    //TODO add a chance
+                    //TODO add just inherited stats
+                    ItemStack result = mixChickens(itemSlot1, itemSlot2, parent1, parent2, newChicken);
+                    addResult(result);
+                }
+            }
+        }
+    }
+
+    private boolean sameChicken(ItemStack chicken1, ItemStack chicken2){
+        return chicken1.getItem() == chicken2.getItem();
+    }
+
+    private boolean hasChickens() {
+        if(itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(1).getItem() != ItemInit.VANILLA_CHICKEN.get()) {
+            return itemStackHandler.getStackInSlot(2).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(2).getItem() != ItemInit.VANILLA_CHICKEN.get();
+        }else{
+            return false;
+        }
+    }
+
+    private boolean hasSeeds() {
+        return itemStackHandler.getStackInSlot(0).getCount() >= 2;
     }
 
     public void addResult(ItemStack result) {
@@ -93,6 +158,50 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
             itemStackHandler.setStackInSlot(5, result);
             itemStackHandler.getStackInSlot(0).shrink(2);
         }
+    }
+
+    private ItemStack mixChickens(ItemStack parent1Item, ItemStack parent2Item, ChickenRegistryObject parent1, ChickenRegistryObject parent2, ChickenRegistryObject newChicken) {
+        ItemStack result = new ItemStack(newChicken.getChickenItemRegistryObject().get());
+        CompoundNBT nbt = result.getOrCreateTag();
+
+        int parent1Gain = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_gain");
+        int parent1Growth = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
+        int parent1Strength = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_strength");
+
+        int parent2Gain = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_gain");
+        int parent2Growth = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
+        int parent2Strength = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_strength");
+
+
+        if(parent1Gain == 0) {
+            parent1Gain = 1;
+        }
+        if(parent1Growth == 0) {
+            parent1Growth = 1;
+        }
+        if(parent1Strength == 0) {
+            parent1Strength = 1;
+        }
+        if(parent2Gain == 0) {
+            parent2Gain = 1;
+        }
+        if(parent2Growth == 0) {
+            parent2Growth = 1;
+        }
+        if(parent2Strength == 0) {
+            parent2Strength = 1;
+        }
+
+        int newGain = calculateNewStat(parent1Strength, parent2Strength, parent1Gain, parent2Gain, world.rand);
+        int newGrowth = calculateNewStat(parent1Strength, parent2Strength, parent1Growth, parent2Growth, world.rand);
+        int newStrength = calculateNewStat(parent1Strength, parent2Strength, parent1Strength, parent2Strength, world.rand);
+
+        nbt.putInt(ResourceChickens.MODID + "_chicken_gain", newGain);
+        nbt.putInt(ResourceChickens.MODID + "_chicken_growth", newGrowth);
+        nbt.putInt(ResourceChickens.MODID + "_chicken_strength", newStrength);
+        result.write(nbt);
+        result.setTag(nbt);
+        return result;
     }
 
     private ItemStack crossBreed(ItemStack parent1Item, ItemStack parent2Item, ChickenRegistryObject parent1, ChickenRegistryObject parent2) {

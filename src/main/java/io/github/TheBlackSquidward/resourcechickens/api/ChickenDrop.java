@@ -1,5 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.api;
 
+import io.github.TheBlackSquidward.resourcechickens.common.items.CustomEggItem;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
@@ -10,7 +11,7 @@ public class ChickenDrop {
 
     ArrayList<ChickenDrop> chickenDrops;
     RegistryObject<Item> itemRegistryObject;
-    Item item = null;
+    Item item;
     int minAmount;
     int maxAmount;
 
