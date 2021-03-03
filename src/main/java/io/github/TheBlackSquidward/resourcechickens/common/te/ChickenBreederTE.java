@@ -7,7 +7,7 @@ import io.github.TheBlackSquidward.resourcechickens.api.utils.NBTConstants;
 import io.github.TheBlackSquidward.resourcechickens.common.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
-import io.github.TheBlackSquidward.resourcechickens.network.ChickenBreederProgressBarMessage;
+import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.netty.buffer.Unpooled;
 import net.minecraft.block.BlockState;
@@ -350,7 +350,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     public void sendGUINetworkPacket(PlayerEntity playerEntity) {
         PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
         packetBuffer.writeDouble(getProgress());
-        ResourceChickensPacketHandler.sendToPlayer(new ChickenBreederProgressBarMessage(getPos(), packetBuffer), (ServerPlayerEntity) playerEntity);
+        ResourceChickensPacketHandler.sendToPlayer(new GUISyncMessage(getPos(), packetBuffer), (ServerPlayerEntity) playerEntity);
     }
 }
 

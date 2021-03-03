@@ -3,12 +3,15 @@ package io.github.TheBlackSquidward.resourcechickens.api;
 import io.github.TheBlackSquidward.resourcechickens.common.entities.CustomChickenEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ChickenRegistryObject {
 
@@ -98,6 +101,19 @@ public class ChickenRegistryObject {
 
     public ChickenRegistryObject getParent2() {
         return parent2;
+    }
+
+    public ItemStack buildChickenStack() {
+        ItemStack stack = new ItemStack(getChickenItemRegistryObject().get());
+        return stack;
+    }
+
+    public List<ItemStack> buildParentChickenStack() {
+        if (!isBreedable())
+            return null;
+        ChickenRegistryObject parent1 = getParent1();
+        ChickenRegistryObject parent2 = getParent2();
+        return Arrays.asList(new ItemStack[] { parent1.buildChickenStack(), parent2.buildChickenStack() });
     }
 
 }

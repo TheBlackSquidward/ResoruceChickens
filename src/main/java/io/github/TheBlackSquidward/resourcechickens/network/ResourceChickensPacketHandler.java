@@ -20,7 +20,7 @@ public class ResourceChickensPacketHandler {
     );
 
     public static void init() {
-        INSTANCE.registerMessage(id++, ChickenBreederProgressBarMessage.class, ChickenBreederProgressBarMessage::encode, ChickenBreederProgressBarMessage::decode, ChickenBreederProgressBarMessage::handle);
+        INSTANCE.registerMessage(id++, GUISyncMessage.class, GUISyncMessage::encode, GUISyncMessage::decode, GUISyncMessage::handle);
     }
 
     public static void sendToServer(Object message) {
