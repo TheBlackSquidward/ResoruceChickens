@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "I1I",
+    "2O3",
+    "IHI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "H": { "item": "minecraft:hopper" },
+    "1": { "item": "resourcechickens:speed_upgrade" },
+    "2": { "item": "resourcechickens:energy_upgrade" },
+    "3": { "item": "resourcechickens:luck_upgrade" },
+    "O": { "item": "resourcechickens:roost" }
+  },
+  "result": {
+    "item": "resourcechickens:electric_roost",
+    "count": 1
+  }
+}

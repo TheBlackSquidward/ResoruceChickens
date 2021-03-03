@@ -1,25 +1,15 @@
 package io.github.TheBlackSquidward.resourcechickens.common.containers;
 
-import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.common.te.ChickenBreederTE;
 import io.github.TheBlackSquidward.resourcechickens.init.BlockInit;
 import io.github.TheBlackSquidward.resourcechickens.init.ContainerInit;
-import io.github.TheBlackSquidward.resourcechickens.network.ChickenBreederProgressBarMessage;
-import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
-import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.FurnaceContainer;
-import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;

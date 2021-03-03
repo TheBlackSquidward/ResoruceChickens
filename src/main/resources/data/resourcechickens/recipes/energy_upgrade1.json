@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BRB",
+    "RDR",
+    "BRB"
+  ],
+  "key": {
+    "B": { "item": "minecraft:redstone" },
+    "R": { "item": "minecraft:gold_ingot" },
+    "D": { "item": "resourcechickens:upgrade_base" }
+  },
+  "result": {
+    "item": "resourcechickens:energy_upgrade",
+    "count": 1
+  }
+}

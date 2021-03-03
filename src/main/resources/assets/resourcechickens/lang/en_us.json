@@ -7,10 +7,19 @@
 
     "item.resourcechickens.lava_infused_egg": "Lava Infused Egg",
     "item.resourcechickens.water_infused_egg": "Water Infused Egg",
-    "item.resourcechickens.solidified_experience": "Solidified Experience",
+    "item.resourcechickens.experience_imbued_egg": "Experience Imbued Egg",
 
+    "item.resourcechickens.chicken_and_chips": "Chicken And Chips",
+    "item.resourcechickens.chicken_nuggets": "Chicken Nuggets",
+    "item.resourcechickens.fried_chicken": "Fried Chicken",
+    "item.resourcechickens.chicken_sandwich": "Fried Chicken Sandwich",
+
+
+    "item.resourcechickens.upgrade_base": "Upgrade Base",
     "item.resourcechickens.speed_upgrade": "Speed Upgrade",
-    "item.resourcechickens.energy_upgrade": "Energy Upgrade",
+    "item.resourcechickens.energy_upgrade": "Energy Efficiency Upgrade",
+    "item.resourcechickens.luck_upgrade": "Luck Upgrade",
+    "item.resourcechickens.electric_upgrade": "Electric Upgrade",
 
     "block.resourcechickens.electric_roost": "Electric Roost",
     "block.resourcechickens.roost": "Roost",
@@ -237,6 +246,22 @@
     "entity.resourcechickens.wither_skeleton_chicken": "Wither Skeleton Chicken",
     "item.resourcechickens.wither_skeleton_chicken_item": "Wither Skeleton Chicken",
     "item.resourcechickens.wither_skeleton_chicken_spawn_egg": "Wither Skeleton Chicken Spawn Egg",
+
+    "entity.resourcechickens.squidward_chicken": "Squidward Chicken",
+    "item.resourcechickens.squidward_chicken_item": "Squidward Chicken",
+    "item.resourcechickens.squidward_chicken_spawn_egg": "Squidward Chicken Spawn Egg",
+
+    "entity.resourcechickens.god_chicken": "God Chicken",
+    "item.resourcechickens.god_chicken_item": "God Chicken",
+    "item.resourcechickens.god_chicken_spawn_egg": "God Chicken Spawn Egg",
+
+    "entity.resourcechickens.quantum_chicken": "Quantum Chicken",
+    "item.resourcechickens.quantum_chicken_item": "Quantum Chicken",
+    "item.resourcechickens.quantum_chicken_spawn_egg": "Quantum Chicken Spawn Egg",
+
+    "entity.resourcechickens.donkey_chicken": "Donkey Chicken",
+    "item.resourcechickens.donkey_chicken_item": "Donkey Chicken",
+    "item.resourcechickens.donkey_chicken_spawn_egg": "Donkey Chicken Spawn Egg",
 
     "entity.resourcechickens.iron_chicken": "Iron Chicken",
     "item.resourcechickens.iron_chicken_item": "Iron Chicken",

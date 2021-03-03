@@ -24,11 +24,14 @@ public class ChickenRegistry {
     public static void initChickens() {
         initVanillaChickens();
         initModChickens();
+        initOtherChickens();
     }
 
     //Other Chickens
     private static ChickenRegistryObject donkeyChicken;
     private static ChickenRegistryObject godChicken;
+    private static ChickenRegistryObject squidwardChicken;
+    private static ChickenRegistryObject quantumChicken;
 
     //Dye Chickens
     private static ChickenRegistryObject greenChicken;
@@ -220,6 +223,10 @@ public class ChickenRegistry {
         getChickenRegistry().put(donkeyChicken.getEntityName(), donkeyChicken);
         godChicken = new ChickenRegistryObject("god_chicken", Items.BARRIER, null, null, false);
         getChickenRegistry().put(godChicken.getEntityName(), godChicken);
+        squidwardChicken = new ChickenRegistryObject("squidward_chicken", Items.SQUID_SPAWN_EGG, null, null, false);
+        getChickenRegistry().put("squidward_chicken", squidwardChicken);
+        quantumChicken = new ChickenRegistryObject("quantum_chicken", Items.END_PORTAL_FRAME, null, null, false);
+        getChickenRegistry().put("quantum_chicken", quantumChicken);
     }
 
     public static void registerChickens() {

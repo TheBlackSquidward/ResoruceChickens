@@ -29,7 +29,16 @@ public class ItemInit {
     public static final RegistryObject<Item> CHICKEN_MANURE = ITEMS.register("chicken_manure", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> FERTILIZER = ITEMS.register("fertilizer", () -> new Item(new Item.Properties()));
 
+    //Food
+    public static final RegistryObject<Item> CHICKEN_SANDWICH = ITEMS.register("chicken_sandwich", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> FRIED_CHICKEN = ITEMS.register("fried_chicken", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CHICKEN_NUGGETS = ITEMS.register("chicken_nuggets", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> CHICKEN_AND_CHIPS = ITEMS.register("chicken_and_chips", () -> new Item(new Item.Properties()));
+
     //Upgrades
+    public static final RegistryObject<Item> UPGRADE_BASE = ITEMS.register("upgrade_base", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> ELECTRIC_UPGRADE = ITEMS.register("electric_upgrade", () -> new ElectricUpgradeItem(new Item.Properties()));
+    public static final RegistryObject<Item> LUCK_UPGRADE = ITEMS.register("luck_upgrade", () -> new UpgradeItem(new Item.Properties()));
     public static final RegistryObject<Item> SPEED_UPGRADE = ITEMS.register("speed_upgrade", () -> new UpgradeItem(new Item.Properties()));
     public static final RegistryObject<Item> ENERGY_UPGRADE = ITEMS.register("energy_upgrade", () -> new UpgradeItem(new Item.Properties()));
 

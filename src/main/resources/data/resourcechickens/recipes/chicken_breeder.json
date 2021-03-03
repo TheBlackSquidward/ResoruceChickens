@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PSP",
+    "HHH"
+  ],
+  "key": {
+    "P": { "tag": "minecraft:planks" },
+    "S": { "item": "minecraft:wheat_seeds" },
+    "H": { "item": "minecraft:hay_block" }
+  },
+  "result": {
+    "item": "resourcechickens:chicken_breeder",
+    "count": 1
+  }
+}

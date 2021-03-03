@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BRB",
+    "RDR",
+    "BRB"
+  ],
+  "key": {
+    "B": { "item": "minecraft:stick" },
+    "R": { "item": "minecraft:iron_ingot" },
+    "D": { "item": "minecraft:diamond" }
+  },
+  "result": {
+    "item": "resourcechickens:upgrade_base",
+    "count": 2
+  }
+}

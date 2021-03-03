@@ -6,12 +6,8 @@
     "BRB"
   ],
   "key": {
-    "R": {
-      "item": "minecraft:bone_meal"
-    },
-    "B": {
-      "item": "resourcefulchickens:chicken_manure"
-    }
+    "R": { "item": "minecraft:bone_meal" },
+    "B": { "item": "resourcechickens:chicken_manure" }
   },
   "result": {
     "item": "resourcechickens:fertilizer",

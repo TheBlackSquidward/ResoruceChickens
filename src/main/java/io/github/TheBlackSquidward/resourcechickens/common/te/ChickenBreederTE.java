@@ -3,27 +3,26 @@ package io.github.TheBlackSquidward.resourcechickens.common.te;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
+import io.github.TheBlackSquidward.resourcechickens.api.utils.NBTConstants;
 import io.github.TheBlackSquidward.resourcechickens.common.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
 import io.github.TheBlackSquidward.resourcechickens.network.ChickenBreederProgressBarMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.netty.buffer.Unpooled;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.BrewingStandContainer;
-import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -31,21 +30,18 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.text.DecimalFormat;
 import java.util.Random;
 
 public class ChickenBreederTE extends TileEntity implements ITickableTileEntity {
-
-    private static final DecimalFormat FORMATTER = new DecimalFormat("0.0%");
 
     private final ItemStackHandler itemStackHandler = createHandler();
 
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
-    //1 Min in ticks
-    private double totalBreedTime = 1200;
-    private double progress;
-    private double breedTime;
+    //2 Min in ticks
+    private final double totalBreedTime = 2400;
+    private double progress = 0;
+    private double breedTime = 0;
     private boolean isBreeding;
 
     public ChickenBreederTE() {
@@ -55,7 +51,6 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     @Override
     public void tick() {
         if (!this.world.isRemote) {
-            updateProgress();
             if (isBreeding) {
                 if (!(hasChickens() && hasSeeds())) {
                     this.breedTime = 0;
@@ -77,6 +72,8 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
                     this.breedTime = totalBreedTime;
                 }
             }
+            updateProgress();
+            markDirty();
         }
     }
 
@@ -104,14 +101,6 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
 
     public double getProgress() {
         return progress;
-    }
-
-    public String getFormattedProgress() {
-        return formatProgress(this.progress);
-    }
-
-    public String formatProgress(double progress) {
-        return FORMATTER.format(progress);
     }
 
 
@@ -240,7 +229,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         return result;
     }
 
-    private static int calculateNewStat(int parent1Strength, int parent2Strength, int parent1Stat, int parent2Stat, Random rand) {
+    private int calculateNewStat(int parent1Strength, int parent2Strength, int parent1Stat, int parent2Stat, Random rand) {
         int mutation = rand.nextInt(2) + 1;
         int newStatValue = (parent1Stat * parent1Strength + parent2Stat * parent2Strength) / (parent1Strength + parent2Strength) + mutation;
         if (newStatValue <= 1)
@@ -277,7 +266,73 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         };
     }
 
-    //TODO nbt
+    private int getOverallGrowth(ItemStack parent1Item, ItemStack parent2Item) {
+        if(hasChickens()) {
+            int parent1Growth = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
+            int parent2Growth = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
+            if (parent1Growth == 0) {
+                parent1Growth = 1;
+            }
+            if (parent2Growth == 0) {
+                parent2Growth = 1;
+            }
+            int overallGrowth = (parent1Growth + parent2Growth) / 2;
+            return overallGrowth;
+        }else{
+            return 0;
+        }
+    }
+
+    @Nonnull
+    @Override
+    public CompoundNBT write(@Nonnull CompoundNBT tag) {
+        super.write(tag);
+        return saveToNBT(tag);
+    }
+
+    protected CompoundNBT saveToNBT(CompoundNBT tag) {
+        tag.put(NBTConstants.NBT_INVENTORY, itemStackHandler.serializeNBT());
+        tag.putDouble("breedTime", breedTime);
+        tag.putBoolean("isBreeding", isBreeding);
+        return tag;
+    }
+
+    protected void loadFromNBT(CompoundNBT tag) {
+        itemStackHandler.deserializeNBT(tag.getCompound(NBTConstants.NBT_INVENTORY));
+        breedTime = tag.getDouble("breedTime");
+        isBreeding = tag.getBoolean("isBreeding");
+    }
+
+    @Override
+    public void fromTag(@Nonnull BlockState state, @Nonnull CompoundNBT tag) {
+        this.loadFromNBT(tag);
+        super.fromTag(state, tag);
+    }
+
+    @Nonnull
+    @Override
+    public CompoundNBT getUpdateTag() {
+        CompoundNBT nbtTagCompound = new CompoundNBT();
+        write(nbtTagCompound);
+        return nbtTagCompound;
+    }
+
+    @Override
+    public void handleUpdateTag(@Nonnull BlockState state, CompoundNBT tag) {
+        this.fromTag(state, tag);
+    }
+
+    @Nullable
+    @Override
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        return new SUpdateTileEntityPacket(pos, 0, saveToNBT(new CompoundNBT()));
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+        CompoundNBT nbt = pkt.getNbtCompound();
+        loadFromNBT(nbt);
+    }
 
     @Nonnull
     @Override

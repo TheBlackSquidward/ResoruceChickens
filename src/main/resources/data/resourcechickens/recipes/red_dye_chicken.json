@@ -6,12 +6,8 @@
     "SSS"
   ],
   "key": {
-    "S": {
-      "item": "minecraft:red_dye"
-    },
-    "E": {
-      "item": "minecraft:egg"
-    }
+    "S": { "item": "minecraft:red_dye" },
+    "E": { "item": "minecraft:egg" }
   },
   "result": {
     "item": "resourcechickens:red_chicken_spawn_egg",

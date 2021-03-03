@@ -6,12 +6,8 @@
     "SSS"
   ],
   "key": {
-    "S": {
-      "item": "minecraft:sand"
-    },
-    "E": {
-      "item": "minecraft:egg"
-    }
+    "S": { "item": "minecraft:sand" },
+    "E": { "item": "minecraft:egg" }
   },
   "result": {
     "item": "resourcechickens:sand_chicken_spawn_egg",
