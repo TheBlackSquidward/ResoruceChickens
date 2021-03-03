@@ -1,6 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.api;
 
-import io.github.TheBlackSquidward.resourcechickens.common.items.CustomEggItem;
+import net.minecraft.inventory.container.FurnaceContainer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;

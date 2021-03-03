@@ -112,12 +112,7 @@ public class CustomChickenEntity extends AnimalEntity {
     @Override
     public void onDeath(DamageSource cause) {
         ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(this);
-        ArrayList<ChickenDrop> chickenDrops = chickenRegistryObject.getChickenDrops();
-        for(ChickenDrop chickenDrop : chickenDrops) {
-            ItemStack itemStack = new ItemStack(chickenDrop.getItem(), chickenDrop.getDropAmount(world));
-            ItemEntity itemEntity = new ItemEntity(world, getX(), getY(), getZ(), itemStack);
-            world.addEntity(itemEntity);
-        }
+        //TODO
         super.onDeath(cause);
     }
 

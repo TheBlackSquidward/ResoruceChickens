@@ -4,6 +4,7 @@ import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.common.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.init.*;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -46,6 +47,7 @@ public class ResourceChickens {
     }
 
     private void setup(final FMLCommonSetupEvent e) {
+        ResourceChickensPacketHandler.init();
         setupChickens();
     }
 

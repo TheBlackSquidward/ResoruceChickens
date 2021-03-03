@@ -1,16 +1,14 @@
 package io.github.TheBlackSquidward.resourcechickens.common.screens;
 
+import com.google.common.collect.Lists;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.common.containers.ChickenBreederContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-
-import javax.annotation.Nonnull;
 
 public class ChickenBreederScreen extends ContainerScreen<ChickenBreederContainer> {
 
@@ -27,6 +25,7 @@ public class ChickenBreederScreen extends ContainerScreen<ChickenBreederContaine
         int relX = (this.width - this.xSize) / 2;
         int relY = (this.height - this.ySize) / 2;
         this.drawTexture(matrixStack, relX, relY, 0, 0, this.xSize, this.ySize);
+        drawTexture(matrixStack, relX + 84, relY + 22, 176, 0, getProgressWidth(), 12);
     }
 
     @Override
@@ -36,5 +35,8 @@ public class ChickenBreederScreen extends ContainerScreen<ChickenBreederContaine
         this.drawMouseoverTooltip(matrixStack, mouseX, mouseY);
     }
 
-
+    private int getProgressWidth() {
+        double progress = this.container.getProgress();
+        return (progress == 0.0D) ? 0 : (1 + (int)(progress * 25.0D));
+    }
 }

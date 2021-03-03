@@ -17,7 +17,8 @@ public class ChickenRegistryObject {
     private final ChickenRegistryObject parent2;
     private transient boolean hasFeather;
 
-    private transient ArrayList<ChickenDrop> chickenDrops;
+    private Item chickenDrop = null;
+    private RegistryObject<Item> itemRegistryObject = null;
 
     private transient RegistryObject<Item> chickenFeatherRegistryObject;
     private transient RegistryObject<Item> chickenItemRegistryObject;
@@ -25,11 +26,16 @@ public class ChickenRegistryObject {
     private transient RegistryObject<EntityType<CustomChickenEntity>> chickenEntityRegistryObject;
     private transient ResourceLocation registryID;
 
-    public ChickenRegistryObject(String entityName, ArrayList<ChickenDrop> chickenDrops, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2, boolean hasFeather) {
+    public ChickenRegistryObject(String entityName, Item chickenDrop, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2, boolean hasFeather) {
         this.entityName = entityName;
-        this.chickenDrops = chickenDrops;
-        chickenDrops.add(new ChickenDrop(Items.CHICKEN, 1, 1));
-        chickenDrops.add(new ChickenDrop(Items.FEATHER, 0, 2));
+        this.chickenDrop = chickenDrop;
+        this.parent1 = parent1;
+        this.parent2 = parent2;
+        this.hasFeather = hasFeather;
+    }
+    public ChickenRegistryObject(String entityName, RegistryObject<Item> itemRegistryObject, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2, boolean hasFeather) {
+        this.entityName = entityName;
+        this.itemRegistryObject = itemRegistryObject;
         this.parent1 = parent1;
         this.parent2 = parent2;
         this.hasFeather = hasFeather;
@@ -51,8 +57,11 @@ public class ChickenRegistryObject {
         this.chickenItemRegistryObject = (this.chickenItemRegistryObject == null) ? chickenItemRegistryObject : this.chickenItemRegistryObject;
     }
 
-    public ArrayList<ChickenDrop> getChickenDrops() {
-        return chickenDrops;
+    public Item getChickenDrop() {
+        if(chickenDrop == null) {
+            chickenDrop = itemRegistryObject.get();
+        }
+        return chickenDrop;
     }
 
     public RegistryObject<Item> getChickenItemRegistryObject() {
@@ -90,4 +99,5 @@ public class ChickenRegistryObject {
     public ChickenRegistryObject getParent2() {
         return parent2;
     }
+
 }

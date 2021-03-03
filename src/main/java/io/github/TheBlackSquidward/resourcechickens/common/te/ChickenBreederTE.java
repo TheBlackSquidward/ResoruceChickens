@@ -6,14 +6,24 @@ import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.common.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
-import net.minecraft.block.BlockState;
+import io.github.TheBlackSquidward.resourcechickens.network.ChickenBreederProgressBarMessage;
+import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
+import io.netty.buffer.Unpooled;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.BrewingStandContainer;
+import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -33,9 +43,9 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
     //1 Min in ticks
-    private final int totalBreedTime = 1200;
-    private int progress = 0;
-    private int breedTime;
+    private double totalBreedTime = 1200;
+    private double progress;
+    private double breedTime;
     private boolean isBreeding;
 
     public ChickenBreederTE() {
@@ -45,25 +55,24 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     @Override
     public void tick() {
         if (!this.world.isRemote) {
-            ResourceChickens.LOGGER.debug(progress);
-            if(isBreeding) {
-                if(!(hasChickens() && hasSeeds())) {
+            updateProgress();
+            if (isBreeding) {
+                if (!(hasChickens() && hasSeeds())) {
                     this.breedTime = 0;
                     this.isBreeding = false;
                     this.progress = 0;
                 }
-                if(breedTime > 0) {
+                if (breedTime > 0) {
                     breedTime--;
-                    updateProgress();
-                }else{
+                } else {
                     spawnChickenIfNeeded();
                     this.breedTime = 0;
                     this.isBreeding = false;
                     this.progress = 0;
                 }
             }
-            if(!isBreeding) {
-                if(hasChickens() && hasSeeds()) {
+            if (!isBreeding) {
+                if (hasChickens() && hasSeeds()) {
                     this.isBreeding = true;
                     this.breedTime = totalBreedTime;
                 }
@@ -78,9 +87,24 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     }
 
     private void updateProgress() {
-        this.progress = this.breedTime / this.totalBreedTime;
+        double calculatedProgress = (this.totalBreedTime - this.breedTime) / this.totalBreedTime;
+        if(calculatedProgress == 1) {
+            calculatedProgress = 0;
+        }
+        this.progress = calculatedProgress;
     }
 
+    public double getTotalBreedTime() {
+        return totalBreedTime;
+    }
+
+    public double getBreedTime() {
+        return breedTime;
+    }
+
+    public double getProgress() {
+        return progress;
+    }
 
     public String getFormattedProgress() {
         return formatProgress(this.progress);
@@ -92,8 +116,8 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
 
 
     private void spawnChickenIfNeeded() {
-        if(hasSeeds()) {
-            if(hasChickens()) {
+        if (hasSeeds()) {
+            if (hasChickens()) {
                 ItemStack itemSlot1 = itemStackHandler.getStackInSlot(1);
                 ChickenRegistryObject parent1 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot1.getItem());
                 ItemStack itemSlot2 = itemStackHandler.getStackInSlot(2);
@@ -113,14 +137,14 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         }
     }
 
-    private boolean sameChicken(ItemStack chicken1, ItemStack chicken2){
+    private boolean sameChicken(ItemStack chicken1, ItemStack chicken2) {
         return chicken1.getItem() == chicken2.getItem();
     }
 
     private boolean hasChickens() {
-        if(itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(1).getItem() != ItemInit.VANILLA_CHICKEN.get()) {
+        if (itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(1).getItem() != ItemInit.VANILLA_CHICKEN.get()) {
             return itemStackHandler.getStackInSlot(2).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(2).getItem() != ItemInit.VANILLA_CHICKEN.get();
-        }else{
+        } else {
             return false;
         }
     }
@@ -133,26 +157,26 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         ItemStack item3 = itemStackHandler.getStackInSlot(3);
         ItemStack item4 = itemStackHandler.getStackInSlot(4);
         ItemStack item5 = itemStackHandler.getStackInSlot(5);
-        if(item3.isEmpty()) {
+        if (item3.isEmpty()) {
             itemStackHandler.setStackInSlot(3, result);
             itemStackHandler.getStackInSlot(0).shrink(2);
-        }else if(item3.getOrCreateTag().equals(result.getOrCreateTag()) && item3.getCount() < 16){
+        } else if (item3.getOrCreateTag().equals(result.getOrCreateTag()) && item3.getCount() < 16) {
             int amount = item3.getCount() + 1;
             result.setCount(amount);
             itemStackHandler.setStackInSlot(3, result);
             itemStackHandler.getStackInSlot(0).shrink(2);
-        }else if(item4.isEmpty()) {
+        } else if (item4.isEmpty()) {
             itemStackHandler.setStackInSlot(4, result);
             itemStackHandler.getStackInSlot(0).shrink(2);
-        }else if(item4.getOrCreateTag().equals(result.getOrCreateTag()) && item4.getCount() < 16) {
+        } else if (item4.getOrCreateTag().equals(result.getOrCreateTag()) && item4.getCount() < 16) {
             int amount = item4.getCount() + 1;
             result.setCount(amount);
             itemStackHandler.setStackInSlot(4, result);
             itemStackHandler.getStackInSlot(0).shrink(2);
-        }else if(item5.isEmpty()) {
+        } else if (item5.isEmpty()) {
             itemStackHandler.setStackInSlot(5, result);
             itemStackHandler.getStackInSlot(0).shrink(2);
-        }else if(item5.getOrCreateTag().equals(result.getOrCreateTag()) && item5.getCount() < 16) {
+        } else if (item5.getOrCreateTag().equals(result.getOrCreateTag()) && item5.getCount() < 16) {
             int amount = item5.getCount() + 1;
             result.setCount(amount);
             itemStackHandler.setStackInSlot(5, result);
@@ -164,41 +188,9 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         ItemStack result = new ItemStack(newChicken.getChickenItemRegistryObject().get());
         CompoundNBT nbt = result.getOrCreateTag();
 
-        int parent1Gain = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_gain");
-        int parent1Growth = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
-        int parent1Strength = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_strength");
-
-        int parent2Gain = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_gain");
-        int parent2Growth = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
-        int parent2Strength = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_strength");
-
-
-        if(parent1Gain == 0) {
-            parent1Gain = 1;
-        }
-        if(parent1Growth == 0) {
-            parent1Growth = 1;
-        }
-        if(parent1Strength == 0) {
-            parent1Strength = 1;
-        }
-        if(parent2Gain == 0) {
-            parent2Gain = 1;
-        }
-        if(parent2Growth == 0) {
-            parent2Growth = 1;
-        }
-        if(parent2Strength == 0) {
-            parent2Strength = 1;
-        }
-
-        int newGain = calculateNewStat(parent1Strength, parent2Strength, parent1Gain, parent2Gain, world.rand);
-        int newGrowth = calculateNewStat(parent1Strength, parent2Strength, parent1Growth, parent2Growth, world.rand);
-        int newStrength = calculateNewStat(parent1Strength, parent2Strength, parent1Strength, parent2Strength, world.rand);
-
-        nbt.putInt(ResourceChickens.MODID + "_chicken_gain", newGain);
-        nbt.putInt(ResourceChickens.MODID + "_chicken_growth", newGrowth);
-        nbt.putInt(ResourceChickens.MODID + "_chicken_strength", newStrength);
+        nbt.putInt(ResourceChickens.MODID + "_chicken_gain", 1);
+        nbt.putInt(ResourceChickens.MODID + "_chicken_growth", 1);
+        nbt.putInt(ResourceChickens.MODID + "_chicken_strength", 1);
         result.write(nbt);
         result.setTag(nbt);
         return result;
@@ -217,22 +209,22 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         int parent2Strength = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_strength");
 
 
-        if(parent1Gain == 0) {
+        if (parent1Gain == 0) {
             parent1Gain = 1;
         }
-        if(parent1Growth == 0) {
+        if (parent1Growth == 0) {
             parent1Growth = 1;
         }
-        if(parent1Strength == 0) {
+        if (parent1Strength == 0) {
             parent1Strength = 1;
         }
-        if(parent2Gain == 0) {
+        if (parent2Gain == 0) {
             parent2Gain = 1;
         }
-        if(parent2Growth == 0) {
+        if (parent2Growth == 0) {
             parent2Growth = 1;
         }
-        if(parent2Strength == 0) {
+        if (parent2Strength == 0) {
             parent2Strength = 1;
         }
 
@@ -268,14 +260,14 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                if(slot == 0) {
+                if (slot == 0) {
                     return stack.getItem() == Items.WHEAT_SEEDS;
                 }
-                if(slot == 1 || slot == 2) {
-                    if(stack.getItem() instanceof ChickenItem) {
-                        if(stack.getItem() == ItemInit.VANILLA_CHICKEN.get()) {
+                if (slot == 1 || slot == 2) {
+                    if (stack.getItem() instanceof ChickenItem) {
+                        if (stack.getItem() == ItemInit.VANILLA_CHICKEN.get()) {
                             return false;
-                        }else{
+                        } else {
                             return true;
                         }
                     }
@@ -295,4 +287,16 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         }
         return super.getCapability(cap, side);
     }
+
+    public void handleGUINetworkPacket(PacketBuffer packetBuffer) {
+        this.progress = packetBuffer.readDouble();
+    }
+
+    public void sendGUINetworkPacket(PlayerEntity playerEntity) {
+        PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
+        packetBuffer.writeDouble(getProgress());
+        ResourceChickensPacketHandler.sendToPlayer(new ChickenBreederProgressBarMessage(getPos(), packetBuffer), (ServerPlayerEntity) playerEntity);
+    }
 }
+
+

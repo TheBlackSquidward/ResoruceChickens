@@ -1,29 +1,43 @@
 package io.github.TheBlackSquidward.resourcechickens.common.containers;
 
+import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
+import io.github.TheBlackSquidward.resourcechickens.common.te.ChickenBreederTE;
 import io.github.TheBlackSquidward.resourcechickens.init.BlockInit;
 import io.github.TheBlackSquidward.resourcechickens.init.ContainerInit;
+import io.github.TheBlackSquidward.resourcechickens.network.ChickenBreederProgressBarMessage;
+import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
+import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.FurnaceContainer;
+import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
+import java.text.DecimalFormat;
+
 public class ChickenBreederContainer extends Container {
 
-    private final TileEntity tileEntity;
+    private static final DecimalFormat FORMATTER = new DecimalFormat("0.0%");
+
+    private final ChickenBreederTE tileEntity;
     private final PlayerEntity playerEntity;
     private final IItemHandler playerInventory;
 
     public ChickenBreederContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
         super(ContainerInit.CHICKEN_BREEDER_CONTAINER.get(), windowId);
-        tileEntity = world.getTileEntity(pos);
+        tileEntity = (ChickenBreederTE) world.getTileEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
 
@@ -72,4 +86,23 @@ public class ChickenBreederContainer extends Container {
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
         return super.transferStackInSlot(playerIn, index);
     }
+
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+        tileEntity.sendGUINetworkPacket(playerEntity);
+    }
+
+    public double getProgress() {
+        return tileEntity.getProgress();
+    }
+
+    public String getFormattedProgress() {
+        return formatProgress(getProgress());
+    }
+
+    public String formatProgress(double progress) {
+        return FORMATTER.format(progress);
+    }
+
 }
