@@ -1,7 +1,6 @@
-package io.github.TheBlackSquidward.resourcechickens.jei;
+package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.sun.java.accessibility.util.Translator;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
@@ -36,14 +35,14 @@ public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingR
         IDrawableStatic heartsDrawable = iGuiHelper.createDrawable(GUI, 90, 0, 26, 12);
         this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(Items.WHEAT_SEEDS));
         this.hearts = iGuiHelper.createAnimatedDrawable(heartsDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
-        this.background = (IDrawable)iGuiHelper.createDrawable(GUI, 0, 0, 90, 18);
+        this.background = iGuiHelper.createDrawable(GUI, 0, 0, 90, 18);
         this.localizedName = I18n.format("gui.resourcechickens.jei.category.chicken_breeding");
     }
 
     public static Collection<?> getBreedingRecipes() {
         List<ChickenBreedingRecipe> recipes = new ArrayList<>();
-        for(ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry().values()) {
-            if(chickenRegistryObject.isBreedable()) {
+        for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry().values()) {
+            if (chickenRegistryObject.isBreedable()) {
                 recipes.add(new ChickenBreedingRecipe(chickenRegistryObject));
             }
         }

@@ -46,10 +46,8 @@ public class IncubatorTE extends TileEntity implements ITickableTileEntity {
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                if(slot == 0) {
-                    if(stack.getItem() instanceof CustomEggItem) {
-                        return true;
-                    }
+                if (slot == 0) {
+                    return stack.getItem() instanceof CustomEggItem;
                 }
                 return false;
             }

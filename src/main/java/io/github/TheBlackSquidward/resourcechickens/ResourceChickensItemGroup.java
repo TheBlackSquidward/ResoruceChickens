@@ -19,7 +19,7 @@ public class ResourceChickensItemGroup extends net.minecraft.item.ItemGroup {
 
     @Override
     public void fill(NonNullList<ItemStack> items) {
-        for(RegistryObject<Item> item : ItemInit.ITEMS.getEntries()) {
+        for (RegistryObject<Item> item : ItemInit.ITEMS.getEntries()) {
             items.add(item.get().getDefaultInstance());
         }
     }

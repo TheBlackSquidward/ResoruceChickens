@@ -13,7 +13,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class ElectricRoostTE extends TileEntity implements ITickableTileEntity {
 

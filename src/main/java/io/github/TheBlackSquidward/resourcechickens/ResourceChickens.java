@@ -1,16 +1,20 @@
 package io.github.TheBlackSquidward.resourcechickens;
 
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.common.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.init.*;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
+import io.github.TheBlackSquidward.resourcechickens.compat.top.TopCompat;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +26,7 @@ import static io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry.i
 @Mod(ResourceChickens.MODID)
 public class ResourceChickens {
 
-    public static final Random RANDOM =  new Random();
+    public static final Random RANDOM = new Random();
 
     public static final String MODID = "resourcechickens";
 
@@ -40,6 +44,7 @@ public class ResourceChickens {
         TileEntityInit.TILE_ENTITY.register(iEventBus);
         ContainerInit.CONTAINERS.register(iEventBus);
 
+        iEventBus.addListener(this::onInterModEnqueue);
         MinecraftForge.EVENT_BUS.register(this);
 
         initChickens();
@@ -51,9 +56,16 @@ public class ResourceChickens {
         setupChickens();
     }
 
+    public void onInterModEnqueue(InterModEnqueueEvent e) {
+        if(ModList.get().isLoaded("theoneprobe")) {
+            InterModComms.sendTo("theoneprobe", "getTheOneProbe", TopCompat::new);
+            LOGGER.info("Detected The One Probe. Initializing compat.");
+        }
+    }
+
     private void setupChickens() {
         DeferredWorkQueue.runLater(() -> {
-            for(ChickenRegistryObject chicken : ChickenRegistry.getChickenRegistry().values()) {
+            for (ChickenRegistryObject chicken : ChickenRegistry.getChickenRegistry().values()) {
                 GlobalEntityTypeAttributes.put(chicken.getChickenEntityRegisryObject().get(), CustomChickenEntity.setCustomAttributes().build());
             }
         });

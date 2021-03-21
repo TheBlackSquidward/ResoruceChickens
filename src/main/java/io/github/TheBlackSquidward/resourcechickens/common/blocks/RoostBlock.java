@@ -1,8 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.common.blocks;
 
-import io.github.TheBlackSquidward.resourcechickens.common.containers.ChickenBreederContainer;
 import io.github.TheBlackSquidward.resourcechickens.common.containers.RoostContainer;
-import io.github.TheBlackSquidward.resourcechickens.common.te.ElectricRoostTE;
 import io.github.TheBlackSquidward.resourcechickens.common.te.RoostTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -64,7 +62,7 @@ public class RoostBlock extends Block {
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
-        }else{
+        } else {
             return ActionResultType.FAIL;
         }
     }

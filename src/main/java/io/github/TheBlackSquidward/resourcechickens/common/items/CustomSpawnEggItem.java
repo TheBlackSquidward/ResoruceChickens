@@ -11,7 +11,6 @@ import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
@@ -25,23 +24,23 @@ public class CustomSpawnEggItem extends Item {
     public ActionResultType onItemUse(ItemUseContext context) {
         PlayerEntity p = context.getPlayer();
         ItemStack itemStack = context.getItem();
-        if(p != null) {
+        if (p != null) {
             BlockPos finalBlockpos;
             World world = context.getWorld();
-            if(!world.isRemote()) {
+            if (!world.isRemote()) {
                 BlockPos blockpos = context.getPos();
                 Direction direction = context.getFace();
                 BlockState blockstate = world.getBlockState(blockpos);
-                if(!blockstate.causesSuffocation((IBlockReader) world, blockpos)) {
+                if (!blockstate.causesSuffocation(world, blockpos)) {
                     finalBlockpos = blockpos;
-                }else{
+                } else {
                     finalBlockpos = blockpos.offset(direction);
                 }
                 ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenSpawnEggItem(itemStack.getItem());
                 chickenRegistryObject.getChickenEntityRegisryObject().get().spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);
                 itemStack.shrink(1);
                 return ActionResultType.CONSUME;
-            }else{
+            } else {
                 return ActionResultType.SUCCESS;
             }
         }

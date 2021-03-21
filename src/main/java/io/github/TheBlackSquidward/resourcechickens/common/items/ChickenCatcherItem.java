@@ -32,9 +32,9 @@ public class ChickenCatcherItem extends Item {
             if (!entity.isChild()) {
                 if (world.isRemote) {
                     p.getEntityWorld().playSound(p, pos.x, pos.y, pos.z, SoundEvents.ENTITY_CHICKEN_EGG, entity.getSoundCategory(), 1.0F, 1.0F);
-                }else{
+                } else {
                     p.addItemStackToInventory(new ItemStack(chickenRegistryObject.getChickenItemRegistryObject().get(), 1));
-                    itemStack.damageItem(1, p,(p_220045_0_) -> {
+                    itemStack.damageItem(1, p, (p_220045_0_) -> {
                         p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
                     });
                     entity.remove();
@@ -42,13 +42,13 @@ public class ChickenCatcherItem extends Item {
             } else {
                 return ActionResultType.SUCCESS;
             }
-        }else if(entity instanceof ChickenEntity) {
-            if(!entity.isChild()) {
-                if(world.isRemote()) {
+        } else if (entity instanceof ChickenEntity) {
+            if (!entity.isChild()) {
+                if (world.isRemote()) {
                     p.getEntityWorld().playSound(p, pos.x, pos.y, pos.z, SoundEvents.ENTITY_CHICKEN_EGG, entity.getSoundCategory(), 1.0F, 1.0F);
-                }else{
+                } else {
                     p.addItemStackToInventory(new ItemStack(ItemInit.VANILLA_CHICKEN.get(), 1));
-                    itemStack.damageItem(1, p,(p_220045_0_) -> {
+                    itemStack.damageItem(1, p, (p_220045_0_) -> {
                         p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
                     });
                     entity.remove();

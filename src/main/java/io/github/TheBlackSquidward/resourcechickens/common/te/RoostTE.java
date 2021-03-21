@@ -21,7 +21,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class RoostTE extends TileEntity implements ITickableTileEntity {
 
@@ -36,7 +35,7 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
     //TODO add timer
     @Override
     public void tick() {
-        if(!this.world.isRemote) {
+        if (!this.world.isRemote) {
             if (hasChicken()) {
                 ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemStackHandler.getStackInSlot(0).getItem());
                 addResult(new ItemStack(chickenRegistryObject.getChickenDrop(), getDropAmount(getGain())));
@@ -56,7 +55,7 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
             int amount = item1.getCount() + 1;
             result.setCount(amount);
             itemStackHandler.setStackInSlot(1, result);
-        } else if (item2.isEmpty() ) {
+        } else if (item2.isEmpty()) {
             itemStackHandler.setStackInSlot(2, result);
         } else if (item2.isItemEqual(result) && item2.getCount() < 64) {
             int amount = item2.getCount() + 1;
@@ -91,8 +90,8 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
 
     private int getGain() {
         CompoundNBT nbt = itemStackHandler.getStackInSlot(0).getOrCreateTag();
-        int gain =  nbt.getInt(ResourceChickens.MODID + "_chicken_gain");
-        if(gain == 0) {
+        int gain = nbt.getInt(ResourceChickens.MODID + "_chicken_gain");
+        if (gain == 0) {
             gain = 1;
         }
         return gain;
@@ -115,9 +114,7 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 if (slot == 0) {
-                    if (stack.getItem() instanceof ChickenItem) {
-                        return true;
-                    }
+                    return stack.getItem() instanceof ChickenItem;
                 }
                 return false;
             }

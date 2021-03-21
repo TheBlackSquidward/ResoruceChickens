@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.jei;
+package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import mezz.jei.api.gui.ITickTimer;

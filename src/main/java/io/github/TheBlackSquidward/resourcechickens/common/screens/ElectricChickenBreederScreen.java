@@ -3,7 +3,6 @@ package io.github.TheBlackSquidward.resourcechickens.common.screens;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.common.containers.ChickenBreederContainer;
 import io.github.TheBlackSquidward.resourcechickens.common.containers.ElectricChickenBreederContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,7 +11,7 @@ import net.minecraft.util.text.ITextComponent;
 
 public class ElectricChickenBreederScreen extends ContainerScreen<ElectricChickenBreederContainer> {
 
-    private ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/electric_chicken_breeder_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/electric_chicken_breeder_gui.png");
 
     public ElectricChickenBreederScreen(ElectricChickenBreederContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);

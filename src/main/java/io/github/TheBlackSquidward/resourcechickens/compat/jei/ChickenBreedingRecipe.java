@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.jei;
+package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 

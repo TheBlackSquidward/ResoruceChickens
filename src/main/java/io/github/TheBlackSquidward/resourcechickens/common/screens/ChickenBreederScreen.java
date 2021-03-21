@@ -1,6 +1,5 @@
 package io.github.TheBlackSquidward.resourcechickens.common.screens;
 
-import com.google.common.collect.Lists;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
@@ -12,7 +11,7 @@ import net.minecraft.util.text.ITextComponent;
 
 public class ChickenBreederScreen extends ContainerScreen<ChickenBreederContainer> {
 
-    private ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/chicken_breeder_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/chicken_breeder_gui.png");
 
     public ChickenBreederScreen(ChickenBreederContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
@@ -37,6 +36,6 @@ public class ChickenBreederScreen extends ContainerScreen<ChickenBreederContaine
 
     private int getProgressWidth() {
         double progress = this.container.getProgress();
-        return (progress == 0.0D) ? 0 : (1 + (int)(progress * 25.0D));
+        return (progress == 0.0D) ? 0 : (1 + (int) (progress * 25.0D));
     }
 }

@@ -1,6 +1,5 @@
 package io.github.TheBlackSquidward.resourcechickens.common.entities;
 
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenDrop;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import net.minecraft.block.BlockState;
@@ -10,10 +9,8 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.datasync.DataParameter;
@@ -27,11 +24,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 
 public class CustomChickenEntity extends AnimalEntity {
 
-    private static Ingredient TEMPTATION_ITEM = Ingredient.fromItems(Items.WHEAT_SEEDS);
+    private static final Ingredient TEMPTATION_ITEM = Ingredient.fromItems(Items.WHEAT_SEEDS);
     private static transient int layTime;
 
     private static final DataParameter<Integer> CHICKEN_GROWTH = EntityDataManager.createKey(CustomChickenEntity.class, DataSerializers.VARINT);
@@ -50,7 +46,6 @@ public class CustomChickenEntity extends AnimalEntity {
         super(type, worldIn);
         layTime = this.rand.nextInt(6000) + 6000;
     }
-
 
 
     @Override
@@ -73,12 +68,15 @@ public class CustomChickenEntity extends AnimalEntity {
     protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_CHICKEN_AMBIENT;
     }
+
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
         return SoundEvents.ENTITY_CHICKEN_HURT;
     }
+
     protected SoundEvent getDeathSound() {
         return SoundEvents.ENTITY_CHICKEN_DEATH;
     }
+
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
         this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
     }

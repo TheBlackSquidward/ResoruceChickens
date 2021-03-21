@@ -19,8 +19,6 @@ import java.text.DecimalFormat;
 
 public class ChickenBreederContainer extends Container {
 
-    private static final DecimalFormat FORMATTER = new DecimalFormat("0.0%");
-
     private final ChickenBreederTE tileEntity;
     private final PlayerEntity playerEntity;
     private final IItemHandler playerInventory;
@@ -50,7 +48,7 @@ public class ChickenBreederContainer extends Container {
     }
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
-        for (int i = 0 ; i < amount ; i++) {
+        for (int i = 0; i < amount; i++) {
             addSlot(new SlotItemHandler(handler, index, x, y));
             x += dx;
             index++;
@@ -59,7 +57,7 @@ public class ChickenBreederContainer extends Container {
     }
 
     private int addSlotBox(IItemHandler handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
-        for (int j = 0 ; j < verAmount ; j++) {
+        for (int j = 0; j < verAmount; j++) {
             index = addSlotRange(handler, index, x, y, horAmount, dx);
             y += dy;
         }
@@ -85,14 +83,6 @@ public class ChickenBreederContainer extends Container {
 
     public double getProgress() {
         return tileEntity.getProgress();
-    }
-
-    public String getFormattedProgress() {
-        return formatProgress(getProgress());
-    }
-
-    public String formatProgress(double progress) {
-        return FORMATTER.format(progress);
     }
 
 }

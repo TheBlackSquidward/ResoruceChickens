@@ -11,7 +11,7 @@ import net.minecraft.util.text.ITextComponent;
 
 public class ElectricRoostScreen extends ContainerScreen<ElectricRoostContainer> {
 
-    private ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/electric_roost_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/electric_roost_gui.png");
 
     public ElectricRoostScreen(ElectricRoostContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);

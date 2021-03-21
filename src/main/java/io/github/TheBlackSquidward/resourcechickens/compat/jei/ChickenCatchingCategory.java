@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.jei;
+package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
@@ -8,7 +8,6 @@ import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IGuiItemStackGroup;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -16,7 +15,6 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
@@ -36,15 +34,16 @@ public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingR
         IDrawableStatic animationDrawable = iGuiHelper.createDrawable(GUI, 73, 0, 24, 252);
         this.animation = new ChickenCatchingDrawable(animationDrawable, iGuiHelper.createTickTimer(18, 18, false));
         this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ItemInit.CHICKEN_CATCHER.get()));
-        this.background = (IDrawable)iGuiHelper.createDrawable(GUI, 0, 0, 72, 18);
+        this.background = iGuiHelper.createDrawable(GUI, 0, 0, 72, 18);
         this.localizedName = I18n.format("gui.resourcechickens.jei.category.chicken_catching");
     }
 
     public static Collection<?> getCatchingRecipes() {
         List<ChickenCatchingRecipe> recipes = new ArrayList<>();
-        for(ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry().values()) {
+        for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry().values()) {
             recipes.add(new ChickenCatchingRecipe(chickenRegistryObject));
         }
+        recipes.add(new ChickenCatchingRecipe(ItemInit.VANILLA_CHICKEN));
         return recipes;
     }
 
@@ -80,8 +79,8 @@ public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingR
 
     @Override
     public void setIngredients(ChickenCatchingRecipe recipe, IIngredients iIngredients) {
-        iIngredients.setInput(VanillaTypes.ITEM, new ItemStack(recipe.chicken.getChickenSpawnEggRegistryObject().get()));
-        iIngredients.setOutput(VanillaTypes.ITEM, recipe.chicken.buildChickenStack());
+        iIngredients.setInput(VanillaTypes.ITEM, recipe.egg);
+        iIngredients.setOutput(VanillaTypes.ITEM, recipe.chickenItem);
     }
 
     @Override

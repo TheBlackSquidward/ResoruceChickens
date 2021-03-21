@@ -85,7 +85,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
 
     private void updateProgress() {
         double calculatedProgress = (this.totalBreedTime - this.breedTime) / this.totalBreedTime;
-        if(calculatedProgress == 1) {
+        if (calculatedProgress == 1) {
             calculatedProgress = 0;
         }
         this.progress = calculatedProgress;
@@ -254,11 +254,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
                 }
                 if (slot == 1 || slot == 2) {
                     if (stack.getItem() instanceof ChickenItem) {
-                        if (stack.getItem() == ItemInit.VANILLA_CHICKEN.get()) {
-                            return false;
-                        } else {
-                            return true;
-                        }
+                        return stack.getItem() != ItemInit.VANILLA_CHICKEN.get();
                     }
                 }
                 return false;
@@ -267,7 +263,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     }
 
     private int getOverallGrowth(ItemStack parent1Item, ItemStack parent2Item) {
-        if(hasChickens()) {
+        if (hasChickens()) {
             int parent1Growth = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
             int parent2Growth = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
             if (parent1Growth == 0) {
@@ -278,7 +274,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
             }
             int overallGrowth = (parent1Growth + parent2Growth) / 2;
             return overallGrowth;
-        }else{
+        } else {
             return 0;
         }
     }
@@ -351,6 +347,14 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
         packetBuffer.writeDouble(getProgress());
         ResourceChickensPacketHandler.sendToPlayer(new GUISyncMessage(getPos(), packetBuffer), (ServerPlayerEntity) playerEntity);
+    }
+
+    public ItemStack getChicken1() {
+        return itemStackHandler.getStackInSlot(1);
+    }
+
+    public ItemStack getChicken2() {
+        return itemStackHandler.getStackInSlot(2);
     }
 }
 

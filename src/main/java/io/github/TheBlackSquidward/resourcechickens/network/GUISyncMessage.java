@@ -1,6 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.network;
 
-import io.github.TheBlackSquidward.resourcechickens.common.te.ChickenBreederTE;
+import io.github.TheBlackSquidward.resourcechickens.common.te.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.network.PacketBuffer;
@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 
 public class GUISyncMessage {
 
-    private BlockPos blockPos;
+    private final BlockPos blockPos;
     private final PacketBuffer packetBuffer;
 
     public GUISyncMessage(BlockPos blockPos, PacketBuffer packetBuffer) {
@@ -20,22 +20,37 @@ public class GUISyncMessage {
         this.packetBuffer = packetBuffer;
     }
 
-    public static void encode(GUISyncMessage message, PacketBuffer packetBuffer){
+    public static void encode(GUISyncMessage message, PacketBuffer packetBuffer) {
         packetBuffer.writeBlockPos(message.blockPos);
         packetBuffer.writeBytes(message.packetBuffer);
     }
 
-    public static GUISyncMessage decode(PacketBuffer packetBuffer){
+    public static GUISyncMessage decode(PacketBuffer packetBuffer) {
         return new GUISyncMessage(packetBuffer.readBlockPos(), packetBuffer);
     }
 
-    public static void handle(GUISyncMessage message, Supplier<NetworkEvent.Context> context){
+    public static void handle(GUISyncMessage message, Supplier<NetworkEvent.Context> context) {
         context.get().enqueueWork(() -> {
             ClientPlayerEntity player = Minecraft.getInstance().player;
             if (player != null) {
                 TileEntity tileEntity = player.world.getTileEntity(message.blockPos);
-                if(tileEntity instanceof ChickenBreederTE) {
+                if (tileEntity instanceof ChickenBreederTE) {
                     ((ChickenBreederTE) tileEntity).handleGUINetworkPacket(message.packetBuffer);
+                }
+                if(tileEntity instanceof RoostTE) {
+                    //TODO handle packet
+                }
+                if(tileEntity instanceof IncubatorTE) {
+                    //TODO
+                }
+                if(tileEntity instanceof ElectricChickenBreederTE) {
+                    //TODO
+                }
+                if(tileEntity instanceof ElectricRoostTE) {
+                    //TODO
+                }
+                if(tileEntity instanceof ElectricIncubatorTE) {
+                    //TODO
                 }
             }
         });

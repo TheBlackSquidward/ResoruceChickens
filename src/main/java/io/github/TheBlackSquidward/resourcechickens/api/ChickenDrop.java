@@ -1,6 +1,5 @@
 package io.github.TheBlackSquidward.resourcechickens.api;
 
-import net.minecraft.inventory.container.FurnaceContainer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
@@ -21,16 +20,16 @@ public class ChickenDrop {
         this.maxAmount = maxAmount;
     }
 
-    public ChickenDrop(Item item, int minAmount, int maxAmount){
+    public ChickenDrop(Item item, int minAmount, int maxAmount) {
         this.item = item;
         this.minAmount = minAmount;
         this.maxAmount = maxAmount;
     }
 
     public Item getItem() {
-        if(item == null) {
+        if (item == null) {
             return itemRegistryObject.get();
-        }else{
+        } else {
             return item;
         }
     }

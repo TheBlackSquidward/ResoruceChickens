@@ -18,7 +18,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
@@ -41,13 +40,13 @@ public class ChickenItem extends Item {
         int gain = nbt.getInt(ResourceChickens.MODID + "_chicken_gain");
         int growth = nbt.getInt(ResourceChickens.MODID + "_chicken_growth");
         int strength = nbt.getInt(ResourceChickens.MODID + "_chicken_strength");
-        if(gain != 0) {
+        if (gain != 0) {
             tooltip.add(new StringTextComponent("Gain: " + gain));
         }
-        if(growth != 0) {
+        if (growth != 0) {
             tooltip.add(new StringTextComponent("Growth: " + growth));
         }
-        if(strength != 0) {
+        if (strength != 0) {
             tooltip.add(new StringTextComponent("Strength: " + strength));
         }
     }
@@ -56,7 +55,7 @@ public class ChickenItem extends Item {
     public ActionResultType onItemUse(ItemUseContext context) {
         PlayerEntity p = context.getPlayer();
         ItemStack itemStack = context.getItem();
-        if(p != null) {
+        if (p != null) {
             BlockPos finalBlockpos;
             World world = context.getWorld();
             if (!world.isRemote()) {
@@ -64,7 +63,7 @@ public class ChickenItem extends Item {
                     BlockPos blockpos = context.getPos();
                     Direction direction = context.getFace();
                     BlockState blockstate = world.getBlockState(blockpos);
-                    if (!blockstate.causesSuffocation((IBlockReader) world, blockpos)) {
+                    if (!blockstate.causesSuffocation(world, blockpos)) {
                         finalBlockpos = blockpos;
                     } else {
                         finalBlockpos = blockpos.offset(direction);
@@ -77,7 +76,7 @@ public class ChickenItem extends Item {
                     BlockPos blockpos = context.getPos();
                     Direction direction = context.getFace();
                     BlockState blockstate = world.getBlockState(blockpos);
-                    if (!blockstate.causesSuffocation((IBlockReader) world, blockpos)) {
+                    if (!blockstate.causesSuffocation(world, blockpos)) {
                         finalBlockpos = blockpos;
                     } else {
                         finalBlockpos = blockpos.offset(direction);

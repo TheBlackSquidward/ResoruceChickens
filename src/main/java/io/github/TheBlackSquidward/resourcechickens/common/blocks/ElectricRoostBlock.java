@@ -1,17 +1,10 @@
 package io.github.TheBlackSquidward.resourcechickens.common.blocks;
 
-import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.common.containers.ChickenBreederContainer;
-import io.github.TheBlackSquidward.resourcechickens.common.containers.ElectricIncubatorContainer;
 import io.github.TheBlackSquidward.resourcechickens.common.containers.ElectricRoostContainer;
-import io.github.TheBlackSquidward.resourcechickens.common.containers.RoostContainer;
-import io.github.TheBlackSquidward.resourcechickens.common.te.ElectricIncubatorTE;
 import io.github.TheBlackSquidward.resourcechickens.common.te.ElectricRoostTE;
-import io.github.TheBlackSquidward.resourcechickens.common.te.RoostTE;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -23,10 +16,8 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.FurnaceTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -54,6 +45,7 @@ public class ElectricRoostBlock extends Block {
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING, POWERED);
     }
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
@@ -92,7 +84,7 @@ public class ElectricRoostBlock extends Block {
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
-        }else{
+        } else {
             return ActionResultType.FAIL;
         }
     }

@@ -3,7 +3,6 @@ package io.github.TheBlackSquidward.resourcechickens.common.screens;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.common.containers.ElectricRoostContainer;
 import io.github.TheBlackSquidward.resourcechickens.common.containers.RoostContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,7 +11,7 @@ import net.minecraft.util.text.ITextComponent;
 
 public class RoostScreen extends ContainerScreen<RoostContainer> {
 
-    private ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/roost_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/roost_gui.png");
 
     public RoostScreen(RoostContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);

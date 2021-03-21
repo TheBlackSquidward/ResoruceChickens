@@ -1,13 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.common.blocks;
 
-import io.github.TheBlackSquidward.resourcechickens.common.containers.ChickenBreederContainer;
-import io.github.TheBlackSquidward.resourcechickens.common.containers.ElectricIncubatorContainer;
 import io.github.TheBlackSquidward.resourcechickens.common.containers.IncubatorContainer;
-import io.github.TheBlackSquidward.resourcechickens.common.containers.RoostContainer;
-import io.github.TheBlackSquidward.resourcechickens.common.te.ElectricIncubatorTE;
-import io.github.TheBlackSquidward.resourcechickens.common.te.ElectricRoostTE;
 import io.github.TheBlackSquidward.resourcechickens.common.te.IncubatorTE;
-import io.github.TheBlackSquidward.resourcechickens.common.te.RoostTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -68,7 +62,7 @@ public class IncubatorBlock extends Block {
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }
-        }else{
+        } else {
             return ActionResultType.FAIL;
         }
     }
