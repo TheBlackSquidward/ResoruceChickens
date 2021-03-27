@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "resourcechickens:emerald_nugget" },
+    { "item": "resourcechickens:emerald_nugget" },
+    { "item": "resourcechickens:emerald_nugget" },
+    { "item": "resourcechickens:emerald_nugget" },
+    { "item": "resourcechickens:emerald_nugget" },
+    { "item": "resourcechickens:emerald_nugget" },
+    { "item": "resourcechickens:emerald_nugget" },
+    { "item": "resourcechickens:emerald_nugget" },
+    { "item": "resourcechickens:emerald_nugget" }
+  ],
+  "result": {
+    "item": "minecraft:emerald",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "resourcechickens:diamond_nugget" },
+    { "item": "resourcechickens:diamond_nugget" },
+    { "item": "resourcechickens:diamond_nugget" },
+    { "item": "resourcechickens:diamond_nugget" },
+    { "item": "resourcechickens:diamond_nugget" },
+    { "item": "resourcechickens:diamond_nugget" },
+    { "item": "resourcechickens:diamond_nugget" },
+    { "item": "resourcechickens:diamond_nugget" },
+    { "item": "resourcechickens:diamond_nugget" }
+  ],
+  "result": {
+    "item": "minecraft:diamond",
+    "count": 1
+  }
+}

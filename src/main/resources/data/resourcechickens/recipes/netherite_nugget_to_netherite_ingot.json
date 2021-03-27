@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "resourcechickens:netherite_nugget" },
+    { "item": "resourcechickens:netherite_nugget" },
+    { "item": "resourcechickens:netherite_nugget" },
+    { "item": "resourcechickens:netherite_nugget" },
+    { "item": "resourcechickens:netherite_nugget" },
+    { "item": "resourcechickens:netherite_nugget" },
+    { "item": "resourcechickens:netherite_nugget" },
+    { "item": "resourcechickens:netherite_nugget" },
+    { "item": "resourcechickens:netherite_nugget" }
+  ],
+  "result": {
+    "item": "minecraft:netherite_ingot",
+    "count": 1
+  }
+}
