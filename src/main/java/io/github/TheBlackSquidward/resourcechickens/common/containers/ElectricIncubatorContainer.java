@@ -23,7 +23,7 @@ public class ElectricIncubatorContainer extends Container {
 
     public ElectricIncubatorContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
         super(ContainerInit.ELECTRIC_INCUBATOR_CONTAINER.get(), windowId);
-        tileEntity = world.getTileEntity(pos);
+        tileEntity = world.getBlockEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
 
@@ -34,11 +34,6 @@ public class ElectricIncubatorContainer extends Container {
             });
         }
         layoutPlayerInventorySlots(8, 84);
-    }
-
-    @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), playerEntity, BlockInit.ELECTRIC_INCUBATOR.get());
     }
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
@@ -65,7 +60,7 @@ public class ElectricIncubatorContainer extends Container {
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        return super.transferStackInSlot(playerIn, index);
+    public boolean stillValid(PlayerEntity player) {
+        return true;
     }
 }

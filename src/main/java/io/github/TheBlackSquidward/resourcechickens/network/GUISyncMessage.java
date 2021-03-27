@@ -33,7 +33,7 @@ public class GUISyncMessage {
         context.get().enqueueWork(() -> {
             ClientPlayerEntity player = Minecraft.getInstance().player;
             if (player != null) {
-                TileEntity tileEntity = player.world.getTileEntity(message.blockPos);
+                TileEntity tileEntity = player.level.getBlockEntity(message.blockPos);
                 if (tileEntity instanceof ChickenBreederTE) {
                     ((ChickenBreederTE) tileEntity).handleGUINetworkPacket(message.packetBuffer);
                 }

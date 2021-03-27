@@ -36,7 +36,7 @@ public class RoostCategory implements IRecipeCategory<RoostRecipe> {
         this.arrow = iGuiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
         this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ItemInit.ROOST.get()));
         this.background = iGuiHelper.createDrawable(GUI, 0, 0, 72, 18);
-        this.localizedName = I18n.format("gui.resourcechickens.jei.category.roost");
+        this.localizedName = I18n.get("gui.resourcechickens.jei.category.roost");
     }
 
     public static Collection<?> getRoostRecipes() {

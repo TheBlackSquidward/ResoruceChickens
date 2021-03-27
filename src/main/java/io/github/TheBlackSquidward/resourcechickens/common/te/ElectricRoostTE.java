@@ -30,8 +30,8 @@ public class ElectricRoostTE extends TileEntity implements ITickableTileEntity {
     }
 
     @Override
-    public void remove() {
-        super.remove();
+    protected void invalidateCaps() {
+        super.invalidateCaps();
         handler.invalidate();
     }
 
@@ -40,7 +40,7 @@ public class ElectricRoostTE extends TileEntity implements ITickableTileEntity {
 
             @Override
             protected void onContentsChanged(int slot) {
-                markDirty();
+                setChanged();
             }
 
             @Override

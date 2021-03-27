@@ -1,5 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.network;
 
+import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +14,7 @@ public class ResourceChickensPacketHandler {
     private static int id = 0;
     private static final String PROTOCOL_VERSION = Integer.toString(1);
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation("mymodid", "main"),
+            new ResourceLocation(ResourceChickens.MODID, "main"),
             () -> PROTOCOL_VERSION,
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals

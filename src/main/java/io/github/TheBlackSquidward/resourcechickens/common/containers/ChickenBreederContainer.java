@@ -25,7 +25,7 @@ public class ChickenBreederContainer extends Container {
 
     public ChickenBreederContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
         super(ContainerInit.CHICKEN_BREEDER_CONTAINER.get(), windowId);
-        tileEntity = (ChickenBreederTE) world.getTileEntity(pos);
+        tileEntity = (ChickenBreederTE) world.getBlockEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
 
@@ -40,11 +40,6 @@ public class ChickenBreederContainer extends Container {
             });
         }
         layoutPlayerInventorySlots(8, 84);
-    }
-
-    @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(IWorldPosCallable.of(tileEntity.getWorld(), tileEntity.getPos()), playerEntity, BlockInit.CHICKEN_BREEDER.get());
     }
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
@@ -71,13 +66,8 @@ public class ChickenBreederContainer extends Container {
     }
 
     @Override
-    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        return super.transferStackInSlot(playerIn, index);
-    }
-
-    @Override
-    public void detectAndSendChanges() {
-        super.detectAndSendChanges();
+    public void broadcastChanges() {
+        super.broadcastChanges();
         tileEntity.sendGUINetworkPacket(playerEntity);
     }
 
@@ -85,4 +75,8 @@ public class ChickenBreederContainer extends Container {
         return tileEntity.getProgress();
     }
 
+    @Override
+    public boolean stillValid(PlayerEntity player) {
+        return true;
+    }
 }

@@ -15,7 +15,7 @@ public class CustomChickenRenderer extends MobRenderer<CustomChickenEntity, Cust
     }
 
     @Override
-    public ResourceLocation getEntityTexture(CustomChickenEntity entity) {
+    public ResourceLocation getTextureLocation(CustomChickenEntity entity) {
         ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(entity);
         return new ResourceLocation(ResourceChickens.MODID, "textures/entity/" + chickenRegistryObject.getEntityName() + ".png");
     }

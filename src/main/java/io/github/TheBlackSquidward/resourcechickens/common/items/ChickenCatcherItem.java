@@ -15,27 +15,28 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
+import net.minecraftforge.common.extensions.IForgeItem;
 
 public class ChickenCatcherItem extends Item {
 
     public ChickenCatcherItem() {
-        super(new Item.Properties().maxStackSize(1).maxDamage(128));
+        super(new Item.Properties().stacksTo(1).defaultDurability(128));
     }
 
     @Override
-    public ActionResultType itemInteractionForEntity(ItemStack itemStack, PlayerEntity p, LivingEntity entity, Hand hand) {
+    public ActionResultType interactLivingEntity(ItemStack itemStack, PlayerEntity p, LivingEntity entity, Hand hand) {
         Vec3d pos = new Vec3d(entity.getX(), entity.getY(), entity.getZ());
-        World world = p.getEntityWorld();
+        World world = p.level;
         if (entity instanceof CustomChickenEntity) {
             CustomChickenEntity chickenEntity = (CustomChickenEntity) entity;
             ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(chickenEntity);
-            if (!entity.isChild()) {
-                if (world.isRemote) {
-                    p.getEntityWorld().playSound(p, pos.x, pos.y, pos.z, SoundEvents.ENTITY_CHICKEN_EGG, entity.getSoundCategory(), 1.0F, 1.0F);
+            if (!entity.isBaby()) {
+                if (world.isClientSide) {
+                    p.level.playSound(p, pos.x, pos.y, pos.z, SoundEvents.CHICKEN_EGG, entity.getSoundSource(), 1.0F, 1.0F);
                 } else {
-                    p.addItemStackToInventory(new ItemStack(chickenRegistryObject.getChickenItemRegistryObject().get(), 1));
-                    itemStack.damageItem(1, p, (p_220045_0_) -> {
-                        p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+                    p.addItem(new ItemStack(chickenRegistryObject.getChickenItemRegistryObject().get(), 1));
+                    itemStack.hurtAndBreak(1, p, (p_220045_0_) -> {
+                        p_220045_0_.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
                     });
                     entity.remove();
                 }
@@ -43,13 +44,12 @@ public class ChickenCatcherItem extends Item {
                 return ActionResultType.SUCCESS;
             }
         } else if (entity instanceof ChickenEntity) {
-            if (!entity.isChild()) {
-                if (world.isRemote()) {
-                    p.getEntityWorld().playSound(p, pos.x, pos.y, pos.z, SoundEvents.ENTITY_CHICKEN_EGG, entity.getSoundCategory(), 1.0F, 1.0F);
+            if (!entity.isBaby()) {
+                if (world.isClientSide()) {
+                    p.level.playSound(p, pos.x, pos.y, pos.z, SoundEvents.CHICKEN_EGG, entity.getSoundSource(), 1.0F, 1.0F);
                 } else {
-                    p.addItemStackToInventory(new ItemStack(ItemInit.VANILLA_CHICKEN.get(), 1));
-                    itemStack.damageItem(1, p, (p_220045_0_) -> {
-                        p_220045_0_.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+                    itemStack.hurtAndBreak(1, p, (p_220045_0_) -> {
+                        p_220045_0_.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
                     });
                     entity.remove();
                 }

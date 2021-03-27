@@ -45,7 +45,7 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(@Nonnull IRecipeRegistration registration) {
-        World clientWorld = Minecraft.getInstance().world;
+        World clientWorld = Minecraft.getInstance().level;
         if (clientWorld != null) {
             registration.addRecipes(ChickenCatchingCategory.getCatchingRecipes(), ChickenCatchingCategory.ID);
             registration.addRecipes(ChickenBreedingCategory.getBreedingRecipes(), ChickenBreedingCategory.ID);

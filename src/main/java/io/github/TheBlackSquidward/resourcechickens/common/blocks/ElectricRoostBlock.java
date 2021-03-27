@@ -36,20 +36,9 @@ public class ElectricRoostBlock extends Block {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     public ElectricRoostBlock() {
-        super(AbstractBlock.Properties.create(Material.IRON)
+        super(AbstractBlock.Properties.of(Material.METAL)
                 .harvestLevel(2)
                 .harvestTool(ToolType.PICKAXE));
-    }
-
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, POWERED);
-    }
-
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return stateContainer.getBaseState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(POWERED, false);
     }
 
     @Override
@@ -64,9 +53,9 @@ public class ElectricRoostBlock extends Block {
     }
 
     @Override
-    public ActionResultType onUse(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
-        if (!world.isRemote) {
-            TileEntity tileEntity = world.getTileEntity(pos);
+    public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
+        if (!world.isClientSide) {
+            TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof ElectricRoostTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
@@ -79,7 +68,7 @@ public class ElectricRoostBlock extends Block {
                         return new ElectricRoostContainer(i, world, pos, playerInventory, playerEntity);
                     }
                 };
-                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
+                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getBlockPos());
                 return ActionResultType.SUCCESS;
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");

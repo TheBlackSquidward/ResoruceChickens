@@ -13,15 +13,14 @@ public class ResourceChickensItemGroup extends net.minecraft.item.ItemGroup {
     }
 
     @Override
-    public ItemStack createIcon() {
-        return ItemInit.VANILLA_CHICKEN.get().getDefaultInstance();
-    }
-
-    @Override
-    public void fill(NonNullList<ItemStack> items) {
+    public void fillItemList(NonNullList<ItemStack> items) {
         for (RegistryObject<Item> item : ItemInit.ITEMS.getEntries()) {
             items.add(item.get().getDefaultInstance());
         }
     }
 
+    @Override
+    public ItemStack makeIcon()  {
+        return ItemInit.VANILLA_CHICKEN.get().getDefaultInstance();
+    }
 }

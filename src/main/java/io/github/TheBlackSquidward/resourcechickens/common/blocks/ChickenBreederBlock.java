@@ -25,7 +25,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class ChickenBreederBlock extends Block {
 
     public ChickenBreederBlock() {
-        super(Properties.create(Material.WOOD).harvestTool(ToolType.AXE));
+        super(Properties.of(Material.WOOD).harvestTool(ToolType.AXE));
     }
 
     @Override
@@ -39,9 +39,9 @@ public class ChickenBreederBlock extends Block {
     }
 
     @Override
-    public ActionResultType onUse(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
-        if (!world.isRemote) {
-            TileEntity tileEntity = world.getTileEntity(pos);
+    public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
+        if (!world.isClientSide) {
+            TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof ChickenBreederTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
@@ -54,7 +54,7 @@ public class ChickenBreederBlock extends Block {
                         return new ChickenBreederContainer(i, world, pos, playerInventory, playerEntity);
                     }
                 };
-                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
+                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getBlockPos());
                 return ActionResultType.SUCCESS;
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");

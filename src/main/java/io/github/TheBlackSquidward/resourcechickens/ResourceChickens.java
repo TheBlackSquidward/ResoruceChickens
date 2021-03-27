@@ -19,14 +19,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Random;
-
 import static io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry.initChickens;
 
 @Mod(ResourceChickens.MODID)
 public class ResourceChickens {
-
-    public static final Random RANDOM = new Random();
 
     public static final String MODID = "resourcechickens";
 

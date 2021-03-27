@@ -33,9 +33,8 @@ public class ChickenItem extends Item {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        super.addInformation(stack, worldIn, tooltip, flagIn);
+    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+        super.appendHoverText(stack, worldIn, tooltip, flagIn);
         CompoundNBT nbt = stack.getOrCreateTag();
         int gain = nbt.getInt(ResourceChickens.MODID + "_chicken_gain");
         int growth = nbt.getInt(ResourceChickens.MODID + "_chicken_growth");
@@ -52,34 +51,33 @@ public class ChickenItem extends Item {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
+    public ActionResultType onItemUseFirst(ItemStack itemStack, ItemUseContext context) {
         PlayerEntity p = context.getPlayer();
-        ItemStack itemStack = context.getItem();
         if (p != null) {
             BlockPos finalBlockpos;
-            World world = context.getWorld();
-            if (!world.isRemote()) {
+            World world = context.getLevel();
+            if (!world.isClientSide()) {
                 if (itemStack.getItem() != ItemInit.VANILLA_CHICKEN.get()) {
-                    BlockPos blockpos = context.getPos();
-                    Direction direction = context.getFace();
+                    BlockPos blockpos = context.getClickedPos();
+                    Direction direction = context.getClickedFace();
                     BlockState blockstate = world.getBlockState(blockpos);
-                    if (!blockstate.causesSuffocation(world, blockpos)) {
+                    if (!blockstate.canSurvive(world, blockpos)) {
                         finalBlockpos = blockpos;
                     } else {
-                        finalBlockpos = blockpos.offset(direction);
+                        finalBlockpos = blockpos.offset(direction.getNormal());
                     }
                     ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemStack.getItem());
                     chickenRegistryObject.getChickenEntityRegisryObject().get().spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);
                     itemStack.shrink(1);
                     return ActionResultType.CONSUME;
                 } else {
-                    BlockPos blockpos = context.getPos();
-                    Direction direction = context.getFace();
+                    BlockPos blockpos = context.getClickedPos();
+                    Direction direction = context.getClickedFace();
                     BlockState blockstate = world.getBlockState(blockpos);
-                    if (!blockstate.causesSuffocation(world, blockpos)) {
+                    if (!blockstate.canSurvive(world, blockpos)) {
                         finalBlockpos = blockpos;
                     } else {
-                        finalBlockpos = blockpos.offset(direction);
+                        finalBlockpos = blockpos.offset(direction.getNormal());
                     }
                     EntityType.CHICKEN.spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);
                     itemStack.shrink(1);

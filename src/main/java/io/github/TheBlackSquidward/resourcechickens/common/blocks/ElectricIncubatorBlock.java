@@ -25,7 +25,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class ElectricIncubatorBlock extends Block {
 
     public ElectricIncubatorBlock() {
-        super(Properties.create(Material.IRON).harvestTool(ToolType.PICKAXE));
+        super(Properties.of(Material.METAL).harvestTool(ToolType.PICKAXE));
     }
 
     @Override
@@ -39,9 +39,9 @@ public class ElectricIncubatorBlock extends Block {
     }
 
     @Override
-    public ActionResultType onUse(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
-        if (!world.isRemote) {
-            TileEntity tileEntity = world.getTileEntity(pos);
+    public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
+        if (!world.isClientSide) {
+            TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof ElectricIncubatorTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
@@ -54,7 +54,7 @@ public class ElectricIncubatorBlock extends Block {
                         return new ElectricIncubatorContainer(i, world, pos, playerInventory, playerEntity);
                     }
                 };
-                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
+                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getBlockPos());
                 return ActionResultType.SUCCESS;
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");

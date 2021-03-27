@@ -27,24 +27,14 @@ import javax.annotation.Nullable;
 
 public class CustomChickenEntity extends AnimalEntity {
 
-    private static final Ingredient TEMPTATION_ITEM = Ingredient.fromItems(Items.WHEAT_SEEDS);
+    private static final Ingredient TEMPTATION_ITEM = Ingredient.of(Items.WHEAT_SEEDS);
     private static transient int layTime;
-
-    private static final DataParameter<Integer> CHICKEN_GROWTH = EntityDataManager.createKey(CustomChickenEntity.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> CHICKEN_GAIN = EntityDataManager.createKey(CustomChickenEntity.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> CHICKEN_STRENGTH = EntityDataManager.createKey(CustomChickenEntity.class, DataSerializers.VARINT);
-    private static final DataParameter<Integer> CHICKEN_LAY_PROGRESS = EntityDataManager.createKey(CustomChickenEntity.class, DataSerializers.VARINT);
-
-    private static final String CHICKEN_GROWTH_NBT = "Growth";
-    private static final String CHICKEN_GAIN_NBT = "Gain";
-    private static final String CHICKEN_STRENGTH_NBT = "Strength";
-    private static final String CHICKEN_LAY_PROGRESS_NBT = "ChickenLayProgress";
 
     public int timeUntilNextLay = layTime;
 
     public CustomChickenEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
-        layTime = this.rand.nextInt(6000) + 6000;
+        layTime = this.getRandom().nextInt(6000) + 6000;
     }
 
 
@@ -62,23 +52,23 @@ public class CustomChickenEntity extends AnimalEntity {
     }
 
     protected int getExperiencePoints(PlayerEntity player) {
-        return 1 + this.world.rand.nextInt(4);
+        return 1 + this.getRandom().nextInt(4);
     }
 
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENTITY_CHICKEN_AMBIENT;
+        return SoundEvents.CHICKEN_AMBIENT;
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.ENTITY_CHICKEN_HURT;
+        return SoundEvents.CHICKEN_HURT;
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_CHICKEN_DEATH;
+        return SoundEvents.CHICKEN_DEATH;
     }
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
-        this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
+        this.playSound(SoundEvents.CHICKEN_STEP, 0.15F, 1.0F);
     }
 
     @Nullable
@@ -86,96 +76,15 @@ public class CustomChickenEntity extends AnimalEntity {
         return null;
     }
 
-    @Override
-    public AgeableEntity createChild(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
-        return null;
-    }
-
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createMobAttributes()
-                .add(Attributes.GENERIC_MAX_HEALTH, 4.0D)
-                .add(Attributes.GENERIC_MOVEMENT_SPEED, 0.25D);
+                .add(Attributes.MAX_HEALTH, 4.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 
+    @Nullable
     @Override
-    public void livingTick() {
-        super.livingTick();
-        if (!this.world.isRemote && this.isAlive() && !this.isChild() && --this.timeUntilNextLay <= 0) {
-            this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-            this.entityDropItem(Items.EGG);
-            this.timeUntilNextLay = layTime;
-        }
+    public AgeableEntity getBreedOffspring(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
+        return null;
     }
-
-    @Override
-    public void onDeath(DamageSource cause) {
-        ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(this);
-        //TODO
-        super.onDeath(cause);
-    }
-
-    /*
-    @Override
-    public CompoundNBT serializeNBT() {
-        CompoundNBT compoundNBT = new CompoundNBT();
-        compoundNBT.putInt(CHICKEN_GAIN_NBT, 1);
-        compoundNBT.putInt(CHICKEN_GROWTH_NBT, 1);
-        compoundNBT.putInt(CHICKEN_STRENGTH_NBT, 1);
-        compoundNBT.putInt(CHICKEN_LAY_PROGRESS_NBT, 0);
-        return compoundNBT;
-    }
-
-    @Override
-    protected void registerData() {
-        super.registerData();
-        this.dataManager.register(CHICKEN_GROWTH, Integer.valueOf(1));
-        this.dataManager.register(CHICKEN_GAIN, Integer.valueOf(1));
-        this.dataManager.register(CHICKEN_STRENGTH, Integer.valueOf(1));
-        this.dataManager.register(CHICKEN_LAY_PROGRESS, Integer.valueOf(0));
-    }
-    public void readEntityfromNBT(CompoundNBT compound) {
-        super.read(compound);
-        this.dataManager.set(CHICKEN_TYPE, compound.getString(TYPE_NBT));
-        this.dataManager.set(CHICKEN_GROWTH, Integer.valueOf(compound.getInt(CHICKEN_GROWTH_NBT)));
-        this.dataManager.set(CHICKEN_GAIN, Integer.valueOf(compound.getInt(CHICKEN_GAIN_NBT)));
-        this.dataManager.set(CHICKEN_STRENGTH, Integer.valueOf(compound.getInt(CHICKEN_STRENGTH_NBT)));
-    }
-
-    public void writeEntityToNBT(CompoundNBT compoundNBT) {
-        super.writeAdditional(compoundNBT);
-        compoundNBT.putString(CHICKEN_GROWTH_NBT, getChickenTypeInternal());
-        compoundNBT.putInt("Growth", getGrowth());
-        compoundNBT.putInt("Gain", getGain());
-        compoundNBT.putInt("Strength", getStrength());
-    }
-
-    public String getChickenTypeInternal() {
-        return (String)this.dataManager.get(CHICKEN_TYPE);
-    }
-
-    public int getGain() {
-        return ((Integer)this.dataManager.get(CHICKEN_GAIN)).intValue();
-    }
-
-    private void setGain(int gain) {
-        this.dataManager.set(CHICKEN_GAIN, Integer.valueOf(gain));
-    }
-
-    public int getGrowth() {
-        return ((Integer)this.dataManager.get(CHICKEN_GROWTH)).intValue();
-    }
-
-    private void setGrowth(int growth) {
-        this.dataManager.set(CHICKEN_GROWTH, Integer.valueOf(growth));
-    }
-
-    public int getStrength() {
-        return ((Integer)this.dataManager.get(CHICKEN_STRENGTH)).intValue();
-    }
-
-    private void setStrength(int strength) {
-        this.dataManager.set(CHICKEN_STRENGTH, Integer.valueOf(strength));
-    }
-    */
-
 }

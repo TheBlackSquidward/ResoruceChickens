@@ -31,8 +31,8 @@ public class IncubatorTE extends TileEntity implements ITickableTileEntity {
     }
 
     @Override
-    public void remove() {
-        super.remove();
+    protected void invalidateCaps() {
+        super.invalidateCaps();
         handler.invalidate();
     }
 
@@ -41,7 +41,7 @@ public class IncubatorTE extends TileEntity implements ITickableTileEntity {
 
             @Override
             protected void onContentsChanged(int slot) {
-                markDirty();
+                setChanged();
             }
 
             @Override

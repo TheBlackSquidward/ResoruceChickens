@@ -31,22 +31,10 @@ import javax.annotation.Nullable;
 
 public class ElectricChickenBreederBlock extends Block {
 
-    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
     public ElectricChickenBreederBlock() {
-        super(Properties.create(Material.IRON).harvestTool(ToolType.PICKAXE));
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
-    }
-
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
-    }
-
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite());
+        super(Properties.of(Material.METAL).harvestTool(ToolType.PICKAXE));
     }
 
     @Override
@@ -61,9 +49,9 @@ public class ElectricChickenBreederBlock extends Block {
     }
 
     @Override
-    public ActionResultType onUse(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
-        if (!world.isRemote) {
-            TileEntity tileEntity = world.getTileEntity(pos);
+    public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
+        if (!world.isClientSide) {
+            TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof ElectricChickenBreederTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
@@ -76,7 +64,7 @@ public class ElectricChickenBreederBlock extends Block {
                         return new ElectricChickenBreederContainer(i, world, pos, playerInventory, playerEntity);
                     }
                 };
-                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
+                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getBlockPos());
                 return ActionResultType.SUCCESS;
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");

@@ -35,11 +35,11 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
     //TODO add timer
     @Override
     public void tick() {
-        if (!this.world.isRemote) {
+        if (!this.level.isClientSide) {
             if (hasChicken()) {
                 ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemStackHandler.getStackInSlot(0).getItem());
                 addResult(new ItemStack(chickenRegistryObject.getChickenDrop(), getDropAmount(getGain())));
-                markDirty();
+                setChanged();
             }
         }
     }
@@ -51,25 +51,25 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
         ItemStack item4 = itemStackHandler.getStackInSlot(4);
         if (item1.isEmpty()) {
             itemStackHandler.setStackInSlot(1, result);
-        } else if (item1.isItemEqual(result) && item1.getCount() < 64) {
+        } else if (item1.equals(result) && item1.getCount() < 64) {
             int amount = item1.getCount() + 1;
             result.setCount(amount);
             itemStackHandler.setStackInSlot(1, result);
         } else if (item2.isEmpty()) {
             itemStackHandler.setStackInSlot(2, result);
-        } else if (item2.isItemEqual(result) && item2.getCount() < 64) {
+        } else if (item2.equals(result) && item2.getCount() < 64) {
             int amount = item2.getCount() + 1;
             result.setCount(amount);
             itemStackHandler.setStackInSlot(2, result);
         } else if (item3.isEmpty()) {
             itemStackHandler.setStackInSlot(3, result);
-        } else if (item3.isItemEqual(result) && item3.getCount() < 64) {
+        } else if (item3.equals(result) && item3.getCount() < 64) {
             int amount = item3.getCount() + 1;
             result.setCount(amount);
             itemStackHandler.setStackInSlot(3, result);
         } else if (item4.isEmpty()) {
             itemStackHandler.setStackInSlot(4, result);
-        } else if (item4.isItemEqual(result) && item4.getCount() < 64) {
+        } else if (item4.equals(result) && item4.getCount() < 64) {
             int amount = item4.getCount() + 1;
             result.setCount(amount);
             itemStackHandler.setStackInSlot(4, result);
@@ -98,8 +98,8 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
     }
 
     @Override
-    public void remove() {
-        super.remove();
+    protected void invalidateCaps() {
+        super.invalidateCaps();
         handler.invalidate();
     }
 
@@ -108,7 +108,7 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
 
             @Override
             protected void onContentsChanged(int slot) {
-                markDirty();
+                setChanged();
             }
 
             @Override

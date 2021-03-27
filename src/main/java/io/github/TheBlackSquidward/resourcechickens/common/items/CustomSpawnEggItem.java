@@ -21,20 +21,19 @@ public class CustomSpawnEggItem extends Item {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
+    public ActionResultType onItemUseFirst(ItemStack itemStack, ItemUseContext context) {
         PlayerEntity p = context.getPlayer();
-        ItemStack itemStack = context.getItem();
         if (p != null) {
             BlockPos finalBlockpos;
-            World world = context.getWorld();
-            if (!world.isRemote()) {
-                BlockPos blockpos = context.getPos();
-                Direction direction = context.getFace();
+            World world = context.getLevel();
+            if (!world.isClientSide()) {
+                BlockPos blockpos = context.getClickedPos();
+                Direction direction = context.getClickedFace();
                 BlockState blockstate = world.getBlockState(blockpos);
-                if (!blockstate.causesSuffocation(world, blockpos)) {
+                if (!blockstate.canSurvive(world, blockpos)) {
                     finalBlockpos = blockpos;
                 } else {
-                    finalBlockpos = blockpos.offset(direction);
+                    finalBlockpos = blockpos.offset(direction.getNormal());
                 }
                 ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenSpawnEggItem(itemStack.getItem());
                 chickenRegistryObject.getChickenEntityRegisryObject().get().spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);

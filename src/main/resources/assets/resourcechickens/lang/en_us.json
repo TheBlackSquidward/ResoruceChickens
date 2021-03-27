@@ -14,7 +14,6 @@
     "item.resourcechickens.fried_chicken": "Fried Chicken",
     "item.resourcechickens.chicken_sandwich": "Fried Chicken Sandwich",
 
-
     "item.resourcechickens.upgrade_base": "Upgrade Base",
     "item.resourcechickens.speed_upgrade": "Speed Upgrade",
     "item.resourcechickens.energy_upgrade": "Energy Efficiency Upgrade",
@@ -278,5 +277,6 @@
     "gui.resourcechickens.jei.category.chicken_breeding": "Chicken Breeding",
     "gui.resourcechickens.jei.category.chicken_catching": "Chicken Catching",
     "gui.resourcechickens.jei.category.roost": "Roost",
+    "gui.resourcechickens.jei.category.incubator": "Incubator",
     "gui.resourcechickens.top.chicken_breeder.progress": "Progress: "
 }

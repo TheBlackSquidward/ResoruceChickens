@@ -35,7 +35,7 @@ public class ChickenDrop {
     }
 
     public int getDropAmount(World world) {
-        return world.rand.nextInt((maxAmount - minAmount) + minAmount) + 1;
+        return world.random.nextInt((maxAmount - minAmount) + minAmount) + 1;
     }
 
     public int getMinAmount() {

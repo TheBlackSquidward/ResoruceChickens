@@ -22,7 +22,7 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
     @Override
     public Void apply(ITheOneProbe iTheOneProbe) {
         iTheOneProbe.registerBlockDisplayOverride((mode, probeInfo, player, world, blockState, data) -> {
-            TileEntity tileEntity = world.getTileEntity(data.getPos());
+            TileEntity tileEntity = world.getBlockEntity(data.getPos());
             if(tileEntity instanceof ChickenBreederTE) {
                 ChickenBreederTE chickenBreederTE = (ChickenBreederTE) tileEntity;
                 probeInfo.horizontal()

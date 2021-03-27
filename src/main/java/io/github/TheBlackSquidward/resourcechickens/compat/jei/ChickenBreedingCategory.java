@@ -36,7 +36,7 @@ public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingR
         this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(Items.WHEAT_SEEDS));
         this.hearts = iGuiHelper.createAnimatedDrawable(heartsDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
         this.background = iGuiHelper.createDrawable(GUI, 0, 0, 90, 18);
-        this.localizedName = I18n.format("gui.resourcechickens.jei.category.chicken_breeding");
+        this.localizedName = I18n.get("gui.resourcechickens.jei.category.chicken_breeding");
     }
 
     public static Collection<?> getBreedingRecipes() {

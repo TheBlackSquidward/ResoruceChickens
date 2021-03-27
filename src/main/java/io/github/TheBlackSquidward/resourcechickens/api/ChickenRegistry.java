@@ -243,10 +243,10 @@ public class ChickenRegistry {
 
     public static void registerChicken(ChickenRegistryObject chicken) {
         RegistryObject<EntityType<CustomChickenEntity>> customChickenEntity = EntityInit.ENTITY_TYPES.register(chicken.getEntityName() + "",
-                () -> EntityType.Builder.create(CustomChickenEntity::new, EntityClassification.CREATURE)
-                        .size(1.0f, 1.0f)
+                () -> EntityType.Builder.of(CustomChickenEntity::new, EntityClassification.CREATURE)
+                        .sized(1.0f, 1.0f)
                         .build(new ResourceLocation(ResourceChickens.MODID, chicken.getEntityName()).toString()));
-        RegistryObject<Item> customChickenItem = ItemInit.ITEMS.register(chicken.getEntityName() + "_item", () -> new ChickenItem(new Item.Properties().maxStackSize(16)));
+        RegistryObject<Item> customChickenItem = ItemInit.ITEMS.register(chicken.getEntityName() + "_item", () -> new ChickenItem(new Item.Properties().stacksTo(16)));
         RegistryObject<Item> customChickenSpawnEgg = ItemInit.ITEMS.register(chicken.getEntityName() + "_spawn_egg", () -> new CustomSpawnEggItem(new Item.Properties()));
         if (chicken.isHasFeather()) {
             RegistryObject<Item> customChickenFeather = ItemInit.ITEMS.register(chicken.getEntityName() + "_feather", () -> new Item(new Item.Properties()));

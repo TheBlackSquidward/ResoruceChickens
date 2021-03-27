@@ -50,7 +50,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
 
     @Override
     public void tick() {
-        if (!this.world.isRemote) {
+        if (!this.level.isClientSide) {
             if (isBreeding) {
                 if (!(hasChickens() && hasSeeds())) {
                     this.breedTime = 0;
@@ -73,13 +73,13 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
                 }
             }
             updateProgress();
-            markDirty();
+            setChanged();
         }
     }
 
     @Override
-    public void remove() {
-        super.remove();
+    protected void invalidateCaps() {
+        super.invalidateCaps();
         handler.invalidate();
     }
 
@@ -180,7 +180,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         nbt.putInt(ResourceChickens.MODID + "_chicken_gain", 1);
         nbt.putInt(ResourceChickens.MODID + "_chicken_growth", 1);
         nbt.putInt(ResourceChickens.MODID + "_chicken_strength", 1);
-        result.write(nbt);
+        result.save(nbt);
         result.setTag(nbt);
         return result;
     }
@@ -217,14 +217,14 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
             parent2Strength = 1;
         }
 
-        int newGain = calculateNewStat(parent1Strength, parent2Strength, parent1Gain, parent2Gain, world.rand);
-        int newGrowth = calculateNewStat(parent1Strength, parent2Strength, parent1Growth, parent2Growth, world.rand);
-        int newStrength = calculateNewStat(parent1Strength, parent2Strength, parent1Strength, parent2Strength, world.rand);
+        int newGain = calculateNewStat(parent1Strength, parent2Strength, parent1Gain, parent2Gain, level.random);
+        int newGrowth = calculateNewStat(parent1Strength, parent2Strength, parent1Growth, parent2Growth, level.random);
+        int newStrength = calculateNewStat(parent1Strength, parent2Strength, parent1Strength, parent2Strength, level.random);
 
         nbt.putInt(ResourceChickens.MODID + "_chicken_gain", newGain);
         nbt.putInt(ResourceChickens.MODID + "_chicken_growth", newGrowth);
         nbt.putInt(ResourceChickens.MODID + "_chicken_strength", newStrength);
-        result.write(nbt);
+        result.save(nbt);
         result.setTag(nbt);
         return result;
     }
@@ -244,7 +244,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
 
             @Override
             protected void onContentsChanged(int slot) {
-                markDirty();
+                setChanged();
             }
 
             @Override
@@ -279,10 +279,9 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         }
     }
 
-    @Nonnull
     @Override
-    public CompoundNBT write(@Nonnull CompoundNBT tag) {
-        super.write(tag);
+    public CompoundNBT save(CompoundNBT tag) {
+        super.save(tag);
         return saveToNBT(tag);
     }
 
@@ -300,33 +299,33 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     }
 
     @Override
-    public void fromTag(@Nonnull BlockState state, @Nonnull CompoundNBT tag) {
+    public void load(BlockState state, CompoundNBT tag) {
         this.loadFromNBT(tag);
-        super.fromTag(state, tag);
+        super.load(state, tag);
     }
 
     @Nonnull
     @Override
     public CompoundNBT getUpdateTag() {
         CompoundNBT nbtTagCompound = new CompoundNBT();
-        write(nbtTagCompound);
+        save(nbtTagCompound);
         return nbtTagCompound;
     }
 
     @Override
     public void handleUpdateTag(@Nonnull BlockState state, CompoundNBT tag) {
-        this.fromTag(state, tag);
+        this.load(state, tag);
     }
 
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(pos, 0, saveToNBT(new CompoundNBT()));
+        return new SUpdateTileEntityPacket(getBlockPos(), 0, saveToNBT(new CompoundNBT()));
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        CompoundNBT nbt = pkt.getNbtCompound();
+        CompoundNBT nbt = pkt.getTag();
         loadFromNBT(nbt);
     }
 
@@ -346,7 +345,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     public void sendGUINetworkPacket(PlayerEntity playerEntity) {
         PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
         packetBuffer.writeDouble(getProgress());
-        ResourceChickensPacketHandler.sendToPlayer(new GUISyncMessage(getPos(), packetBuffer), (ServerPlayerEntity) playerEntity);
+        ResourceChickensPacketHandler.sendToPlayer(new GUISyncMessage(getBlockPos(), packetBuffer), (ServerPlayerEntity) playerEntity);
     }
 
     public ItemStack getChicken1() {
