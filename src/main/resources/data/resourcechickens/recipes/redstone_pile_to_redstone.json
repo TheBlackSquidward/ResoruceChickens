@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "resourcechickens:redstone_pile" },
+    { "item": "resourcechickens:redstone_pile" },
+    { "item": "resourcechickens:redstone_pile" },
+    { "item": "resourcechickens:redstone_pile" },
+    { "item": "resourcechickens:redstone_pile" },
+    { "item": "resourcechickens:redstone_pile" },
+    { "item": "resourcechickens:redstone_pile" },
+    { "item": "resourcechickens:redstone_pile" },
+    { "item": "resourcechickens:redstone_pile" }
+  ],
+  "result": {
+    "item": "minecraft:redstone",
+    "count": 1
+  }
+}

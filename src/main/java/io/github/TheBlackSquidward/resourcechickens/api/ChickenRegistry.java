@@ -94,6 +94,7 @@ public class ChickenRegistry {
     private static ChickenRegistryObject honeyChicken;
     private static ChickenRegistryObject witherChicken;
     private static ChickenRegistryObject witherSkeletonChicken;
+    private static ChickenRegistryObject prismarineChicken;
 
     private static void initDyeChickens() {
         greenChicken = new ChickenRegistryObject("green_chicken", Items.GREEN_DYE, null, null);
@@ -160,21 +161,21 @@ public class ChickenRegistry {
         getChickenRegistry().put(ironChicken.getEntityName(), ironChicken);
         goldChicken = new ChickenRegistryObject("gold_chicken", Items.GOLD_INGOT, yellowChicken, ironChicken, true);
         getChickenRegistry().put(goldChicken.getEntityName(), goldChicken);
-        diamondChicken = new ChickenRegistryObject("diamond_chicken", Items.DIAMOND, glassChicken, goldChicken);
+        diamondChicken = new ChickenRegistryObject("diamond_chicken", Items.DIAMOND, glassChicken, goldChicken, true);
         getChickenRegistry().put(diamondChicken.getEntityName(), diamondChicken);
-        emeraldChicken = new ChickenRegistryObject("emerald_chicken", Items.EMERALD, diamondChicken, greenChicken);
+        emeraldChicken = new ChickenRegistryObject("emerald_chicken", Items.EMERALD, diamondChicken, greenChicken, true);
         getChickenRegistry().put(emeraldChicken.getEntityName(), emeraldChicken);
-        redstoneChicken = new ChickenRegistryObject("redstone_chicken", Items.REDSTONE, redChicken, sandChicken);
+        redstoneChicken = new ChickenRegistryObject("redstone_chicken", Items.REDSTONE, redChicken, sandChicken, true);
         getChickenRegistry().put(redstoneChicken.getEntityName(), redstoneChicken);
-        lapisChicken = new ChickenRegistryObject("lapis_chicken", Items.LAPIS_LAZULI, null, null);
+        lapisChicken = new ChickenRegistryObject("lapis_chicken", Items.LAPIS_LAZULI, null, null, true);
         getChickenRegistry().put(lapisChicken.getEntityName(), lapisChicken);
         blazeChicken = new ChickenRegistryObject("blaze_chicken", Items.BLAZE_ROD, goldChicken, lavaChicken);
         getChickenRegistry().put(blazeChicken.getEntityName(), blazeChicken);
-        coalChicken = new ChickenRegistryObject("coal_chicken", Items.COAL, flintChicken, oakLogChicken);
+        coalChicken = new ChickenRegistryObject("coal_chicken", Items.COAL, flintChicken, oakLogChicken, true);
         getChickenRegistry().put(coalChicken.getEntityName(), coalChicken);
         cowChicken = new ChickenRegistryObject("cow_chicken", Items.LEATHER, null, null);
         getChickenRegistry().put(cowChicken.getEntityName(), cowChicken);
-        enderChicken = new ChickenRegistryObject("ender_chicken", Items.ENDER_PEARL, null, null);
+        enderChicken = new ChickenRegistryObject("ender_chicken", Items.ENDER_PEARL, null, null, true);
         getChickenRegistry().put(enderChicken.getEntityName(), enderChicken);
         experienceChicken = new ChickenRegistryObject("experience_chicken", new ChickenEggObject(ItemInit.EXPERIENCE_IMBUED_EGG, Items.EXPERIENCE_BOTTLE), null, null);
         getChickenRegistry().put(experienceChicken.getEntityName(), experienceChicken);
@@ -214,6 +215,8 @@ public class ChickenRegistry {
         getChickenRegistry().put(witherChicken.getEntityName(), witherChicken);
         witherSkeletonChicken = new ChickenRegistryObject("wither_skeleton_chicken", Items.WITHER_SKELETON_SKULL, null, null);
         getChickenRegistry().put(witherSkeletonChicken.getEntityName(), witherSkeletonChicken);
+        prismarineChicken = new ChickenRegistryObject("prismarine_chicken", Items.PRISMARINE, null, null);
+        getChickenRegistry().put("prismarine_chicken", prismarineChicken);
     }
 
     private static void initModChickens() {

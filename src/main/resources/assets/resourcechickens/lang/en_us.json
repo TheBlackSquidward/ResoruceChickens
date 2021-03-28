@@ -11,8 +11,19 @@
 
     "item.resourcechickens.chicken_and_chips": "Chicken And Chips",
     "item.resourcechickens.chicken_nuggets": "Chicken Nuggets",
+    "item.resourcechickens.raw_chicken_nuggets": "Raw Chicken Nuggets",
     "item.resourcechickens.fried_chicken": "Fried Chicken",
     "item.resourcechickens.chicken_sandwich": "Fried Chicken Sandwich",
+
+    "item.resourcechickens.diamond_nugget": "Diamond Nugget",
+    "item.resourcechickens.emerald_nugget": "Emerald Nugget",
+    "item.resourcechickens.netherite_nugget": "Netherite Nugget",
+    "item.resourcechickens.redstone_pile": "Small Pile of Redstone",
+    "item.resourcechickens.coal_chunk": "Coal Chunk",
+    "item.resourcechickens.lapis_dust": "Lapis Dust",
+    "item.resourcechickens.ender_fragment": "Ender Fragment",
+    "item.resourcechickens.wither_skull_fragment": "Wither Skull Fragment",
+    "item.resourcechickens.nether_star_shard": "Nether Star Shard",
 
     "item.resourcechickens.upgrade_base": "Upgrade Base",
     "item.resourcechickens.speed_upgrade": "Speed Upgrade",
@@ -113,6 +124,10 @@
     "entity.resourcechickens.obsidian_chicken": "Obsidian Chicken",
     "item.resourcechickens.obsidian_chicken_item": "Obsidian Chicken",
     "item.resourcechickens.obsidian_chicken_spawn_egg": "Obsidian Chicken Spawn Egg",
+
+    "entity.resourcechickens.prismarine_chicken": "Prismarine Chicken",
+    "item.resourcechickens.prismarine_chicken_item": "Prismarine Chicken",
+    "item.resourcechickens.prismarine_chicken_spawn_egg": "Prismarine Chicken Spawn Egg",
 
     "entity.resourcechickens.quartz_chicken": "Quartz Chicken",
     "item.resourcechickens.quartz_chicken_item": "Quartz Chicken",

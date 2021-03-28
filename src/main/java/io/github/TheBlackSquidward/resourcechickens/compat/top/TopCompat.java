@@ -1,5 +1,8 @@
 package io.github.TheBlackSquidward.resourcechickens.compat.top;
 
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
+import io.github.TheBlackSquidward.resourcechickens.common.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.common.te.*;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
@@ -59,6 +62,21 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
             if(tileEntity instanceof ElectricIncubatorTE) {
                 ElectricIncubatorTE electricIncubatorTE = (ElectricIncubatorTE) tileEntity;
                 //TODO
+                return true;
+            }
+            return false;
+        });
+        iTheOneProbe.registerEntityDisplayOverride((mode, probeInfo, player, world, entity, data) -> {
+            if(entity instanceof CustomChickenEntity) {
+                CustomChickenEntity customChickenEntity = (CustomChickenEntity) entity;
+                ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(customChickenEntity);
+                probeInfo.horizontal()
+                        .entity(entity)
+                        .vertical()
+                        .text(formattedName);
+                if(mode.equals(ProbeMode.EXTENDED)) {
+
+                }
                 return true;
             }
             return false;
