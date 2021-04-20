@@ -1,7 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.init;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.common.te.*;
+import io.github.TheBlackSquidward.resourcechickens.te.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
