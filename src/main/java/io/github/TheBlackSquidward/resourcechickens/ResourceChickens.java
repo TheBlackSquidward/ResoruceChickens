@@ -2,7 +2,7 @@ package io.github.TheBlackSquidward.resourcechickens;
 
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.common.entities.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.init.*;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.compat.top.TopCompat;
@@ -49,7 +49,6 @@ public class ResourceChickens {
 
     private void setup(final FMLCommonSetupEvent e) {
         ResourceChickensPacketHandler.init();
-        setupChickens();
     }
 
     public void onInterModEnqueue(InterModEnqueueEvent e) {
@@ -57,14 +56,6 @@ public class ResourceChickens {
             InterModComms.sendTo("theoneprobe", "getTheOneProbe", TopCompat::new);
             LOGGER.info("Detected The One Probe. Initializing compat.");
         }
-    }
-
-    private void setupChickens() {
-        DeferredWorkQueue.runLater(() -> {
-            for (ChickenRegistryObject chicken : ChickenRegistry.getChickenRegistry().values()) {
-                GlobalEntityTypeAttributes.put(chicken.getChickenEntityRegisryObject().get(), CustomChickenEntity.setCustomAttributes().build());
-            }
-        });
     }
 
 }
