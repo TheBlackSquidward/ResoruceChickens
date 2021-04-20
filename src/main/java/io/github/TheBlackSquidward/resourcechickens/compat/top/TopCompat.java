@@ -2,8 +2,9 @@ package io.github.TheBlackSquidward.resourcechickens.compat.top;
 
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.common.entities.CustomChickenEntity;
-import io.github.TheBlackSquidward.resourcechickens.common.te.*;
+import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcechickens.te.*;
+import mcjty.theoneprobe.api.IEntityDisplayOverride;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,9 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
 
     private static final DecimalFormat FORMATTER = new DecimalFormat("0.0%");
 
-    IFormattableTextComponent formattedName = new StringTextComponent(TextFormatting.BLUE.toString() + TextFormatting.ITALIC.toString() + "Resource Chickens");
+    public static final IFormattableTextComponent formattedName = new StringTextComponent(TextFormatting.BLUE.toString() + TextFormatting.ITALIC.toString() + "Resource Chickens");
+
+    private static final IEntityDisplayOverride CHICKEN_ENTITY = new ChickenEntityDisplayOverride();
 
     @Override
     public Void apply(ITheOneProbe iTheOneProbe) {
@@ -66,21 +69,7 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
             }
             return false;
         });
-        iTheOneProbe.registerEntityDisplayOverride((mode, probeInfo, player, world, entity, data) -> {
-            if(entity instanceof CustomChickenEntity) {
-                CustomChickenEntity customChickenEntity = (CustomChickenEntity) entity;
-                ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(customChickenEntity);
-                probeInfo.horizontal()
-                        .entity(entity)
-                        .vertical()
-                        .text(formattedName);
-                if(mode.equals(ProbeMode.EXTENDED)) {
-
-                }
-                return true;
-            }
-            return false;
-        });
+        iTheOneProbe.registerEntityDisplayOverride(CHICKEN_ENTITY);
         return null;
     }
 
