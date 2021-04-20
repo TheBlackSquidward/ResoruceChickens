@@ -1,17 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "PPP",
-    "PCP",
+    "PLP",
+    "PEP",
     "HHH"
   ],
   "key": {
     "P": { "tag": "minecraft:planks" },
-    "C": { "item": "resourcechickens:machine_core" },
+    "L": { "item": "minecraft:redstone_lamp" },
+    "E": { "item": "minecraft:egg" },
     "H": { "item": "minecraft:hay_block" }
   },
   "result": {
-    "item": "resourcechickens:electric_roost",
+    "item": "resourcechickens:incubator",
     "count": 1
   }
 }

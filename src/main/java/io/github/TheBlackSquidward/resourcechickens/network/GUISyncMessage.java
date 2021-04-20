@@ -1,6 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.network;
 
-import io.github.TheBlackSquidward.resourcechickens.common.te.*;
+import io.github.TheBlackSquidward.resourcechickens.te.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.network.PacketBuffer;

@@ -51,6 +51,7 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
             registration.addRecipes(ChickenBreedingCategory.getBreedingRecipes(), ChickenBreedingCategory.ID);
             registration.addRecipes(IncubatorCategory.getIncubatorRecipes(), IncubatorCategory.ID);
             registration.addRecipes(RoostCategory.getRoostRecipes(), RoostCategory.ID);
+            //TODO add descriptions
         }
     }
 }

@@ -1,7 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.common.items.ChickenItem;
+import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;

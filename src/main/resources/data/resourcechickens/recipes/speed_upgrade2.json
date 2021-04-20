@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BRB",
+    "RDR",
+    "BRB"
+  ],
+  "key": {
+    "R": { "item": "minecraft:sugar" },
+    "B": { "tag": "resourcechickens:resource_feather" },
+    "D": { "item": "resourcechickens:upgrade_base" }
+  },
+  "result": {
+    "item": "resourcechickens:speed_upgrade",
+    "count": 1
+  }
+}

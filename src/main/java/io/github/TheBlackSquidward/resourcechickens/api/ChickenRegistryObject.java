@@ -1,6 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.api;
 
-import io.github.TheBlackSquidward.resourcechickens.common.entities.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,50 +17,37 @@ public class ChickenRegistryObject {
     private final String entityName;
     private final ChickenRegistryObject parent1;
     private final ChickenRegistryObject parent2;
-    private RegistryObject<Item> chickenItemRegistryObject;
-    private RegistryObject<Item> chickenSpawnEggRegistryObject;
+    private final boolean hasFeather;
+    private final boolean hasEgg;
+    private final List<ChickenDrop> chickenDrops;
+    private final ChickenType chickenType;
+
+
     private RegistryObject<EntityType<CustomChickenEntity>> chickenEntityRegistryObject;
     private ResourceLocation registryID;
 
-    private boolean hasEgg;
+    private RegistryObject<Item> chickenItemRegistryObject;
+    private RegistryObject<Item> chickenSpawnEggRegistryObject;
+    private RegistryObject<Item> chickenFeatherRegistryObject;
+
     private transient ChickenEggObject eggObject;
 
-    private boolean hasFeather;
-    private transient RegistryObject<Item> featherRegistryObject;
 
-    private Item chickenDrop = null;
-    private RegistryObject<Item> itemRegistryObject = null;
 
-    private transient RegistryObject<Item> chickenFeatherRegistryObject;
-
-    //No Feathers - Item
-    public ChickenRegistryObject(String entityName, Item chickenDrop, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2) {
+    //Base Constructor
+    public ChickenRegistryObject(String entityName, ChickenType chickenType, List<ChickenDrop> chickenDrops, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2, boolean hasFeather, boolean hasEgg) {
         this.entityName = entityName;
-        this.chickenDrop = chickenDrop;
-        this.parent1 = parent1;
-        this.parent2 = parent2;
-        this.hasFeather = false;
-        this.hasEgg = false;
-    }
-
-    //Has Feather - Item
-    public ChickenRegistryObject(String entityName, Item chickenDrop, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2, boolean hasFeather) {
-        this.entityName = entityName;
-        this.chickenDrop = chickenDrop;
+        this.chickenType = chickenType;
+        this.chickenDrops = chickenDrops;
         this.parent1 = parent1;
         this.parent2 = parent2;
         this.hasFeather = hasFeather;
-        this.hasEgg = false;
+        this.hasEgg = hasEgg;
     }
 
-    //No Feathers - Custom Egg
-    public ChickenRegistryObject(String entityName, ChickenEggObject chickenEggObject, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2) {
-        this.entityName = entityName;
-        this.itemRegistryObject = chickenEggObject.getEggRegistryObject();
-        this.parent1 = parent1;
-        this.parent2 = parent2;
-        this.hasFeather = false;
-        this.hasEgg = true;
+    //Egg
+    public ChickenRegistryObject(String entityName, ChickenType chickenType, List<ChickenDrop> chickenDrops, ChickenEggObject chickenEggObject, @Nullable ChickenRegistryObject parent1, @Nullable ChickenRegistryObject parent2, boolean hasFeather) {
+        this(entityName, chickenType, chickenDrops, parent1, parent2, hasFeather, true);
         this.eggObject = chickenEggObject;
     }
 
@@ -79,11 +67,17 @@ public class ChickenRegistryObject {
         this.chickenItemRegistryObject = (this.chickenItemRegistryObject == null) ? chickenItemRegistryObject : this.chickenItemRegistryObject;
     }
 
-    public Item getChickenDrop() {
-        if (chickenDrop == null) {
-            chickenDrop = itemRegistryObject.get();
+    public List<ChickenDrop> getChickenDrops() {
+        return chickenDrops;
+    }
+
+    public List<ChickenDrop> getFinalOutput() {
+        List<ChickenDrop> output = new ArrayList<>();
+        output.addAll(getChickenDrops());
+        if(hasFeather && chickenFeatherRegistryObject != null) {
+            output.add(new ChickenDrop(chickenFeatherRegistryObject, 1, 3));
         }
-        return chickenDrop;
+        return output;
     }
 
     public RegistryObject<Item> getChickenItemRegistryObject() {
@@ -149,6 +143,10 @@ public class ChickenRegistryObject {
 
     public ChickenEggObject getEggObject() {
         return eggObject;
+    }
+
+    public ChickenType getChickenType() {
+        return chickenType;
     }
 
 }

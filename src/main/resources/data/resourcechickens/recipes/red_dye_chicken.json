@@ -7,7 +7,7 @@
   ],
   "key": {
     "S": { "item": "minecraft:red_dye" },
-    "E": { "item": "minecraft:egg" }
+    "E": { "tag": "resourcechickens:egg" }
   },
   "result": {
     "item": "resourcechickens:red_chicken_spawn_egg",

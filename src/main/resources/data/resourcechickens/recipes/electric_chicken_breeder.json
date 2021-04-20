@@ -2,16 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "PPP",
-    "PCP",
+    "SCS",
     "HHH"
   ],
   "key": {
     "P": { "tag": "minecraft:planks" },
     "C": { "item": "resourcechickens:machine_core" },
-    "H": { "item": "minecraft:hay_block" }
+    "H": { "item": "minecraft:hay_block" },
+    "S": { "item": "minecraft:wheat_seeds" }
   },
   "result": {
-    "item": "resourcechickens:electric_roost",
+    "item": "resourcechickens:electric_chicken_breeder",
     "count": 1
   }
 }

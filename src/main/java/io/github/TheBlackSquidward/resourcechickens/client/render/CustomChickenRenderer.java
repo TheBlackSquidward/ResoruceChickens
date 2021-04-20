@@ -4,7 +4,7 @@ import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.client.model.CustomChickenModel;
-import io.github.TheBlackSquidward.resourcechickens.common.entities.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;

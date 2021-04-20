@@ -1,6 +1,7 @@
 {
     "item.resourcechickens.chicken_catcher": "Chicken Catcher",
     "item.resourcechickens.chicken_stick": "Chicken Stick",
+    "item.resourcechickens.chicken_analyser": "Chicken Analyzer",
 
     "item.resourcechickens.chicken_manure": "Chicken Manure",
     "item.resourcechickens.fertilizer": "Fertilizer",
@@ -8,12 +9,6 @@
     "item.resourcechickens.lava_infused_egg": "Lava Infused Egg",
     "item.resourcechickens.water_infused_egg": "Water Infused Egg",
     "item.resourcechickens.experience_imbued_egg": "Experience Imbued Egg",
-
-    "item.resourcechickens.chicken_and_chips": "Chicken And Chips",
-    "item.resourcechickens.chicken_nuggets": "Chicken Nuggets",
-    "item.resourcechickens.raw_chicken_nuggets": "Raw Chicken Nuggets",
-    "item.resourcechickens.fried_chicken": "Fried Chicken",
-    "item.resourcechickens.chicken_sandwich": "Fried Chicken Sandwich",
 
     "item.resourcechickens.diamond_nugget": "Diamond Nugget",
     "item.resourcechickens.emerald_nugget": "Emerald Nugget",
@@ -25,6 +20,7 @@
     "item.resourcechickens.wither_skull_fragment": "Wither Skull Fragment",
     "item.resourcechickens.nether_star_shard": "Nether Star Shard",
 
+    "item.resourcechickens.machine_core": "Machine Core",
     "item.resourcechickens.upgrade_base": "Upgrade Base",
     "item.resourcechickens.speed_upgrade": "Speed Upgrade",
     "item.resourcechickens.energy_upgrade": "Energy Efficiency Upgrade",
@@ -37,6 +33,8 @@
     "block.resourcechickens.chicken_breeder": "Chicken Breeder",
     "block.resourcechickens.electric_incubator": "Electric Incubator",
     "block.resourcechickens.incubator": "Incubator",
+    "block.resourcechickens.roost_controller": "Roost Controller",
+    "block.resourcechickens.roost_casing": "Roost Casing",
 
     "item.resourcechickens.vanilla_chicken_item": "Chicken",
 
@@ -107,6 +105,7 @@
     "entity.resourcechickens.emerald_chicken": "Emerald Chicken",
     "item.resourcechickens.emerald_chicken_item": "Emerald Chicken",
     "item.resourcechickens.emerald_chicken_spawn_egg": "Emerald Chicken Spawn Egg",
+    "item.resourcechickens.emerald_chicken_feather": "Emerald Feather",
 
     "entity.resourcechickens.flint_chicken": "Flint Chicken",
     "item.resourcechickens.flint_chicken_item": "Flint Chicken",
@@ -120,6 +119,7 @@
     "entity.resourcechickens.diamond_chicken": "Diamond Chicken",
     "item.resourcechickens.diamond_chicken_item": "Diamond Chicken",
     "item.resourcechickens.diamond_chicken_spawn_egg": "Diamond Chicken Spawn Egg",
+    "item.resourcechickens.diamond_chicken_feather": "Diamond Feather",
 
     "entity.resourcechickens.obsidian_chicken": "Obsidian Chicken",
     "item.resourcechickens.obsidian_chicken_item": "Obsidian Chicken",
@@ -136,10 +136,12 @@
     "entity.resourcechickens.coal_chicken": "Coal Chicken",
     "item.resourcechickens.coal_chicken_item": "Coal Chicken",
     "item.resourcechickens.coal_chicken_spawn_egg": "Coal Chicken Spawn Egg",
+    "item.resourcechickens.coal_chicken_feather": "Coal Feather",
 
     "entity.resourcechickens.netherite_chicken": "Netherite Chicken",
     "item.resourcechickens.netherite_chicken_item": "Netherite Chicken",
     "item.resourcechickens.netherite_chicken_spawn_egg": "Netherite Chicken Spawn Egg",
+    "item.resourcechickens.netherite_chicken_feather": "Netherite Feather",
 
     "entity.resourcechickens.soul_sand_chicken": "Soul Sand Chicken",
     "item.resourcechickens.soul_sand_chicken_item": "Soul Sand Chicken",
@@ -188,6 +190,7 @@
     "entity.resourcechickens.lapis_chicken": "Lapis Chicken",
     "item.resourcechickens.lapis_chicken_item": "Lapis Chicken",
     "item.resourcechickens.lapis_chicken_spawn_egg": "Lapis Chicken Spawn Egg",
+    "item.resourcechickens.lapis_chicken_feather": "Lapis Feather",
 
     "entity.resourcechickens.blaze_chicken": "Blaze Chicken",
     "item.resourcechickens.blaze_chicken_item": "Blaze Chicken",
@@ -196,6 +199,7 @@
     "entity.resourcechickens.ender_chicken": "Ender Chicken",
     "item.resourcechickens.ender_chicken_item": "Ender Chicken",
     "item.resourcechickens.ender_chicken_spawn_egg": "Ender Chicken Spawn Egg",
+    "item.resourcechickens.ender_chicken_feather": "Ender Feather",
 
     "entity.resourcechickens.ghast_chicken": "Ghast Chicken",
     "item.resourcechickens.ghast_chicken_item": "Ghast Chicken",
@@ -212,6 +216,7 @@
     "entity.resourcechickens.redstone_chicken": "Redstone Chicken",
     "item.resourcechickens.redstone_chicken_item": "Redstone Chicken",
     "item.resourcechickens.redstone_chicken_spawn_egg": "Redstone Chicken Spawn Egg",
+    "item.resourcechickens.redstone_chicken_feather": "Redstone Feather",
 
     "entity.resourcechickens.birch_chicken": "Birch Chicken",
     "item.resourcechickens.birch_chicken_item": "Birch Chicken",
@@ -289,6 +294,7 @@
     "gui.resourcechickens.roost": "Roost",
     "gui.resourcechickens.electric_roost": "Electric Roost",
     "gui.resourcechickens.incubator": "Incubator",
+    "gui.resourcechickens.electric_incubator": "Electric Incubator",
     "gui.resourcechickens.jei.category.chicken_breeding": "Chicken Breeding",
     "gui.resourcechickens.jei.category.chicken_catching": "Chicken Catching",
     "gui.resourcechickens.jei.category.roost": "Roost",

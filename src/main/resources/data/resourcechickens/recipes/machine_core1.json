@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IQI",
+    "RSR",
+    "IQI"
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "R": { "item": "minecraft:redstone" },
+    "S": { "item": "minecraft:stone" },
+    "Q": { "item": "minecraft:quartz" }
+  },
+  "result": {
+    "item": "resourcechickens:machine_core",
+    "count": 1
+  }
+}

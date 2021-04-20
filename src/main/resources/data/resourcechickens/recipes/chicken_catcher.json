@@ -7,7 +7,7 @@
   ],
   "key": {
     "S": { "item": "minecraft:stick" },
-    "E": { "item": "minecraft:egg" },
+    "E": { "tag": "resourcechickens:egg" },
     "F": { "item": "minecraft:feather" }
   },
   "result": {

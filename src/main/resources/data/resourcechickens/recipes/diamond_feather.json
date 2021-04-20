@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " F ",
+    "FFF",
+    " F "
+  ],
+  "key": {
+    "F": { "item": "resourcechickens:diamond_chicken_feather" }
+  },
+  "result": {
+    "item": "resourcechickens:diamond_nugget",
+    "count": 3
+  }
+}
