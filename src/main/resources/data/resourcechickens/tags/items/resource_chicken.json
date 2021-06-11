@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "resourcechickens:iron_chicken_item",
-    "resourcechickens:gold_chicken_item",
-    "resourcechickens:diamond_chicken_item",
-    "resourcechickens:emerald_chicken_item"
-  ]
-}
