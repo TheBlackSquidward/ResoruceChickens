@@ -24,7 +24,7 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ChickenItem extends Item {
+public class ChickenItem extends BaseItem {
 
     public ChickenItem(Properties properties) {
         super(properties);

@@ -15,7 +15,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
-public class ChickenCatcherItem extends Item {
+public class ChickenCatcherItem extends BaseItem {
 
     public ChickenCatcherItem() {
         super(new Item.Properties().stacksTo(1).defaultDurability(128));
