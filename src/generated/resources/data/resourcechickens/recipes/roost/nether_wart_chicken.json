@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:nether_wart_chicken_item"
+  },
+  "results": [
+    {
+      "item": "minecraft:nether_wart",
+      "amount": 1,
+      "chance": 1.0
+    }
+  ]
+}

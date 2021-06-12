@@ -1,0 +1,19 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:prismarine_chicken_item"
+  },
+  "results": [
+    {
+      "item": "minecraft:prismarine_shard",
+      "amount": 1,
+      "chance": 1.0
+    },
+    {
+      "item": "minecraft:prismarine_crystals",
+      "amount": 1,
+      "chance": 1.0
+    }
+  ]
+}

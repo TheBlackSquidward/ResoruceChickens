@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:netherite_chicken_item"
+  },
+  "results": [
+    {
+      "item": "minecraft:netherite_ingot",
+      "amount": 1,
+      "chance": 1.0
+    }
+  ]
+}

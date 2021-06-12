@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:spruce_chicken_item"
+  },
+  "results": [
+    {
+      "item": "minecraft:spruce_log",
+      "amount": 1,
+      "chance": 1.0
+    }
+  ]
+}

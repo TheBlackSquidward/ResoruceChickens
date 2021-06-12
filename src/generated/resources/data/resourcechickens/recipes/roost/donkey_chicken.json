@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:donkey_chicken_item"
+  },
+  "results": [
+    {
+      "item": "minecraft:command_block",
+      "amount": 1,
+      "chance": 1.0
+    }
+  ]
+}

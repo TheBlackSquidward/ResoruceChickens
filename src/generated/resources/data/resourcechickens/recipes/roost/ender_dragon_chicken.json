@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:ender_dragon_chicken_item"
+  },
+  "results": [
+    {
+      "item": "minecraft:dragon_egg",
+      "amount": 1,
+      "chance": 1.0
+    }
+  ]
+}

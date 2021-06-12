@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:purple_chicken_item"
+  },
+  "results": [
+    {
+      "item": "minecraft:purple_dye",
+      "amount": 1,
+      "chance": 1.0
+    }
+  ]
+}

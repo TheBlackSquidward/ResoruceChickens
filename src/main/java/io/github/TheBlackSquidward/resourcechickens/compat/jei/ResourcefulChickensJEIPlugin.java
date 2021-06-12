@@ -2,6 +2,8 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
+import io.github.TheBlackSquidward.resourcechickens.init.RecipeInit;
+import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -14,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 @JeiPlugin
 public class ResourcefulChickensJEIPlugin implements IModPlugin {
@@ -50,8 +53,9 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
             registration.addRecipes(ChickenCatchingCategory.getCatchingRecipes(), ChickenCatchingCategory.ID);
             registration.addRecipes(ChickenBreedingCategory.getBreedingRecipes(), ChickenBreedingCategory.ID);
             registration.addRecipes(IncubatorCategory.getIncubatorRecipes(), IncubatorCategory.ID);
-            registration.addRecipes(RoostCategory.getRoostRecipes(), RoostCategory.ID);
-            //TODO add descriptions
+            List<RoostRecipe> roostRecipes = clientWorld.getRecipeManager().getAllRecipesFor(RecipeInit.ROOST_RECIPE_TYPE);
+            registration.addRecipes(roostRecipes, RoostCategory.ID);
+
         }
     }
 }

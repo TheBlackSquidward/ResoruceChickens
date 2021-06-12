@@ -19,6 +19,7 @@ public class DataGeneration {
 
         dataGenerator.addProvider(blockTagGenerator);
         dataGenerator.addProvider(new ItemTagGenerator(dataGenerator, blockTagGenerator, existingFileHelper));
+        dataGenerator.addProvider(new RecipeGenerator(dataGenerator));
 
     }
 
