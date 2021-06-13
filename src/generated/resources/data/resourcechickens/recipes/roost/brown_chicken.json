@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:brown_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:brown_dye",
       "amount": 1,
