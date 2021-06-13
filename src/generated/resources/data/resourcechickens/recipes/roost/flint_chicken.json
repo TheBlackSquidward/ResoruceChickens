@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:flint_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:flint",
       "amount": 1,

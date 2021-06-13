@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:wither_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:nether_star",
       "amount": 1,

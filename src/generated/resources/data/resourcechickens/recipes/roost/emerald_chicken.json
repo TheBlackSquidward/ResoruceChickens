@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:emerald_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:emerald",
       "amount": 1,

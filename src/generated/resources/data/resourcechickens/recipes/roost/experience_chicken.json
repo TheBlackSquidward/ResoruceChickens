@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:experience_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:experience_bottle",
       "amount": 1,

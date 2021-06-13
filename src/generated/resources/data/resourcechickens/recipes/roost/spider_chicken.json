@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:spider_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:string",
       "amount": 1,

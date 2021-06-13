@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:magenta_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:magenta_dye",
       "amount": 1,

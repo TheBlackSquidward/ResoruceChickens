@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:quantum_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:end_portal_frame",
       "amount": 1,

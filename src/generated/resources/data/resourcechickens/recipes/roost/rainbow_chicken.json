@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:rainbow_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:panda_spawn_egg",
       "amount": 1,

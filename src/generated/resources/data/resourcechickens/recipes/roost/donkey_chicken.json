@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:donkey_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:command_block",
       "amount": 1,

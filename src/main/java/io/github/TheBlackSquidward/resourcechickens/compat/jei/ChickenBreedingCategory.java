@@ -2,8 +2,7 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
+import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -17,10 +16,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingRecipe> {
 
@@ -37,16 +32,6 @@ public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingR
         this.hearts = iGuiHelper.createAnimatedDrawable(heartsDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
         this.background = iGuiHelper.createDrawable(GUI, 0, 0, 90, 18);
         this.localizedName = I18n.get("gui.resourcechickens.jei.category.chicken_breeding");
-    }
-
-    public static Collection<?> getBreedingRecipes() {
-        List<ChickenBreedingRecipe> recipes = new ArrayList<>();
-        for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry().values()) {
-            if (chickenRegistryObject.isBreedable()) {
-                recipes.add(new ChickenBreedingRecipe(chickenRegistryObject));
-            }
-        }
-        return recipes;
     }
 
     @Override
@@ -81,8 +66,8 @@ public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingR
 
     @Override
     public void setIngredients(ChickenBreedingRecipe recipe, IIngredients iIngredients) {
-        iIngredients.setInputs(VanillaTypes.ITEM, recipe.child.buildParentChickenStack());
-        iIngredients.setOutput(VanillaTypes.ITEM, recipe.child.buildChickenStack());
+        iIngredients.setInputs(VanillaTypes.ITEM, recipe.getInputs());
+        iIngredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
     }
 
     @Override

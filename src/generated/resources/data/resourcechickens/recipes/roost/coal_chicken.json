@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:coal_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:coal",
       "amount": 1,

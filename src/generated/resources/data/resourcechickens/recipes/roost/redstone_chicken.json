@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:redstone_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:dark_oak_log",
       "amount": 1,

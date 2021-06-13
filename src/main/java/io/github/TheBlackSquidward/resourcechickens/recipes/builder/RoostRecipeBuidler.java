@@ -1,9 +1,9 @@
 package io.github.TheBlackSquidward.resourcechickens.recipes.builder;
 
 import com.google.gson.JsonObject;
-import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChanceItemStack;
 import io.github.TheBlackSquidward.resourcechickens.api.ChanceItemStackList;
+import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
 import io.github.TheBlackSquidward.resourcechickens.init.RecipeInit;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -57,9 +57,9 @@ public class RoostRecipeBuidler {
 
         @Override
         public void serializeRecipeData(JsonObject json) {
-            json.addProperty("totalRoostTime", this.totalRoostTime);
-            json.add("input", this.chicken.toJson());
-            json.add("results", results.toJSON());
+            json.addProperty(Constants.JSON.TOTAL_ROOST_TIME, this.totalRoostTime);
+            json.add(Constants.JSON.INPUT, this.chicken.toJson());
+            json.add(Constants.JSON.OUTPUT, results.toJSON());
         }
 
         @Override

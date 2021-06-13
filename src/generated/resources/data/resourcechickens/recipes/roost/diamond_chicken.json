@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:diamond_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:diamond",
       "amount": 1,

@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:sand_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:sand",
       "amount": 1,

@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:magma_slime_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:magma_cream",
       "amount": 1,

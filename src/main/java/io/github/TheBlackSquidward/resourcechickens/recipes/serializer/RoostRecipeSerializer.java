@@ -1,9 +1,8 @@
 package io.github.TheBlackSquidward.resourcechickens.recipes.serializer;
 
 import com.google.gson.JsonObject;
-import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.ChanceItemStack;
 import io.github.TheBlackSquidward.resourcechickens.api.ChanceItemStackList;
+import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
@@ -13,17 +12,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class RoostRecipeSerializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<RoostRecipe> {
 
     @Override
     public RoostRecipe fromJson(ResourceLocation recipeID, JsonObject jsonObject) {
-        Ingredient chicken = deserializeIngredient(jsonObject, "input");
-        int totalRoostTime = JSONUtils.getAsInt(jsonObject, "totalRoostTime");
-        ChanceItemStackList outputs = ChanceItemStackList.fromJSON(jsonObject.get("results").getAsJsonArray());
+        Ingredient chicken = deserializeIngredient(jsonObject, Constants.JSON.INPUT);
+        int totalRoostTime = JSONUtils.getAsInt(jsonObject, Constants.JSON.TOTAL_ROOST_TIME);
+        ChanceItemStackList outputs = ChanceItemStackList.fromJSON(jsonObject.get(Constants.JSON.OUTPUT).getAsJsonArray());
         return new RoostRecipe(recipeID, totalRoostTime, chicken, outputs);
     }
 

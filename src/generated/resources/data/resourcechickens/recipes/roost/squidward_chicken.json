@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:squidward_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:squid_spawn_egg",
       "amount": 1,

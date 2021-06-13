@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:quartz_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:quartz",
       "amount": 1,

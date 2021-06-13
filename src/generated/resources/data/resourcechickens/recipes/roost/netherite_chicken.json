@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:netherite_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:netherite_ingot",
       "amount": 1,

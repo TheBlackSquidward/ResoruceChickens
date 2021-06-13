@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:ender_dragon_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:dragon_egg",
       "amount": 1,

@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:gunpowder_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:gunpowder",
       "amount": 1,

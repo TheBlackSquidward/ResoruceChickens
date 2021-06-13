@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:water_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:water_bucket",
       "amount": 1,

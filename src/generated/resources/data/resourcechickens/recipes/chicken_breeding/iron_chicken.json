@@ -1,0 +1,15 @@
+{
+  "type": "resourcechickens:chicken_breeding",
+  "totalBreedTime": 2400,
+  "input": [
+    {
+      "item": "resourcechickens:flint_chicken_item"
+    },
+    {
+      "item": "resourcechickens:white_chicken_item"
+    }
+  ],
+  "output": {
+    "item": "resourcechickens:iron_chicken_item"
+  }
+}

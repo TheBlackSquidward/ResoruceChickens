@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:lapis_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:lapis_lazuli",
       "amount": 1,

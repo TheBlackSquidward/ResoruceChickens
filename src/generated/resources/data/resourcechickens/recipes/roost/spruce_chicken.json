@@ -4,7 +4,7 @@
   "input": {
     "item": "resourcechickens:spruce_chicken_item"
   },
-  "results": [
+  "output": [
     {
       "item": "minecraft:spruce_log",
       "amount": 1,
