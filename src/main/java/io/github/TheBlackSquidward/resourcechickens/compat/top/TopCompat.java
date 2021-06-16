@@ -35,7 +35,7 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
                         .item(new ItemStack(blockState.getBlock().asItem()))
                         .vertical()
                         .itemLabel(new ItemStack(blockState.getBlock().asItem()))
-                        .text(new StringTextComponent(new TranslationTextComponent("gui.resourcechickens.top.chicken_breeder.progress").getString() + getFormattedProgress(getChickenBreederProgress(chickenBreederTE))))
+                        .text(new StringTextComponent(new TranslationTextComponent("gui.resourcechickens.top.chicken_breeder.progress").getString() + getFormattedProgress(chickenBreederTE.getProgress())))
                         .text(formattedName);
                 if(mode.equals(ProbeMode.EXTENDED)) {
 
@@ -49,7 +49,15 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
             }
             if(tileEntity instanceof RoostTE) {
                 RoostTE roostTE = (RoostTE) tileEntity;
-                //TODO
+                probeInfo.horizontal()
+                        .item(new ItemStack(blockState.getBlock().asItem()))
+                        .vertical()
+                        .itemLabel(new ItemStack(blockState.getBlock().asItem()))
+                        .text(new StringTextComponent(new TranslationTextComponent("gui.resourcechickens.top.roost.progress").getString() + getFormattedProgress(roostTE.getProgress())))
+                        .text(formattedName);
+                if(mode.equals(ProbeMode.EXTENDED)) {
+
+                }
                 return true;
             }
             if(tileEntity instanceof ElectricRoostTE) {
@@ -71,10 +79,6 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
         });
         iTheOneProbe.registerEntityDisplayOverride(CHICKEN_ENTITY);
         return null;
-    }
-
-    public double getChickenBreederProgress(ChickenBreederTE tileEntity) {
-        return tileEntity.getProgress();
     }
 
     public String getFormattedProgress(double progress) {
