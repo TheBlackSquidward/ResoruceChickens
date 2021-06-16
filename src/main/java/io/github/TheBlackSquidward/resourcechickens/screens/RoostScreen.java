@@ -13,8 +13,11 @@ public class RoostScreen extends ContainerScreen<RoostContainer> {
 
     private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/roost_gui.png");
 
+    RoostContainer roostContainer;
+
     public RoostScreen(RoostContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
+        roostContainer = container;
     }
 
     @Override
@@ -24,6 +27,7 @@ public class RoostScreen extends ContainerScreen<RoostContainer> {
         int relX = (this.width - this.getXSize()) / 2;
         int relY = (this.height - this.getYSize()) / 2;
         this.blit(matrixStack, relX, relY, 0, 0, this.getXSize(), this.getYSize());
+        this.blit(matrixStack, relX + 48, relY + 20, 176, 0, getProgressWidth(), 16);
     }
 
     @Override
@@ -31,6 +35,11 @@ public class RoostScreen extends ContainerScreen<RoostContainer> {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);
+    }
+
+    private int getProgressWidth() {
+        double progress = this.roostContainer.getProgress();
+        return (progress == 0.0D) ? 0 : (1 + (int) (progress * 25.0D));
     }
 
 

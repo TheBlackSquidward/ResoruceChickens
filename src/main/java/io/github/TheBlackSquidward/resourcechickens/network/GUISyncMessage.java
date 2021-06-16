@@ -34,12 +34,8 @@ public class GUISyncMessage {
             ClientPlayerEntity player = Minecraft.getInstance().player;
             if (player != null) {
                 TileEntity tileEntity = player.level.getBlockEntity(message.blockPos);
-                if (tileEntity instanceof ChickenBreederTE) {
-                    ((ChickenBreederTE) tileEntity).handleGUINetworkPacket(message.packetBuffer);
-                }
-                if(tileEntity instanceof RoostTE) {
-                    //TODO handle packet
-                }
+                if(tileEntity instanceof ChickenBreederTE) ((ChickenBreederTE) tileEntity).handleGUINetworkPacket(message.packetBuffer);
+                if(tileEntity instanceof RoostTE) ((RoostTE) tileEntity).handleGUINetworkPacket(message.packetBuffer);
                 if(tileEntity instanceof IncubatorTE) {
                     //TODO
                 }

@@ -1,46 +1,32 @@
 package io.github.TheBlackSquidward.resourcechickens.te;
 
+import io.github.TheBlackSquidward.resourcechickens.AbstractTileEntity;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.api.utils.NBTConstants;
+import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
 import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
+import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
 import io.netty.buffer.Unpooled;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Random;
 
-public class ChickenBreederTE extends TileEntity implements ITickableTileEntity {
-
-    private final ItemStackHandler itemStackHandler = createHandler();
-
-    private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
+public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> {
 
     //2 Min in ticks
     private final double totalBreedTime = 2400;
-    private double progress = 0;
     private double breedTime = 0;
     private boolean isBreeding;
 
@@ -80,7 +66,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
     @Override
     protected void invalidateCaps() {
         super.invalidateCaps();
-        handler.invalidate();
+        itemHandlerLazyOptional.invalidate();
     }
 
     private void updateProgress() {
@@ -239,7 +225,7 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         return newStatValue;
     }
 
-    private ItemStackHandler createHandler() {
+    public ItemStackHandler createItemStackHandler() {
         return new ItemStackHandler(6) {
 
             @Override
@@ -279,63 +265,23 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
         }
     }
 
-    @Override
-    public CompoundNBT save(CompoundNBT tag) {
-        super.save(tag);
-        return saveToNBT(tag);
-    }
-
     protected CompoundNBT saveToNBT(CompoundNBT tag) {
-        tag.put(NBTConstants.NBT_INVENTORY, itemStackHandler.serializeNBT());
+        tag.put(Constants.NBT.INVENTORY, itemStackHandler.serializeNBT());
         tag.putDouble("breedTime", breedTime);
         tag.putBoolean("isBreeding", isBreeding);
         return tag;
     }
 
+    @Override
+    public ChickenBreedingRecipe getRecipe() {
+        //TODO
+        return null;
+    }
+
     protected void loadFromNBT(CompoundNBT tag) {
-        itemStackHandler.deserializeNBT(tag.getCompound(NBTConstants.NBT_INVENTORY));
+        itemStackHandler.deserializeNBT(tag.getCompound(Constants.NBT.INVENTORY));
         breedTime = tag.getDouble("breedTime");
         isBreeding = tag.getBoolean("isBreeding");
-    }
-
-    @Override
-    public void load(BlockState state, CompoundNBT tag) {
-        this.loadFromNBT(tag);
-        super.load(state, tag);
-    }
-
-    @Nonnull
-    @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT nbtTagCompound = new CompoundNBT();
-        save(nbtTagCompound);
-        return nbtTagCompound;
-    }
-
-    @Override
-    public void handleUpdateTag(@Nonnull BlockState state, CompoundNBT tag) {
-        this.load(state, tag);
-    }
-
-    @Nullable
-    @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(getBlockPos(), 0, saveToNBT(new CompoundNBT()));
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        CompoundNBT nbt = pkt.getTag();
-        loadFromNBT(nbt);
-    }
-
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return handler.cast();
-        }
-        return super.getCapability(cap, side);
     }
 
     public void handleGUINetworkPacket(PacketBuffer packetBuffer) {
@@ -354,6 +300,41 @@ public class ChickenBreederTE extends TileEntity implements ITickableTileEntity 
 
     public ItemStack getChicken2() {
         return itemStackHandler.getStackInSlot(2);
+    }
+
+    @Override
+    public int getContainerSize() {
+        return 0;
+    }
+
+    @Override
+    public ItemStack getItem(int p_70301_1_) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItem(int p_70298_1_, int p_70298_2_) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int p_70304_1_) {
+        return null;
+    }
+
+    @Override
+    public void setItem(int p_70299_1_, ItemStack p_70299_2_) {
+
+    }
+
+    @Override
+    public boolean stillValid(PlayerEntity p_70300_1_) {
+        return false;
+    }
+
+    @Override
+    public void clearContent() {
+
     }
 }
 

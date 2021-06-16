@@ -1,32 +1,29 @@
 package io.github.TheBlackSquidward.resourcechickens.te;
 
+import io.github.TheBlackSquidward.resourcechickens.AbstractTileEntity;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenDrop;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
+import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
+import io.github.TheBlackSquidward.resourcechickens.init.RecipeInit;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
-import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
+import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
+import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
+import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
+import io.netty.buffer.Unpooled;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
+import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class RoostTE extends TileEntity implements ITickableTileEntity {
+public class RoostTE extends AbstractTileEntity<RoostRecipe> {
 
-    private final ItemStackHandler itemStackHandler = createHandler();
-
-    private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
+    private double roostTime = 0;
+    private boolean isRoosting;
 
     public RoostTE() {
         super(TileEntityInit.ROOST_TE.get());
@@ -36,16 +33,55 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
     @Override
     public void tick() {
         if (!this.level.isClientSide()) {
-            if (hasChicken()) {
-                //TODO
-                ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemStackHandler.getStackInSlot(0).getItem());
-                //addResult(new ItemStack(chickenRegistryObject.getChickenDrop(), getDropAmount(getGain())));
-                setChanged();
+            if (getRecipe() != null) {
+                RoostRecipe recipe = getRecipe();
+                if (isRoosting) {
+                    if (roostTime > 0) {
+                        roostTime--;
+                    } else {
+                        ResourceChickens.LOGGER.debug("outputting");
+                        //Output neccessary things
+                        recipe.getOutputs().dissolve().forEach(this::addResult);
+                        reset();
+                    }
+                } else {
+                    this.isRoosting = true;
+                    this.roostTime = (double) recipe.getTotalRoostTime();
+                }
+            } else {
+                if (isRoosting) {
+                    reset();
+                }
             }
+            setChanged();
+            updateProgress();
         }
     }
 
+    public void reset() {
+        this.roostTime = 0;
+        this.isRoosting = false;
+        this.progress = 0;
+    }
+
+    public RoostRecipe getRecipe() {
+        ItemStack input = itemStackHandler.getStackInSlot(0);
+        if (this.level == null || input.isEmpty()) {
+            return null;
+        }
+        return level.getRecipeManager().getRecipeFor(RecipeInit.ROOST_RECIPE_TYPE, this, this.level).orElse(null);
+    }
+
+    private void updateProgress() {
+        double calculatedProgress = (getTotalRoostTime() - this.roostTime) / getTotalRoostTime();
+        if (calculatedProgress == 1) {
+            calculatedProgress = 0;
+        }
+        this.progress = calculatedProgress;
+    }
+
     public void addResult(ItemStack result) {
+        //TODO rewrite
         ItemStack item1 = itemStackHandler.getStackInSlot(1);
         ItemStack item2 = itemStackHandler.getStackInSlot(2);
         ItemStack item3 = itemStackHandler.getStackInSlot(3);
@@ -77,16 +113,14 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
         }
     }
 
-    private int getDropAmount(int gain) {
+    private int getDropAmount(ChickenDrop chickenDrop, int gain) {
+        int preDropAmount = (gain >= 10) ? 3 : ((gain >= 5) ? 2 : 1);
+        if (preDropAmount > chickenDrop.getMaxAmount()) {
+            chickenDrop.getMaxAmount();
+        } else {
+            return preDropAmount;
+        }
         return (gain >= 10) ? 3 : ((gain >= 5) ? 2 : 1);
-    }
-
-    private boolean isDrop(ChickenDrop chickenDrop) {
-        return chickenDrop.getItem() != Items.CHICKEN && chickenDrop.getItem().getItem() != Items.FEATHER;
-    }
-
-    private boolean hasChicken() {
-        return itemStackHandler.getStackInSlot(0).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(0).getItem() != ItemInit.VANILLA_CHICKEN.get();
     }
 
     private int getGain() {
@@ -98,13 +132,16 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
         return gain;
     }
 
-    @Override
-    protected void invalidateCaps() {
-        super.invalidateCaps();
-        handler.invalidate();
+    public int getTotalRoostTime() {
+        if(isRoosting) {
+            return getRecipe().getTotalRoostTime();
+        }else{
+            return 0;
+        }
     }
 
-    private ItemStackHandler createHandler() {
+    @Override
+    public ItemStackHandler createItemStackHandler() {
         return new ItemStackHandler(6) {
 
             @Override
@@ -122,14 +159,60 @@ public class RoostTE extends TileEntity implements ITickableTileEntity {
         };
     }
 
-    //TODO nbt
-
-    @Nonnull
     @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return handler.cast();
-        }
-        return super.getCapability(cap, side);
+    public int getContainerSize() {
+        return 6;
+    }
+
+    @Override
+    public ItemStack getItem(int itemSlot) {
+        return itemStackHandler.getStackInSlot(itemSlot);
+    }
+
+    @Override
+    public ItemStack removeItem(int p_70298_1_, int p_70298_2_) {
+        return null;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int p_70304_1_) {
+        return null;
+    }
+
+    @Override
+    public void setItem(int itemSlot, ItemStack itemStack) {
+        itemStackHandler.setStackInSlot(itemSlot, itemStack);
+    }
+
+    @Override
+    public boolean stillValid(PlayerEntity p_70300_1_) {
+        return true;
+    }
+
+    @Override
+    public void clearContent() {
+
+    }
+
+    protected CompoundNBT saveToNBT(CompoundNBT tag) {
+        tag.put(Constants.NBT.INVENTORY, itemStackHandler.serializeNBT());
+        tag.putDouble("roostTime", roostTime);
+        tag.putBoolean("isRoosting", isRoosting);
+        return tag;
+    }
+    protected void loadFromNBT(CompoundNBT tag) {
+        itemStackHandler.deserializeNBT(tag.getCompound(Constants.NBT.INVENTORY));
+        this.roostTime = tag.getDouble("roostTime");
+        this.isRoosting = tag.getBoolean("isRoosting");
+    }
+
+    public void handleGUINetworkPacket(PacketBuffer packetBuffer) {
+        this.progress = packetBuffer.readDouble();
+    }
+
+    public void sendGUINetworkPacket(PlayerEntity playerEntity) {
+        PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
+        packetBuffer.writeDouble(getProgress());
+        ResourceChickensPacketHandler.sendToPlayer(new GUISyncMessage(getBlockPos(), packetBuffer), (ServerPlayerEntity) playerEntity);
     }
 }
