@@ -79,21 +79,7 @@ public class RoostCategory implements IRecipeCategory<RoostRecipe> {
         guiItemStacks.init(3, false, 90, 0);
         guiItemStacks.init(4, false, 108, 0);
         guiItemStacks.set(iIngredients);
-        //TODO port over
-        /*
-        iRecipeLayout.getItemStacks().addTooltipCallback(new ITooltipCallback<ItemStack>() {
-            @Override
-            public void onTooltip(int slot, boolean input, ItemStack itemStack, List<ITextComponent> tooltip) {
-                if(!input) {
-                    ChickenDrop chickenDrop = recipe.matchItemToChickenDrop(itemStack.getItem());
-                    tooltip.add(new StringTextComponent("Minimum Drop Amount: " + chickenDrop.getMinAmount()));
-                    tooltip.add(new StringTextComponent("Maximum Drop Amount: " + chickenDrop.getMaxAmount()));
-                    tooltip.add(new StringTextComponent("Drop Chance: NYI"));
-                    //TODO
-                }
-            }
-        });
-         */
+        iRecipeLayout.getItemStacks().addTooltipCallback(new RoostTooltipCallback(recipe));
     }
 
 }

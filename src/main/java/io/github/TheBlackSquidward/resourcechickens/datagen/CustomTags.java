@@ -26,6 +26,7 @@ public class CustomTags {
 
         public static final ITag.INamedTag<Item> RESOUCE_CHICKEN = mod("resource_chicken");
         public static final ITag.INamedTag<Item> RESOURCE_FEATHER = mod("resource_feather");
+        public static final ITag.INamedTag<Item> EGG = mod("egg");
 
         private static ITag.INamedTag<Item> forge(String path) {
             return ItemTags.bind(new ResourceLocation("forge", path).toString());
