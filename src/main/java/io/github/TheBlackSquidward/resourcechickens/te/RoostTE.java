@@ -29,10 +29,9 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
         super(TileEntityInit.ROOST_TE.get());
     }
 
-    //TODO add timer
     @Override
     public void tick() {
-        if (!this.level.isClientSide()) {
+        if (!getWorld().isClientSide()) {
             if (getRecipe() != null) {
                 RoostRecipe recipe = getRecipe();
                 if (isRoosting) {
@@ -61,7 +60,6 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
     public void reset() {
         this.roostTime = 0;
         this.isRoosting = false;
-        this.progress = 0;
     }
 
     public RoostRecipe getRecipe() {
@@ -73,44 +71,19 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
     }
 
     private void updateProgress() {
-        double calculatedProgress = (getTotalRoostTime() - this.roostTime) / getTotalRoostTime();
-        if (calculatedProgress == 1) {
-            calculatedProgress = 0;
+        if(isRoosting) {
+            double calculatedProgress = (getTotalRoostTime() - this.roostTime) / getTotalRoostTime();
+            if (calculatedProgress == 1) {
+                calculatedProgress = 0;
+            }
+            this.progress = calculatedProgress;
+        }else{
+            this.progress = 0;
         }
-        this.progress = calculatedProgress;
     }
 
     public void addResult(ItemStack result) {
         //TODO rewrite
-        ItemStack item1 = itemStackHandler.getStackInSlot(1);
-        ItemStack item2 = itemStackHandler.getStackInSlot(2);
-        ItemStack item3 = itemStackHandler.getStackInSlot(3);
-        ItemStack item4 = itemStackHandler.getStackInSlot(4);
-        if (item1.isEmpty()) {
-            itemStackHandler.setStackInSlot(1, result);
-        } else if (item1.sameItemStackIgnoreDurability(result) && item1.getCount() < 64) {
-            int amount = item1.getCount() + 1;
-            result.setCount(amount);
-            itemStackHandler.setStackInSlot(1, result);
-        } else if (item2.isEmpty()) {
-            itemStackHandler.setStackInSlot(2, result);
-        } else if (item2.sameItemStackIgnoreDurability(result) && item2.getCount() < 64) {
-            int amount = item2.getCount() + 1;
-            result.setCount(amount);
-            itemStackHandler.setStackInSlot(2, result);
-        } else if (item3.isEmpty()) {
-            itemStackHandler.setStackInSlot(3, result);
-        } else if (item3.sameItemStackIgnoreDurability(result) && item3.getCount() < 64) {
-            int amount = item3.getCount() + 1;
-            result.setCount(amount);
-            itemStackHandler.setStackInSlot(3, result);
-        } else if (item4.isEmpty()) {
-            itemStackHandler.setStackInSlot(4, result);
-        } else if (item4.sameItemStackIgnoreDurability(result) && item4.getCount() < 64) {
-            int amount = item4.getCount() + 1;
-            result.setCount(amount);
-            itemStackHandler.setStackInSlot(4, result);
-        }
     }
 
     private int getDropAmount(ChickenDrop chickenDrop, int gain) {
@@ -209,7 +182,6 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
     public void handleGUINetworkPacket(PacketBuffer packetBuffer) {
         this.progress = packetBuffer.readDouble();
     }
-
     public void sendGUINetworkPacket(PlayerEntity playerEntity) {
         PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
         packetBuffer.writeDouble(getProgress());

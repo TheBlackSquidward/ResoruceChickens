@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
+import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -147,6 +148,11 @@ public class ChickenRegistryObject {
 
     public ChickenType getChickenType() {
         return chickenType;
+    }
+
+    public String getForamattedName() {
+        String formattedName = entityName.replace("_", " ");
+        return WordUtils.capitalize(formattedName);
     }
 
 }

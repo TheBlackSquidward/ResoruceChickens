@@ -79,6 +79,18 @@ public class RoostContainer extends Container {
         tileEntity.sendGUINetworkPacket(playerEntity);
     }
 
+    @Override
+    public ItemStack quickMoveStack(PlayerEntity playerEntity, int index) {
+        Slot slot = this.slots.get(index);
+        ItemStack itemStack = slot.getItem();
+        ResourceChickens.LOGGER.debug(index);
+        if(itemStack.getItem() instanceof ChickenItem && itemStack.getItem() != ItemInit.VANILLA_CHICKEN.get()) {
+            this.tileEntity.setItem(0, itemStack.copy());
+            slot.set(ItemStack.EMPTY);
+        }
+        return ItemStack.EMPTY;
+    }
+
     public double getProgress() {
         return tileEntity.getProgress();
     }

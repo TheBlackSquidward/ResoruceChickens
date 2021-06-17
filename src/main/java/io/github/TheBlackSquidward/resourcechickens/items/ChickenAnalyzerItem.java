@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class ChickenAnalyzerItem extends BaseItem {
 
     public ChickenAnalyzerItem() {
-        super(new Item.Properties().stacksTo(1));
+        super(new Properties().stacksTo(1));
     }
 
     //TODO

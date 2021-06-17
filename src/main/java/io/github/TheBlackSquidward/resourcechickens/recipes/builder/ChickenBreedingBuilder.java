@@ -43,7 +43,7 @@ public class ChickenBreedingBuilder {
 
     public void build(Consumer<IFinishedRecipe> consumer, ResourceLocation id) {
         Ingredient[] ingredients = input.toArray(new Ingredient[0]);
-        consumer.accept(new ChickenBreedingBuilder.Result(id, this.totalBreedTime, this.output, ingredients));
+        consumer.accept(new Result(id, this.totalBreedTime, this.output, ingredients));
     }
 
     private static class Result implements IFinishedRecipe{

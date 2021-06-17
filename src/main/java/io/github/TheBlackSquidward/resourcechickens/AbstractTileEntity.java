@@ -1,3 +1,4 @@
+
 package io.github.TheBlackSquidward.resourcechickens;
 
 import net.minecraft.block.BlockState;
@@ -11,6 +12,7 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -32,7 +34,12 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
     public double progress;
 
     public abstract R getRecipe();
+
     public abstract ItemStackHandler createItemStackHandler();
+
+    public World getWorld() {
+        return this.level;
+    }
 
     @Nonnull
     @Override
@@ -53,9 +60,10 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
     public boolean isEmpty() {
         return false;
     }
+
     @Override
     public ItemStack getItem(int index) {
-        if(index > getContainerSize()) {
+        if (index > getContainerSize()) {
             return ItemStack.EMPTY;
         }
         return null;
@@ -66,6 +74,7 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
         this.loadFromNBT(tag);
         super.load(blockState, tag);
     }
+
     protected abstract void loadFromNBT(CompoundNBT tag);
 
     @Override
@@ -73,6 +82,7 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
         super.save(tag);
         return saveToNBT(tag);
     }
+
     protected abstract CompoundNBT saveToNBT(CompoundNBT tag);
 
     @Nullable
@@ -80,15 +90,18 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
     public SUpdateTileEntityPacket getUpdatePacket() {
         return new SUpdateTileEntityPacket(getBlockPos(), 0, saveToNBT(new CompoundNBT()));
     }
+
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         CompoundNBT nbt = pkt.getTag();
         loadFromNBT(nbt);
     }
+
     @Override
     public CompoundNBT getUpdateTag() {
         return this.serializeNBT();
     }
+
     @Override
     public void handleUpdateTag(BlockState state, CompoundNBT tag) {
         this.deserializeNBT(tag);
@@ -97,4 +110,5 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
     public double getProgress() {
         return progress;
     }
+
 }

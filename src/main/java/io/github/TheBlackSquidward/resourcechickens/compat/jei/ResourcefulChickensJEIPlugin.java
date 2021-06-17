@@ -1,6 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
+import io.github.TheBlackSquidward.resourcechickens.containers.RoostContainer;
 import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import io.github.TheBlackSquidward.resourcechickens.init.RecipeInit;
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
@@ -11,6 +12,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -60,5 +62,10 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
             List<ChickenBreedingRecipe> chickenBreedingRecipes = clientWorld.getRecipeManager().getAllRecipesFor(RecipeInit.CHICKEN_BREEDING_RECIPE_TYPE);
             registration.addRecipes(chickenBreedingRecipes, ChickenBreedingCategory.ID);
         }
+    }
+
+    @Override
+    public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
+        registration.addRecipeTransferHandler(RoostContainer.class, RoostCategory.ID, 0, 1, 5,36);
     }
 }

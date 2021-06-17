@@ -1,15 +1,12 @@
 package io.github.TheBlackSquidward.resourcechickens;
 
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.init.*;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.compat.top.TopCompat;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -28,7 +25,7 @@ public class ResourceChickens {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static final net.minecraft.item.ItemGroup ITEM_GROUP = new ResourceChickensItemGroup();
+    public static final ItemGroup ITEM_GROUP = new ResourceChickensItemGroup();
 
     public ResourceChickens() {
         IEventBus iEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -39,6 +36,7 @@ public class ResourceChickens {
         BlockInit.BLOCKS.register(iEventBus);
         TileEntityInit.TILE_ENTITY.register(iEventBus);
         ContainerInit.CONTAINERS.register(iEventBus);
+        RecipeInit.RECIPE_SERIALIZER_REGISTRY.register(iEventBus);
 
         iEventBus.addListener(this::onInterModEnqueue);
         MinecraftForge.EVENT_BUS.register(this);
@@ -46,6 +44,7 @@ public class ResourceChickens {
         initChickens();
         ChickenRegistry.registerChickens();
     }
+
 
     private void setup(final FMLCommonSetupEvent e) {
         ResourceChickensPacketHandler.init();
@@ -57,5 +56,4 @@ public class ResourceChickens {
             LOGGER.info("Detected The One Probe. Initializing compat.");
         }
     }
-
 }

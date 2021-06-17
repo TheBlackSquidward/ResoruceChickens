@@ -34,7 +34,7 @@ public class ElectricRoostBlock extends Block {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     public ElectricRoostBlock() {
-        super(AbstractBlock.Properties.of(Material.METAL)
+        super(Properties.of(Material.METAL)
                 .harvestLevel(2)
                 .harvestTool(ToolType.PICKAXE));
     }

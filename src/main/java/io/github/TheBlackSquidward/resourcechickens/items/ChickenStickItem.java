@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 public class ChickenStickItem extends BaseItem {
 
     public ChickenStickItem() {
-        super(new Item.Properties().stacksTo(1));
+        super(new Properties().stacksTo(1));
     }
 
 }

@@ -4,10 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
 
-public class MetalBlock extends Block {
+public class HenhouseBlock extends Block {
 
-
-    public MetalBlock()  {
-        super(Properties.of(Material.METAL).harvestTool(ToolType.PICKAXE));
+    public HenhouseBlock() {
+        super(Properties.of(Material.WOOD).harvestTool(ToolType.AXE));
     }
+
 }

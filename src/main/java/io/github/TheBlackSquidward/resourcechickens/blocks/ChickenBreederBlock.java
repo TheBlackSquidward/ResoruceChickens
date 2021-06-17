@@ -1,7 +1,7 @@
-package io.github.TheBlackSquidward.resourcechickens.common.blocks;
+package io.github.TheBlackSquidward.resourcechickens.blocks;
 
-import io.github.TheBlackSquidward.resourcechickens.common.containers.ChickenBreederContainer;
-import io.github.TheBlackSquidward.resourcechickens.common.te.ChickenBreederTE;
+import io.github.TheBlackSquidward.resourcechickens.containers.ChickenBreederContainer;
+import io.github.TheBlackSquidward.resourcechickens.te.ChickenBreederTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -39,7 +39,7 @@ public class ChickenBreederBlock extends Block {
     }
 
     @Override
-    public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
+    public ActionResultType use(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
         if (!world.isClientSide) {
             TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof ChickenBreederTE) {

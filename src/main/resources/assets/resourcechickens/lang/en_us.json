@@ -230,9 +230,9 @@
     "item.resourcechickens.jungle_chicken_item": "Jungle Chicken",
     "item.resourcechickens.jungle_chicken_spawn_egg": "Jungle Chicken Spawn Egg",
 
-    "entity.resourcechickens.spruce_chicken": "Jungle Chicken",
-    "item.resourcechickens.spruce_chicken_item": "Jungle Chicken",
-    "item.resourcechickens.spruce_chicken_spawn_egg": "Jungle Chicken Spawn Egg",
+    "entity.resourcechickens.spruce_chicken": "Spruce Chicken",
+    "item.resourcechickens.spruce_chicken_item": "Spruce Chicken",
+    "item.resourcechickens.spruce_chicken_spawn_egg": "Spruce Chicken Spawn Egg",
 
     "entity.resourcechickens.dark_oak_chicken": "Dark Oak Chicken",
     "item.resourcechickens.dark_oak_chicken_item": "Dark Oak Chicken",

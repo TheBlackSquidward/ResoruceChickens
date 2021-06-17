@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class ChickenCatcherItem extends BaseItem {
 
     public ChickenCatcherItem() {
-        super(new Item.Properties().stacksTo(1).defaultDurability(128));
+        super(new Properties().stacksTo(1).defaultDurability(128));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.entities;
 
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -8,6 +10,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
@@ -18,16 +21,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-import javax.annotation.Nullable;
-
-public class CustomChickenEntity extends AnimalEntity {
+public class CustomChickenEntity extends ChickenEntity {
 
     private static final Ingredient TEMPTATION_ITEM = Ingredient.of(Items.WHEAT_SEEDS);
     private static transient int layTime;
 
     public int timeUntilNextLay = layTime;
 
-    public CustomChickenEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
+    public CustomChickenEntity(EntityType<? extends ChickenEntity> type, World worldIn) {
         super(type, worldIn);
         layTime = this.getRandom().nextInt(6000) + 6000;
     }
@@ -66,20 +67,17 @@ public class CustomChickenEntity extends AnimalEntity {
         this.playSound(SoundEvents.CHICKEN_STEP, 0.15F, 1.0F);
     }
 
-    @Nullable
-    public AgeableEntity createChild(AgeableEntity ageableEntity) {
-        return null;
-    }
-
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 4.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D);
     }
 
-    @Nullable
     @Override
-    public AgeableEntity getBreedOffspring(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
-        return null;
+    public CustomChickenEntity getBreedOffspring(ServerWorld serverWorld, AgeableEntity ageableEntity) {
+        ChickenRegistryObject offspring = ChickenRegistry.getChickenRegistryObjectbyEntity((CustomChickenEntity) ageableEntity);
+        return offspring.getChickenEntityRegisryObject().get().create(serverWorld);
     }
+
+
 }
