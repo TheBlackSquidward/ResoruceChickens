@@ -1,0 +1,11 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 2400,
+  "input": "chicken_item",
+  "result": [
+    {
+      "item": "thermal:apatite",
+      "chance": 12.5
+    }
+  ]
+}

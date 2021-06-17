@@ -1,0 +1,11 @@
+{
+  "type": "resourcechickens:chicken_breeding",
+  "totalBreedTime": 300,
+  "input": [
+    { "item": "resourcechickens:ender_chicken_item" },
+    { "item": "resourcechickens:donkey_chicken_item" }
+  ],
+  "output": [
+    { "item": "minecraft:ender_pearl" }
+  ]
+}
