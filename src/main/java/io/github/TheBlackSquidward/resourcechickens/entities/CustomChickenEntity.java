@@ -76,7 +76,7 @@ public class CustomChickenEntity extends ChickenEntity {
     @Override
     public CustomChickenEntity getBreedOffspring(ServerWorld serverWorld, AgeableEntity ageableEntity) {
         ChickenRegistryObject offspring = ChickenRegistry.getChickenRegistryObjectbyEntity((CustomChickenEntity) ageableEntity);
-        return offspring.getChickenEntityRegisryObject().get().create(serverWorld);
+        return offspring.getChickenEntityRegistryObject().get().create(serverWorld);
     }
 
 

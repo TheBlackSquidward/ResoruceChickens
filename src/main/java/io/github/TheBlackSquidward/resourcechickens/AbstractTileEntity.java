@@ -2,8 +2,6 @@
 package io.github.TheBlackSquidward.resourcechickens;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -21,13 +19,15 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.text.DecimalFormat;
 
-public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntity implements IInventory, ITickableTileEntity {
+public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntity implements ITickableTileEntity {
 
     public AbstractTileEntity(TileEntityType<?> p_i48289_1_) {
         super(p_i48289_1_);
     }
 
+    private static final DecimalFormat FORMATTER = new DecimalFormat("0.0%");
     public ItemStackHandler itemStackHandler = createItemStackHandler();
     public LazyOptional<IItemHandler> itemHandlerLazyOptional = LazyOptional.of(() -> itemStackHandler);
 
@@ -57,58 +57,49 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
     }
 
     @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public ItemStack getItem(int index) {
-        if (index > getContainerSize()) {
-            return ItemStack.EMPTY;
-        }
-        return null;
-    }
-
-    @Override
     public void load(BlockState blockState, CompoundNBT tag) {
         this.loadFromNBT(tag);
         super.load(blockState, tag);
     }
-
     protected abstract void loadFromNBT(CompoundNBT tag);
 
+    //NBT
     @Override
     public CompoundNBT save(CompoundNBT tag) {
         super.save(tag);
         return saveToNBT(tag);
     }
-
     protected abstract CompoundNBT saveToNBT(CompoundNBT tag);
 
+    //Updating the tile entity
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(getBlockPos(), 0, saveToNBT(new CompoundNBT()));
+        return new SUpdateTileEntityPacket(getBlockPos(), -1, saveToNBT(new CompoundNBT()));
     }
-
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         CompoundNBT nbt = pkt.getTag();
         loadFromNBT(nbt);
     }
-
     @Override
     public CompoundNBT getUpdateTag() {
         return this.serializeNBT();
     }
-
     @Override
     public void handleUpdateTag(BlockState state, CompoundNBT tag) {
         this.deserializeNBT(tag);
     }
 
+    //Custom Methods For Handling Progress
     public double getProgress() {
         return progress;
+    }
+    public String getFormattedProgress(double progress) {
+        return formatProgress(progress);
+    }
+    public String formatProgress(double progress) {
+        return FORMATTER.format(progress);
     }
 
 }

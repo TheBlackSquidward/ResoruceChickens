@@ -42,7 +42,7 @@ public class IncubatorCategory implements IRecipeCategory<IncubatorRecipe> {
 
     public static Collection<?> getIncubatorRecipes() {
         List<IncubatorRecipe> recipes = new ArrayList<>();
-        for(ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry().values()) {
+        for(ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry()) {
             if(chickenRegistryObject.isHasEgg()) {
                 recipes.add(new IncubatorRecipe(chickenRegistryObject.getEggObject()));
             }

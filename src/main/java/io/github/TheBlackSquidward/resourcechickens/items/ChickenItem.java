@@ -65,7 +65,7 @@ public class ChickenItem extends BaseItem {
                         finalBlockpos = blockpos.offset(direction.getNormal());
                     }
                     ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemStack.getItem());
-                    chickenRegistryObject.getChickenEntityRegisryObject().get().spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);
+                    chickenRegistryObject.getChickenEntityRegistryObject().get().spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);
                     itemStack.shrink(1);
                     return ActionResultType.CONSUME;
                 } else {

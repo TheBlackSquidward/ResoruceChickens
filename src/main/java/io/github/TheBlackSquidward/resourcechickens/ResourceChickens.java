@@ -1,9 +1,9 @@
 package io.github.TheBlackSquidward.resourcechickens;
 
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.config.Config;
-import io.github.TheBlackSquidward.resourcechickens.config.ConfigHelper;
-import io.github.TheBlackSquidward.resourcechickens.config.FileHelper;
+import io.github.TheBlackSquidward.resourcechickens.files.config.Config;
+import io.github.TheBlackSquidward.resourcechickens.files.config.ConfigHelper;
+import io.github.TheBlackSquidward.resourcechickens.files.config.FileHelper;
 import io.github.TheBlackSquidward.resourcechickens.init.*;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.compat.top.TopCompat;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry.initChickens;
+import static io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry.initializeChickenRegistry;
 
 @Mod(ResourceChickens.MODID)
 public class ResourceChickens {
@@ -45,10 +45,11 @@ public class ResourceChickens {
         ContainerInit.CONTAINERS.register(iEventBus);
         RecipeInit.RECIPE_SERIALIZER_REGISTRY.register(iEventBus);
 
+
         iEventBus.addListener(this::onInterModEnqueue);
         MinecraftForge.EVENT_BUS.register(this);
 
-        initChickens();
+        initializeChickenRegistry();
         ChickenRegistry.registerChickens();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.CommonConfig.commonConfig, "resourcechickens/common.toml");
@@ -66,4 +67,5 @@ public class ResourceChickens {
             LOGGER.info("Detected The One Probe. Initializing compat.");
         }
     }
+
 }

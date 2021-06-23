@@ -40,7 +40,7 @@ public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingR
 
     public static Collection<?> getCatchingRecipes() {
         List<ChickenCatchingRecipe> recipes = new ArrayList<>();
-        for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry().values()) {
+        for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry()) {
             recipes.add(new ChickenCatchingRecipe(chickenRegistryObject));
         }
         recipes.add(new ChickenCatchingRecipe(ItemInit.VANILLA_CHICKEN));

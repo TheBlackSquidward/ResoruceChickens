@@ -14,7 +14,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class ChickenBreederContainer extends Container {
 
-    private final ChickenBreederTE tileEntity;
+    public final ChickenBreederTE tileEntity;
     private final PlayerEntity playerEntity;
     private final IItemHandler playerInventory;
 

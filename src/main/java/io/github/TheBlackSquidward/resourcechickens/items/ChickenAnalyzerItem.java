@@ -36,13 +36,14 @@ public class ChickenAnalyzerItem extends BaseItem {
     public ActionResultType interactLivingEntity(ItemStack itemStack, PlayerEntity p, LivingEntity entity, Hand hand) {
         Vec3d pos = new Vec3d(entity.getX(), entity.getY(), entity.getZ());
         World world = p.level;
-        if(p.isCrouching()) {
-            if (entity instanceof CustomChickenEntity) {
-                CustomChickenEntity chickenEntity = (CustomChickenEntity) entity;
-                ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(chickenEntity);
-                if (!entity.isBaby()) {
-                    //TODO message the player - Fires twice
-                    p.sendMessage(new StringTextComponent(chickenRegistryObject.getForamattedName()), p.getUUID());
+        if(!world.isClientSide()) {
+            if (p.isCrouching()) {
+                if (entity instanceof CustomChickenEntity) {
+                    CustomChickenEntity chickenEntity = (CustomChickenEntity) entity;
+                    ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(chickenEntity);
+                    if (!entity.isBaby()) {
+                        //TODO message the player - Fires twice
+                        p.sendMessage(new StringTextComponent(chickenRegistryObject.getForamattedName()), p.getUUID());
                     /*
                     - Chicken Name
                     - Chicken Type
@@ -51,9 +52,9 @@ public class ChickenAnalyzerItem extends BaseItem {
                     - Gain
                     - Strength
                      */
-                } else {
-                    //TODO messgae the player
-                    p.sendMessage(new StringTextComponent("Baby " + chickenRegistryObject.getForamattedName()), p.getUUID());
+                    } else {
+                        //TODO messgae the player
+                        p.sendMessage(new StringTextComponent("Baby " + chickenRegistryObject.getForamattedName()), p.getUUID());
                     /*
                     - Baby + Chicken Name
                     - Chicken Type
@@ -63,10 +64,11 @@ public class ChickenAnalyzerItem extends BaseItem {
                     - Strength
                     - Time till Growth
                      */
-                    return ActionResultType.SUCCESS;
+                        return ActionResultType.SUCCESS;
+                    }
                 }
             }
         }
-        return ActionResultType.SUCCESS;
+        return ActionResultType.PASS;
     }
 }

@@ -1,8 +1,5 @@
 package io.github.TheBlackSquidward.resourcechickens.compat.top;
 
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.te.*;
 import mcjty.theoneprobe.api.IEntityDisplayOverride;
 import mcjty.theoneprobe.api.ITheOneProbe;
@@ -14,12 +11,9 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 
-import java.text.DecimalFormat;
 import java.util.function.Function;
 
 public class TopCompat implements Function<ITheOneProbe, Void> {
-
-    private static final DecimalFormat FORMATTER = new DecimalFormat("0.0%");
 
     public static final IFormattableTextComponent formattedName = new StringTextComponent(TextFormatting.BLUE.toString() + TextFormatting.ITALIC.toString() + "Resource Chickens");
 
@@ -35,10 +29,10 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
                         .item(new ItemStack(blockState.getBlock().asItem()))
                         .vertical()
                         .itemLabel(new ItemStack(blockState.getBlock().asItem()))
-                        .text(new StringTextComponent(new TranslationTextComponent("gui.resourcechickens.top.chicken_breeder.progress").getString() + getFormattedProgress(chickenBreederTE.getProgress())))
+                        .text(new StringTextComponent(new TranslationTextComponent("gui.resourcechickens.top.chicken_breeder.progress").getString() + chickenBreederTE.getFormattedProgress(chickenBreederTE.getProgress())))
                         .text(formattedName);
                 if(mode.equals(ProbeMode.EXTENDED)) {
-
+                    
                 }
                 return true;
             }
@@ -53,7 +47,7 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
                         .item(new ItemStack(blockState.getBlock().asItem()))
                         .vertical()
                         .itemLabel(new ItemStack(blockState.getBlock().asItem()))
-                        .text(new StringTextComponent(new TranslationTextComponent("gui.resourcechickens.top.roost.progress").getString() + getFormattedProgress(roostTE.getProgress())))
+                        .text(new StringTextComponent(new TranslationTextComponent("gui.resourcechickens.top.roost.progress").getString() + roostTE.getFormattedProgress(roostTE.getProgress())))
                         .text(formattedName);
                 if(mode.equals(ProbeMode.EXTENDED)) {
 
@@ -79,13 +73,5 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
         });
         iTheOneProbe.registerEntityDisplayOverride(CHICKEN_ENTITY);
         return null;
-    }
-
-    public String getFormattedProgress(double progress) {
-        return formatProgress(progress);
-    }
-
-    public String formatProgress(double progress) {
-        return FORMATTER.format(progress);
     }
 }

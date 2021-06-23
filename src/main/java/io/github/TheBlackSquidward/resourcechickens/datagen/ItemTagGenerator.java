@@ -16,7 +16,7 @@ public class ItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags() {
-        for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry().values()) {
+        for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry()) {
             tag(CustomTags.Items.RESOUCE_CHICKEN).add(chickenRegistryObject.getChickenItemRegistryObject().get());
             if(chickenRegistryObject.isHasFeather()) {
                 tag(CustomTags.Items.RESOURCE_FEATHER).add(chickenRegistryObject.getChickenFeatherItem());

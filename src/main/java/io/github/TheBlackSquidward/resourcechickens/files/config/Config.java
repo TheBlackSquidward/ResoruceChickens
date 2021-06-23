@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.config;
+package io.github.TheBlackSquidward.resourcechickens.files.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.*;

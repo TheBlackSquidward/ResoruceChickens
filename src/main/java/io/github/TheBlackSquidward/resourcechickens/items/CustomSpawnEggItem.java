@@ -1,19 +1,16 @@
 package io.github.TheBlackSquidward.resourcechickens.items;
 
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenDrop;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -35,21 +32,16 @@ public class CustomSpawnEggItem extends BaseItem {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenSpawnEggItem(this);
         StringBuilder stringBuilder = new StringBuilder(100);
-        if(chickenRegistryObject.getFinalOutput().size() > 1) {
-            //TODO more than one drop
-        }else{
-            for(ChickenDrop chickenDrop : chickenRegistryObject.getFinalOutput()) {
-                stringBuilder.append(chickenDrop.getItem().toString());
-            }
-        }
         String itemOutput = WordUtils.capitalize(stringBuilder.toString().replace("_", " "));
         tooltip.add(new StringTextComponent(TextFormatting.GRAY + "Lay Item: " + TextFormatting.WHITE + itemOutput));
         tooltip.add(new StringTextComponent(TextFormatting.GRAY + "Chicken Type: " + chickenRegistryObject.getChickenType().getName()));
+        /*
         if(chickenRegistryObject.isBreedable()) {
             tooltip.add(new StringTextComponent(TextFormatting.YELLOW + "Bred from" + TextFormatting.WHITE + ": " + TextFormatting.GOLD + chickenRegistryObject.getParent1().getForamattedName() + TextFormatting.WHITE + " & " + TextFormatting.GOLD + chickenRegistryObject.getParent2().getForamattedName()));
         }else{
             tooltip.add(new StringTextComponent(TextFormatting.RED + "Cannot be bred."));
         }
+         */
     }
 
     @Override
@@ -68,7 +60,7 @@ public class CustomSpawnEggItem extends BaseItem {
                     finalBlockpos = blockpos.offset(direction.getNormal());
                 }
                 ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenSpawnEggItem(itemStack.getItem());
-                chickenRegistryObject.getChickenEntityRegisryObject().get().spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);
+                chickenRegistryObject.getChickenEntityRegistryObject().get().spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);
                 itemStack.shrink(1);
                 return ActionResultType.CONSUME;
             } else {

@@ -21,34 +21,7 @@ public class RecipeGenerator extends RecipeProviderBase{
 
     @Override
     protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
-        registerRoostRecipes(consumer);
-        registerChickenBreedingRecipes(consumer);
-    }
 
-    private void registerRoostRecipes(Consumer<IFinishedRecipe> consumer) {
-        for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry().values()) {
-            RoostRecipeBuidler builder = RoostRecipeBuidler.newRoostRecipe()
-                    .setChicken(Ingredient.of(chickenRegistryObject.getChickenItemRegistryObject().get()))
-                    .setTotalRoostTime(300);
-            for(ChickenDrop chickenDrop : chickenRegistryObject.getChickenDrops()) {
-                builder.addOutput(new ChanceItemStack(new ItemStack(chickenDrop.getItem())));
-            }
-            builder.build(consumer, getRoostPath(chickenRegistryObject.getEntityName()));
-        }
-    }
-
-    private void registerChickenBreedingRecipes(Consumer<IFinishedRecipe> consumer) {
-        for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry().values()) {
-            if(chickenRegistryObject.isBreedable()) {
-                ChickenBreedingBuilder.newChickenBreedingRecipe()
-                        .addInput(Ingredient.of(chickenRegistryObject.getParent1().getChickenItemRegistryObject().get()))
-                        .addInput(Ingredient.of(chickenRegistryObject.getParent2().getChickenItemRegistryObject().get()))
-                        .setTotalBreedTime(2400)
-                        .setOutput(chickenRegistryObject.buildChickenStack())
-                        .build(consumer, getChickenBreedingPath(chickenRegistryObject.getEntityName()));
-
-            }
-        }
     }
 
     private ResourceLocation getRoostPath(String fileName) {

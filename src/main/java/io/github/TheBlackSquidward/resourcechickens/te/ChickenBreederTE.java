@@ -2,9 +2,9 @@ package io.github.TheBlackSquidward.resourcechickens.te;
 
 import io.github.TheBlackSquidward.resourcechickens.AbstractTileEntity;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
+import io.github.TheBlackSquidward.resourcechickens.containers.ChickenBreederContainer;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
@@ -13,14 +13,19 @@ import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPack
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> {
@@ -91,25 +96,7 @@ public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> 
 
 
     private void spawnChickenIfNeeded() {
-        if (hasSeeds()) {
-            if (hasChickens()) {
-                ItemStack itemSlot1 = itemStackHandler.getStackInSlot(1);
-                ChickenRegistryObject parent1 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot1.getItem());
-                ItemStack itemSlot2 = itemStackHandler.getStackInSlot(2);
-                ChickenRegistryObject parent2 = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemSlot2.getItem());
-                if (sameChicken(itemSlot1, itemSlot2)) {
-                    ItemStack result = crossBreed(itemSlot1, itemSlot2, parent1, parent2);
-                    addResult(result);
-                }
-                if (ChickenRegistry.canBeBred(parent1, parent2)) {
-                    ChickenRegistryObject newChicken = ChickenRegistry.getChild(parent1, parent2);
-                    //TODO add a chance
-                    //TODO add just inherited stats
-                    ItemStack result = mixChickens(itemSlot1, itemSlot2, parent1, parent2, newChicken);
-                    addResult(result);
-                }
-            }
-        }
+        //TODO
     }
 
     private boolean sameChicken(ItemStack chicken1, ItemStack chicken2) {
@@ -302,40 +289,6 @@ public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> 
         return itemStackHandler.getStackInSlot(2);
     }
 
-    @Override
-    public int getContainerSize() {
-        return 0;
-    }
-
-    @Override
-    public ItemStack getItem(int p_70301_1_) {
-        return null;
-    }
-
-    @Override
-    public ItemStack removeItem(int p_70298_1_, int p_70298_2_) {
-        return null;
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int p_70304_1_) {
-        return null;
-    }
-
-    @Override
-    public void setItem(int p_70299_1_, ItemStack p_70299_2_) {
-
-    }
-
-    @Override
-    public boolean stillValid(PlayerEntity p_70300_1_) {
-        return false;
-    }
-
-    @Override
-    public void clearContent() {
-
-    }
 }
 
 

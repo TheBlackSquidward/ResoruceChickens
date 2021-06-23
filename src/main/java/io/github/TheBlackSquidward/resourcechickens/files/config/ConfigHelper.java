@@ -1,10 +1,9 @@
-package io.github.TheBlackSquidward.resourcechickens.config;
+package io.github.TheBlackSquidward.resourcechickens.files.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.nio.file.Path;
 

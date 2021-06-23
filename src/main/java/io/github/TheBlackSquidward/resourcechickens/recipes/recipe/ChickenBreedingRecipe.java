@@ -3,6 +3,7 @@ package io.github.TheBlackSquidward.resourcechickens.recipes.recipe;
 import io.github.TheBlackSquidward.resourcechickens.api.ChanceItemStack;
 import io.github.TheBlackSquidward.resourcechickens.init.RecipeInit;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -35,19 +36,18 @@ public class ChickenBreedingRecipe implements IRecipe<IInventory> {
     }
 
     @Override
-    public boolean canCraftInDimensions(int p_194133_1_, int p_194133_2_) {
-        return true;
-    }
-
-    @Override
-    public boolean matches(IInventory inv, World world) {
-        //TODO
+    public boolean matches(IInventory p_77569_1_, World p_77569_2_) {
         return false;
     }
 
     @Override
     public ItemStack assemble(IInventory p_77572_1_) {
         return ItemStack.EMPTY;
+    }
+
+    @Override
+    public boolean canCraftInDimensions(int p_194133_1_, int p_194133_2_) {
+        return true;
     }
 
     @Override
