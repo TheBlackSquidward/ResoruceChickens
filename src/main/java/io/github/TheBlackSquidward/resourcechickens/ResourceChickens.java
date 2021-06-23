@@ -46,7 +46,7 @@ public class ResourceChickens {
         ModContainers.CONTAINERS.register(iEventBus);
         ModRecipes.RECIPE_SERIALIZER.register(iEventBus);
 
-        iEventBus.addListener(this::onCommandRegister);
+        //iEventBus.addListener(this::onCommandRegister);
         iEventBus.addListener(this::onInterModEnqueue);
         MinecraftForge.EVENT_BUS.register(this);
 

@@ -20,7 +20,8 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<ElectricIncubatorTE>> ELECTRIC_INCUBATOR_TE = TILE_ENTITY.register("electric_incubator", () -> TileEntityType.Builder.of(ElectricIncubatorTE::new, ModBlocks.ELECTRIC_INCUBATOR.get()).build(null));
     public static final RegistryObject<TileEntityType<IncubatorTE>> INCUBATOR_TE = TILE_ENTITY.register("incubator", () -> TileEntityType.Builder.of(IncubatorTE::new, ModBlocks.INCUBATOR.get()).build(null));
 
-    public static void registerTileEntityRenders() {
+    public static void registerTileEntityRenderers() {
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.ROOST_TE.get(), RoostTileEntityRenderer::new);
     }
+
 }
