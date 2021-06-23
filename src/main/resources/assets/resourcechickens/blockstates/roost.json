@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "resourcechickens:block/roost"
+    },
+    "facing=east": {
+      "model": "resourcechickens:block/roost", "y": 90
+    },
+    "facing=south": {
+      "model": "resourcechickens:block/roost", "y": 180
+    },
+    "facing=west": {
+      "model": "resourcechickens:block/roost", "y": 270
+    }
+  }
+}

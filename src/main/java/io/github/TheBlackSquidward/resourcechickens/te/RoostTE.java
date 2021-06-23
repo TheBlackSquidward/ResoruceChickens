@@ -2,8 +2,10 @@ package io.github.TheBlackSquidward.resourcechickens.te;
 
 import io.github.TheBlackSquidward.resourcechickens.AbstractTileEntity;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenDrop;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
+import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
 import io.github.TheBlackSquidward.resourcechickens.init.RecipeInit;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
@@ -11,8 +13,10 @@ import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
 import io.netty.buffer.Unpooled;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
@@ -67,7 +71,8 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
         if (this.level == null || input.isEmpty()) {
             return null;
         }
-        return level.getRecipeManager().getRecipeFor(RecipeInit.ROOST_RECIPE_TYPE, this, this.level).orElse(null);
+        return level.getRecipeManager().getRecipeFor(RecipeInit.ROOST_RECIPE_TYPE,
+                new Inventory(itemStackHandler.getStackInSlot(0)), this.level).orElse(null);
     }
 
     private void updateProgress() {
@@ -84,16 +89,6 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
 
     public void addResult(ItemStack result) {
         //TODO rewrite
-    }
-
-    private int getDropAmount(ChickenDrop chickenDrop, int gain) {
-        int preDropAmount = (gain >= 10) ? 3 : ((gain >= 5) ? 2 : 1);
-        if (preDropAmount > chickenDrop.getMaxAmount()) {
-            chickenDrop.getMaxAmount();
-        } else {
-            return preDropAmount;
-        }
-        return (gain >= 10) ? 3 : ((gain >= 5) ? 2 : 1);
     }
 
     private int getGain() {
@@ -124,47 +119,17 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                if (slot == 0) {
-                    return stack.getItem() instanceof ChickenItem;
+                if(slot == 0) {
+                    if (stack.getItem() == ItemInit.VANILLA_CHICKEN.get()) {
+                        return true;
+                    }
+                    if (stack.getItem() instanceof ChickenItem) {
+                        return true;
+                    }
                 }
                 return false;
             }
         };
-    }
-
-    @Override
-    public int getContainerSize() {
-        return 6;
-    }
-
-    @Override
-    public ItemStack getItem(int itemSlot) {
-        return itemStackHandler.getStackInSlot(itemSlot);
-    }
-
-    @Override
-    public ItemStack removeItem(int p_70298_1_, int p_70298_2_) {
-        return null;
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int p_70304_1_) {
-        return null;
-    }
-
-    @Override
-    public void setItem(int itemSlot, ItemStack itemStack) {
-        itemStackHandler.setStackInSlot(itemSlot, itemStack);
-    }
-
-    @Override
-    public boolean stillValid(PlayerEntity p_70300_1_) {
-        return true;
-    }
-
-    @Override
-    public void clearContent() {
-
     }
 
     protected CompoundNBT saveToNBT(CompoundNBT tag) {
@@ -183,8 +148,22 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
         this.progress = packetBuffer.readDouble();
     }
     public void sendGUINetworkPacket(PlayerEntity playerEntity) {
-        PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
-        packetBuffer.writeDouble(getProgress());
-        ResourceChickensPacketHandler.sendToPlayer(new GUISyncMessage(getBlockPos(), packetBuffer), (ServerPlayerEntity) playerEntity);
+        if(!level.isClientSide()) {
+            PacketBuffer packetBuffer = new PacketBuffer(Unpooled.buffer());
+            packetBuffer.writeDouble(getProgress());
+            ResourceChickensPacketHandler.sendToPlayer(new GUISyncMessage(getBlockPos(), packetBuffer), (ServerPlayerEntity) playerEntity);
+        }
+    }
+
+    public ChickenRegistryObject getRoostingChicken() {
+        return ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemStackHandler.getStackInSlot(0).getItem());
+    }
+
+    public boolean hasChicken() {
+        return !itemStackHandler.getStackInSlot(0).isEmpty();
+    }
+
+    public Entity getChickenEntity() {
+        return getRoostingChicken().getChickenEntityRegistryObject().get().create(getWorld());
     }
 }

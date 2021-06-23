@@ -1,9 +1,11 @@
 package io.github.TheBlackSquidward.resourcechickens.init;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
+import io.github.TheBlackSquidward.resourcechickens.client.render.RoostTileEntityRenderer;
 import io.github.TheBlackSquidward.resourcechickens.te.*;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -18,4 +20,7 @@ public class TileEntityInit {
     public static final RegistryObject<TileEntityType<ElectricIncubatorTE>> ELECTRIC_INCUBATOR_TE = TILE_ENTITY.register("electric_incubator", () -> TileEntityType.Builder.of(ElectricIncubatorTE::new, BlockInit.ELECTRIC_INCUBATOR.get()).build(null));
     public static final RegistryObject<TileEntityType<IncubatorTE>> INCUBATOR_TE = TILE_ENTITY.register("incubator", () -> TileEntityType.Builder.of(IncubatorTE::new, BlockInit.INCUBATOR.get()).build(null));
 
+    public static void registerTileEntityRenders() {
+        ClientRegistry.bindTileEntityRenderer(TileEntityInit.ROOST_TE.get(), RoostTileEntityRenderer::new);
+    }
 }

@@ -5,6 +5,7 @@ import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.client.render.CustomChickenRenderer;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
 import io.github.TheBlackSquidward.resourcechickens.screens.*;
 import io.github.TheBlackSquidward.resourcechickens.init.ContainerInit;
 import net.minecraft.client.gui.ScreenManager;
@@ -20,19 +21,21 @@ public class ClientEventBusSubscriber {
 
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent e) {
-        ChickenRegistry.getChickenRegistry().forEach((s, customChicken) -> RenderingRegistry.registerEntityRenderingHandler(customChicken.getChickenEntityRegisryObject().get(), CustomChickenRenderer::new));
+        ChickenRegistry.getChickenRegistry().forEach((customChicken) -> RenderingRegistry.registerEntityRenderingHandler(customChicken.getChickenEntityRegistryObject().get(), CustomChickenRenderer::new));
         ScreenManager.register(ContainerInit.CHICKEN_BREEDER_CONTAINER.get(), ChickenBreederScreen::new);
         ScreenManager.register(ContainerInit.ELECTRIC_CHICKEN_BREEDER_CONTAINER.get(), ElectricChickenBreederScreen::new);
         ScreenManager.register(ContainerInit.ROOST_CONTAINER.get(), RoostScreen::new);
         ScreenManager.register(ContainerInit.ELECTRIC_ROOST_CONTAINER.get(), ElectricRoostScreen::new);
         ScreenManager.register(ContainerInit.INCUBATOR_CONTAINER.get(), IncubatorScreen::new);
         ScreenManager.register(ContainerInit.ELECTRIC_INCUBATOR_CONTAINER.get(), ElectricIncubatorScreen::new);
+
+        TileEntityInit.registerTileEntityRenders();
     }
 
     @SubscribeEvent
     public static void onAttributeCreation(EntityAttributeCreationEvent e) {
-        for(ChickenRegistryObject chicken : ChickenRegistry.getChickenRegistry().values()) {
-            e.put(chicken.getChickenEntityRegisryObject().get(), CustomChickenEntity.setCustomAttributes().build());
+        for(ChickenRegistryObject chicken : ChickenRegistry.getChickenRegistry()) {
+            e.put(chicken.getChickenEntityRegistryObject().get(), CustomChickenEntity.setCustomAttributes().build());
         }
     }
 
