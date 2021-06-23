@@ -8,20 +8,20 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class ItemInit {
+public class ModItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ResourceChickens.MODID);
 
     //Blocks
-    public static final RegistryObject<BlockItem> ELECTRIC_ROOST = ITEMS.register("electric_roost", () -> new BaseBlockItem(BlockInit.ELECTRIC_ROOST.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> ROOST = ITEMS.register("roost", () -> new BaseBlockItem(BlockInit.ROOST.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> ELECTRIC_INCUBATOR = ITEMS.register("electric_incubator", () -> new BaseBlockItem(BlockInit.ELECTRIC_INCUBATOR.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> INCUBATOR = ITEMS.register("incubator", () -> new BaseBlockItem(BlockInit.INCUBATOR.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> CHICKEN_BREEDER = ITEMS.register("chicken_breeder", () -> new BaseBlockItem(BlockInit.CHICKEN_BREEDER.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> ELECTRIC_CHICKEN_BREEDER = ITEMS.register("electric_chicken_breeder", () -> new BaseBlockItem(BlockInit.ELECTRIC_CHICKEN_BREEDER.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> ROOST_CONTROLLER = ITEMS.register("roost_controller", () -> new BaseBlockItem(BlockInit.ROOST_CONTROLLER.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> ROOST_CASING = ITEMS.register("roost_casing", () -> new BaseBlockItem(BlockInit.ROOST_CASING.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> HENHOUSE = ITEMS.register("henhouse", () -> new BaseBlockItem(BlockInit.HENHOUSE.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> ELECTRIC_ROOST = ITEMS.register("electric_roost", () -> new BaseBlockItem(ModBlocks.ELECTRIC_ROOST.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> ROOST = ITEMS.register("roost", () -> new BaseBlockItem(ModBlocks.ROOST.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> ELECTRIC_INCUBATOR = ITEMS.register("electric_incubator", () -> new BaseBlockItem(ModBlocks.ELECTRIC_INCUBATOR.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> INCUBATOR = ITEMS.register("incubator", () -> new BaseBlockItem(ModBlocks.INCUBATOR.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> CHICKEN_BREEDER = ITEMS.register("chicken_breeder", () -> new BaseBlockItem(ModBlocks.CHICKEN_BREEDER.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> ELECTRIC_CHICKEN_BREEDER = ITEMS.register("electric_chicken_breeder", () -> new BaseBlockItem(ModBlocks.ELECTRIC_CHICKEN_BREEDER.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> ROOST_CONTROLLER = ITEMS.register("roost_controller", () -> new BaseBlockItem(ModBlocks.ROOST_CONTROLLER.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> ROOST_CASING = ITEMS.register("roost_casing", () -> new BaseBlockItem(ModBlocks.ROOST_CASING.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> HENHOUSE = ITEMS.register("henhouse", () -> new BaseBlockItem(ModBlocks.HENHOUSE.get(), new Item.Properties()));
 
     //Misc
     public static final RegistryObject<ChickenStickItem> CHICKEN_STICK = ITEMS.register("chicken_stick", ChickenStickItem::new);

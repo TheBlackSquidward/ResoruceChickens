@@ -1,7 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.containers;
 
 import io.github.TheBlackSquidward.resourcechickens.te.ChickenBreederTE;
-import io.github.TheBlackSquidward.resourcechickens.init.ContainerInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModContainers;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -19,7 +19,7 @@ public class ChickenBreederContainer extends Container {
     private final IItemHandler playerInventory;
 
     public ChickenBreederContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
-        super(ContainerInit.CHICKEN_BREEDER_CONTAINER.get(), windowId);
+        super(ModContainers.CHICKEN_BREEDER_CONTAINER.get(), windowId);
         tileEntity = (ChickenBreederTE) world.getBlockEntity(pos);
         this.playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);

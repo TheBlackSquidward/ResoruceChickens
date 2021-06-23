@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 public class TopCompat implements Function<ITheOneProbe, Void> {
 
-    public static final IFormattableTextComponent formattedName = new StringTextComponent(TextFormatting.BLUE.toString() + TextFormatting.ITALIC.toString() + "Resource Chickens");
+    public static final IFormattableTextComponent formattedName = new StringTextComponent(TextFormatting.BLUE.toString() + TextFormatting.ITALIC + "Resource Chickens");
 
     private static final IEntityDisplayOverride CHICKEN_ENTITY = new ChickenEntityDisplayOverride();
 

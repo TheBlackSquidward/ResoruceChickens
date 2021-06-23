@@ -3,13 +3,12 @@ package io.github.TheBlackSquidward.resourcechickens.items;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
@@ -55,7 +54,7 @@ public class ChickenItem extends BaseItem {
             BlockPos finalBlockpos;
             World world = context.getLevel();
             if (!world.isClientSide()) {
-                if (itemStack.getItem() != ItemInit.VANILLA_CHICKEN.get()) {
+                if (itemStack.getItem() != ModItems.VANILLA_CHICKEN.get()) {
                     BlockPos blockpos = context.getClickedPos();
                     Direction direction = context.getClickedFace();
                     BlockState blockstate = world.getBlockState(blockpos);

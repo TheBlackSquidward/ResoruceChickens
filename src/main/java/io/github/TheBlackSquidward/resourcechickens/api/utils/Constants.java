@@ -2,11 +2,15 @@ package io.github.TheBlackSquidward.resourcechickens.api.utils;
 
 public class Constants {
 
-    public class NBT {
+    public static class NBT {
         public static final String INVENTORY = "inventory";
+
+        public static final String GROWTH = "growth";
+        public static final String GAIN = "gain";
+        public static final String STRENGTH = "strength";
     }
 
-    public class JSON {
+    public static class JSON {
         public static final String INPUT = "input";
         public static final String OUTPUT = "output";
         public static final String ITEM = "item";

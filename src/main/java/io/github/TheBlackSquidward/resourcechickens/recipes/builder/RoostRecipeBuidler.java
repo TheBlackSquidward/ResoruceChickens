@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import io.github.TheBlackSquidward.resourcechickens.api.ChanceItemStack;
 import io.github.TheBlackSquidward.resourcechickens.api.ChanceItemStackList;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
-import io.github.TheBlackSquidward.resourcechickens.init.RecipeInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModRecipes;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
@@ -69,7 +69,7 @@ public class RoostRecipeBuidler {
 
         @Override
         public IRecipeSerializer<?> getType() {
-            return RecipeInit.ROOST_SERIALIZER.get();
+            return ModRecipes.ROOST_SERIALIZER.get();
         }
 
         @Override

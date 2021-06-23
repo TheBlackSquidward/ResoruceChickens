@@ -1,5 +1,5 @@
 
-package io.github.TheBlackSquidward.resourcechickens;
+package io.github.TheBlackSquidward.resourcechickens.te;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.item.crafting.IRecipe;
@@ -28,6 +28,7 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
     }
 
     private static final DecimalFormat FORMATTER = new DecimalFormat("0.0%");
+
     public ItemStackHandler itemStackHandler = createItemStackHandler();
     public LazyOptional<IItemHandler> itemHandlerLazyOptional = LazyOptional.of(() -> itemStackHandler);
 

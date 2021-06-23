@@ -9,6 +9,7 @@ import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPack
 import io.github.TheBlackSquidward.resourcechickens.compat.top.TopCompat;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
@@ -38,14 +39,14 @@ public class ResourceChickens {
         IEventBus iEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         iEventBus.addListener(this::setup);
 
-        ItemInit.ITEMS.register(iEventBus);
-        EntityInit.ENTITY_TYPES.register(iEventBus);
-        BlockInit.BLOCKS.register(iEventBus);
-        TileEntityInit.TILE_ENTITY.register(iEventBus);
-        ContainerInit.CONTAINERS.register(iEventBus);
-        RecipeInit.RECIPE_SERIALIZER_REGISTRY.register(iEventBus);
+        ModItems.ITEMS.register(iEventBus);
+        ModEntities.ENTITY_TYPES.register(iEventBus);
+        ModBlocks.BLOCKS.register(iEventBus);
+        ModTileEntities.TILE_ENTITY.register(iEventBus);
+        ModContainers.CONTAINERS.register(iEventBus);
+        ModRecipes.RECIPE_SERIALIZER.register(iEventBus);
 
-
+        iEventBus.addListener(this::onCommandRegister);
         iEventBus.addListener(this::onInterModEnqueue);
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -56,12 +57,15 @@ public class ResourceChickens {
         ConfigHelper.loadConfig(Config.CommonConfig.commonConfig, FMLPaths.CONFIGDIR.get().resolve("resourcechickens/common.toml"));
     }
 
+    private void onCommandRegister(RegisterCommandsEvent e) {
+        ModCommands.registerCommands(e.getDispatcher(), e.getEnvironment());
+    }
 
     private void setup(final FMLCommonSetupEvent e) {
         ResourceChickensPacketHandler.init();
     }
 
-    public void onInterModEnqueue(InterModEnqueueEvent e) {
+    private void onInterModEnqueue(InterModEnqueueEvent e) {
         if(ModList.get().isLoaded("theoneprobe")) {
             InterModComms.sendTo("theoneprobe", "getTheOneProbe", TopCompat::new);
             LOGGER.info("Detected The One Probe. Initializing compat.");

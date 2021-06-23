@@ -1,31 +1,24 @@
 package io.github.TheBlackSquidward.resourcechickens.te;
 
-import io.github.TheBlackSquidward.resourcechickens.AbstractTileEntity;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
-import io.github.TheBlackSquidward.resourcechickens.containers.ChickenBreederContainer;
+import io.github.TheBlackSquidward.resourcechickens.init.ModTileEntities;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
-import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
-import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> {
@@ -36,7 +29,7 @@ public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> 
     private boolean isBreeding;
 
     public ChickenBreederTE() {
-        super(TileEntityInit.CHICKEN_BREEDER_TE.get());
+        super(ModTileEntities.CHICKEN_BREEDER_TE.get());
     }
 
     @Override
@@ -104,8 +97,8 @@ public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> 
     }
 
     private boolean hasChickens() {
-        if (itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(1).getItem() != ItemInit.VANILLA_CHICKEN.get()) {
-            return itemStackHandler.getStackInSlot(2).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(2).getItem() != ItemInit.VANILLA_CHICKEN.get();
+        if (itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(1).getItem() != ModItems.VANILLA_CHICKEN.get()) {
+            return itemStackHandler.getStackInSlot(2).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(2).getItem() != ModItems.VANILLA_CHICKEN.get();
         } else {
             return false;
         }
@@ -207,9 +200,7 @@ public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> 
         int newStatValue = (parent1Stat * parent1Strength + parent2Stat * parent2Strength) / (parent1Strength + parent2Strength) + mutation;
         if (newStatValue <= 1)
             return 1;
-        if (newStatValue >= 10)
-            return 10;
-        return newStatValue;
+        return Math.min(newStatValue, 10);
     }
 
     public ItemStackHandler createItemStackHandler() {
@@ -227,7 +218,7 @@ public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> 
                 }
                 if (slot == 1 || slot == 2) {
                     if (stack.getItem() instanceof ChickenItem) {
-                        return stack.getItem() != ItemInit.VANILLA_CHICKEN.get();
+                        return stack.getItem() != ModItems.VANILLA_CHICKEN.get();
                     }
                 }
                 return false;

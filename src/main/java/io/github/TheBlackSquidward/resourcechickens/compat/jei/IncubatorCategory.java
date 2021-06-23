@@ -4,7 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -34,7 +34,7 @@ public class IncubatorCategory implements IRecipeCategory<IncubatorRecipe> {
     public IncubatorCategory(IGuiHelper iGuiHelper) {
         IDrawableStatic arrowDrawable = iGuiHelper.createDrawable(GUI, 73, 0, 26, 16);
         this.arrow = iGuiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
-        this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ItemInit.INCUBATOR.get()));
+        this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ModItems.INCUBATOR.get()));
         this.background = iGuiHelper.createDrawable(GUI, 0, 0, 72, 18);
         this.localizedName = I18n.get("gui.resourcechickens.jei.category.incubator");
 

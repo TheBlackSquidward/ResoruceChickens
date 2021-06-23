@@ -1,24 +1,17 @@
 package io.github.TheBlackSquidward.resourcechickens.containers;
 
-import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.init.ContainerInit;
-import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
-import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
+import io.github.TheBlackSquidward.resourcechickens.init.ModContainers;
 import io.github.TheBlackSquidward.resourcechickens.te.RoostTE;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
-
-import java.util.List;
 
 public class RoostContainer extends Container {
 
@@ -28,7 +21,7 @@ public class RoostContainer extends Container {
     private final PlayerEntity playerEntity;
 
     public RoostContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
-        super(ContainerInit.ROOST_CONTAINER.get(), windowId);
+        super(ModContainers.ROOST_CONTAINER.get(), windowId);
         tileEntity = (RoostTE) world.getBlockEntity(pos);
         this.playerInventory = new InvWrapper(playerInventory);
         this.playerEntity = player;

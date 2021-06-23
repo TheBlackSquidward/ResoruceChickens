@@ -1,14 +1,13 @@
 package io.github.TheBlackSquidward.resourcechickens.te;
 
-import io.github.TheBlackSquidward.resourcechickens.AbstractTileEntity;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
-import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
-import io.github.TheBlackSquidward.resourcechickens.init.RecipeInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
+import io.github.TheBlackSquidward.resourcechickens.init.ModRecipes;
+import io.github.TheBlackSquidward.resourcechickens.init.ModTileEntities;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
-import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
 import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
@@ -30,7 +29,7 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
     private boolean isRoosting;
 
     public RoostTE() {
-        super(TileEntityInit.ROOST_TE.get());
+        super(ModTileEntities.ROOST_TE.get());
     }
 
     @Override
@@ -49,7 +48,7 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
                     }
                 } else {
                     this.isRoosting = true;
-                    this.roostTime = (double) recipe.getTotalRoostTime();
+                    this.roostTime = recipe.getTotalRoostTime();
                 }
             } else {
                 if (isRoosting) {
@@ -71,7 +70,7 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
         if (this.level == null || input.isEmpty()) {
             return null;
         }
-        return level.getRecipeManager().getRecipeFor(RecipeInit.ROOST_RECIPE_TYPE,
+        return level.getRecipeManager().getRecipeFor(ModRecipes.ROOST_RECIPE_TYPE,
                 new Inventory(itemStackHandler.getStackInSlot(0)), this.level).orElse(null);
     }
 
@@ -120,12 +119,10 @@ public class RoostTE extends AbstractTileEntity<RoostRecipe> {
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 if(slot == 0) {
-                    if (stack.getItem() == ItemInit.VANILLA_CHICKEN.get()) {
+                    if (stack.getItem() == ModItems.VANILLA_CHICKEN.get()) {
                         return true;
                     }
-                    if (stack.getItem() instanceof ChickenItem) {
-                        return true;
-                    }
+                    return stack.getItem() instanceof ChickenItem;
                 }
                 return false;
             }

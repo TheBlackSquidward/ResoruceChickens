@@ -6,7 +6,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class EntityInit {
+public class ModEntities {
 
     public static DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, ResourceChickens.MODID);
 

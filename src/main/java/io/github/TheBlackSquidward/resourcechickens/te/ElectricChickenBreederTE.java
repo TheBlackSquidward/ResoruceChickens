@@ -1,6 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.te;
 
-import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModTileEntities;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -21,7 +21,7 @@ public class ElectricChickenBreederTE extends TileEntity implements ITickableTil
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
     public ElectricChickenBreederTE() {
-        super(TileEntityInit.ELECTRIC_CHICKEN_BREEDER_TE.get());
+        super(ModTileEntities.ELECTRIC_CHICKEN_BREEDER_TE.get());
     }
 
     @Override

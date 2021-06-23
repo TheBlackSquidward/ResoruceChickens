@@ -5,9 +5,9 @@ import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.client.render.CustomChickenRenderer;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
-import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModTileEntities;
 import io.github.TheBlackSquidward.resourcechickens.screens.*;
-import io.github.TheBlackSquidward.resourcechickens.init.ContainerInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModContainers;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -22,14 +22,13 @@ public class ClientEventBusSubscriber {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent e) {
         ChickenRegistry.getChickenRegistry().forEach((customChicken) -> RenderingRegistry.registerEntityRenderingHandler(customChicken.getChickenEntityRegistryObject().get(), CustomChickenRenderer::new));
-        ScreenManager.register(ContainerInit.CHICKEN_BREEDER_CONTAINER.get(), ChickenBreederScreen::new);
-        ScreenManager.register(ContainerInit.ELECTRIC_CHICKEN_BREEDER_CONTAINER.get(), ElectricChickenBreederScreen::new);
-        ScreenManager.register(ContainerInit.ROOST_CONTAINER.get(), RoostScreen::new);
-        ScreenManager.register(ContainerInit.ELECTRIC_ROOST_CONTAINER.get(), ElectricRoostScreen::new);
-        ScreenManager.register(ContainerInit.INCUBATOR_CONTAINER.get(), IncubatorScreen::new);
-        ScreenManager.register(ContainerInit.ELECTRIC_INCUBATOR_CONTAINER.get(), ElectricIncubatorScreen::new);
-
-        TileEntityInit.registerTileEntityRenders();
+        ScreenManager.register(ModContainers.CHICKEN_BREEDER_CONTAINER.get(), ChickenBreederScreen::new);
+        ScreenManager.register(ModContainers.ELECTRIC_CHICKEN_BREEDER_CONTAINER.get(), ElectricChickenBreederScreen::new);
+        ScreenManager.register(ModContainers.ROOST_CONTAINER.get(), RoostScreen::new);
+        ScreenManager.register(ModContainers.ELECTRIC_ROOST_CONTAINER.get(), ElectricRoostScreen::new);
+        ScreenManager.register(ModContainers.INCUBATOR_CONTAINER.get(), IncubatorScreen::new);
+        ScreenManager.register(ModContainers.ELECTRIC_INCUBATOR_CONTAINER.get(), ElectricIncubatorScreen::new);
+        ModTileEntities.registerTileEntityRenders();
     }
 
     @SubscribeEvent

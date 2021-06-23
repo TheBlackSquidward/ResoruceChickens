@@ -2,8 +2,8 @@ package io.github.TheBlackSquidward.resourcechickens.api;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
-import io.github.TheBlackSquidward.resourcechickens.init.EntityInit;
-import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModEntities;
+import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.items.CustomSpawnEggItem;
 import io.github.TheBlackSquidward.resourcechickens.items.FeatherItem;
@@ -181,14 +181,14 @@ public class ChickenRegistry {
     }
 
     public static void registerChicken(ChickenRegistryObject chicken) {
-        RegistryObject<EntityType<CustomChickenEntity>> customChickenEntity = EntityInit.ENTITY_TYPES.register(chicken.getEntityName() + "",
+        RegistryObject<EntityType<CustomChickenEntity>> customChickenEntity = ModEntities.ENTITY_TYPES.register(chicken.getEntityName() + "",
                 () -> EntityType.Builder.of(CustomChickenEntity::new, EntityClassification.CREATURE)
                         .sized(1.0f, 1.0f)
                         .build(new ResourceLocation(ResourceChickens.MODID, chicken.getEntityName()).toString()));
-        RegistryObject<Item> customChickenItem = ItemInit.ITEMS.register(chicken.getEntityName() + "_item", () -> new ChickenItem(new Item.Properties().stacksTo(16)));
-        RegistryObject<Item> customChickenSpawnEgg = ItemInit.ITEMS.register(chicken.getEntityName() + "_spawn_egg", () -> new CustomSpawnEggItem(new Item.Properties()));
+        RegistryObject<Item> customChickenItem = ModItems.ITEMS.register(chicken.getEntityName() + "_item", () -> new ChickenItem(new Item.Properties().stacksTo(16)));
+        RegistryObject<Item> customChickenSpawnEgg = ModItems.ITEMS.register(chicken.getEntityName() + "_spawn_egg", () -> new CustomSpawnEggItem(new Item.Properties()));
         if (chicken.isHasFeather()) {
-            RegistryObject<Item> customChickenFeather = ItemInit.ITEMS.register(chicken.getEntityName() + "_feather", () -> new FeatherItem(new Item.Properties()));
+            RegistryObject<Item> customChickenFeather = ModItems.ITEMS.register(chicken.getEntityName() + "_feather", () -> new FeatherItem(new Item.Properties()));
             chicken.setChickenFeatherRegistryObject(customChickenFeather);
         }
 

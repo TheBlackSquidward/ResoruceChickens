@@ -1,8 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.recipes.recipe;
 
-import io.github.TheBlackSquidward.resourcechickens.api.ChanceItemStack;
 import io.github.TheBlackSquidward.resourcechickens.api.ChanceItemStackList;
-import io.github.TheBlackSquidward.resourcechickens.init.RecipeInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -61,11 +60,11 @@ public class RoostRecipe implements IRecipe<IInventory> {
 
     @Override
     public IRecipeSerializer<?> getSerializer() {
-        return RecipeInit.ROOST_SERIALIZER.get();
+        return ModRecipes.ROOST_SERIALIZER.get();
     }
     @Override
     public IRecipeType<?> getType() {
-        return RecipeInit.ROOST_RECIPE_TYPE;
+        return ModRecipes.ROOST_RECIPE_TYPE;
     }
 
     public int getTotalRoostTime() {

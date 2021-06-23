@@ -1,7 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.te;
 
 import io.github.TheBlackSquidward.resourcechickens.items.CustomEggItem;
-import io.github.TheBlackSquidward.resourcechickens.init.TileEntityInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModTileEntities;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -22,7 +22,7 @@ public class IncubatorTE extends TileEntity implements ITickableTileEntity {
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
     public IncubatorTE() {
-        super(TileEntityInit.INCUBATOR_TE.get());
+        super(ModTileEntities.INCUBATOR_TE.get());
     }
 
     @Override

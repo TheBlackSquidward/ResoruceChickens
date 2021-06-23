@@ -11,12 +11,12 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class RecipeInit {
+public class ModRecipes {
 
-    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZER_REGISTRY = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ResourceChickens.MODID);
+    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ResourceChickens.MODID);
 
-    public static final RegistryObject<IRecipeSerializer<RoostRecipe>> ROOST_SERIALIZER = RECIPE_SERIALIZER_REGISTRY.register("roost", RoostRecipeSerializer::new);
-    public static final RegistryObject<IRecipeSerializer<ChickenBreedingRecipe>> CHICKEN_BREEDING_SERIALIZER = RECIPE_SERIALIZER_REGISTRY.register("chicken_breeding", ChickenBreedingRecipeSerializer::new);
+    public static final RegistryObject<IRecipeSerializer<RoostRecipe>> ROOST_SERIALIZER = RECIPE_SERIALIZER.register("roost", RoostRecipeSerializer::new);
+    public static final RegistryObject<IRecipeSerializer<ChickenBreedingRecipe>> CHICKEN_BREEDING_SERIALIZER = RECIPE_SERIALIZER.register("chicken_breeding", ChickenBreedingRecipeSerializer::new);
 
     public static IRecipeType<RoostRecipe> ROOST_RECIPE_TYPE = IRecipeType.register("resourcechickens:roost");
     public static IRecipeType<ChickenBreedingRecipe> CHICKEN_BREEDING_RECIPE_TYPE = IRecipeType.register("resourcechickens:chicken_breeding");

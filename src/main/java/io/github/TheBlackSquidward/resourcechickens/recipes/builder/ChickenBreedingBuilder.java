@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.JsonUtils;
-import io.github.TheBlackSquidward.resourcechickens.init.RecipeInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModRecipes;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipeSerializer;
@@ -12,7 +12,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -73,7 +72,7 @@ public class ChickenBreedingBuilder {
 
         @Override
         public IRecipeSerializer<?> getType() {
-            return RecipeInit.CHICKEN_BREEDING_SERIALIZER.get();
+            return ModRecipes.CHICKEN_BREEDING_SERIALIZER.get();
         }
 
         @Override

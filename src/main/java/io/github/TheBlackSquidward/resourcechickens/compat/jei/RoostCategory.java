@@ -2,7 +2,7 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.init.ItemInit;
+import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -29,7 +29,7 @@ public class RoostCategory implements IRecipeCategory<RoostRecipe> {
     public RoostCategory(IGuiHelper iGuiHelper) {
         IDrawableStatic arrowDrawable = iGuiHelper.createDrawable(GUI, 127, 0, 26, 16);
         this.arrow = iGuiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
-        this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ItemInit.ROOST.get()));
+        this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ModItems.ROOST.get()));
         this.background = iGuiHelper.createDrawable(GUI, 0, 0, 126, 18);
         this.localizedName = I18n.get("gui.resourcechickens.jei.category.roost");
     }

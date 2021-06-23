@@ -5,8 +5,8 @@ import net.minecraftforge.fml.RegistryObject;
 
 public class ChickenEggObject {
 
-    private RegistryObject<Item> eggRegistryObject;
-    private Item eggDrop;
+    private final RegistryObject<Item> eggRegistryObject;
+    private final Item eggDrop;
 
     public ChickenEggObject(RegistryObject<Item> eggRegistryObject, Item eggDrop) {
         this.eggRegistryObject = eggRegistryObject;
