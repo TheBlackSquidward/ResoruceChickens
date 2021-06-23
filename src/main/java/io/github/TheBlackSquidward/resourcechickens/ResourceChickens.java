@@ -8,6 +8,7 @@ import io.github.TheBlackSquidward.resourcechickens.init.*;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.compat.top.TopCompat;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -32,7 +33,7 @@ public class ResourceChickens {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static final ItemGroup ITEM_GROUP = new ResourceChickensItemGroup();
+    public static final ItemGroup ITEM_GROUP = new ItemGroup();
 
     public ResourceChickens() {
         FileHelper.setupPaths();
@@ -69,6 +70,18 @@ public class ResourceChickens {
         if(ModList.get().isLoaded("theoneprobe")) {
             InterModComms.sendTo("theoneprobe", "getTheOneProbe", TopCompat::new);
             LOGGER.info("Detected The One Probe. Initializing compat.");
+        }
+    }
+
+    public static class ItemGroup extends net.minecraft.item.ItemGroup {
+
+        public ItemGroup() {
+            super(MODID);
+        }
+
+        @Override
+        public ItemStack makeIcon() {
+            return ModItems.VANILLA_CHICKEN.get().getDefaultInstance();
         }
     }
 
