@@ -1,6 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"ambientocclusion": false,
 	"textures": {
 		"0": "resourcechickens:blocks/roost_side",
 		"1": "resourcechickens:blocks/roost_front",
