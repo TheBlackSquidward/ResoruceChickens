@@ -1,24 +1,24 @@
 modLoader = "javafml"
-loaderVersion = "[36,)"
+loaderVersion="${loader_version_range}"
 issueTrackerURL = "https://github.com/TheBlackSquidward/ResoruceChickens/issues"
 license = "https://github.com/TheBlackSquidward/ResoruceChickens/blob/master/LICENSE"
 [[mods]]
-modId = "resourcechickens"
-version = "1.0.0"
-displayName = "Resource Chickens"
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
 displayURL = "https://github.com/TheBlackSquidward/ResoruceChickens"
-authors = "TheBlackSquidward"
-description = '''Resource Chickens is a minecraft mod that provides an alternative way to generate resources through chickens.'''
+authors = "${mod_authors}"
+description = '''${mod_description}'''
 
 [[dependencies.resourcechickens]]
 modId = "forge"
 mandatory = true
-versionRange = "[36,)"
+versionRange = "${forge_version_range}"
 ordering = "BEFORE"
 side = "BOTH"
-[[dependencies.resourcechickens]]
+[[dependencies.${mod_id}]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[1.16.5,1.17)"
+versionRange="${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"

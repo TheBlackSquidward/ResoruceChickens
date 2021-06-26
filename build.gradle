@@ -2,17 +2,18 @@ buildscript {
     repositories {
         maven { url = 'https://files.minecraftforge.net/maven' }
         maven { url = 'https://sizableshrimp.me/maven' }
-        maven { url= 'https://repo.spongepowered.org/maven' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.8-SNAPSHOT'
+        classpath group: 'me.sizableshrimp.parchmenttest', name: 'ForgeGradle', version: '4.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
+
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
 apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 repositories {
@@ -27,10 +28,14 @@ repositories {
 version = '1.0'
 group = 'io.github.TheBlackSquidward.resourcechickens'
 
+version = "${minecraft_version}-${mod_version}"
+group = "${mod_base_package}.${mod_id}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = mod_id
+
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: "official", version: "${mapping}"
+    mappings channel: mappings_channel, version: mappings_version
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     runs {
         client {
@@ -80,10 +85,12 @@ minecraft {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-dependencies {
-    annotationProcessor 'org.spongepowered:mixin:0.8:processor'
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+}
 
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:${jei_version}")
@@ -95,16 +102,53 @@ dependencies {
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
 }
 
-// Example for how to get properties into the manifest for reading by the runtime..
+def resource_targets = ["META-INF/mods.toml", "pack.mcmeta"]
+task replaceResources(type: Copy) {
+    dependsOn(jar)
+    outputs.upToDateWhen { false }
+    def spec = copySpec {
+        from(sourceSets.main.resources) {
+            include resource_targets
+            expand "project": project, "mod_id": mod_id, "mod_name": mod_name, "mod_version": mod_version,
+                    "mod_authors": mod_authors, "mod_description": mod_description,
+                    "minecraft_version_range": minecraft_version_range, "forge_version_range": forge_version_range,
+                    "loader_version_range": loader_version_range
+        }
+    }
+    with spec
+    into "$buildDir/resources/main/"
+    // If IntelliJ's output dir exists, copy it there as well
+    if (new File("$rootDir/out/production/${project.name}.main/").exists()) {
+        copy {
+            with spec
+            into "$rootDir/out/production/${project.name}.main/"
+        }
+    }
+    // If Eclipse's output dir exists, copy it there as well
+    if (new File("$rootDir/bin/main/").exists()) {
+        copy {
+            with spec
+            into "$rootDir/bin/main/"
+        }
+    }
+}
+
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.FAIL
+    // Exclude the resource targets as we manually handle those and don't want them to invalidate our cache
+    exclude resource_targets
+    finalizedBy replaceResources
+}
+
 jar {
     manifest {
         attributes([
-                "Specification-Title": "resourcechickens",
-                "Specification-Vendor": "resourcechickens",
-                "Specification-Version": "1",
+                "Specification-Title": mod_id,
+                "Specification-Vendor": mod_authors,
+                "Specification-Version": "1", // We are version 1 of ourselves
                 "Implementation-Title": project.name,
-                "Implementation-Version": project.version,
-                "Implementation-Vendor" :"resourcechickens",
+                "Implementation-Version": mod_version,
+                "Implementation-Vendor": mod_authors,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -113,8 +157,8 @@ jar {
 // Example configuration to allow publishing using the maven-publish task
 // This is the preferred method to reobfuscate your jar file
 jar.finalizedBy('reobfJar')
-// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
-//publish.dependsOn('reobfJar')
+// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing:
+// publish.dependsOn('reobfJar')
 
 publishing {
     publications {
