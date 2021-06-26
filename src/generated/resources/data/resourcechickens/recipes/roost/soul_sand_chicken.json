@@ -7,7 +7,7 @@
   "output": [
     {
       "item": "minecraft:soul_sand",
-      "amount": 1,
+      "count": 1,
       "chance": 1.0
     }
   ]

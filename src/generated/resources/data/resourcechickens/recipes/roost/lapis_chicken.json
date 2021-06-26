@@ -7,7 +7,7 @@
   "output": [
     {
       "item": "minecraft:lapis_lazuli",
-      "amount": 1,
+      "count": 1,
       "chance": 1.0
     }
   ]

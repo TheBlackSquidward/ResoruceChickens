@@ -7,7 +7,7 @@
   "output": [
     {
       "item": "minecraft:snowball",
-      "amount": 1,
+      "count": 1,
       "chance": 1.0
     }
   ]

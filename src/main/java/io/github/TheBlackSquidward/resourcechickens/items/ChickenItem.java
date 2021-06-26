@@ -1,8 +1,8 @@
 package io.github.TheBlackSquidward.resourcechickens.items;
 
-import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
+import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -33,9 +33,9 @@ public class ChickenItem extends BaseItem {
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         CompoundNBT nbt = stack.getOrCreateTag();
-        int gain = nbt.getInt(ResourceChickens.MODID + "_chicken_gain");
-        int growth = nbt.getInt(ResourceChickens.MODID + "_chicken_growth");
-        int strength = nbt.getInt(ResourceChickens.MODID + "_chicken_strength");
+        int gain = nbt.getInt(Constants.NBT.GAIN);
+        int growth = nbt.getInt(Constants.NBT.GROWTH);
+        int strength = nbt.getInt(Constants.NBT.STRENGTH);
         if (gain != 0) {
             tooltip.add(new StringTextComponent("Gain: " + gain));
         }
@@ -49,6 +49,10 @@ public class ChickenItem extends BaseItem {
 
     @Override
     public ActionResultType onItemUseFirst(ItemStack itemStack, ItemUseContext context) {
+        CompoundNBT nbt = itemStack.getOrCreateTag();
+        int gain = nbt.getInt(Constants.NBT.GAIN);
+        int growth = nbt.getInt(Constants.NBT.GROWTH);
+        int strength = nbt.getInt(Constants.NBT.STRENGTH);
         PlayerEntity p = context.getPlayer();
         if (p != null) {
             BlockPos finalBlockpos;

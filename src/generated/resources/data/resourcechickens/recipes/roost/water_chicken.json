@@ -7,7 +7,7 @@
   "output": [
     {
       "item": "minecraft:water_bucket",
-      "amount": 1,
+      "count": 1,
       "chance": 1.0
     }
   ]

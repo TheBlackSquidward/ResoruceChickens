@@ -1,6 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.api;
 
 import com.google.gson.JsonObject;
+import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -48,15 +49,15 @@ public class ChanceItemStack {
 
     public JsonObject toJSON() {
         JsonObject jsonobject = new JsonObject();
-        jsonobject.addProperty("item", Registry.ITEM.getKey(stack.getItem()).toString());
-        jsonobject.addProperty("amount", stack.getCount());
-        jsonobject.addProperty("chance", chance);
+        jsonobject.addProperty(Constants.JSON.ITEM, Registry.ITEM.getKey(stack.getItem()).toString());
+        jsonobject.addProperty(Constants.JSON.COUNT, stack.getCount());
+        jsonobject.addProperty(Constants.JSON.CHANCE, chance);
         return jsonobject;
     }
 
     public static ChanceItemStack fromJSON(JsonObject jsonObject) {
-        Item item = Registry.ITEM.get(new ResourceLocation(jsonObject.get("item").getAsString()));
-        return ChanceItemStack.of(new ItemStack(item, jsonObject.get("amount").getAsInt()), jsonObject.get("chance").getAsDouble());
+        Item item = Registry.ITEM.get(new ResourceLocation(jsonObject.get(Constants.JSON.ITEM).getAsString()));
+        return ChanceItemStack.of(new ItemStack(item, jsonObject.get(Constants.JSON.COUNT).getAsInt()), jsonObject.get(Constants.JSON.CHANCE).getAsDouble());
     }
 
     public static ChanceItemStack read(PacketBuffer buffer) {

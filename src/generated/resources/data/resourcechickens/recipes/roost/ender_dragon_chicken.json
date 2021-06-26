@@ -7,7 +7,7 @@
   "output": [
     {
       "item": "minecraft:dragon_egg",
-      "amount": 1,
+      "count": 1,
       "chance": 1.0
     }
   ]

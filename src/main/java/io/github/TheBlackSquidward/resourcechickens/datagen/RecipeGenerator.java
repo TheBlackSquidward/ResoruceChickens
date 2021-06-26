@@ -23,7 +23,6 @@ public class RecipeGenerator extends RecipeProviderBase{
     protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
 
     }
-
     private ResourceLocation getRoostPath(String fileName) {
         return new ResourceLocation(ResourceChickens.MODID, "roost/" + fileName);
     }

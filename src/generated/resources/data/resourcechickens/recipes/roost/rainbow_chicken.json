@@ -7,7 +7,7 @@
   "output": [
     {
       "item": "minecraft:panda_spawn_egg",
-      "amount": 1,
+      "count": 1,
       "chance": 1.0
     }
   ]

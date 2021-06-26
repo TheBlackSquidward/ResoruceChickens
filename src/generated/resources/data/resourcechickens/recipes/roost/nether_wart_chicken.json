@@ -7,7 +7,7 @@
   "output": [
     {
       "item": "minecraft:nether_wart",
-      "amount": 1,
+      "count": 1,
       "chance": 1.0
     }
   ]

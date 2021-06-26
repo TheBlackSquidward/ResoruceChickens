@@ -7,12 +7,12 @@
   "output": [
     {
       "item": "minecraft:prismarine_shard",
-      "amount": 1,
+      "count": 1,
       "chance": 1.0
     },
     {
       "item": "minecraft:prismarine_crystals",
-      "amount": 1,
+      "count": 1,
       "chance": 1.0
     }
   ]

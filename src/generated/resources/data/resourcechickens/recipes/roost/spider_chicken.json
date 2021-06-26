@@ -7,7 +7,7 @@
   "output": [
     {
       "item": "minecraft:string",
-      "amount": 1,
+      "count": 1,
       "chance": 1.0
     }
   ]
