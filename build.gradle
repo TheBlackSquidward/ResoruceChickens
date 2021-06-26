@@ -22,7 +22,6 @@ repositories {
     maven { url "https://dvs1.progwml6.com/files/maven/" }
     maven { url "https://modmaven.k-4u.nl" }
     maven { url 'https://modmaven.dev/' }
-    maven { url = 'https://sizableshrimp.me/maven' }
 }
 
 version = '1.0'
@@ -82,6 +81,8 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
+    annotationProcessor 'org.spongepowered:mixin:0.8:processor'
+
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
     compileOnly fg.deobf("mezz.jei:jei-1.16.5:${jei_version}:api")
