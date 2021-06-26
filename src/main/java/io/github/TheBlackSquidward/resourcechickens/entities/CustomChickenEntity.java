@@ -1,15 +1,11 @@
 package io.github.TheBlackSquidward.resourcechickens.entities;
 
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
@@ -19,20 +15,16 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 public class CustomChickenEntity extends ChickenEntity {
 
     private static final Ingredient TEMPTATION_ITEM = Ingredient.of(Items.WHEAT_SEEDS);
-    private static transient int layTime;
-
-    public int timeUntilNextLay = layTime;
 
     public CustomChickenEntity(EntityType<? extends ChickenEntity> type, World worldIn) {
         super(type, worldIn);
-        layTime = this.getRandom().nextInt(6000) + 6000;
     }
-
 
     @Override
     protected void registerGoals() {
@@ -47,14 +39,11 @@ public class CustomChickenEntity extends ChickenEntity {
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
     }
 
-    protected int getExperiencePoints(PlayerEntity player) {
-        return 1 + this.getRandom().nextInt(4);
-    }
-
     protected SoundEvent getAmbientSound() {
         return SoundEvents.CHICKEN_AMBIENT;
     }
 
+    @ParametersAreNonnullByDefault
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
         return SoundEvents.CHICKEN_HURT;
     }
@@ -63,6 +52,7 @@ public class CustomChickenEntity extends ChickenEntity {
         return SoundEvents.CHICKEN_DEATH;
     }
 
+    @ParametersAreNonnullByDefault
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
         this.playSound(SoundEvents.CHICKEN_STEP, 0.15F, 1.0F);
     }
@@ -74,10 +64,7 @@ public class CustomChickenEntity extends ChickenEntity {
     }
 
     @Override
-    public CustomChickenEntity getBreedOffspring(ServerWorld serverWorld, AgeableEntity ageableEntity) {
-        ChickenRegistryObject offspring = ChickenRegistry.getChickenRegistryObjectbyEntity((CustomChickenEntity) ageableEntity);
-        return offspring.getChickenEntityRegistryObject().get().create(serverWorld);
+    public boolean canFallInLove() {
+        return false;
     }
-
-
 }
