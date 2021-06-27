@@ -11,7 +11,8 @@
     "H": { "item": "minecraft:hay_block" }
   },
   "result": {
-    "item": "resourcechickens:electric_roost",
+    "item": "resourcechickens:powered_roost",
+
     "count": 1
   }
 }

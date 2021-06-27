@@ -8,7 +8,7 @@
   "key": {
     "P": { "tag": "minecraft:planks" },
     "L": { "item": "minecraft:redstone_lamp" },
-    "E": { "item": "minecraft:egg" },
+    "E": { "tag": "resourcechickens:egg" },
     "H": { "item": "minecraft:hay_block" }
   },
   "result": {

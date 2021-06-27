@@ -10,7 +10,7 @@
     "H": { "item": "minecraft:hay_block" }
   },
   "result": {
-    "item": "resourcechickens:roost",
+    "item": "resourcechickens:oak_roost",
     "count": 1
   }
 }
