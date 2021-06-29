@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.multiblocks.roost;
+package io.github.TheBlackSquidward.resourcechickens.multiblocks.chicken_breeder;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -9,10 +9,9 @@ import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 
-public class RoostControllerBlock extends Block {
+public class ChickenBreederControllerBlock extends Block {
 
-
-    public RoostControllerBlock() {
+    public ChickenBreederControllerBlock() {
         super(Properties.of(Material.METAL).harvestTool(ToolType.PICKAXE));
     }
 

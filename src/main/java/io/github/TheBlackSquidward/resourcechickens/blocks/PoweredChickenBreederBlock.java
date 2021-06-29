@@ -1,7 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.blocks;
 
 import io.github.TheBlackSquidward.resourcechickens.containers.ElectricChickenBreederContainer;
-import io.github.TheBlackSquidward.resourcechickens.te.ElectricChickenBreederTE;
+import io.github.TheBlackSquidward.resourcechickens.te.chicken_breeder.PowererdChickenBreederTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
@@ -29,11 +29,11 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class ElectricChickenBreederBlock extends Block {
+public class PoweredChickenBreederBlock extends Block {
 
     public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
-    public ElectricChickenBreederBlock() {
+    public PoweredChickenBreederBlock() {
         super(Properties.of(Material.METAL).harvestTool(ToolType.PICKAXE));
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH));
     }
@@ -46,7 +46,7 @@ public class ElectricChickenBreederBlock extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new ElectricChickenBreederTE();
+        return new PowererdChickenBreederTE();
     }
 
     @Nullable
@@ -64,7 +64,7 @@ public class ElectricChickenBreederBlock extends Block {
     public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
         if (!world.isClientSide) {
             TileEntity tileEntity = world.getBlockEntity(pos);
-            if (tileEntity instanceof ElectricChickenBreederTE) {
+            if (tileEntity instanceof PowererdChickenBreederTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
                     public ITextComponent getDisplayName() {

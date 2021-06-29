@@ -1,6 +1,9 @@
 package io.github.TheBlackSquidward.resourcechickens.compat.top;
 
 import io.github.TheBlackSquidward.resourcechickens.te.*;
+import io.github.TheBlackSquidward.resourcechickens.te.chicken_breeder.AbstractChickenBreederTE;
+import io.github.TheBlackSquidward.resourcechickens.te.chicken_breeder.PowererdChickenBreederTE;
+import io.github.TheBlackSquidward.resourcechickens.te.roost.AbstractRoostTE;
 import mcjty.theoneprobe.api.IEntityDisplayOverride;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import mcjty.theoneprobe.api.ProbeMode;
@@ -23,8 +26,8 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
     public Void apply(ITheOneProbe iTheOneProbe) {
         iTheOneProbe.registerBlockDisplayOverride((mode, probeInfo, player, world, blockState, data) -> {
             TileEntity tileEntity = world.getBlockEntity(data.getPos());
-            if(tileEntity instanceof ChickenBreederTE) {
-                ChickenBreederTE chickenBreederTE = (ChickenBreederTE) tileEntity;
+            if(tileEntity instanceof AbstractChickenBreederTE) {
+                AbstractChickenBreederTE chickenBreederTE = (AbstractChickenBreederTE) tileEntity;
                 probeInfo.horizontal()
                         .item(new ItemStack(blockState.getBlock().asItem()))
                         .vertical()
@@ -36,13 +39,13 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
                 }
                 return true;
             }
-            if(tileEntity instanceof ElectricChickenBreederTE) {
-                ElectricChickenBreederTE electricChickenBreederTE = (ElectricChickenBreederTE) tileEntity;
+            if(tileEntity instanceof PowererdChickenBreederTE) {
+                PowererdChickenBreederTE electricChickenBreederTE = (PowererdChickenBreederTE) tileEntity;
                 //TODO
                 return true;
             }
-            if(tileEntity instanceof RoostTE) {
-                RoostTE roostTE = (RoostTE) tileEntity;
+            if(tileEntity instanceof AbstractRoostTE) {
+                AbstractRoostTE roostTE = (AbstractRoostTE) tileEntity;
                 probeInfo.horizontal()
                         .item(new ItemStack(blockState.getBlock().asItem()))
                         .vertical()
@@ -54,8 +57,8 @@ public class TopCompat implements Function<ITheOneProbe, Void> {
                 }
                 return true;
             }
-            if(tileEntity instanceof ElectricRoostTE) {
-                ElectricRoostTE electricRoostTE = (ElectricRoostTE) tileEntity;
+            if(tileEntity instanceof PoweredRoostTE) {
+                PoweredRoostTE electricRoostTE = (PoweredRoostTE) tileEntity;
                 //TODO
                 return true;
             }

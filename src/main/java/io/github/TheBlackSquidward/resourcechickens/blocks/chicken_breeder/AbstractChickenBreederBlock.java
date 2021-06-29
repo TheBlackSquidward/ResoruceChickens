@@ -1,7 +1,7 @@
-package io.github.TheBlackSquidward.resourcechickens.blocks;
+package io.github.TheBlackSquidward.resourcechickens.blocks.chicken_breeder;
 
 import io.github.TheBlackSquidward.resourcechickens.containers.ChickenBreederContainer;
-import io.github.TheBlackSquidward.resourcechickens.te.ChickenBreederTE;
+import io.github.TheBlackSquidward.resourcechickens.te.chicken_breeder.AbstractChickenBreederTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -17,14 +17,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class ChickenBreederBlock extends Block {
+public abstract class AbstractChickenBreederBlock extends Block {
 
-    public ChickenBreederBlock() {
+    public AbstractChickenBreederBlock() {
         super(Properties.of(Material.WOOD).harvestTool(ToolType.AXE));
     }
 
@@ -34,15 +33,10 @@ public class ChickenBreederBlock extends Block {
     }
 
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new ChickenBreederTE();
-    }
-
-    @Override
     public ActionResultType use(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
         if (!world.isClientSide) {
             TileEntity tileEntity = world.getBlockEntity(pos);
-            if (tileEntity instanceof ChickenBreederTE) {
+            if (tileEntity instanceof AbstractChickenBreederTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
                     public ITextComponent getDisplayName() {

@@ -1,9 +1,10 @@
-package io.github.TheBlackSquidward.resourcechickens.te;
+package io.github.TheBlackSquidward.resourcechickens.te.chicken_breeder;
 
 import io.github.TheBlackSquidward.resourcechickens.init.ModTileEntities;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -14,13 +15,13 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ElectricChickenBreederTE extends TileEntity implements ITickableTileEntity {
+public class PowererdChickenBreederTE extends TileEntity implements ITickableTileEntity {
 
     private final ItemStackHandler itemStackHandler = createHandler();
 
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
-    public ElectricChickenBreederTE() {
+    public PowererdChickenBreederTE() {
         super(ModTileEntities.poweredChickenBreeder.get());
     }
 

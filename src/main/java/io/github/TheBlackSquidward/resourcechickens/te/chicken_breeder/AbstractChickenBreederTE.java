@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.te;
+package io.github.TheBlackSquidward.resourcechickens.te.chicken_breeder;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
@@ -9,6 +9,7 @@ import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
+import io.github.TheBlackSquidward.resourcechickens.te.AbstractTileEntity;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -16,20 +17,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> {
+public abstract class AbstractChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> {
 
     //2 Min in ticks
     private final double totalBreedTime = 2400;
     private double breedTime = 0;
     private boolean isBreeding;
 
-    public ChickenBreederTE() {
-        super(ModTileEntities.chickenBreeder.get());
+    public AbstractChickenBreederTE(TileEntityType<?> tileEntityType) {
+        super(tileEntityType);
     }
 
     @Override

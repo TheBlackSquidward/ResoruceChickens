@@ -1,6 +1,8 @@
 package io.github.TheBlackSquidward.resourcechickens.network;
 
 import io.github.TheBlackSquidward.resourcechickens.te.*;
+import io.github.TheBlackSquidward.resourcechickens.te.chicken_breeder.AbstractChickenBreederTE;
+import io.github.TheBlackSquidward.resourcechickens.te.chicken_breeder.PowererdChickenBreederTE;
 import io.github.TheBlackSquidward.resourcechickens.te.roost.AbstractRoostTE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -35,12 +37,12 @@ public class GUISyncMessage {
             ClientPlayerEntity player = Minecraft.getInstance().player;
             if (player != null) {
                 TileEntity tileEntity = player.level.getBlockEntity(message.blockPos);
-                if(tileEntity instanceof ChickenBreederTE) ((ChickenBreederTE) tileEntity).handleGUINetworkPacket(message.packetBuffer);
+                if(tileEntity instanceof AbstractChickenBreederTE) ((AbstractChickenBreederTE) tileEntity).handleGUINetworkPacket(message.packetBuffer);
                 if(tileEntity instanceof AbstractRoostTE) ((AbstractRoostTE) tileEntity).handleGUINetworkPacket(message.packetBuffer);
                 if(tileEntity instanceof IncubatorTE) {
                     //TODO
                 }
-                if(tileEntity instanceof ElectricChickenBreederTE) {
+                if(tileEntity instanceof PowererdChickenBreederTE) {
                     //TODO
                 }
                 if(tileEntity instanceof PoweredRoostTE) {
