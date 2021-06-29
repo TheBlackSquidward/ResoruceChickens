@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:clay_chicken_item"
+  },
+  "output": [
+    {
+      "item": "minecraft:clay_ball",
+      "count": 1,
+      "chance": 1.0
+    }
+  ]
+}

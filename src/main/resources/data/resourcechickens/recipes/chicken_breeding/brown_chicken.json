@@ -1,0 +1,15 @@
+{
+  "type": "resourcechickens:chicken_breeding",
+  "totalBreedTime": 2400,
+  "input": [
+    {
+      "item": "resourcechickens:red_chicken_item"
+    },
+    {
+      "item": "resourcechickens:green_chicken_item"
+    }
+  ],
+  "output": {
+    "item": "resourcechickens:brown_chicken_item"
+  }
+}

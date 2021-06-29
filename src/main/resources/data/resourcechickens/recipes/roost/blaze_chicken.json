@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:blaze_chicken_item"
+  },
+  "output": [
+    {
+      "item": "minecraft:blaze_rod",
+      "count": 1,
+      "chance": 1.0
+    }
+  ]
+}

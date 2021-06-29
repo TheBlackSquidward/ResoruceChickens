@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:acacia_chicken_item"
+  },
+  "output": [
+    {
+      "item": "minecraft:acacia_log",
+      "count": 1,
+      "chance": 1.0
+    }
+  ]
+}

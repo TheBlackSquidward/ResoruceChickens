@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:ender_chicken_item"
+  },
+  "output": [
+    {
+      "item": "minecraft:ender_pearl",
+      "count": 1,
+      "chance": 1.0
+    }
+  ]
+}

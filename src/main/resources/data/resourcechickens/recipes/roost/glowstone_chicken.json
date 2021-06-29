@@ -1,0 +1,14 @@
+{
+  "type": "resourcechickens:roost",
+  "totalRoostTime": 300,
+  "input": {
+    "item": "resourcechickens:glowstone_chicken_item"
+  },
+  "output": [
+    {
+      "item": "minecraft:glowstone_dust",
+      "count": 1,
+      "chance": 1.0
+    }
+  ]
+}
