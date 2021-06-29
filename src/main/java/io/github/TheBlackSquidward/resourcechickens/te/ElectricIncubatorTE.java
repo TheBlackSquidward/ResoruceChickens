@@ -21,7 +21,7 @@ public class ElectricIncubatorTE extends TileEntity implements ITickableTileEnti
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
     public ElectricIncubatorTE() {
-        super(ModTileEntities.ELECTRIC_INCUBATOR_TE.get());
+        super(ModTileEntities.poweredIncubator.get());
     }
 
     @Override

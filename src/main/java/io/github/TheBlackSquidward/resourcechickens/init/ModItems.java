@@ -13,15 +13,27 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ResourceChickens.MODID);
 
     //Blocks
-    public static final RegistryObject<BlockItem> ELECTRIC_ROOST = ITEMS.register("electric_roost", () -> new BaseBlockItem(ModBlocks.ELECTRIC_ROOST.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> ROOST = ITEMS.register("roost", () -> new BaseBlockItem(ModBlocks.ROOST.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> oakRoost = ITEMS.register("oak_roost", () -> new BaseBlockItem(ModBlocks.oakRoost.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> darkOakRoost = ITEMS.register("dark_oak_roost", () -> new BaseBlockItem(ModBlocks.darkOakRoost.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> birchRoost = ITEMS.register("birch_roost", () -> new BaseBlockItem(ModBlocks.birchRoost.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> spruceRoost = ITEMS.register("spruce_roost", () -> new BaseBlockItem(ModBlocks.spruceRoost.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> acaciaRoost = ITEMS.register("acacia_roost", () -> new BaseBlockItem(ModBlocks.acaciaRoost.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> jungleRoost = ITEMS.register("jungle_roost", () -> new BaseBlockItem(ModBlocks.jungleRoost.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> poweredRoost = ITEMS.register("powered_roost", () -> new BaseBlockItem(ModBlocks.poweredRoost.get(), new Item.Properties()));
+
+    public static final RegistryObject<BlockItem> oakHenhouse = ITEMS.register("oak_henhouse", () -> new BaseBlockItem(ModBlocks.oakHenhouse.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> darkOakHenhouse = ITEMS.register("dark_oak_henhouse", () -> new BaseBlockItem(ModBlocks.darkOakHenhouse.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> birchHenhouse = ITEMS.register("birch_henhouse", () -> new BaseBlockItem(ModBlocks.birchHenhouse.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> spruceHenhouse = ITEMS.register("spruce_henhouse", () -> new BaseBlockItem(ModBlocks.spruceHenhouse.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> acaciaHenhouse = ITEMS.register("acacia_henhouse", () -> new BaseBlockItem(ModBlocks.acaciaHenhouse.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> jungleHenhouse = ITEMS.register("jungle_henhouse", () -> new BaseBlockItem(ModBlocks.jungleHenhouse.get(), new Item.Properties()));
+
     public static final RegistryObject<BlockItem> ELECTRIC_INCUBATOR = ITEMS.register("electric_incubator", () -> new BaseBlockItem(ModBlocks.ELECTRIC_INCUBATOR.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> INCUBATOR = ITEMS.register("incubator", () -> new BaseBlockItem(ModBlocks.INCUBATOR.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> CHICKEN_BREEDER = ITEMS.register("chicken_breeder", () -> new BaseBlockItem(ModBlocks.CHICKEN_BREEDER.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> ELECTRIC_CHICKEN_BREEDER = ITEMS.register("electric_chicken_breeder", () -> new BaseBlockItem(ModBlocks.ELECTRIC_CHICKEN_BREEDER.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> ROOST_CONTROLLER = ITEMS.register("roost_controller", () -> new BaseBlockItem(ModBlocks.ROOST_CONTROLLER.get(), new Item.Properties()));
     public static final RegistryObject<BlockItem> ROOST_CASING = ITEMS.register("roost_casing", () -> new BaseBlockItem(ModBlocks.ROOST_CASING.get(), new Item.Properties()));
-    public static final RegistryObject<BlockItem> HENHOUSE = ITEMS.register("henhouse", () -> new BaseBlockItem(ModBlocks.HENHOUSE.get(), new Item.Properties()));
 
     //Misc
     public static final RegistryObject<ChickenStickItem> CHICKEN_STICK = ITEMS.register("chicken_stick", ChickenStickItem::new);

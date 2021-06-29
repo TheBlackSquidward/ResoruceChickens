@@ -2,9 +2,10 @@ package io.github.TheBlackSquidward.resourcechickens.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.blocks.RoostBlock;
-import io.github.TheBlackSquidward.resourcechickens.te.RoostTE;
+import io.github.TheBlackSquidward.resourcechickens.blocks.roost.AbstractRoostBlock;
+import io.github.TheBlackSquidward.resourcechickens.te.roost.AbstractRoostTE;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
@@ -18,7 +19,7 @@ import net.minecraft.util.math.vector.Vector3f;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-public class RoostTileEntityRenderer extends TileEntityRenderer<RoostTE> {
+public class RoostTileEntityRenderer extends TileEntityRenderer<AbstractRoostTE> {
 
     public static final ChickenModel roostingChickenModel = new ChickenModel();
 
@@ -36,22 +37,22 @@ public class RoostTileEntityRenderer extends TileEntityRenderer<RoostTE> {
 
     @ParametersAreNonnullByDefault
     @Override
-    public void render(RoostTE roostTE, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer vertexBuilder, int combinedLight, int combinedOverlay) {
-        if (roostTE.hasChicken()) {
-            renderChicken(matrixStack, roostTE, vertexBuilder, combinedLight, combinedOverlay);
+    public void render(AbstractRoostTE roost, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer vertexBuilder, int combinedLight, int combinedOverlay) {
+        if (roost.hasChicken()) {
+            renderChicken(matrixStack, roost, vertexBuilder, combinedLight, combinedOverlay);
         }
     }
 
-    public void renderChicken(MatrixStack matrixStack, RoostTE roostTE, IRenderTypeBuffer vertexBuilder, int combinedLight, int combinedOverlay) {
-        BlockState blockState = roostTE.getBlockState();
-        Direction direction = blockState.getValue(RoostBlock.FACING);
+    public void renderChicken(MatrixStack matrixStack, AbstractRoostTE roost, IRenderTypeBuffer vertexBuilder, int combinedLight, int combinedOverlay) {
+        BlockState blockState = roost.getBlockState();
+        Direction direction = blockState.getValue(AbstractRoostBlock.FACING);
         float scale = 1f;
         matrixStack.pushPose();
         matrixStack.translate(0.5, 1.3, 0.5);
         matrixStack.scale(scale, scale, scale);
         matrixStack.mulPose(Vector3f.YN.rotationDegrees(direction.toYRot()));
         matrixStack.mulPose(Vector3f.XP.rotationDegrees(180));
-        IVertexBuilder renderBuffer = vertexBuilder.getBuffer(ChickenModel.getRenderType(getChickenTexture(roostTE.getRoostingChicken())));
+        IVertexBuilder renderBuffer = vertexBuilder.getBuffer(ChickenModel.getRenderType(getChickenTexture(roost.getRoostingChicken())));
         roostingChickenModel.chin.render(matrixStack, renderBuffer, combinedLight, combinedOverlay, 1, 1, 1, 1);
         roostingChickenModel.head.render(matrixStack, renderBuffer, combinedLight, combinedOverlay, 1, 1, 1, 1);
         roostingChickenModel.bill.render(matrixStack, renderBuffer, combinedLight, combinedOverlay, 1, 1, 1, 1);

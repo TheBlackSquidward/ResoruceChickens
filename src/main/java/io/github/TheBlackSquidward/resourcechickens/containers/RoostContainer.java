@@ -1,7 +1,8 @@
 package io.github.TheBlackSquidward.resourcechickens.containers;
 
+import io.github.TheBlackSquidward.resourcechickens.commands.AbstractCommand;
 import io.github.TheBlackSquidward.resourcechickens.init.ModContainers;
-import io.github.TheBlackSquidward.resourcechickens.te.RoostTE;
+import io.github.TheBlackSquidward.resourcechickens.te.roost.AbstractRoostTE;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -15,14 +16,14 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class RoostContainer extends Container {
 
-    private final RoostTE tileEntity;
+    private final AbstractRoostTE tileEntity;
     private final IItemHandler playerInventory;
 
     private final PlayerEntity playerEntity;
 
     public RoostContainer(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
         super(ModContainers.ROOST_CONTAINER.get(), windowId);
-        tileEntity = (RoostTE) world.getBlockEntity(pos);
+        tileEntity = (AbstractRoostTE) world.getBlockEntity(pos);
         this.playerInventory = new InvWrapper(playerInventory);
         this.playerEntity = player;
 

@@ -22,7 +22,7 @@ public class IncubatorTE extends TileEntity implements ITickableTileEntity {
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
     public IncubatorTE() {
-        super(ModTileEntities.INCUBATOR_TE.get());
+        super(ModTileEntities.incuabtor.get());
     }
 
     @Override

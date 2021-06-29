@@ -29,7 +29,7 @@ public class RoostCategory implements IRecipeCategory<RoostRecipe> {
     public RoostCategory(IGuiHelper iGuiHelper) {
         IDrawableStatic arrowDrawable = iGuiHelper.createDrawable(GUI, 127, 0, 26, 16);
         this.arrow = iGuiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
-        this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ModItems.ROOST.get()));
+        this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ModItems.oakRoost.get()));
         this.background = iGuiHelper.createDrawable(GUI, 0, 0, 126, 18);
         this.localizedName = I18n.get("gui.resourcechickens.jei.category.roost");
     }

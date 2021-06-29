@@ -29,7 +29,7 @@ public class ChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> 
     private boolean isBreeding;
 
     public ChickenBreederTE() {
-        super(ModTileEntities.CHICKEN_BREEDER_TE.get());
+        super(ModTileEntities.chickenBreeder.get());
     }
 
     @Override

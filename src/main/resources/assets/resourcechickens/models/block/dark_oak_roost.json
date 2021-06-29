@@ -1,11 +1,11 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "resourcechickens:blocks/oak_roost_side",
-		"1": "resourcechickens:blocks/oak_roost_front",
-		"2": "resourcechickens:blocks/oak_hay_side",
-		"3": "resourcechickens:blocks/oak_hay_floor",
-		"particle": "resourcechickens:blocks/oak_roost_side"
+		"0": "resourcechickens:blocks/dark_oak_roost_side",
+		"1": "resourcechickens:blocks/dark_oak_roost_front",
+		"2": "resourcechickens:blocks/dark_oak_hay_side",
+		"3": "resourcechickens:blocks/dark_oak_hay_floor",
+		"particle": "resourcechickens:blocks/dark_oak_roost_side"
 	},
 	"elements": [
 		{

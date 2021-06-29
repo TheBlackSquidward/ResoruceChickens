@@ -14,14 +14,14 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ElectricRoostTE extends TileEntity implements ITickableTileEntity {
+public class PoweredRoostTE extends TileEntity implements ITickableTileEntity {
 
     private final ItemStackHandler itemStackHandler = createHandler();
 
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
-    public ElectricRoostTE() {
-        super(ModTileEntities.ELECTRIC_ROOST_TE.get());
+    public PoweredRoostTE() {
+        super(ModTileEntities.poweredRoost.get());
     }
 
     @Override

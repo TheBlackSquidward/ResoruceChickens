@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.te;
+package io.github.TheBlackSquidward.resourcechickens.te.roost;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
@@ -6,11 +6,11 @@ import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import io.github.TheBlackSquidward.resourcechickens.init.ModRecipes;
-import io.github.TheBlackSquidward.resourcechickens.init.ModTileEntities;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
+import io.github.TheBlackSquidward.resourcechickens.te.AbstractTileEntity;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,17 +19,18 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public class RoostTE extends AbstractTileEntity<RoostRecipe> {
+public abstract class AbstractRoostTE  extends AbstractTileEntity<RoostRecipe> {
 
     private double roostTime = 0;
     private boolean isRoosting;
 
-    public RoostTE() {
-        super(ModTileEntities.ROOST_TE.get());
+    public AbstractRoostTE(TileEntityType<?> tileEntityType) {
+        super(tileEntityType);
     }
 
     @Override

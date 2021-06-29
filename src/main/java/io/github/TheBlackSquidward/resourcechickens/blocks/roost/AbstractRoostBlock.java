@@ -1,11 +1,10 @@
-package io.github.TheBlackSquidward.resourcechickens.blocks;
+package io.github.TheBlackSquidward.resourcechickens.blocks.roost;
 
 import io.github.TheBlackSquidward.resourcechickens.containers.RoostContainer;
-import io.github.TheBlackSquidward.resourcechickens.te.RoostTE;
+import io.github.TheBlackSquidward.resourcechickens.te.roost.AbstractRoostTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -23,25 +22,22 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class RoostBlock extends Block {
+public abstract class AbstractRoostBlock extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty LIGHT_LEVEL = IntegerProperty.create("light_level", 0, 15);
 
-    public RoostBlock() {
-        super(Properties.of(Material.WOOD));
-        registerDefaultState(this.getStateDefinition().any()
+    public AbstractRoostBlock() {
+        super(Properties.of(Material.WOOD).noOcclusion());
+        this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(LIGHT_LEVEL, 0)
                 .setValue(FACING, Direction.NORTH));
     }
@@ -62,17 +58,11 @@ public class RoostBlock extends Block {
         return true;
     }
 
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new RoostTE();
-    }
-
     @Override
     public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
         if (!world.isClientSide) {
             TileEntity tileEntity = world.getBlockEntity(pos);
-            if (tileEntity instanceof RoostTE) {
+            if (tileEntity instanceof AbstractRoostTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
                     public ITextComponent getDisplayName() {
@@ -103,5 +93,5 @@ public class RoostBlock extends Block {
     public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
         return state.getValue(LIGHT_LEVEL);
     }
-}
 
+}

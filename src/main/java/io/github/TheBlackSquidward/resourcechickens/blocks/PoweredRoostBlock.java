@@ -1,8 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.blocks;
 
 import io.github.TheBlackSquidward.resourcechickens.containers.ElectricRoostContainer;
-import io.github.TheBlackSquidward.resourcechickens.te.ElectricRoostTE;
-import net.minecraft.block.AbstractBlock;
+import io.github.TheBlackSquidward.resourcechickens.te.PoweredRoostTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -28,12 +27,12 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class ElectricRoostBlock extends Block {
+public class PoweredRoostBlock extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    public ElectricRoostBlock() {
+    public PoweredRoostBlock() {
         super(Properties.of(Material.METAL)
                 .harvestLevel(2)
                 .harvestTool(ToolType.PICKAXE));
@@ -47,14 +46,14 @@ public class ElectricRoostBlock extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new ElectricRoostTE();
+        return new PoweredRoostTE();
     }
 
     @Override
     public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
         if (!world.isClientSide) {
             TileEntity tileEntity = world.getBlockEntity(pos);
-            if (tileEntity instanceof ElectricRoostTE) {
+            if (tileEntity instanceof PoweredRoostTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
                     public ITextComponent getDisplayName() {

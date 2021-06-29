@@ -21,7 +21,7 @@ public class ElectricChickenBreederTE extends TileEntity implements ITickableTil
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemStackHandler);
 
     public ElectricChickenBreederTE() {
-        super(ModTileEntities.ELECTRIC_CHICKEN_BREEDER_TE.get());
+        super(ModTileEntities.poweredChickenBreeder.get());
     }
 
     @Override

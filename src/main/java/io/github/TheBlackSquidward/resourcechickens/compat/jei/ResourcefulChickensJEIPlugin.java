@@ -40,13 +40,24 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+
         registration.addRecipeCatalyst(new ItemStack(ModItems.CHICKEN_CATCHER.get()), ChickenCatchingCategory.ID);
+
         registration.addRecipeCatalyst(new ItemStack(ModItems.CHICKEN_BREEDER.get()), ChickenBreedingCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.ELECTRIC_CHICKEN_BREEDER.get()), ChickenBreedingCategory.ID);
-        registration.addRecipeCatalyst(new ItemStack(ModItems.ROOST.get()), RoostCategory.ID);
-        registration.addRecipeCatalyst(new ItemStack(ModItems.ELECTRIC_ROOST.get()), RoostCategory.ID);
+
+        //Roost
+        registration.addRecipeCatalyst(new ItemStack(ModItems.oakRoost.get()), RoostCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.darkOakRoost.get()), RoostCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.spruceRoost.get()), RoostCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.birchRoost.get()), RoostCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.acaciaRoost.get()), RoostCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.jungleRoost.get()), RoostCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.poweredRoost.get()), RoostCategory.ID);
+
         registration.addRecipeCatalyst(new ItemStack(ModItems.INCUBATOR.get()), IncubatorCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.ELECTRIC_INCUBATOR.get()), IncubatorCategory.ID);
+
     }
 
     @Override
