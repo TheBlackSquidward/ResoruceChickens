@@ -1,7 +1,7 @@
-package io.github.TheBlackSquidward.resourcechickens.blocks;
+package io.github.TheBlackSquidward.resourcechickens.blocks.roost;
 
-import io.github.TheBlackSquidward.resourcechickens.containers.ElectricIncubatorContainer;
-import io.github.TheBlackSquidward.resourcechickens.te.ElectricIncubatorTE;
+import io.github.TheBlackSquidward.resourcechickens.containers.ElectricRoostContainer;
+import io.github.TheBlackSquidward.resourcechickens.te.PoweredRoostTE;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -10,6 +10,9 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
@@ -22,10 +25,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class ElectricIncubatorBlock extends Block {
+import javax.annotation.Nullable;
 
-    public ElectricIncubatorBlock() {
-        super(Properties.of(Material.METAL).harvestTool(ToolType.PICKAXE));
+public class PoweredRoostBlock extends Block {
+
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+
+    public PoweredRoostBlock() {
+        super(Properties.of(Material.METAL)
+                .harvestLevel(2)
+                .harvestTool(ToolType.PICKAXE));
     }
 
     @Override
@@ -33,25 +43,26 @@ public class ElectricIncubatorBlock extends Block {
         return true;
     }
 
+    @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new ElectricIncubatorTE();
+        return new PoweredRoostTE();
     }
 
     @Override
     public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
         if (!world.isClientSide) {
             TileEntity tileEntity = world.getBlockEntity(pos);
-            if (tileEntity instanceof ElectricIncubatorTE) {
+            if (tileEntity instanceof PoweredRoostTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
                     public ITextComponent getDisplayName() {
-                        return new TranslationTextComponent("gui.resourcechickens.electric_incubator");
+                        return new TranslationTextComponent("gui.resourcechickens.electric_roost");
                     }
 
                     @Override
                     public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-                        return new ElectricIncubatorContainer(i, world, pos, playerInventory, playerEntity);
+                        return new ElectricRoostContainer(i, world, pos, playerInventory, playerEntity);
                     }
                 };
                 NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getBlockPos());
@@ -63,5 +74,6 @@ public class ElectricIncubatorBlock extends Block {
             return ActionResultType.FAIL;
         }
     }
+
 
 }

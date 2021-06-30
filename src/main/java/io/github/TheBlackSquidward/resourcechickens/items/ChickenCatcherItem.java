@@ -43,7 +43,7 @@ public class ChickenCatcherItem extends BaseItem {
                 if (world.isClientSide()) {
                     p.level.playSound(p, pos.x, pos.y, pos.z, SoundEvents.CHICKEN_EGG, entity.getSoundSource(), 1.0F, 1.0F);
                 } else {
-                    p.addItem(new ItemStack(ModItems.VANILLA_CHICKEN.get()));
+                    p.addItem(new ItemStack(ModItems.vanillaChickenItem.get()));
                     itemStack.hurtAndBreak(1, p, (p_220045_0_) -> p_220045_0_.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
                     entity.remove();
                 }}

@@ -22,7 +22,9 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<SpruceChickenBreederTE>> spruceChickenBreeder = TILE_ENTITY.register("spruce_chicken_breeder", () -> TileEntityType.Builder.of(SpruceChickenBreederTE::new, ModBlocks.spruceChickenBreeder.get()).build(null));
     public static final RegistryObject<TileEntityType<AcaciaChickenBreederTE>> acaciaChickenBreeder = TILE_ENTITY.register("acacia_chicken_breeder", () -> TileEntityType.Builder.of(AcaciaChickenBreederTE::new, ModBlocks.acaciaChickenBreeder.get()).build(null));
     public static final RegistryObject<TileEntityType<JungleChickenBreederTE>> jungleChickenBreeder = TILE_ENTITY.register("jungle_chicken_breeder", () -> TileEntityType.Builder.of(JungleChickenBreederTE::new, ModBlocks.jungleChickenBreeder.get()).build(null));
-    public static final RegistryObject<TileEntityType<PowererdChickenBreederTE>> poweredChickenBreeder = TILE_ENTITY.register("electric_chicken_breeder", () -> TileEntityType.Builder.of(PowererdChickenBreederTE::new, ModBlocks.poweredChickenBreeder.get()).build(null));
+    public static final RegistryObject<TileEntityType<WarpedChickenBreederTE>> warpedChickenBreeder = TILE_ENTITY.register("warped_chicken_breeder", () -> TileEntityType.Builder.of(WarpedChickenBreederTE::new, ModBlocks.warpedChickenBreeder.get()).build(null));
+    public static final RegistryObject<TileEntityType<CrimsonChickenBreederTE>> crimsonChickenBreeder = TILE_ENTITY.register("crimson_chicken_breeder", () -> TileEntityType.Builder.of(CrimsonChickenBreederTE::new, ModBlocks.crimsonChickenBreeder.get()).build(null));
+    public static final RegistryObject<TileEntityType<PowererdChickenBreederTE>> poweredChickenBreeder = TILE_ENTITY.register("powered_chicken_breeder", () -> TileEntityType.Builder.of(PowererdChickenBreederTE::new, ModBlocks.poweredChickenBreeder.get()).build(null));
 
     //Roosts
     public static final RegistryObject<TileEntityType<OakRoostTE>> oakRoost = TILE_ENTITY.register("oak_roost", () -> TileEntityType.Builder.of(OakRoostTE::new, ModBlocks.oakRoost.get()).build(null));
@@ -31,14 +33,21 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<SpruceRoostTE>> spruceRoost = TILE_ENTITY.register("spruce_roost", () -> TileEntityType.Builder.of(SpruceRoostTE::new, ModBlocks.spruceRoost.get()).build(null));
     public static final RegistryObject<TileEntityType<AcaciaRoostTE>> acaciaRoost = TILE_ENTITY.register("acacia_roost", () -> TileEntityType.Builder.of(AcaciaRoostTE::new, ModBlocks.acaciaRoost.get()).build(null));
     public static final RegistryObject<TileEntityType<JungleRoostTE>> jungleRoost = TILE_ENTITY.register("jungle_roost", () -> TileEntityType.Builder.of(JungleRoostTE::new, ModBlocks.jungleRoost.get()).build(null));
+    public static final RegistryObject<TileEntityType<WarpedRoostTE>> warpedRoost = TILE_ENTITY.register("warped_roost", () -> TileEntityType.Builder.of(WarpedRoostTE::new, ModBlocks.warpedRoost.get()).build(null));
+    public static final RegistryObject<TileEntityType<CrimsonRoostTE>> crimsonRoost = TILE_ENTITY.register("crimson_roost", () -> TileEntityType.Builder.of(CrimsonRoostTE::new, ModBlocks.crimsonRoost.get()).build(null));
     public static final RegistryObject<TileEntityType<PoweredRoostTE>> poweredRoost = TILE_ENTITY.register("powered_roost", () -> TileEntityType.Builder.of(PoweredRoostTE::new, ModBlocks.poweredRoost.get()).build(null));
 
-    public static final RegistryObject<TileEntityType<ElectricIncubatorTE>> poweredIncubator = TILE_ENTITY.register("electric_incubator", () -> TileEntityType.Builder.of(ElectricIncubatorTE::new, ModBlocks.ELECTRIC_INCUBATOR.get()).build(null));
-    public static final RegistryObject<TileEntityType<IncubatorTE>> incuabtor = TILE_ENTITY.register("incubator", () -> TileEntityType.Builder.of(IncubatorTE::new, ModBlocks.INCUBATOR.get()).build(null));
+    public static final RegistryObject<TileEntityType<ElectricIncubatorTE>> poweredIncubator = TILE_ENTITY.register("powered_incubator", () -> TileEntityType.Builder.of(ElectricIncubatorTE::new, ModBlocks.poweredIncubator.get()).build(null));
 
     public static void registerTileEntityRenderers() {
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.oakRoost.get(), RoostTileEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.darkOakRoost.get(), RoostTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.birchRoost.get(), RoostTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.spruceRoost.get(), RoostTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.acaciaRoost.get(), RoostTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.jungleRoost.get(), RoostTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.warpedRoost.get(), RoostTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.crimsonRoost.get(), RoostTileEntityRenderer::new);
     }
 
 }

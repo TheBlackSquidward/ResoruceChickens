@@ -33,7 +33,7 @@ public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingR
     public ChickenCatchingCategory(IGuiHelper iGuiHelper) {
         IDrawableStatic animationDrawable = iGuiHelper.createDrawable(GUI, 73, 0, 24, 252);
         this.animation = new ChickenCatchingDrawable(animationDrawable, iGuiHelper.createTickTimer(18, 18, false));
-        this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ModItems.CHICKEN_CATCHER.get()));
+        this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ModItems.chickenCatcher.get()));
         this.background = iGuiHelper.createDrawable(GUI, 0, 0, 72, 18);
         this.localizedName = I18n.get("gui.resourcechickens.jei.category.chicken_catching");
     }
@@ -43,7 +43,7 @@ public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingR
         for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry()) {
             recipes.add(new ChickenCatchingRecipe(chickenRegistryObject));
         }
-        recipes.add(new ChickenCatchingRecipe(ModItems.VANILLA_CHICKEN));
+        recipes.add(new ChickenCatchingRecipe(ModItems.vanillaChickenItem));
         return recipes;
     }
 

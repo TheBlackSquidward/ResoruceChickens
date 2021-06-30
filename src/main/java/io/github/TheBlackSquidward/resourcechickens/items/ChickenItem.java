@@ -58,7 +58,7 @@ public class ChickenItem extends BaseItem {
             BlockPos finalBlockpos;
             World world = context.getLevel();
             if (!world.isClientSide()) {
-                if (itemStack.getItem() != ModItems.VANILLA_CHICKEN.get()) {
+                if (itemStack.getItem() != ModItems.vanillaChickenItem.get()) {
                     BlockPos blockpos = context.getClickedPos();
                     Direction direction = context.getClickedFace();
                     BlockState blockstate = world.getBlockState(blockpos);

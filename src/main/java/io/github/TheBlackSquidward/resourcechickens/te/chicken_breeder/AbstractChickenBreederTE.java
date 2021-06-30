@@ -99,8 +99,8 @@ public abstract class AbstractChickenBreederTE extends AbstractTileEntity<Chicke
     }
 
     private boolean hasChickens() {
-        if (itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(1).getItem() != ModItems.VANILLA_CHICKEN.get()) {
-            return itemStackHandler.getStackInSlot(2).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(2).getItem() != ModItems.VANILLA_CHICKEN.get();
+        if (itemStackHandler.getStackInSlot(1).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(1).getItem() != ModItems.vanillaChickenItem.get()) {
+            return itemStackHandler.getStackInSlot(2).getItem() instanceof ChickenItem && itemStackHandler.getStackInSlot(2).getItem() != ModItems.vanillaChickenItem.get();
         } else {
             return false;
         }
@@ -220,7 +220,7 @@ public abstract class AbstractChickenBreederTE extends AbstractTileEntity<Chicke
                 }
                 if (slot == 1 || slot == 2) {
                     if (stack.getItem() instanceof ChickenItem) {
-                        return stack.getItem() != ModItems.VANILLA_CHICKEN.get();
+                        return stack.getItem() != ModItems.vanillaChickenItem.get();
                     }
                 }
                 return false;

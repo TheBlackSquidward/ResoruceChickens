@@ -25,6 +25,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> spruceRoost = BLOCKS.register("spruce_roost", SpurceRoostBlock::new);
     public static final RegistryObject<Block> acaciaRoost = BLOCKS.register("acacia_roost", AcaciaRoostBlock::new);
     public static final RegistryObject<Block> jungleRoost = BLOCKS.register("jungle_roost", JungleRoostBlock::new);
+    public static final RegistryObject<Block> warpedRoost = BLOCKS.register("warped_roost", WarpedRoostBlock::new);
+    public static final RegistryObject<Block> crimsonRoost = BLOCKS.register("crimson_roost", CrimsonRoostBlock::new);
     public static final RegistryObject<Block> poweredRoost = BLOCKS.register("powered_roost", PoweredRoostBlock::new);
 
     //Henhouses
@@ -34,6 +36,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> spruceHenhouse = BLOCKS.register("spruce_henhouse", SpurceHenhouseBlock::new);
     public static final RegistryObject<Block> acaciaHenhouse = BLOCKS.register("acacia_henhouse", AcaciaHenhouseBlock::new);
     public static final RegistryObject<Block> jungleHenhouse = BLOCKS.register("jungle_henhouse", JungleHenhouseBlock::new);
+    public static final RegistryObject<Block> warpedHenhouse = BLOCKS.register("warped_henhouse", WarpedHenhouseBlock::new);
+    public static final RegistryObject<Block> crimsonHenhouse = BLOCKS.register("crimson_henhouse", CrimsonHenhouseBlock::new);
 
     //Chicken Breeders
     public static final RegistryObject<Block> oakChickenBreeder = BLOCKS.register("oak_chicken_breeder", OakChickenBreederBlock::new);
@@ -42,6 +46,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> spruceChickenBreeder = BLOCKS.register("spruce_chicken_breeder", SpruceChickenBreederBlock::new);
     public static final RegistryObject<Block> acaciaChickenBreeder = BLOCKS.register("acacia_chicken_breeder", AcaciaChickenBreederBlock::new);
     public static final RegistryObject<Block> jungleChickenBreeder = BLOCKS.register("jungle_chicken_breeder", JungleChickenBreederBlock::new);
+    public static final RegistryObject<Block> warpedChickenBreeder = BLOCKS.register("warped_chicken_breeder", WarpedChickenBreederBlock::new);
+    public static final RegistryObject<Block> crimsonChickenBreeder = BLOCKS.register("crimson_chicken_breeder", CrimsonChickenBreederBlock::new);
     public static final RegistryObject<Block> poweredChickenBreeder = BLOCKS.register("powered_chicken_breeder", PoweredChickenBreederBlock::new);
 
     //Mutliblock
@@ -50,8 +56,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> industrialCasing = BLOCKS.register("industrial_casing", IndustrialCasingBlock::new);
     public static final RegistryObject<Block> industrialGlass = BLOCKS.register("industrial_glass", IndustrialGlassBlock::new);
 
-    //TODO redo
-    public static final RegistryObject<Block> INCUBATOR = BLOCKS.register("incubator", IncubatorBlock::new);
-    public static final RegistryObject<Block> ELECTRIC_INCUBATOR = BLOCKS.register("electric_incubator", ElectricIncubatorBlock::new);
+    //Misc
+    public static final RegistryObject<Block> poweredIncubator = BLOCKS.register("powered_incubator", PoweredIncubatorBlock::new);
 
 }

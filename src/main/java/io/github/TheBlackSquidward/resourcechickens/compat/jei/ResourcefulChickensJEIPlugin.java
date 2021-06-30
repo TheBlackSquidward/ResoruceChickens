@@ -42,7 +42,7 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 
         //Chicken Catching
-        registration.addRecipeCatalyst(new ItemStack(ModItems.CHICKEN_CATCHER.get()), ChickenCatchingCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.chickenCatcher.get()), ChickenCatchingCategory.ID);
 
         //Chicken Breeder
         registration.addRecipeCatalyst(new ItemStack(ModItems.oakChickenBreeder.get()), ChickenBreedingCategory.ID);
@@ -51,6 +51,8 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModItems.birchChickenBreeder.get()), ChickenBreedingCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.acaciaChickenBreeder.get()), ChickenBreedingCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.jungleChickenBreeder.get()), ChickenBreedingCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.crimsonChickenBreeder.get()), RoostCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.warpedChickenBreeder.get()), RoostCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.poweredChickenBreeder.get()), ChickenBreedingCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.chickenBreederController.get()), ChickenBreedingCategory.ID);
 
@@ -61,11 +63,12 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModItems.birchRoost.get()), RoostCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.acaciaRoost.get()), RoostCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.jungleRoost.get()), RoostCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.crimsonRoost.get()), RoostCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.warpedRoost.get()), RoostCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.poweredRoost.get()), RoostCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.roostController.get()), RoostCategory.ID);
 
-        registration.addRecipeCatalyst(new ItemStack(ModItems.INCUBATOR.get()), IncubatorCategory.ID);
-        registration.addRecipeCatalyst(new ItemStack(ModItems.ELECTRIC_INCUBATOR.get()), IncubatorCategory.ID);
+        registration.addRecipeCatalyst(new ItemStack(ModItems.poweredIncubator.get()), IncubatorCategory.ID);
 
     }
 

@@ -34,7 +34,7 @@ public class IncubatorCategory implements IRecipeCategory<IncubatorRecipe> {
     public IncubatorCategory(IGuiHelper iGuiHelper) {
         IDrawableStatic arrowDrawable = iGuiHelper.createDrawable(GUI, 73, 0, 26, 16);
         this.arrow = iGuiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
-        this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ModItems.INCUBATOR.get()));
+        this.icon = iGuiHelper.createDrawableIngredient(new ItemStack(ModItems.poweredIncubator.get()));
         this.background = iGuiHelper.createDrawable(GUI, 0, 0, 72, 18);
         this.localizedName = I18n.get("gui.resourcechickens.jei.category.incubator");
 

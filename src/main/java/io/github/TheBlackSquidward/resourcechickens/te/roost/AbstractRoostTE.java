@@ -120,7 +120,7 @@ public abstract class AbstractRoostTE  extends AbstractTileEntity<RoostRecipe> {
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
                 if(slot == 0) {
-                    if (stack.getItem() == ModItems.VANILLA_CHICKEN.get()) {
+                    if (stack.getItem() == ModItems.vanillaChickenItem.get()) {
                         return true;
                     }
                     return stack.getItem() instanceof ChickenItem;

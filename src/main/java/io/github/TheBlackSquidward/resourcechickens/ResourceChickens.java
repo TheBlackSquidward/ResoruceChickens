@@ -81,7 +81,7 @@ public class ResourceChickens {
 
         @Override
         public ItemStack makeIcon() {
-            return ModItems.VANILLA_CHICKEN.get().getDefaultInstance();
+            return ModItems.vanillaChickenItem.get().getDefaultInstance();
         }
     }
 
