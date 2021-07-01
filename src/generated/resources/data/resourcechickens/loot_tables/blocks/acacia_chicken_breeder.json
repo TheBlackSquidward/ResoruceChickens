@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "resourcechickens:electric_chicken_breeder"
+          "name": "resourcechickens:acacia_chicken_breeder"
         }
       ],
       "conditions": [
