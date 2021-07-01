@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "resourcechickens:electric_incubator"
+          "name": "resourcechickens:warped_henhouse"
         }
       ],
       "conditions": [

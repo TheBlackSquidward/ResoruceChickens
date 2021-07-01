@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "resourcechickens:chicken_breeder"
+          "name": "resourcechickens:warped_chicken_breeder"
         }
       ],
       "conditions": [

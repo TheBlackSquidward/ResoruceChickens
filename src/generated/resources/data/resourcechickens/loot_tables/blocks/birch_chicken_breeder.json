@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "resourcechickens:roost_casing"
+          "name": "resourcechickens:birch_chicken_breeder"
         }
       ],
       "conditions": [
