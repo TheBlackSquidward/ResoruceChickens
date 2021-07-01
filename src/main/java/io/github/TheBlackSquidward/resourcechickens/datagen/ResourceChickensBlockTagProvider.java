@@ -5,10 +5,10 @@ import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
-public class BlockTagGenerator extends BlockTagsProvider {
+public class ResourceChickensBlockTagProvider extends BlockTagsProvider {
 
-    public BlockTagGenerator(DataGenerator dataGenerator, ExistingFileHelper existingFileHelper) {
-        super(dataGenerator, ResourceChickens.MODID, existingFileHelper);
+    public ResourceChickensBlockTagProvider(DataGenerator dataGenerator, ExistingFileHelper existingFileHelper) {
+        super(dataGenerator, ResourceChickens.MOD_ID, existingFileHelper);
     }
 
     @Override

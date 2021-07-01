@@ -8,7 +8,7 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 
-public class CustomTags {
+public class ResourceChickensTags {
 
     public static class Blocks {
 
@@ -19,7 +19,7 @@ public class CustomTags {
         }
 
         private static ITag.INamedTag<Block> mod(String path) {
-            return BlockTags.bind(new ResourceLocation(ResourceChickens.MODID, path).toString());
+            return BlockTags.bind(new ResourceLocation(ResourceChickens.MOD_ID, path).toString());
         }
     }
     public static class Items {
@@ -33,7 +33,7 @@ public class CustomTags {
         }
 
         private static ITag.INamedTag<Item> mod(String path) {
-            return ItemTags.bind(new ResourceLocation(ResourceChickens.MODID, path).toString());
+            return ItemTags.bind(new ResourceLocation(ResourceChickens.MOD_ID, path).toString());
         }
     }
 
