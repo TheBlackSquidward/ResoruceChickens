@@ -6,8 +6,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'me.sizableshrimp.parchmenttest', name: 'ForgeGradle', version: '4.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+        classpath group: 'me.sizableshrimp.parchmenttest', name: 'ForgeGradle', version: '5.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.8-SNAPSHOT'
     }
 }
 
