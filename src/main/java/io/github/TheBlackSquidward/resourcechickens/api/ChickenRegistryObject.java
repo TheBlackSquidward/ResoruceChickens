@@ -21,7 +21,7 @@ public class ChickenRegistryObject {
     private final ChickenType chickenType;
 
 
-    private RegistryObject<EntityType<CustomChickenEntity>> chickenEntityRegistryObject;
+    private RegistryObject<EntityType<? extends CustomChickenEntity>>chickenEntityRegistryObject;
     private ResourceLocation registryID;
 
     private RegistryObject<Item> chickenItemRegistryObject;
@@ -77,11 +77,11 @@ public class ChickenRegistryObject {
         return hasFeather;
     }
 
-    public RegistryObject<EntityType<CustomChickenEntity>> getChickenEntityRegistryObject() {
+    public RegistryObject<EntityType<? extends CustomChickenEntity>> getChickenEntityRegistryObject() {
         return chickenEntityRegistryObject;
     }
 
-    public void setChickenEntityRegistryObject(RegistryObject<EntityType<CustomChickenEntity>> chickenEntityRegistryObject) {
+    public void setChickenEntityRegistryObject(RegistryObject<EntityType<? extends CustomChickenEntity>> chickenEntityRegistryObject) {
         this.chickenEntityRegistryObject = chickenEntityRegistryObject;
     }
 

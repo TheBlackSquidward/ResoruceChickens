@@ -1,9 +1,11 @@
 {
+  "beeType": "",
+  "hasFeather": true,
   "roostData": {
     "canRoost": true,
-    ""
+    "totalRoostTime": 300
   },
-  "breedingData": {
+  "breedData": {
     "isBreedable": true,
     "breedChance": 1.0,
     "parent1": "",

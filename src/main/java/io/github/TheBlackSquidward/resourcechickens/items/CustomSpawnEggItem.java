@@ -30,18 +30,7 @@ public class CustomSpawnEggItem extends BaseItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenSpawnEggItem(this);
-        StringBuilder stringBuilder = new StringBuilder(100);
-        String itemOutput = WordUtils.capitalize(stringBuilder.toString().replace("_", " "));
-        tooltip.add(new StringTextComponent(TextFormatting.GRAY + "Lay Item: " + TextFormatting.WHITE + itemOutput));
-        tooltip.add(new StringTextComponent(TextFormatting.GRAY + "Chicken Type: " + chickenRegistryObject.getChickenType().getName()));
-        /*
-        if(chickenRegistryObject.isBreedable()) {
-            tooltip.add(new StringTextComponent(TextFormatting.YELLOW + "Bred from" + TextFormatting.WHITE + ": " + TextFormatting.GOLD + chickenRegistryObject.getParent1().getForamattedName() + TextFormatting.WHITE + " & " + TextFormatting.GOLD + chickenRegistryObject.getParent2().getForamattedName()));
-        }else{
-            tooltip.add(new StringTextComponent(TextFormatting.RED + "Cannot be bred."));
-        }
-         */
+        //TODO redo
     }
 
     @Override

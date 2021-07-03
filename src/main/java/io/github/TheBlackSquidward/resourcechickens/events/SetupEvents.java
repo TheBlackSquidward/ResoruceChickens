@@ -3,6 +3,7 @@ package io.github.TheBlackSquidward.resourcechickens.events;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.client.render.CustomChickenRenderer;
+import io.github.TheBlackSquidward.resourcechickens.init.ModEntities;
 import io.github.TheBlackSquidward.resourcechickens.init.ModScreens;
 import io.github.TheBlackSquidward.resourcechickens.init.ModTileEntities;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,7 +19,7 @@ public class SetupEvents {
     @SubscribeEvent
     public static void setupClient(FMLClientSetupEvent e) {
         ResourceChickens.LOGGER.info("Beginning Client Setup...");
-        ChickenRegistry.getChickenRegistry().forEach((customChicken) -> RenderingRegistry.registerEntityRenderingHandler(customChicken.getChickenEntityRegistryObject().get(), CustomChickenRenderer::new));
+        ModEntities.getModChickens().forEach((s, customChicken) -> RenderingRegistry.registerEntityRenderingHandler(customChicken.get(), CustomChickenRenderer::new));
         ModScreens.registerScreens();
         ModTileEntities.registerTileEntityRenderers();
     }

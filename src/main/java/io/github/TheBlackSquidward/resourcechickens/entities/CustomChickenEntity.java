@@ -1,5 +1,12 @@
 package io.github.TheBlackSquidward.resourcechickens.entities;
 
+import com.google.gson.JsonObject;
+import io.github.TheBlackSquidward.resourcechickens.api2.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api2.CustomChickenData;
+import io.github.TheBlackSquidward.resourcechickens.api2.IResourceChicken;
+import io.github.TheBlackSquidward.resourcechickens.api2.data.BreedData;
+import io.github.TheBlackSquidward.resourcechickens.api2.data.CoreData;
+import io.github.TheBlackSquidward.resourcechickens.api2.data.RoostData;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -18,12 +25,33 @@ import net.minecraft.world.World;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-public class CustomChickenEntity extends ChickenEntity {
+public class CustomChickenEntity extends ChickenEntity implements IResourceChicken {
 
     private static final Ingredient TEMPTATION_ITEM = Ingredient.of(Items.WHEAT_SEEDS);
 
-    public CustomChickenEntity(EntityType<? extends ChickenEntity> type, World worldIn) {
+    protected final CustomChickenData customChickenData;
+    protected final String chickenName;
+
+    public CustomChickenEntity(EntityType<? extends ChickenEntity> type, World worldIn, String chickenName) {
         super(type, worldIn);
+        this.chickenName = chickenName;
+        this.customChickenData = ChickenRegistry.getChickenRegistry().getCustomChickenObject(chickenName);
+    }
+
+    public String getChickenName() {
+        return chickenName;
+    }
+    public JsonObject getRawChickenData() {
+        return customChickenData.getRawData();
+    }
+    public CoreData getCoreData() {
+        return customChickenData.getCoreData();
+    }
+    public BreedData getBreedData() {
+        return customChickenData.getBreedData();
+    }
+    public RoostData getRoostData() {
+        return customChickenData.getRoostData();
     }
 
     @Override

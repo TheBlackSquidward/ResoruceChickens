@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.files.config;
+package io.github.TheBlackSquidward.resourcechickens.files;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import net.minecraftforge.fml.loading.FMLPaths;

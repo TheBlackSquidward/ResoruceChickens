@@ -1,6 +1,13 @@
 package io.github.TheBlackSquidward.resourcechickens.api.utils;
 
+import com.google.gson.Gson;
+
 public class Constants {
+
+    public static class ResourceChickens {
+
+        public static final Gson GSON = new Gson();
+    }
 
     public static class NBT {
         public static final String INVENTORY = "inventory";

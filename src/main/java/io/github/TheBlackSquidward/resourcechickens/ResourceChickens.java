@@ -1,20 +1,32 @@
 package io.github.TheBlackSquidward.resourcechickens;
 
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api2.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api2.ResourceChickensAPI;
+import io.github.TheBlackSquidward.resourcechickens.api2.data.CoreData;
+import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcechickens.entities.ResourceChicken;
+import io.github.TheBlackSquidward.resourcechickens.files.ChickenFiles;
 import io.github.TheBlackSquidward.resourcechickens.files.config.Config;
 import io.github.TheBlackSquidward.resourcechickens.files.config.ConfigHelper;
-import io.github.TheBlackSquidward.resourcechickens.files.config.FileHelper;
+import io.github.TheBlackSquidward.resourcechickens.files.FileHelper;
 import io.github.TheBlackSquidward.resourcechickens.init.*;
+import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
+import io.github.TheBlackSquidward.resourcechickens.items.CustomSpawnEggItem;
+import io.github.TheBlackSquidward.resourcechickens.items.FeatherItem;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.compat.top.TopCompat;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -24,12 +36,10 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry.initializeChickenRegistry;
-
-@Mod(ResourceChickens.MODID)
+@Mod(ResourceChickens.MOD_ID)
 public class ResourceChickens {
 
-    public static final String MODID = "resourcechickens";
+    public static final String MOD_ID = "resourcechickens";
 
     public static final Logger LOGGER = LogManager.getLogger();
 
@@ -37,6 +47,14 @@ public class ResourceChickens {
 
     public ResourceChickens() {
         FileHelper.setupPaths();
+        ResourceChickensAPI.setChickenRegistry(ChickenRegistry.getChickenRegistry());
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.CommonConfig.commonConfig, "resourcechickens/common.toml");
+        ConfigHelper.loadConfig(Config.CommonConfig.commonConfig, FMLPaths.CONFIGDIR.get().resolve("resourcechickens/common.toml"));
+
+        ChickenFiles.setupChickens();
+        initChickens();
+
         IEventBus iEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         iEventBus.addListener(this::setup);
 
@@ -51,11 +69,8 @@ public class ResourceChickens {
         iEventBus.addListener(this::onInterModEnqueue);
         MinecraftForge.EVENT_BUS.register(this);
 
-        initializeChickenRegistry();
-        ChickenRegistry.registerChickens();
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.CommonConfig.commonConfig, "resourcechickens/common.toml");
-        ConfigHelper.loadConfig(Config.CommonConfig.commonConfig, FMLPaths.CONFIGDIR.get().resolve("resourcechickens/common.toml"));
+        //io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry.initializeChickenRegistry();
+        //io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry.registerChickens();
     }
 
     private void onCommandRegister(RegisterCommandsEvent e) {
@@ -73,10 +88,33 @@ public class ResourceChickens {
         }
     }
 
+
+    //TODO move these methods to another location for now it can be here
+    public static void initChickens() {
+        ChickenRegistry.getChickenRegistry().getChickens().forEach((name, customChickenData) -> {
+            CoreData coreData = customChickenData.getCoreData();
+            boolean hasFeather = coreData.hasFeather();
+            registerChicken(name, hasFeather);
+        });
+    }
+    public static void registerChicken(String chickenName, boolean hasFeather) {
+        final RegistryObject<EntityType<? extends CustomChickenEntity>> customChickenEntity = ModEntities.ENTITY_TYPES.register(chickenName + "_chicken",
+                () -> EntityType.Builder.<ResourceChicken>of((type, world) -> new ResourceChicken(type, world, chickenName), EntityClassification.CREATURE)
+                        .sized(1.0f, 1.0f)
+                        .build(new ResourceLocation(ResourceChickens.MOD_ID, chickenName +  "_chicken").toString()));
+        RegistryObject<Item> customChickenItem = ModItems.ITEMS.register(chickenName + "_chicken_item", () -> new ChickenItem(new Item.Properties().stacksTo(16)));
+        RegistryObject<Item> customChickenSpawnEgg = ModItems.ITEMS.register(chickenName + "_chicken_spawn_egg", () -> new CustomSpawnEggItem(new Item.Properties()));
+        if (hasFeather) {
+            RegistryObject<Item> customChickenFeather = ModItems.ITEMS.register(chickenName + "_chicken_feather", () -> new FeatherItem(new Item.Properties()));
+        }
+        ModEntities.getModChickens().put(chickenName, customChickenEntity);
+    }
+
+
     public static class ItemGroup extends net.minecraft.item.ItemGroup {
 
         public ItemGroup() {
-            super(MODID);
+            super(MOD_ID);
         }
 
         @Override
