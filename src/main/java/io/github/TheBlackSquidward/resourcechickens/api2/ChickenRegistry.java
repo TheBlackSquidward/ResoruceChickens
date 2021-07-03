@@ -3,6 +3,7 @@ package io.github.TheBlackSquidward.resourcechickens.api2;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
+import net.minecraft.item.ItemStack;
 
 import java.util.*;
 
@@ -20,9 +21,8 @@ public class ChickenRegistry implements IChickenRegistry{
         return chickenData.containsKey(chickenName);
     }
 
-    public CustomChickenData getCustomChickenObject(String chickenName) {
-        //TODO
-        return null;
+    public CustomChickenData getChickenData(String chickenName) {
+        return chickenData.getOrDefault(chickenName, CustomChickenData.DEFAULT);
     }
 
     public JsonObject getRawCustomChickenObject(String chickenName) {

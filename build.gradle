@@ -102,6 +102,8 @@ dependencies {
 
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
+
+    compileOnly 'org.jetbrains:annotations:20.1.0'
 }
 
 def resource_targets = ["META-INF/mods.toml", "pack.mcmeta"]

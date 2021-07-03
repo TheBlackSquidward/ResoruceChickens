@@ -7,15 +7,13 @@ public class BreedData {
 
     public static final BreedData DEFAULT = new BreedData(false, 0, "", "");
 
-    public static Codec<BreedData> CODEC() {
-        return RecordCodecBuilder.create(breedDataInstance -> breedDataInstance.group(
+    public static Codec<BreedData> CODEC = RecordCodecBuilder.create(breedDataInstance -> breedDataInstance.group(
                 Codec.BOOL.fieldOf("canBreed").orElse(false).forGetter(BreedData::canBreed),
                 //TODO change default value
                 Codec.INT.fieldOf("totalBreedTime").orElse(2400).forGetter(BreedData::getTotalBreedTime),
                 Codec.STRING.fieldOf("parent1").orElse(null).forGetter(BreedData::getParent1),
                 Codec.STRING.fieldOf("parent2").orElse(null).forGetter(BreedData::getParent2)
         ).apply(breedDataInstance, BreedData::new));
-    }
 
     private BreedData(boolean canBreed, int totalBreedTime, String parent1, String parent2) {
         this.canBreed = canBreed;

@@ -17,11 +17,13 @@ import java.util.function.Consumer;
 
 public class CustomChickenData {
 
+    public static CustomChickenData DEFAULT = new CustomChickenData(CoreData.DEFAULT, BreedData.DEFAULT, RoostData.DEFAULT);
+
     public static Codec<CustomChickenData> CODEC(String chickenName) {
         return RecordCodecBuilder.create(instance -> instance.group(
             CoreData.CODEC(chickenName).fieldOf("coreData").orElseGet((Consumer<String>) s -> ResourceChickens.LOGGER.error("CoreData is REQUIRED!"),null).forGetter(CustomChickenData::getCoreData),
-            BreedData.CODEC().fieldOf("breedData").orElse(BreedData.DEFAULT).forGetter(CustomChickenData::getBreedData),
-            RoostData.CODEC().fieldOf("roostData").orElse(RoostData.DEFAULT).forGetter(CustomChickenData::getRoostData)
+            BreedData.CODEC.fieldOf("breedData").orElse(BreedData.DEFAULT).forGetter(CustomChickenData::getBreedData),
+            RoostData.CODEC.fieldOf("roostData").orElse(RoostData.DEFAULT).forGetter(CustomChickenData::getRoostData)
         ).apply(instance, CustomChickenData::new));
     }
 

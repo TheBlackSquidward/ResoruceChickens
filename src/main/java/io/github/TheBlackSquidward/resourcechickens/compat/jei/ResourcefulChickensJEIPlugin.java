@@ -34,7 +34,6 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
         IGuiHelper iGuiHelper = registration.getJeiHelpers().getGuiHelper();
         registration.addRecipeCategories(new ChickenCatchingCategory(iGuiHelper));
         registration.addRecipeCategories(new ChickenBreedingCategory(iGuiHelper));
-        registration.addRecipeCategories(new IncubatorCategory(iGuiHelper));
         registration.addRecipeCategories(new RoostCategory(iGuiHelper));
     }
 
@@ -68,8 +67,6 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ModItems.poweredRoost.get()), RoostCategory.ID);
         registration.addRecipeCatalyst(new ItemStack(ModItems.roostController.get()), RoostCategory.ID);
 
-        registration.addRecipeCatalyst(new ItemStack(ModItems.poweredIncubator.get()), IncubatorCategory.ID);
-
     }
 
     @Override
@@ -77,7 +74,6 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
         World clientWorld = Minecraft.getInstance().level;
         if (clientWorld != null) {
             registration.addRecipes(ChickenCatchingCategory.getCatchingRecipes(), ChickenCatchingCategory.ID);
-            registration.addRecipes(IncubatorCategory.getIncubatorRecipes(), IncubatorCategory.ID);
 
             List<RoostRecipe> roostRecipes = clientWorld.getRecipeManager().getAllRecipesFor(ModRecipes.ROOST_RECIPE_TYPE);
             registration.addRecipes(roostRecipes, RoostCategory.ID);

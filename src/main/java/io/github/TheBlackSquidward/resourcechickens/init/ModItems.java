@@ -66,7 +66,7 @@ public class ModItems {
     public static final RegistryObject<UpgradeItem> energyUpgrade = ITEMS.register("energy_upgrade", () -> new UpgradeItem(new Item.Properties()));
 
     //Chickens - Vanilla
-    public static final RegistryObject<ChickenItem> vanillaChickenItem = ITEMS.register("vanilla_chicken_item", () -> new ChickenItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<ChickenItem> vanillaChickenItem = ITEMS.register("vanilla_chicken_item", () -> new VanillaChickenItem(new Item.Properties().stacksTo(16)));
 
     //Eggs
     public static final RegistryObject<Item> experienceImbuedEgg = ITEMS.register("experience_imbued_egg", () -> new CustomEggItem(new Item.Properties()));

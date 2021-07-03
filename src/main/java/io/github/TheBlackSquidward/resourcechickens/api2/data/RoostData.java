@@ -7,13 +7,11 @@ public class RoostData {
 
     public static final RoostData DEFAULT = new RoostData(false, 0);
 
-    public static Codec<RoostData> CODEC() {
-        return RecordCodecBuilder.create(instance -> instance.group(
+    public static Codec<RoostData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.BOOL.fieldOf("canRoost").orElse(false).forGetter(RoostData::canRoost),
                 //TODO change default value
                 Codec.INT.fieldOf("totalRoostTime").orElse(300).forGetter(RoostData::getTotalRoostTime)
         ).apply(instance, RoostData::new));
-    }
 
     private RoostData(boolean canRoost, int totalRoostTime) {
         this.canRoost = canRoost;

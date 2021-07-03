@@ -1,8 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.items;
 
 import com.sun.javafx.geom.Vec3d;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import net.minecraft.entity.LivingEntity;
@@ -27,12 +25,11 @@ public class ChickenCatcherItem extends BaseItem {
         World world = p.level;
         if (entity instanceof CustomChickenEntity) {
             CustomChickenEntity chickenEntity = (CustomChickenEntity) entity;
-            ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(chickenEntity);
             if (!entity.isBaby()) {
                 if (world.isClientSide) {
                    p.level.playSound(p, pos.x, pos.y, pos.z, SoundEvents.CHICKEN_EGG, entity.getSoundSource(), 1.0F, 1.0F);
                 } else {
-                    p.addItem(new ItemStack(chickenRegistryObject.getChickenItemRegistryObject().get(), 1));
+                    //TODO add chicken item to inv
                     itemStack.hurtAndBreak(1, p, (p_220045_0_) -> p_220045_0_.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
                     entity.remove();
                 }} else {

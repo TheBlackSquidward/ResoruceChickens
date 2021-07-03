@@ -1,7 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.events;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.client.render.CustomChickenRenderer;
 import io.github.TheBlackSquidward.resourcechickens.init.ModEntities;
 import io.github.TheBlackSquidward.resourcechickens.init.ModScreens;

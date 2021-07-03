@@ -2,8 +2,7 @@ package io.github.TheBlackSquidward.resourcechickens.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
+import io.github.TheBlackSquidward.resourcechickens.api2.CustomChickenData;
 import io.github.TheBlackSquidward.resourcechickens.blocks.roost.AbstractRoostBlock;
 import io.github.TheBlackSquidward.resourcechickens.te.roost.AbstractRoostTE;
 import net.minecraft.block.BlockState;
@@ -27,11 +26,11 @@ public class RoostTileEntityRenderer extends TileEntityRenderer<AbstractRoostTE>
         super(tileEntityRendererDispatcher);
     }
 
-    private static ResourceLocation getChickenTexture(ChickenRegistryObject chickenRegistryObject) {
-        if(chickenRegistryObject == null) {
+    private static ResourceLocation getChickenTexture(CustomChickenData customChickenData) {
+        if(customChickenData == null) {
             return new ResourceLocation("minecraft:textures/entity/chicken.png");
         }else {
-            return new ResourceLocation("resourcechickens:textures/entity/" + chickenRegistryObject.getEntityName() + ".png");
+            return new ResourceLocation("resourcechickens:textures/entity/" + customChickenData.getCoreData().getName() + "_chicken.png");
         }
     }
 
@@ -52,7 +51,7 @@ public class RoostTileEntityRenderer extends TileEntityRenderer<AbstractRoostTE>
         matrixStack.scale(scale, scale, scale);
         matrixStack.mulPose(Vector3f.YN.rotationDegrees(direction.toYRot()));
         matrixStack.mulPose(Vector3f.XP.rotationDegrees(180));
-        IVertexBuilder renderBuffer = vertexBuilder.getBuffer(ChickenModel.getRenderType(getChickenTexture(roost.getRoostingChicken())));
+        IVertexBuilder renderBuffer = vertexBuilder.getBuffer(ChickenModel.getRenderType(getChickenTexture(roost.getRoostingChickenData())));
         roostingChickenModel.chin.render(matrixStack, renderBuffer, combinedLight, combinedOverlay, 1, 1, 1, 1);
         roostingChickenModel.head.render(matrixStack, renderBuffer, combinedLight, combinedOverlay, 1, 1, 1, 1);
         roostingChickenModel.bill.render(matrixStack, renderBuffer, combinedLight, combinedOverlay, 1, 1, 1, 1);

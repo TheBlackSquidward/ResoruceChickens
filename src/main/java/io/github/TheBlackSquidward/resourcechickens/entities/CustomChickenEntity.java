@@ -35,7 +35,7 @@ public class CustomChickenEntity extends ChickenEntity implements IResourceChick
     public CustomChickenEntity(EntityType<? extends ChickenEntity> type, World worldIn, String chickenName) {
         super(type, worldIn);
         this.chickenName = chickenName;
-        this.customChickenData = ChickenRegistry.getChickenRegistry().getCustomChickenObject(chickenName);
+        this.customChickenData = ChickenRegistry.getChickenRegistry().getChickenData(chickenName);
     }
 
     public String getChickenName() {

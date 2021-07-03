@@ -1,8 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.client.render;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.client.model.CustomChickenModel;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import net.minecraft.client.renderer.RenderType;
@@ -28,7 +26,6 @@ public class CustomChickenRenderer extends MobRenderer<CustomChickenEntity, Cust
     @ParametersAreNonnullByDefault
     @Override
     public ResourceLocation getTextureLocation(CustomChickenEntity entity) {
-        ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(entity);
-        return new ResourceLocation(ResourceChickens.MOD_ID, "textures/entity/" + chickenRegistryObject.getEntityName() + ".png");
+        return new ResourceLocation(ResourceChickens.MOD_ID, "textures/entity/" + entity.getChickenName() + "_chicken.png");
     }
 }

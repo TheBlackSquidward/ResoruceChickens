@@ -1,21 +1,21 @@
 package io.github.TheBlackSquidward.resourcechickens.te.roost;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
+import io.github.TheBlackSquidward.resourcechickens.api2.CustomChickenData;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import io.github.TheBlackSquidward.resourcechickens.init.ModRecipes;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
+import io.github.TheBlackSquidward.resourcechickens.items.ResourceChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
 import io.github.TheBlackSquidward.resourcechickens.te.AbstractTileEntity;
 import io.netty.buffer.Unpooled;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
@@ -93,7 +93,7 @@ public abstract class AbstractRoostTE  extends AbstractTileEntity<RoostRecipe> {
 
     private int getGain() {
         CompoundNBT nbt = itemStackHandler.getStackInSlot(0).getOrCreateTag();
-        int gain = nbt.getInt(ResourceChickens.MODID + "_chicken_gain");
+        int gain = nbt.getInt(Constants.NBT.GAIN);
         if (gain == 0) {
             gain = 1;
         }
@@ -153,15 +153,16 @@ public abstract class AbstractRoostTE  extends AbstractTileEntity<RoostRecipe> {
         }
     }
 
-    public ChickenRegistryObject getRoostingChicken() {
-        return ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemStackHandler.getStackInSlot(0).getItem());
+    public CustomChickenData getRoostingChickenData() {
+        ItemStack roostingChicken = itemStackHandler.getStackInSlot(0);
+        Item item = roostingChicken.getItem();
+        if(item instanceof ResourceChickenItem) {
+            return ((ResourceChickenItem) item).getChickenData();
+        }
+        return null;
     }
 
     public boolean hasChicken() {
         return !itemStackHandler.getStackInSlot(0).isEmpty();
-    }
-
-    public Entity getChickenEntity() {
-        return getRoostingChicken().getChickenEntityRegistryObject().get().create(getWorld());
     }
 }

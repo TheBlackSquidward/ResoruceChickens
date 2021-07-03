@@ -1,4 +1,4 @@
-package io.github.TheBlackSquidward.resourcechickens.api;
+package io.github.TheBlackSquidward.resourcechickens.api2;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.text.TextFormatting;

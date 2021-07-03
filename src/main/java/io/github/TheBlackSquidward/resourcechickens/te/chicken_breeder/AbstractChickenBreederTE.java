@@ -1,11 +1,9 @@
 package io.github.TheBlackSquidward.resourcechickens.te.chicken_breeder;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
-import io.github.TheBlackSquidward.resourcechickens.init.ModTileEntities;
-import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
+import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
@@ -110,44 +108,15 @@ public abstract class AbstractChickenBreederTE extends AbstractTileEntity<Chicke
         return itemStackHandler.getStackInSlot(0).getCount() >= 2;
     }
 
-    public void addResult(ItemStack result) {
-        ItemStack item3 = itemStackHandler.getStackInSlot(3);
-        ItemStack item4 = itemStackHandler.getStackInSlot(4);
-        ItemStack item5 = itemStackHandler.getStackInSlot(5);
-        if (item3.isEmpty()) {
-            itemStackHandler.setStackInSlot(3, result);
-            itemStackHandler.getStackInSlot(0).shrink(2);
-        } else if (item3.getOrCreateTag().equals(result.getOrCreateTag()) && item3.getCount() < 16) {
-            int amount = item3.getCount() + 1;
-            result.setCount(amount);
-            itemStackHandler.setStackInSlot(3, result);
-            itemStackHandler.getStackInSlot(0).shrink(2);
-        } else if (item4.isEmpty()) {
-            itemStackHandler.setStackInSlot(4, result);
-            itemStackHandler.getStackInSlot(0).shrink(2);
-        } else if (item4.getOrCreateTag().equals(result.getOrCreateTag()) && item4.getCount() < 16) {
-            int amount = item4.getCount() + 1;
-            result.setCount(amount);
-            itemStackHandler.setStackInSlot(4, result);
-            itemStackHandler.getStackInSlot(0).shrink(2);
-        } else if (item5.isEmpty()) {
-            itemStackHandler.setStackInSlot(5, result);
-            itemStackHandler.getStackInSlot(0).shrink(2);
-        } else if (item5.getOrCreateTag().equals(result.getOrCreateTag()) && item5.getCount() < 16) {
-            int amount = item5.getCount() + 1;
-            result.setCount(amount);
-            itemStackHandler.setStackInSlot(5, result);
-            itemStackHandler.getStackInSlot(0).shrink(2);
-        }
-    }
-
+    //TODO borcken
+    /*
     private ItemStack mixChickens(ItemStack parent1Item, ItemStack parent2Item, ChickenRegistryObject parent1, ChickenRegistryObject parent2, ChickenRegistryObject newChicken) {
         ItemStack result = new ItemStack(newChicken.getChickenItemRegistryObject().get());
         CompoundNBT nbt = result.getOrCreateTag();
 
-        nbt.putInt(ResourceChickens.MODID + "_chicken_gain", 1);
-        nbt.putInt(ResourceChickens.MODID + "_chicken_growth", 1);
-        nbt.putInt(ResourceChickens.MODID + "_chicken_strength", 1);
+        nbt.putInt(ResourceChickens.MOD_ID + "_chicken_gain", 1);
+        nbt.putInt(ResourceChickens.MOD_ID + "_chicken_growth", 1);
+        nbt.putInt(ResourceChickens.MOD_ID + "_chicken_strength", 1);
         result.save(nbt);
         result.setTag(nbt);
         return result;
@@ -157,13 +126,13 @@ public abstract class AbstractChickenBreederTE extends AbstractTileEntity<Chicke
         ItemStack result = new ItemStack(parent1.getChickenItemRegistryObject().get());
         CompoundNBT nbt = result.getOrCreateTag();
 
-        int parent1Gain = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_gain");
-        int parent1Growth = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
-        int parent1Strength = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_strength");
+        int parent1Gain = parent1Item.getOrCreateTag().getInt(ResourceChickens.MOD_ID + "_chicken_gain");
+        int parent1Growth = parent1Item.getOrCreateTag().getInt(ResourceChickens.MOD_ID + "_chicken_growth");
+        int parent1Strength = parent1Item.getOrCreateTag().getInt(ResourceChickens.MOD_ID + "_chicken_strength");
 
-        int parent2Gain = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_gain");
-        int parent2Growth = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
-        int parent2Strength = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_strength");
+        int parent2Gain = parent2Item.getOrCreateTag().getInt(ResourceChickens.MOD_ID + "_chicken_gain");
+        int parent2Growth = parent2Item.getOrCreateTag().getInt(ResourceChickens.MOD_ID + "_chicken_growth");
+        int parent2Strength = parent2Item.getOrCreateTag().getInt(ResourceChickens.MOD_ID + "_chicken_strength");
 
 
         if (parent1Gain == 0) {
@@ -189,9 +158,9 @@ public abstract class AbstractChickenBreederTE extends AbstractTileEntity<Chicke
         int newGrowth = calculateNewStat(parent1Strength, parent2Strength, parent1Growth, parent2Growth, level.random);
         int newStrength = calculateNewStat(parent1Strength, parent2Strength, parent1Strength, parent2Strength, level.random);
 
-        nbt.putInt(ResourceChickens.MODID + "_chicken_gain", newGain);
-        nbt.putInt(ResourceChickens.MODID + "_chicken_growth", newGrowth);
-        nbt.putInt(ResourceChickens.MODID + "_chicken_strength", newStrength);
+        nbt.putInt(ResourceChickens.MOD_ID + "_chicken_gain", newGain);
+        nbt.putInt(ResourceChickens.MOD_ID + "_chicken_growth", newGrowth);
+        nbt.putInt(ResourceChickens.MOD_ID + "_chicken_strength", newStrength);
         result.save(nbt);
         result.setTag(nbt);
         return result;
@@ -204,6 +173,7 @@ public abstract class AbstractChickenBreederTE extends AbstractTileEntity<Chicke
             return 1;
         return Math.min(newStatValue, 10);
     }
+     */
 
     public ItemStackHandler createItemStackHandler() {
         return new ItemStackHandler(6) {
@@ -230,8 +200,8 @@ public abstract class AbstractChickenBreederTE extends AbstractTileEntity<Chicke
 
     private int getOverallGrowth(ItemStack parent1Item, ItemStack parent2Item) {
         if (hasChickens()) {
-            int parent1Growth = parent1Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
-            int parent2Growth = parent2Item.getOrCreateTag().getInt(ResourceChickens.MODID + "_chicken_growth");
+            int parent1Growth = parent1Item.getOrCreateTag().getInt(ResourceChickens.MOD_ID + "_chicken_growth");
+            int parent2Growth = parent2Item.getOrCreateTag().getInt(ResourceChickens.MOD_ID + "_chicken_growth");
             if (parent1Growth == 0) {
                 parent1Growth = 1;
             }

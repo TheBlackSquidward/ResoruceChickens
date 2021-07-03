@@ -11,8 +11,9 @@ import io.github.TheBlackSquidward.resourcechickens.files.config.ConfigHelper;
 import io.github.TheBlackSquidward.resourcechickens.files.FileHelper;
 import io.github.TheBlackSquidward.resourcechickens.init.*;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
-import io.github.TheBlackSquidward.resourcechickens.items.CustomSpawnEggItem;
+import io.github.TheBlackSquidward.resourcechickens.items.ChickenSpawnEggItem;
 import io.github.TheBlackSquidward.resourcechickens.items.FeatherItem;
+import io.github.TheBlackSquidward.resourcechickens.items.ResourceChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
 import io.github.TheBlackSquidward.resourcechickens.compat.top.TopCompat;
 import net.minecraft.entity.EntityClassification;
@@ -102,8 +103,9 @@ public class ResourceChickens {
                 () -> EntityType.Builder.<ResourceChicken>of((type, world) -> new ResourceChicken(type, world, chickenName), EntityClassification.CREATURE)
                         .sized(1.0f, 1.0f)
                         .build(new ResourceLocation(ResourceChickens.MOD_ID, chickenName +  "_chicken").toString()));
-        RegistryObject<Item> customChickenItem = ModItems.ITEMS.register(chickenName + "_chicken_item", () -> new ChickenItem(new Item.Properties().stacksTo(16)));
-        RegistryObject<Item> customChickenSpawnEgg = ModItems.ITEMS.register(chickenName + "_chicken_spawn_egg", () -> new CustomSpawnEggItem(new Item.Properties()));
+        RegistryObject<Item> customChickenItem = ModItems.ITEMS.register(chickenName + "_chicken_item", () -> new ResourceChickenItem(customChickenEntity, chickenName, new Item.Properties().stacksTo(16)));
+        //TODO
+        RegistryObject<Item> customChickenSpawnEgg = ModItems.ITEMS.register(chickenName + "_chicken_spawn_egg", () -> new ChickenSpawnEggItem(customChickenEntity, chickenName, new Item.Properties()));
         if (hasFeather) {
             RegistryObject<Item> customChickenFeather = ModItems.ITEMS.register(chickenName + "_chicken_feather", () -> new FeatherItem(new Item.Properties()));
         }
