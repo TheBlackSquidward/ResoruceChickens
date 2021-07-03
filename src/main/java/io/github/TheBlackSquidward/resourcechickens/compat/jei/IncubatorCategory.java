@@ -24,8 +24,8 @@ import java.util.List;
 
 public class IncubatorCategory implements IRecipeCategory<IncubatorRecipe> {
 
-    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/jei/incubator.png");
-    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MODID, "incubator");
+    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/jei/incubator.png");
+    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MOD_ID, "incubator");
     private final IDrawable background;
     private final IDrawableAnimated arrow;
     private final String localizedName;

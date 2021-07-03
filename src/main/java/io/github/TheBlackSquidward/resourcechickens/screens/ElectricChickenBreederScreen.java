@@ -11,7 +11,7 @@ import net.minecraft.util.text.ITextComponent;
 
 public class ElectricChickenBreederScreen extends ContainerScreen<ElectricChickenBreederContainer> {
 
-    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/electric_chicken_breeder_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/electric_chicken_breeder_gui.png");
 
     public ElectricChickenBreederScreen(ElectricChickenBreederContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);

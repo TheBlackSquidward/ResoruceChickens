@@ -19,8 +19,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class RoostCategory implements IRecipeCategory<RoostRecipe> {
 
-    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/jei/roost.png");
-    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MODID, "roost");
+    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/jei/roost.png");
+    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MOD_ID, "roost");
     private final IDrawable background;
     private final IDrawableAnimated arrow;
     private final String localizedName;

@@ -11,7 +11,7 @@ import net.minecraft.util.text.ITextComponent;
 
 public class RoostScreen extends ContainerScreen<RoostContainer> {
 
-    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/roost_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/roost_gui.png");
 
     RoostContainer roostContainer;
 

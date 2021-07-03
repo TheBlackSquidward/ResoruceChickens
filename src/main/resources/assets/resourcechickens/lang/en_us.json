@@ -299,5 +299,6 @@
     "gui.resourcechickens.jei.category.chicken_catching": "Chicken Catching",
     "gui.resourcechickens.jei.category.roost": "Roost",
     "gui.resourcechickens.jei.category.incubator": "Incubator",
-    "gui.resourcechickens.top.chicken_breeder.progress": "Progress: "
+    "gui.resourcechickens.top.chicken_breeder.progress": "Progress: ",
+    "gui.resourcechickens.top.roost.progress": "Progress: "
 }

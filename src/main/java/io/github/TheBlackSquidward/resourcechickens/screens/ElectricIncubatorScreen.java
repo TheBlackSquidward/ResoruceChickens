@@ -11,7 +11,7 @@ import net.minecraft.util.text.ITextComponent;
 
 public class ElectricIncubatorScreen extends ContainerScreen<ElectricIncubatorContainer> {
 
-    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/electric_incubator_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/electric_incubator_gui.png");
 
     public ElectricIncubatorScreen(ElectricIncubatorContainer container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);

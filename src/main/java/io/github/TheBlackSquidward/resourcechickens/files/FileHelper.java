@@ -13,7 +13,8 @@ public class FileHelper {
 
     public static void setupPaths() {
         Path configPath = FMLPaths.CONFIGDIR.get();
-        Path chickenDir = Paths.get(configPath.toAbsolutePath().toString(), ResourceChickens.MODID, "chickens");
+        Path chickenDir = Paths.get(configPath.toAbsolutePath().toString(), ResourceChickens.MOD_ID, "chickens");
+        ChickenFiles.setChickenPath(chickenDir);
         try { Files.createDirectories(chickenDir);
         } catch (FileAlreadyExistsException ignored) { //ignored
         } catch (IOException e) { ResourceChickens.LOGGER.error("failed to create \"chickens\" directory");}

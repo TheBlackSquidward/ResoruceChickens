@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModRecipes {
 
-    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ResourceChickens.MODID);
+    public static final DeferredRegister<IRecipeSerializer<?>> RECIPE_SERIALIZER = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ResourceChickens.MOD_ID);
 
     public static final RegistryObject<IRecipeSerializer<RoostRecipe>> ROOST_SERIALIZER = RECIPE_SERIALIZER.register("roost", RoostRecipeSerializer::new);
     public static final RegistryObject<IRecipeSerializer<ChickenBreedingRecipe>> CHICKEN_BREEDING_SERIALIZER = RECIPE_SERIALIZER.register("chicken_breeding", ChickenBreedingRecipeSerializer::new);

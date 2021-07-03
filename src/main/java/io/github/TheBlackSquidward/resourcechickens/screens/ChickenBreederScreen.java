@@ -12,7 +12,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 
 public class ChickenBreederScreen extends ContainerScreen<ChickenBreederContainer> {
 
-    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/chicken_breeder_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/chicken_breeder_gui.png");
 
     ChickenBreederContainer chickenBreederContainer;
 

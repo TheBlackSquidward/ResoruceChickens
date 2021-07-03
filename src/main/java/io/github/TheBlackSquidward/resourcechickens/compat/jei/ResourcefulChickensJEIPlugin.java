@@ -26,7 +26,7 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
 
     @Override
     public ResourceLocation getPluginUid() {
-        return new ResourceLocation(ResourceChickens.MODID, "jei_plugin");
+        return new ResourceLocation(ResourceChickens.MOD_ID, "jei_plugin");
     }
 
     @Override

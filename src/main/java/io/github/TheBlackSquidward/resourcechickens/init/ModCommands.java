@@ -26,7 +26,7 @@ public class ModCommands {
             LiteralArgumentBuilder<CommandSource> builder = literal(command.getName());
             builder.requires((sender) -> sender.hasPermission(command.getRequiredPermissionLevel()));
             command.build(builder);
-            dispatcher.register(literal(ResourceChickens.MODID).then(builder));
+            dispatcher.register(literal(ResourceChickens.MOD_ID).then(builder));
         }
 
         return command;

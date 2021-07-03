@@ -13,7 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModTileEntities {
 
-    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ResourceChickens.MODID);
+    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ResourceChickens.MOD_ID);
 
     //Chicken Breeders
     public static final RegistryObject<TileEntityType<OakChickenBreederTE>> oakChickenBreeder = TILE_ENTITY.register("oak_chicken_breeder", () -> TileEntityType.Builder.of(OakChickenBreederTE::new, ModBlocks.oakChickenBreeder.get()).build(null));

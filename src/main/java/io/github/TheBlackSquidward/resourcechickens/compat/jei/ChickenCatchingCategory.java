@@ -23,8 +23,8 @@ import java.util.List;
 
 public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingRecipe> {
 
-    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/jei/chicken_catching.png");
-    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MODID, "chicken_catching");
+    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/jei/chicken_catching.png");
+    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MOD_ID, "chicken_catching");
     private final IDrawable background;
     private final IDrawable animation;
     private final String localizedName;

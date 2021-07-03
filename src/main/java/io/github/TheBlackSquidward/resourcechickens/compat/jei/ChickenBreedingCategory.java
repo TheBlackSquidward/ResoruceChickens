@@ -19,8 +19,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingRecipe> {
 
-    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/jei/chicken_breeding.png");
-    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MODID, "chicken_breeding");
+    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/jei/chicken_breeding.png");
+    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MOD_ID, "chicken_breeding");
     private final IDrawable background;
     private final IDrawableAnimated hearts;
     private final String localizedName;
