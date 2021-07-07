@@ -2,8 +2,11 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.data.RoostData;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
-import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
+import io.github.TheBlackSquidward.resourcechickens.recipes.ChickenBreedingRecipe;
+import io.github.TheBlackSquidward.resourcechickens.recipes.RoostRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,6 +19,10 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class RoostCategory implements IRecipeCategory<RoostRecipe> {
 
@@ -66,8 +73,8 @@ public class RoostCategory implements IRecipeCategory<RoostRecipe> {
 
     @Override
     public void setIngredients(RoostRecipe recipe, IIngredients iIngredients) {
-        iIngredients.setInputs(VanillaTypes.ITEM, recipe.getInputs());
-        iIngredients.setOutputs(VanillaTypes.ITEM, recipe.getOutputs().dissolve());
+        iIngredients.setInputs(VanillaTypes.ITEM, recipe.getInput());
+        iIngredients.setOutputs(VanillaTypes.ITEM, recipe.getOutputs());
     }
 
     @Override
@@ -80,6 +87,17 @@ public class RoostCategory implements IRecipeCategory<RoostRecipe> {
         guiItemStacks.init(4, false, 108, 0);
         guiItemStacks.set(iIngredients);
         iRecipeLayout.getItemStacks().addTooltipCallback(new RoostTooltipCallback(recipe));
+    }
+
+    public static Collection<?> getRoostRecipes() {
+        List<RoostRecipe> recipes = new ArrayList<>();
+        ChickenRegistry.getChickenRegistry().getChickens().forEach(((chickenName, customChickenData) -> {
+            RoostData roostData = customChickenData.getRoostData();
+            if(roostData.canRoost()) {
+                recipes.add(new RoostRecipe(customChickenData));
+            }
+        }));
+        return recipes;
     }
 
 }

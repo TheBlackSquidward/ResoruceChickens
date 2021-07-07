@@ -1,7 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.compat.top;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api2.utils.ChickenUtisl;
+import io.github.TheBlackSquidward.resourcechickens.api.utils.ChickenUtisl;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import mcjty.theoneprobe.api.IEntityDisplayOverride;
 import mcjty.theoneprobe.api.IProbeHitEntityData;
@@ -23,7 +23,7 @@ public class ChickenEntityDisplayOverride implements IEntityDisplayOverride {
         probeInfo.horizontal()
                 .entity(customChickenEntity)
                 .vertical()
-                .itemLabel(new ItemStack(ChickenUtisl.getItem(ResourceChickens.MOD_ID + ":" + customChickenEntity.getCoreData().getName() + "_chicken_item")))
+                .itemLabel(customChickenEntity.getCustomChickenData().getChickenItem())
                 .text(TopCompat.formattedName);
         if(mode.equals(ProbeMode.EXTENDED)) {
 

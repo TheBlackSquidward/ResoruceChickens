@@ -2,7 +2,10 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.data.BreedData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.RoostData;
+import io.github.TheBlackSquidward.resourcechickens.recipes.ChickenBreedingRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,6 +19,10 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingRecipe> {
 
@@ -78,4 +85,16 @@ public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingR
         guiItemStacks.init(2, false, 72, 0);
         guiItemStacks.set(iIngredients);
     }
+
+    public static Collection<?> getBreedingRecipes() {
+        List<ChickenBreedingRecipe> recipes = new ArrayList<>();
+        ChickenRegistry.getChickenRegistry().getChickens().forEach(((chickenName, customChickenData) -> {
+            BreedData breedData = customChickenData.getBreedData();
+            if(breedData.canBreed()) {
+                recipes.add(new ChickenBreedingRecipe(customChickenData));
+            }
+        }));
+        return recipes;
+    }
+
 }

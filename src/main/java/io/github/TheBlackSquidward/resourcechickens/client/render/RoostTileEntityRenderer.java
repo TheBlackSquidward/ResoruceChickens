@@ -2,7 +2,7 @@ package io.github.TheBlackSquidward.resourcechickens.client.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import io.github.TheBlackSquidward.resourcechickens.api2.CustomChickenData;
+import io.github.TheBlackSquidward.resourcechickens.api.CustomChickenData;
 import io.github.TheBlackSquidward.resourcechickens.blocks.roost.AbstractRoostBlock;
 import io.github.TheBlackSquidward.resourcechickens.te.roost.AbstractRoostTE;
 import net.minecraft.block.BlockState;

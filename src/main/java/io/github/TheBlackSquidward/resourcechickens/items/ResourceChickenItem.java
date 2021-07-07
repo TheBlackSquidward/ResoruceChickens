@@ -1,7 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.items;
 
-import io.github.TheBlackSquidward.resourcechickens.api2.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api2.CustomChickenData;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.CustomChickenData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.util.Lazy;

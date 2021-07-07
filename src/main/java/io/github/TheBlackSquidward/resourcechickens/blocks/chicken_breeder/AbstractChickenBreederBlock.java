@@ -21,6 +21,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 public abstract class AbstractChickenBreederBlock extends Block {
 
     public AbstractChickenBreederBlock() {
@@ -32,6 +34,7 @@ public abstract class AbstractChickenBreederBlock extends Block {
         return true;
     }
 
+    @ParametersAreNonnullByDefault
     @Override
     public ActionResultType use(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
         if (!world.isClientSide) {

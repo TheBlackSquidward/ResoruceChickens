@@ -1,13 +1,12 @@
 package io.github.TheBlackSquidward.resourcechickens.te.chicken_breeder;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
-import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
 import io.github.TheBlackSquidward.resourcechickens.te.AbstractTileEntity;
+import io.github.TheBlackSquidward.resourcechickens.utils.Constants;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -19,9 +18,8 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
-public abstract class AbstractChickenBreederTE extends AbstractTileEntity<ChickenBreedingRecipe> {
+public abstract class AbstractChickenBreederTE extends AbstractTileEntity {
 
     //2 Min in ticks
     private final double totalBreedTime = 2400;
@@ -35,29 +33,31 @@ public abstract class AbstractChickenBreederTE extends AbstractTileEntity<Chicke
     @Override
     public void tick() {
         if (!this.level.isClientSide) {
-            if (isBreeding) {
-                if (!(hasChickens() && hasSeeds())) {
-                    this.breedTime = 0;
-                    this.isBreeding = false;
-                    this.progress = 0;
+            if (canBreed()) {
+                if (isBreeding) {
+                    if (!(hasChickens() && hasSeeds())) {
+                        this.breedTime = 0;
+                        this.isBreeding = false;
+                        this.progress = 0;
+                    }
+                    if (breedTime > 0) {
+                        breedTime--;
+                    } else {
+                        spawnChickenIfNeeded();
+                        this.breedTime = 0;
+                        this.isBreeding = false;
+                        this.progress = 0;
+                    }
                 }
-                if (breedTime > 0) {
-                    breedTime--;
-                } else {
-                    spawnChickenIfNeeded();
-                    this.breedTime = 0;
-                    this.isBreeding = false;
-                    this.progress = 0;
+                if (!isBreeding) {
+                    if (hasChickens() && hasSeeds()) {
+                        this.isBreeding = true;
+                        this.breedTime = totalBreedTime;
+                    }
                 }
+                updateProgress();
+                setChanged();
             }
-            if (!isBreeding) {
-                if (hasChickens() && hasSeeds()) {
-                    this.isBreeding = true;
-                    this.breedTime = totalBreedTime;
-                }
-            }
-            updateProgress();
-            setChanged();
         }
     }
 
@@ -65,6 +65,10 @@ public abstract class AbstractChickenBreederTE extends AbstractTileEntity<Chicke
     protected void invalidateCaps() {
         super.invalidateCaps();
         itemHandlerLazyOptional.invalidate();
+    }
+
+    private boolean canBreed() {
+        return false;
     }
 
     private void updateProgress() {
@@ -220,12 +224,6 @@ public abstract class AbstractChickenBreederTE extends AbstractTileEntity<Chicke
         tag.putDouble("breedTime", breedTime);
         tag.putBoolean("isBreeding", isBreeding);
         return tag;
-    }
-
-    @Override
-    public ChickenBreedingRecipe getRecipe() {
-        //TODO
-        return null;
     }
 
     protected void loadFromNBT(CompoundNBT tag) {

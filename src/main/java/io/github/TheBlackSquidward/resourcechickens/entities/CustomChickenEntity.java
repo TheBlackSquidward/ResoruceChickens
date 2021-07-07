@@ -1,12 +1,12 @@
 package io.github.TheBlackSquidward.resourcechickens.entities;
 
 import com.google.gson.JsonObject;
-import io.github.TheBlackSquidward.resourcechickens.api2.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api2.CustomChickenData;
-import io.github.TheBlackSquidward.resourcechickens.api2.IResourceChicken;
-import io.github.TheBlackSquidward.resourcechickens.api2.data.BreedData;
-import io.github.TheBlackSquidward.resourcechickens.api2.data.CoreData;
-import io.github.TheBlackSquidward.resourcechickens.api2.data.RoostData;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.CustomChickenData;
+import io.github.TheBlackSquidward.resourcechickens.api.IResourceChicken;
+import io.github.TheBlackSquidward.resourcechickens.api.data.BreedData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.CoreData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.RoostData;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -38,6 +38,9 @@ public class CustomChickenEntity extends ChickenEntity implements IResourceChick
         this.customChickenData = ChickenRegistry.getChickenRegistry().getChickenData(chickenName);
     }
 
+    public CustomChickenData getCustomChickenData() {
+        return customChickenData;
+    }
     public String getChickenName() {
         return chickenName;
     }

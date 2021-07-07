@@ -4,6 +4,7 @@ import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.util.ResourceLocation;
+
 import java.util.function.Consumer;
 
 public class ResourceChickensRecipeProvider extends ResourceChickensRecipeProviderBase {
@@ -16,8 +17,8 @@ public class ResourceChickensRecipeProvider extends ResourceChickensRecipeProvid
 
     @Override
     protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
-
     }
+
     private ResourceLocation getRoostPath(String fileName) {
         return new ResourceLocation(ResourceChickens.MOD_ID, "roost/" + fileName);
     }

@@ -1,6 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.items;
 
-import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
+import io.github.TheBlackSquidward.resourcechickens.utils.Constants;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityType;

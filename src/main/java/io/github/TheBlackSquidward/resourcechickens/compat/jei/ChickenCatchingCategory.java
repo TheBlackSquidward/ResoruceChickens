@@ -2,8 +2,9 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api2.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
+import io.github.TheBlackSquidward.resourcechickens.recipes.ChickenCatchingRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -76,8 +77,8 @@ public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingR
 
     @Override
     public void setIngredients(ChickenCatchingRecipe recipe, IIngredients iIngredients) {
-        iIngredients.setInput(VanillaTypes.ITEM, recipe.spawnEgg);
-        iIngredients.setOutput(VanillaTypes.ITEM, recipe.chickenItem);
+        iIngredients.setInput(VanillaTypes.ITEM, recipe.getSpawnEgg());
+        iIngredients.setOutput(VanillaTypes.ITEM, recipe.getChickenItem());
     }
 
     @Override

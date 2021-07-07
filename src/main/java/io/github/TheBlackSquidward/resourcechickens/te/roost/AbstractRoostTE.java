@@ -1,20 +1,17 @@
 package io.github.TheBlackSquidward.resourcechickens.te.roost;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
-import io.github.TheBlackSquidward.resourcechickens.api2.CustomChickenData;
+import io.github.TheBlackSquidward.resourcechickens.utils.Constants;
+import io.github.TheBlackSquidward.resourcechickens.api.CustomChickenData;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
-import io.github.TheBlackSquidward.resourcechickens.init.ModRecipes;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.items.ResourceChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.network.GUISyncMessage;
 import io.github.TheBlackSquidward.resourcechickens.network.ResourceChickensPacketHandler;
-import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
 import io.github.TheBlackSquidward.resourcechickens.te.AbstractTileEntity;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -24,7 +21,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 
-public abstract class AbstractRoostTE  extends AbstractTileEntity<RoostRecipe> {
+public abstract class AbstractRoostTE  extends AbstractTileEntity {
 
     private double roostTime = 0;
     private boolean isRoosting;
@@ -36,20 +33,18 @@ public abstract class AbstractRoostTE  extends AbstractTileEntity<RoostRecipe> {
     @Override
     public void tick() {
         if (!getWorld().isClientSide()) {
-            if (getRecipe() != null) {
-                RoostRecipe recipe = getRecipe();
+            if (canRoost()) {
                 if (isRoosting) {
                     if (roostTime > 0) {
                         roostTime--;
                     } else {
                         ResourceChickens.LOGGER.debug("outputting");
-                        //Output neccessary things
-                        recipe.getOutputs().dissolve().forEach(this::addResult);
+                        //TODO Output neccessary things
                         reset();
                     }
                 } else {
                     this.isRoosting = true;
-                    this.roostTime = recipe.getTotalRoostTime();
+                    this.roostTime = getRoostingChickenData().getRoostData().getTotalRoostTime();
                 }
             } else {
                 if (isRoosting) {
@@ -61,18 +56,13 @@ public abstract class AbstractRoostTE  extends AbstractTileEntity<RoostRecipe> {
         }
     }
 
+    protected boolean canRoost() {
+        return itemStackHandler.getStackInSlot(0).getItem() instanceof ResourceChickenItem;
+    }
+
     public void reset() {
         this.roostTime = 0;
         this.isRoosting = false;
-    }
-
-    public RoostRecipe getRecipe() {
-        ItemStack input = itemStackHandler.getStackInSlot(0);
-        if (this.level == null || input.isEmpty()) {
-            return null;
-        }
-        return level.getRecipeManager().getRecipeFor(ModRecipes.ROOST_RECIPE_TYPE,
-                new Inventory(itemStackHandler.getStackInSlot(0)), this.level).orElse(null);
     }
 
     private void updateProgress() {
@@ -102,7 +92,7 @@ public abstract class AbstractRoostTE  extends AbstractTileEntity<RoostRecipe> {
 
     public int getTotalRoostTime() {
         if(isRoosting) {
-            return getRecipe().getTotalRoostTime();
+            return getRoostingChickenData().getRoostData().getTotalRoostTime();
         }else{
             return 0;
         }

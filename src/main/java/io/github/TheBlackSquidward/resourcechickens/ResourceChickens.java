@@ -1,8 +1,8 @@
 package io.github.TheBlackSquidward.resourcechickens;
 
-import io.github.TheBlackSquidward.resourcechickens.api2.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api2.ResourceChickensAPI;
-import io.github.TheBlackSquidward.resourcechickens.api2.data.CoreData;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.ResourceChickensAPI;
+import io.github.TheBlackSquidward.resourcechickens.api.data.CoreData;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.entities.ResourceChicken;
 import io.github.TheBlackSquidward.resourcechickens.files.ChickenFiles;
@@ -10,7 +10,6 @@ import io.github.TheBlackSquidward.resourcechickens.files.config.Config;
 import io.github.TheBlackSquidward.resourcechickens.files.config.ConfigHelper;
 import io.github.TheBlackSquidward.resourcechickens.files.FileHelper;
 import io.github.TheBlackSquidward.resourcechickens.init.*;
-import io.github.TheBlackSquidward.resourcechickens.items.ChickenItem;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenSpawnEggItem;
 import io.github.TheBlackSquidward.resourcechickens.items.FeatherItem;
 import io.github.TheBlackSquidward.resourcechickens.items.ResourceChickenItem;
@@ -69,11 +68,9 @@ public class ResourceChickens {
         //iEventBus.addListener(this::onCommandRegister);
         iEventBus.addListener(this::onInterModEnqueue);
         MinecraftForge.EVENT_BUS.register(this);
-
-        //io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry.initializeChickenRegistry();
-        //io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry.registerChickens();
     }
 
+    @SuppressWarnings("unused")
     private void onCommandRegister(RegisterCommandsEvent e) {
         ModCommands.registerCommands(e.getDispatcher(), e.getEnvironment());
     }
@@ -104,7 +101,6 @@ public class ResourceChickens {
                         .sized(1.0f, 1.0f)
                         .build(new ResourceLocation(ResourceChickens.MOD_ID, chickenName +  "_chicken").toString()));
         RegistryObject<Item> customChickenItem = ModItems.ITEMS.register(chickenName + "_chicken_item", () -> new ResourceChickenItem(customChickenEntity, chickenName, new Item.Properties().stacksTo(16)));
-        //TODO
         RegistryObject<Item> customChickenSpawnEgg = ModItems.ITEMS.register(chickenName + "_chicken_spawn_egg", () -> new ChickenSpawnEggItem(customChickenEntity, chickenName, new Item.Properties()));
         if (hasFeather) {
             RegistryObject<Item> customChickenFeather = ModItems.ITEMS.register(chickenName + "_chicken_feather", () -> new FeatherItem(new Item.Properties()));

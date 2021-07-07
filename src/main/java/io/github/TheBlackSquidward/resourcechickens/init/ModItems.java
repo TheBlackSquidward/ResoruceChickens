@@ -68,11 +68,6 @@ public class ModItems {
     //Chickens - Vanilla
     public static final RegistryObject<ChickenItem> vanillaChickenItem = ITEMS.register("vanilla_chicken_item", () -> new VanillaChickenItem(new Item.Properties().stacksTo(16)));
 
-    //Eggs
-    public static final RegistryObject<Item> experienceImbuedEgg = ITEMS.register("experience_imbued_egg", () -> new CustomEggItem(new Item.Properties()));
-    public static final RegistryObject<Item> lavaInfusedEgg = ITEMS.register("lava_infused_egg", () -> new CustomEggItem(new Item.Properties()));
-    public static final RegistryObject<Item> waterInfusedEgg = ITEMS.register("water_infused_egg", () -> new CustomEggItem(new Item.Properties()));
-
     //Resources
     public static final RegistryObject<Item> diamondNugget = ITEMS.register("diamond_nugget", () -> new BaseItem(new Item.Properties()));
     public static final RegistryObject<Item> emeraldNugget = ITEMS.register("emerald_nugget", () -> new BaseItem(new Item.Properties()));

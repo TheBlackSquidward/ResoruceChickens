@@ -3,9 +3,6 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.containers.RoostContainer;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
-import io.github.TheBlackSquidward.resourcechickens.init.ModRecipes;
-import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
-import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -19,7 +16,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 
 @JeiPlugin
 public class ResourcefulChickensJEIPlugin implements IModPlugin {
@@ -74,12 +70,8 @@ public class ResourcefulChickensJEIPlugin implements IModPlugin {
         World clientWorld = Minecraft.getInstance().level;
         if (clientWorld != null) {
             registration.addRecipes(ChickenCatchingCategory.getCatchingRecipes(), ChickenCatchingCategory.ID);
-
-            List<RoostRecipe> roostRecipes = clientWorld.getRecipeManager().getAllRecipesFor(ModRecipes.ROOST_RECIPE_TYPE);
-            registration.addRecipes(roostRecipes, RoostCategory.ID);
-
-            List<ChickenBreedingRecipe> chickenBreedingRecipes = clientWorld.getRecipeManager().getAllRecipesFor(ModRecipes.CHICKEN_BREEDING_RECIPE_TYPE);
-            registration.addRecipes(chickenBreedingRecipes, ChickenBreedingCategory.ID);
+            registration.addRecipes(ChickenBreedingCategory.getBreedingRecipes(), ChickenBreedingCategory.ID);
+            registration.addRecipes(RoostCategory.getRoostRecipes(), RoostCategory.ID);
         }
     }
 

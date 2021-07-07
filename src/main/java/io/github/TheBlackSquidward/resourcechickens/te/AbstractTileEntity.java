@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.text.DecimalFormat;
 
-public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntity implements ITickableTileEntity {
+public abstract class AbstractTileEntity extends TileEntity implements ITickableTileEntity {
 
     public AbstractTileEntity(TileEntityType<?> p_i48289_1_) {
         super(p_i48289_1_);
@@ -33,8 +33,6 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
     public LazyOptional<IItemHandler> itemHandlerLazyOptional = LazyOptional.of(() -> itemStackHandler);
 
     public double progress;
-
-    public abstract R getRecipe();
 
     public abstract ItemStackHandler createItemStackHandler();
 

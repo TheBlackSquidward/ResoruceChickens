@@ -3,19 +3,17 @@ package io.github.TheBlackSquidward.resourcechickens.files;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
-import io.github.TheBlackSquidward.resourcechickens.api2.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.utils.Constants;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
-import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
@@ -32,7 +30,7 @@ public class ChickenFiles {
     }
 
     public static void setupChickens() {
-        renameFunction(chickenPath, ChickenFiles::parseChicken);
+        iterateFiles(chickenPath, ChickenFiles::parseChicken);
         ChickenRegistry.getChickenRegistry().regenerateCustomChickenData();
     }
 
@@ -40,9 +38,10 @@ public class ChickenFiles {
         JsonObject jsonObject = fromJson(Constants.ResourceChickens.GSON, reader, JsonObject.class);
         name = Codec.STRING.fieldOf("name").orElse(name).codec().fieldOf("coreData").codec().parse(JsonOps.INSTANCE, jsonObject).get().orThrow();
         ChickenRegistry.getChickenRegistry().addRawChickenData(name.toLowerCase(Locale.ENGLISH).replace(" ", "_"), jsonObject);
+        ResourceChickens.LOGGER.info("Added " + name.toLowerCase(Locale.ENGLISH).replace(" ", "_") + " chicken to the chicken registry.");
     }
 
-    private static void renameFunction(Path chickenDir, BiConsumer<Reader, String> instructions) {
+    private static void iterateFiles(Path chickenDir, BiConsumer<Reader, String> instructions) {
         try(Stream<Path> jsonStream = Files.walk(chickenDir)) {
             jsonStream.filter((f) -> f.getFileName().toString().endsWith(JSON)).forEach((path) -> addFile(path, instructions));
         }catch (IOException exception) {
@@ -62,9 +61,7 @@ public class ChickenFiles {
     private static void parseType(File file, BiConsumer<Reader, String> consumer) throws IOException {
         String name = file.getName();
         name = name.substring(0, name.indexOf('.'));
-
         Reader r = Files.newBufferedReader(file.toPath());
-
         consumer.accept(r, name);
     }
 

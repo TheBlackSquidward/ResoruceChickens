@@ -1,7 +1,8 @@
 package io.github.TheBlackSquidward.resourcechickens.items;
 
-import io.github.TheBlackSquidward.resourcechickens.api2.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api2.CustomChickenData;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.CustomChickenData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.BreedData;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityType;
@@ -13,6 +14,8 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.util.Lazy;
@@ -20,6 +23,7 @@ import net.minecraftforge.fml.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,10 +46,17 @@ public class ChickenSpawnEggItem extends BaseItem {
         return chickenData;
     }
 
+    @ParametersAreNonnullByDefault
     @Override
     public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
-        //TODO redo
+        tooltip.add(new StringTextComponent(TextFormatting.GRAY + "Chicken Type: " + chickenData.getCoreData().getChickenType().getName()));
+        if(chickenData.getBreedData().canBreed()) {
+            BreedData breedData = chickenData.getBreedData();
+            tooltip.add(new StringTextComponent(TextFormatting.YELLOW + "Bred from" + TextFormatting.WHITE + ": " + TextFormatting.GOLD + ChickenRegistry.getChickenRegistry().getChickenData(breedData.getParent1()).getFormattedName() + TextFormatting.WHITE + " & " + TextFormatting.GOLD + ChickenRegistry.getChickenRegistry().getChickenData(breedData.getParent2()).getFormattedName()));
+        }else{
+            tooltip.add(new StringTextComponent(TextFormatting.RED + "Cannot be bred."));
+        }
     }
 
     @Override
