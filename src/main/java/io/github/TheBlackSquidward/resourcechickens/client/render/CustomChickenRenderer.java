@@ -23,9 +23,9 @@ public class CustomChickenRenderer extends MobRenderer<CustomChickenEntity, Chic
         return new ResourceLocation(ResourceChickens.MOD_ID, "textures/entity/" + customChickenEntity.getChickenName() + "_chicken.png");
     }
 
-    protected float getBob(CustomChickenEntity pLivingBase, float pPartialTicks) {
-        float f = MathHelper.lerp(pPartialTicks, pLivingBase.oFlap, pLivingBase.flap);
-        float f1 = MathHelper.lerp(pPartialTicks, pLivingBase.oFlapSpeed, pLivingBase.flapSpeed);
+    protected float getBob(CustomChickenEntity customChickenEntity, float partialTicks) {
+        float f = MathHelper.lerp(partialTicks, customChickenEntity.oFlap, customChickenEntity.flap);
+        float f1 = MathHelper.lerp(partialTicks, customChickenEntity.oFlapSpeed, customChickenEntity.flapSpeed);
         return (MathHelper.sin(f) + 1.0F) * f1;
     }
 
