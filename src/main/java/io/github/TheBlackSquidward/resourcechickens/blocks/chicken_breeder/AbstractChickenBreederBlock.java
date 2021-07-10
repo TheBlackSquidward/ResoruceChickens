@@ -20,6 +20,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -36,13 +37,13 @@ public abstract class AbstractChickenBreederBlock extends Block {
 
     @ParametersAreNonnullByDefault
     @Override
-    public ActionResultType use(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
+    public @NotNull ActionResultType use(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
         if (!world.isClientSide) {
             TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof AbstractChickenBreederTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
-                    public ITextComponent getDisplayName() {
+                    public @NotNull ITextComponent getDisplayName() {
                         return new TranslationTextComponent("gui.resourcechickens.chicken_breeder");
                     }
 

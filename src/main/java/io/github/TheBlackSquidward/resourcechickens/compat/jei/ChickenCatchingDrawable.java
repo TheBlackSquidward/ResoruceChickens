@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import mezz.jei.api.gui.ITickTimer;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
+import org.jetbrains.annotations.NotNull;
 
 public class ChickenCatchingDrawable implements IDrawable {
 
@@ -24,11 +25,11 @@ public class ChickenCatchingDrawable implements IDrawable {
         return 14;
     }
 
-    public void draw(MatrixStack matrixStack) {
+    public void draw(@NotNull MatrixStack matrixStack) {
         draw(matrixStack, 0, 0);
     }
 
-    public void draw(MatrixStack matrixStack, int xOffset, int yOffset) {
+    public void draw(@NotNull MatrixStack matrixStack, int xOffset, int yOffset) {
         int animationValue = this.tickTimer.getValue();
         int maxValue = this.tickTimer.getMaxValue();
         int maskTop = 14 * animationValue;

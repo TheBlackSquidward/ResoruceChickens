@@ -4,7 +4,6 @@ import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.CustomChickenData;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.ChickenUtisl;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 
 import java.util.Arrays;
 import java.util.List;

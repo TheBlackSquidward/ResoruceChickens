@@ -11,6 +11,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
 
 public class ElectricRoostContainer extends Container {
 
@@ -54,7 +55,7 @@ public class ElectricRoostContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity player) {
+    public boolean stillValid(@NotNull PlayerEntity player) {
         return true;
     }
 }

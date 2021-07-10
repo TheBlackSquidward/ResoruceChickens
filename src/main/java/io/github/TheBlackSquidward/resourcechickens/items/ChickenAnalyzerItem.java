@@ -9,6 +9,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 public class ChickenAnalyzerItem extends BaseItem {
 
@@ -19,14 +20,14 @@ public class ChickenAnalyzerItem extends BaseItem {
     //TODO
 
     @Override
-    public ActionResult<ItemStack> use(World p_77659_1_, PlayerEntity p_77659_2_, Hand p_77659_3_) {
+    public @NotNull ActionResult<ItemStack> use(@NotNull World p_77659_1_, @NotNull PlayerEntity p_77659_2_, @NotNull Hand p_77659_3_) {
         return super.use(p_77659_1_, p_77659_2_, p_77659_3_);
         //TODO open gui
         //NetworkHooks.openGui();
     }
 
     @Override
-    public ActionResultType interactLivingEntity(ItemStack itemStack, PlayerEntity p, LivingEntity entity, Hand hand) {
+    public @NotNull ActionResultType interactLivingEntity(@NotNull ItemStack itemStack, PlayerEntity p, LivingEntity entity, @NotNull Hand hand) {
         Vec3d pos = new Vec3d(entity.getX(), entity.getY(), entity.getZ());
         World world = p.level;
         if(!world.isClientSide()) {

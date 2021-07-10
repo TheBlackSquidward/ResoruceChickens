@@ -12,6 +12,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -23,7 +24,7 @@ public class ChickenCatcherItem extends BaseItem {
 
     @ParametersAreNonnullByDefault
     @Override
-    public ActionResultType interactLivingEntity(ItemStack itemStack, PlayerEntity p, LivingEntity entity, Hand hand) {
+    public @NotNull ActionResultType interactLivingEntity(ItemStack itemStack, PlayerEntity p, LivingEntity entity, Hand hand) {
         Vec3d pos = new Vec3d(entity.getX(), entity.getY(), entity.getZ());
         World world = p.level;
         if (entity instanceof CustomChickenEntity) {

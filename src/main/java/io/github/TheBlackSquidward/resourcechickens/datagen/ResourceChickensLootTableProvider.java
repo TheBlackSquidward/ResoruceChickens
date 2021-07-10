@@ -10,6 +10,7 @@ import net.minecraft.data.LootTableProvider;
 import net.minecraft.loot.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
@@ -26,7 +27,7 @@ public class ResourceChickensLootTableProvider extends LootTableProvider {
     }
 
     @Override
-    protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> getTables() {
+    protected @NotNull List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> getTables() {
         return ImmutableList.of(Pair.of(Blocks::new, LootParameterSets.BLOCK));
     }
 
@@ -77,7 +78,7 @@ public class ResourceChickensLootTableProvider extends LootTableProvider {
         }
 
         @Override
-        protected Iterable<Block> getKnownBlocks() {
+        protected @NotNull Iterable<Block> getKnownBlocks() {
             return ModBlocks.BLOCKS.getEntries().stream()
                     .map(RegistryObject::get)
                     .collect(Collectors.toList());

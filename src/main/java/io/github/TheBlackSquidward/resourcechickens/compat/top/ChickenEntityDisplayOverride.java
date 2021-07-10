@@ -1,7 +1,5 @@
 package io.github.TheBlackSquidward.resourcechickens.compat.top;
 
-import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.utils.ChickenUtisl;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import mcjty.theoneprobe.api.IEntityDisplayOverride;
 import mcjty.theoneprobe.api.IProbeHitEntityData;
@@ -9,7 +7,6 @@ import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ChickenEntityDisplayOverride implements IEntityDisplayOverride {

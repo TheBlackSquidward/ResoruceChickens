@@ -28,7 +28,7 @@ public abstract class ChickenItem extends BaseItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         CompoundNBT nbt = stack.getOrCreateTag();
         int gain = nbt.getInt(Constants.NBT.GAIN);

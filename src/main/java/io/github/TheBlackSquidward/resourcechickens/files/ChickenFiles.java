@@ -7,31 +7,70 @@ import com.google.gson.stream.JsonReader;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
+import io.github.TheBlackSquidward.resourcechickens.files.config.Config;
 import io.github.TheBlackSquidward.resourcechickens.utils.Constants;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
 import java.util.Locale;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
 public class ChickenFiles {
 
+    //TODO proof
+
     private static Path chickenPath;
     public static final String JSON = ".json";
+    public static final Path MOD_ROOT = ModList.get().getModFileById(ResourceChickens.MOD_ID).getFile().getFilePath();
+    public static final String defaultChickens = "/data/resourcechickens/chickens";
 
     public static void setChickenPath(Path path) {
         chickenPath = path;
     }
 
     public static void setupChickens() {
+        if(Config.generateDefaultChickenFiles.get()) {
+            copyDefaultChickens();
+        }
         iterateFiles(chickenPath, ChickenFiles::parseChicken);
         ChickenRegistry.getChickenRegistry().regenerateCustomChickenData();
+    }
+
+    private static void copyDefaultChickens() {
+        if (Files.isRegularFile(MOD_ROOT)) {
+            try(FileSystem fileSystem = FileSystems.newFileSystem(MOD_ROOT, null)) {
+                Path path = fileSystem.getPath(defaultChickens);
+                if (Files.exists(path)) {
+                    copyFiles(path, chickenPath);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (Files.isDirectory(MOD_ROOT)) {
+            copyFiles(Paths.get(MOD_ROOT.toString(), defaultChickens), chickenPath);
+        }
+    }
+
+    private static void copyFiles(Path source, Path targetPath) {
+        try (Stream<Path> sourceStream = Files.walk(source)) {
+            sourceStream.filter(f -> f.getFileName().toString().endsWith(JSON))
+                    .forEach(path -> {
+                        File targetFile = new File(String.valueOf(Paths.get(targetPath.toString(), "/", path.getFileName().toString())));
+                        try {
+                            Files.copy(path, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void parseChicken(Reader reader, String name) {

@@ -26,6 +26,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -63,13 +64,13 @@ public class PoweredChickenBreederBlock extends Block {
 
     @ParametersAreNonnullByDefault
     @Override
-    public ActionResultType use(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
+    public @NotNull ActionResultType use(BlockState blockState, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
         if (!world.isClientSide) {
             TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof PowererdChickenBreederTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
-                    public ITextComponent getDisplayName() {
+                    public @NotNull ITextComponent getDisplayName() {
                         return new TranslationTextComponent("gui.resourcechickens.electric_chicken_breeder");
                     }
 

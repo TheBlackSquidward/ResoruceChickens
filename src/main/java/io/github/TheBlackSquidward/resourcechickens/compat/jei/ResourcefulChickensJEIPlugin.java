@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -21,7 +22,7 @@ import javax.annotation.Nonnull;
 public class ResourcefulChickensJEIPlugin implements IModPlugin {
 
     @Override
-    public ResourceLocation getPluginUid() {
+    public @NotNull ResourceLocation getPluginUid() {
         return new ResourceLocation(ResourceChickens.MOD_ID, "jei_plugin");
     }
 

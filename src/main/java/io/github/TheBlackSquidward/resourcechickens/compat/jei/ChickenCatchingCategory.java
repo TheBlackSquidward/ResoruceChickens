@@ -16,6 +16,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,32 +47,32 @@ public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingR
     }
 
     @Override
-    public ResourceLocation getUid() {
+    public @NotNull ResourceLocation getUid() {
         return ID;
     }
 
     @Override
-    public Class<? extends ChickenCatchingRecipe> getRecipeClass() {
+    public @NotNull Class<? extends ChickenCatchingRecipe> getRecipeClass() {
         return ChickenCatchingRecipe.class;
     }
 
     @Override
-    public String getTitle() {
+    public @NotNull String getTitle() {
         return this.localizedName;
     }
 
     @Override
-    public IDrawable getBackground() {
+    public @NotNull IDrawable getBackground() {
         return this.background;
     }
 
     @Override
-    public IDrawable getIcon() {
+    public @NotNull IDrawable getIcon() {
         return this.icon;
     }
 
     @Override
-    public void draw(ChickenCatchingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(@NotNull ChickenCatchingRecipe recipe, @NotNull MatrixStack matrixStack, double mouseX, double mouseY) {
         this.animation.draw(matrixStack, 21, 1);
     }
 
@@ -82,7 +83,7 @@ public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingR
     }
 
     @Override
-    public void setRecipe(IRecipeLayout iRecipeLayout, ChickenCatchingRecipe recipe, IIngredients iIngredients) {
+    public void setRecipe(IRecipeLayout iRecipeLayout, @NotNull ChickenCatchingRecipe recipe, @NotNull IIngredients iIngredients) {
         IGuiItemStackGroup guiItemStacks = iRecipeLayout.getItemStacks();
         guiItemStacks.init(0, true, 0, 0);
         guiItemStacks.init(1, false, 54, 0);

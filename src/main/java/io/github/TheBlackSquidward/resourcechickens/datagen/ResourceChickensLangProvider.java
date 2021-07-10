@@ -1,16 +1,9 @@
 package io.github.TheBlackSquidward.resourcechickens.datagen;
 
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.blocks.PoweredIncubatorBlock;
 import io.github.TheBlackSquidward.resourcechickens.init.ModBlocks;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
-import io.github.TheBlackSquidward.resourcechickens.multiblocks.IndustrialCasingBlock;
-import io.github.TheBlackSquidward.resourcechickens.multiblocks.IndustrialGlassBlock;
-import io.github.TheBlackSquidward.resourcechickens.multiblocks.chicken_breeder.ChickenBreederControllerBlock;
-import io.github.TheBlackSquidward.resourcechickens.multiblocks.roost.RoostControllerBlock;
-import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.fml.RegistryObject;
 
 public class ResourceChickensLangProvider extends ResourceChickensLangProviderBase{
 
@@ -49,6 +42,7 @@ public class ResourceChickensLangProvider extends ResourceChickensLangProviderBa
         super(dataGenerator);
     }
 
+    //TODO add remaining lang entries
     @Override
     protected void addTranslations() {
         generateChickens();

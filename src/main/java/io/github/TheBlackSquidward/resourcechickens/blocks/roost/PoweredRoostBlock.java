@@ -24,6 +24,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
@@ -50,18 +51,18 @@ public class PoweredRoostBlock extends Block {
     }
 
     @Override
-    public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
+    public @NotNull ActionResultType use(@NotNull BlockState p_225533_1_, World world, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand hand, @NotNull BlockRayTraceResult p_225533_6_) {
         if (!world.isClientSide) {
             TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof PoweredRoostTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
                     @Override
-                    public ITextComponent getDisplayName() {
+                    public @NotNull ITextComponent getDisplayName() {
                         return new TranslationTextComponent("gui.resourcechickens.electric_roost");
                     }
 
                     @Override
-                    public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+                    public Container createMenu(int i, @NotNull PlayerInventory playerInventory, @NotNull PlayerEntity playerEntity) {
                         return new ElectricRoostContainer(i, world, pos, playerInventory, playerEntity);
                     }
                 };
