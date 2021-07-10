@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "minecraft:egg",
-    "resourcechickens:experience_imbued_egg",
-    "resourcechickens:lava_infused_egg",
-    "resourcechickens:water_infused_egg"
-  ]
-}

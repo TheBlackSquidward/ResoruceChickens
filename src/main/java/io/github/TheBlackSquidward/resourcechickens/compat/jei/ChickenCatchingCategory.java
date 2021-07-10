@@ -3,8 +3,8 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
+import io.github.TheBlackSquidward.resourcechickens.recipes.ChickenCatchingRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,6 +16,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,8 +24,8 @@ import java.util.List;
 
 public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingRecipe> {
 
-    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/jei/chicken_catching.png");
-    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MODID, "chicken_catching");
+    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/jei/chicken_catching.png");
+    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MOD_ID, "chicken_catching");
     private final IDrawable background;
     private final IDrawable animation;
     private final String localizedName;
@@ -40,51 +41,49 @@ public class ChickenCatchingCategory implements IRecipeCategory<ChickenCatchingR
 
     public static Collection<?> getCatchingRecipes() {
         List<ChickenCatchingRecipe> recipes = new ArrayList<>();
-        for (ChickenRegistryObject chickenRegistryObject : ChickenRegistry.getChickenRegistry()) {
-            recipes.add(new ChickenCatchingRecipe(chickenRegistryObject));
-        }
+        ChickenRegistry.getChickenRegistry().getChickens().forEach((string, chickenData) -> recipes.add(new ChickenCatchingRecipe(chickenData)));
         recipes.add(new ChickenCatchingRecipe(ModItems.vanillaChickenItem));
         return recipes;
     }
 
     @Override
-    public ResourceLocation getUid() {
+    public @NotNull ResourceLocation getUid() {
         return ID;
     }
 
     @Override
-    public Class<? extends ChickenCatchingRecipe> getRecipeClass() {
+    public @NotNull Class<? extends ChickenCatchingRecipe> getRecipeClass() {
         return ChickenCatchingRecipe.class;
     }
 
     @Override
-    public String getTitle() {
+    public @NotNull String getTitle() {
         return this.localizedName;
     }
 
     @Override
-    public IDrawable getBackground() {
+    public @NotNull IDrawable getBackground() {
         return this.background;
     }
 
     @Override
-    public IDrawable getIcon() {
+    public @NotNull IDrawable getIcon() {
         return this.icon;
     }
 
     @Override
-    public void draw(ChickenCatchingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(@NotNull ChickenCatchingRecipe recipe, @NotNull MatrixStack matrixStack, double mouseX, double mouseY) {
         this.animation.draw(matrixStack, 21, 1);
     }
 
     @Override
     public void setIngredients(ChickenCatchingRecipe recipe, IIngredients iIngredients) {
-        iIngredients.setInput(VanillaTypes.ITEM, recipe.egg);
-        iIngredients.setOutput(VanillaTypes.ITEM, recipe.chickenItem);
+        iIngredients.setInput(VanillaTypes.ITEM, recipe.getSpawnEgg());
+        iIngredients.setOutput(VanillaTypes.ITEM, recipe.getChickenItem());
     }
 
     @Override
-    public void setRecipe(IRecipeLayout iRecipeLayout, ChickenCatchingRecipe recipe, IIngredients iIngredients) {
+    public void setRecipe(IRecipeLayout iRecipeLayout, @NotNull ChickenCatchingRecipe recipe, @NotNull IIngredients iIngredients) {
         IGuiItemStackGroup guiItemStacks = iRecipeLayout.getItemStacks();
         guiItemStacks.init(0, true, 0, 0);
         guiItemStacks.init(1, false, 54, 0);

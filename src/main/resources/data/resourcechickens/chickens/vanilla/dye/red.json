@@ -1,0 +1,27 @@
+{
+  "coreData": {
+    "name": "red",
+    "chickenType": "DYE",
+    "hasFeather": false
+  },
+  "breedData": {
+    "canBreed": false,
+    "totalBreedTime": 2400,
+    "parent1": "",
+    "parent2": ""
+  },
+  "roostData": {
+    "canRoost": true,
+    "totalRoostTime": 300,
+    "roostOutput": [
+      {
+        "itemOutput": {
+          "id": "minecraft:red_dye",
+          "minAmount": 1,
+          "maxAmount" : 3
+        },
+        "chance": 1.0
+      }
+    ]
+  }
+}

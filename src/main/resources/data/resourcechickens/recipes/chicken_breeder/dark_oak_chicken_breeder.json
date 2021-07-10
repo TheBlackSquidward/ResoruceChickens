@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "S S",
+    "HHH"
+  ],
+  "key": {
+    "P": { "item": "minecraft:dark_oak_planks" },
+    "S": { "item": "minecraft:wheat_seeds" },
+    "H": { "item": "minecraft:hay_block" }
+  },
+  "result": {
+    "item": "resourcechickens:dark_oak_chicken_breeder",
+    "count": 1
+  }
+}

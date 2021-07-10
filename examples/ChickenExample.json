@@ -1,12 +1,18 @@
 {
-  "roostData": {
-    "canRoost": true,
-    ""
+  "coreData": {
+    "name": "rainbow",
+    "chickenType": "SPECIAL",
+    "hasFeather": false
   },
-  "breedingData": {
-    "isBreedable": true,
-    "breedChance": 1.0,
+  "breedData": {
+    "canBreed": false,
+    "totalBreedTime": 2400,
     "parent1": "",
     "parent2": ""
+  },
+  "roostData": {
+    "canRoost": false,
+    "totalRoostTime": 300,
+    "roostOutputs":
   }
 }

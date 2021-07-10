@@ -1,9 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.items;
 
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.api.utils.Constants;
-import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
+import io.github.TheBlackSquidward.resourcechickens.utils.Constants;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityType;
@@ -19,18 +16,19 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ChickenItem extends BaseItem {
+public abstract class ChickenItem extends BaseItem {
 
     public ChickenItem(Properties properties) {
         super(properties);
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+    public void appendHoverText(@NotNull ItemStack stack, @Nullable World worldIn, @NotNull List<ITextComponent> tooltip, @NotNull ITooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         CompoundNBT nbt = stack.getOrCreateTag();
         int gain = nbt.getInt(Constants.NBT.GAIN);
@@ -58,36 +56,25 @@ public class ChickenItem extends BaseItem {
             BlockPos finalBlockpos;
             World world = context.getLevel();
             if (!world.isClientSide()) {
-                if (itemStack.getItem() != ModItems.vanillaChickenItem.get()) {
-                    BlockPos blockpos = context.getClickedPos();
-                    Direction direction = context.getClickedFace();
-                    BlockState blockstate = world.getBlockState(blockpos);
-                    if (!blockstate.canSurvive(world, blockpos)) {
-                        finalBlockpos = blockpos;
-                    } else {
-                        finalBlockpos = blockpos.offset(direction.getNormal());
-                    }
-                    ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyChickenItem(itemStack.getItem());
-                    chickenRegistryObject.getChickenEntityRegistryObject().get().spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);
-                    itemStack.shrink(1);
-                    return ActionResultType.CONSUME;
+                BlockPos blockpos = context.getClickedPos();
+                Direction direction = context.getClickedFace();
+                BlockState blockstate = world.getBlockState(blockpos);
+                if (!blockstate.canSurvive(world, blockpos)) {
+                    finalBlockpos = blockpos;
                 } else {
-                    BlockPos blockpos = context.getClickedPos();
-                    Direction direction = context.getClickedFace();
-                    BlockState blockstate = world.getBlockState(blockpos);
-                    if (!blockstate.canSurvive(world, blockpos)) {
-                        finalBlockpos = blockpos;
-                    } else {
-                        finalBlockpos = blockpos.offset(direction.getNormal());
-                    }
-                    EntityType.CHICKEN.spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);
-                    itemStack.shrink(1);
-                    return ActionResultType.CONSUME;
+                    finalBlockpos = blockpos.offset(direction.getNormal());
                 }
+                getType(nbt).spawn((ServerWorld) world, itemStack, p, finalBlockpos, SpawnReason.SPAWN_EGG, false, false);
+                itemStack.shrink(1);
+                return ActionResultType.CONSUME;
             } else {
                 return ActionResultType.SUCCESS;
             }
         }
         return ActionResultType.SUCCESS;
     }
+
+    @NotNull
+    public abstract EntityType<?> getType(@Nullable final CompoundNBT nbt);
+
 }

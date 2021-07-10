@@ -9,10 +9,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import org.jetbrains.annotations.NotNull;
 
 public class ChickenBreederScreen extends ContainerScreen<ChickenBreederContainer> {
 
-    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/chicken_breeder_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/chicken_breeder_gui.png");
 
     ChickenBreederContainer chickenBreederContainer;
 
@@ -22,7 +23,7 @@ public class ChickenBreederScreen extends ContainerScreen<ChickenBreederContaine
     }
 
     @Override
-    protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y) {
+    protected void renderBg(@NotNull MatrixStack matrixStack, float partialTicks, int x, int y) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.getMinecraft().getTextureManager().bind(GUI);
         int relX = (this.width - this.getXSize()) / 2;
@@ -32,7 +33,7 @@ public class ChickenBreederScreen extends ContainerScreen<ChickenBreederContaine
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+    public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);

@@ -1,0 +1,27 @@
+{
+  "coreData": {
+    "name": "snowy",
+    "chickenType": "VANILLA",
+    "hasFeather": false
+  },
+  "breedData": {
+    "canBreed": false,
+    "totalBreedTime": 2400,
+    "parent1": "",
+    "parent2": ""
+  },
+  "roostData": {
+    "canRoost": false,
+    "totalRoostTime": 300,
+    "roostOutput": [
+      {
+        "itemOutput": {
+          "id": "minecraft:snow_ball",
+          "minAmount": 1,
+          "maxAmount" : 3
+        },
+        "chance": 1.0
+      }
+    ]
+  }
+}

@@ -2,7 +2,6 @@
 package io.github.TheBlackSquidward.resourcechickens.te;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -16,12 +15,13 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.text.DecimalFormat;
 
-public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntity implements ITickableTileEntity {
+public abstract class AbstractTileEntity extends TileEntity implements ITickableTileEntity {
 
     public AbstractTileEntity(TileEntityType<?> p_i48289_1_) {
         super(p_i48289_1_);
@@ -33,8 +33,6 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
     public LazyOptional<IItemHandler> itemHandlerLazyOptional = LazyOptional.of(() -> itemStackHandler);
 
     public double progress;
-
-    public abstract R getRecipe();
 
     public abstract ItemStackHandler createItemStackHandler();
 
@@ -58,7 +56,7 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
     }
 
     @Override
-    public void load(BlockState blockState, CompoundNBT tag) {
+    public void load(@NotNull BlockState blockState, @NotNull CompoundNBT tag) {
         this.loadFromNBT(tag);
         super.load(blockState, tag);
     }
@@ -66,7 +64,7 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
 
     //NBT
     @Override
-    public CompoundNBT save(CompoundNBT tag) {
+    public @NotNull CompoundNBT save(@NotNull CompoundNBT tag) {
         super.save(tag);
         return saveToNBT(tag);
     }
@@ -84,7 +82,7 @@ public abstract class AbstractTileEntity<R extends IRecipe<?>> extends TileEntit
         loadFromNBT(nbt);
     }
     @Override
-    public CompoundNBT getUpdateTag() {
+    public @NotNull CompoundNBT getUpdateTag() {
         return this.serializeNBT();
     }
     @Override

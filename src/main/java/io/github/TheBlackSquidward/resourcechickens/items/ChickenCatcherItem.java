@@ -1,8 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.items;
 
 import com.sun.javafx.geom.Vec3d;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import net.minecraft.entity.LivingEntity;
@@ -14,6 +12,9 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.ParametersAreNonnullByDefault;
 
 public class ChickenCatcherItem extends BaseItem {
 
@@ -21,18 +22,18 @@ public class ChickenCatcherItem extends BaseItem {
         super(new Properties().stacksTo(1).defaultDurability(128));
     }
 
+    @ParametersAreNonnullByDefault
     @Override
-    public ActionResultType interactLivingEntity(ItemStack itemStack, PlayerEntity p, LivingEntity entity, Hand hand) {
+    public @NotNull ActionResultType interactLivingEntity(ItemStack itemStack, PlayerEntity p, LivingEntity entity, Hand hand) {
         Vec3d pos = new Vec3d(entity.getX(), entity.getY(), entity.getZ());
         World world = p.level;
         if (entity instanceof CustomChickenEntity) {
             CustomChickenEntity chickenEntity = (CustomChickenEntity) entity;
-            ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(chickenEntity);
             if (!entity.isBaby()) {
                 if (world.isClientSide) {
                    p.level.playSound(p, pos.x, pos.y, pos.z, SoundEvents.CHICKEN_EGG, entity.getSoundSource(), 1.0F, 1.0F);
                 } else {
-                    p.addItem(new ItemStack(chickenRegistryObject.getChickenItemRegistryObject().get(), 1));
+                    p.addItem(chickenEntity.getCustomChickenData().getChickenItem());
                     itemStack.hurtAndBreak(1, p, (p_220045_0_) -> p_220045_0_.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
                     entity.remove();
                 }} else {

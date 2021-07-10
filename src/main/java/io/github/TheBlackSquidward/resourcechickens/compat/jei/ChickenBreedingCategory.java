@@ -2,7 +2,9 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.ChickenBreedingRecipe;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.data.BreedData;
+import io.github.TheBlackSquidward.resourcechickens.recipes.ChickenBreedingRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,11 +18,16 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingRecipe> {
 
-    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/jei/chicken_breeding.png");
-    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MODID, "chicken_breeding");
+    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/jei/chicken_breeding.png");
+    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MOD_ID, "chicken_breeding");
     private final IDrawable background;
     private final IDrawableAnimated hearts;
     private final String localizedName;
@@ -35,32 +42,32 @@ public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingR
     }
 
     @Override
-    public ResourceLocation getUid() {
+    public @NotNull ResourceLocation getUid() {
         return ID;
     }
 
     @Override
-    public Class<? extends ChickenBreedingRecipe> getRecipeClass() {
+    public @NotNull Class<? extends ChickenBreedingRecipe> getRecipeClass() {
         return ChickenBreedingRecipe.class;
     }
 
     @Override
-    public String getTitle() {
+    public @NotNull String getTitle() {
         return this.localizedName;
     }
 
     @Override
-    public IDrawable getBackground() {
+    public @NotNull IDrawable getBackground() {
         return this.background;
     }
 
     @Override
-    public IDrawable getIcon() {
+    public @NotNull IDrawable getIcon() {
         return this.icon;
     }
 
     @Override
-    public void draw(ChickenBreedingRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(@NotNull ChickenBreedingRecipe recipe, @NotNull MatrixStack matrixStack, double mouseX, double mouseY) {
         this.hearts.draw(matrixStack, 41, 3);
     }
 
@@ -71,11 +78,23 @@ public class ChickenBreedingCategory implements IRecipeCategory<ChickenBreedingR
     }
 
     @Override
-    public void setRecipe(IRecipeLayout iRecipeLayout, ChickenBreedingRecipe recipe, IIngredients iIngredients) {
+    public void setRecipe(IRecipeLayout iRecipeLayout, @NotNull ChickenBreedingRecipe recipe, @NotNull IIngredients iIngredients) {
         IGuiItemStackGroup guiItemStacks = iRecipeLayout.getItemStacks();
         guiItemStacks.init(0, true, 0, 0);
         guiItemStacks.init(1, true, 18, 0);
         guiItemStacks.init(2, false, 72, 0);
         guiItemStacks.set(iIngredients);
     }
+
+    public static Collection<?> getBreedingRecipes() {
+        List<ChickenBreedingRecipe> recipes = new ArrayList<>();
+        ChickenRegistry.getChickenRegistry().getChickens().forEach(((chickenName, customChickenData) -> {
+            BreedData breedData = customChickenData.getBreedData();
+            if(breedData.canBreed()) {
+                recipes.add(new ChickenBreedingRecipe(customChickenData));
+            }
+        }));
+        return recipes;
+    }
+
 }

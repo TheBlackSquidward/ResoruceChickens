@@ -2,8 +2,10 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.data.RoostData;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
-import io.github.TheBlackSquidward.resourcechickens.recipes.recipe.RoostRecipe;
+import io.github.TheBlackSquidward.resourcechickens.recipes.RoostRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,11 +18,16 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class RoostCategory implements IRecipeCategory<RoostRecipe> {
 
-    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MODID, "textures/gui/jei/roost.png");
-    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MODID, "roost");
+    public static final ResourceLocation GUI = new ResourceLocation(ResourceChickens.MOD_ID, "textures/gui/jei/roost.png");
+    public static final ResourceLocation ID = new ResourceLocation(ResourceChickens.MOD_ID, "roost");
     private final IDrawable background;
     private final IDrawableAnimated arrow;
     private final String localizedName;
@@ -35,43 +42,43 @@ public class RoostCategory implements IRecipeCategory<RoostRecipe> {
     }
 
     @Override
-    public ResourceLocation getUid() {
+    public @NotNull ResourceLocation getUid() {
         return ID;
     }
 
     @Override
-    public Class<? extends RoostRecipe> getRecipeClass() {
+    public @NotNull Class<? extends RoostRecipe> getRecipeClass() {
         return RoostRecipe.class;
     }
 
     @Override
-    public String getTitle() {
+    public @NotNull String getTitle() {
         return this.localizedName;
     }
 
     @Override
-    public IDrawable getBackground() {
+    public @NotNull IDrawable getBackground() {
         return this.background;
     }
 
     @Override
-    public IDrawable getIcon() {
+    public @NotNull IDrawable getIcon() {
         return this.icon;
     }
 
     @Override
-    public void draw(RoostRecipe recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
+    public void draw(@NotNull RoostRecipe recipe, @NotNull MatrixStack matrixStack, double mouseX, double mouseY) {
         this.arrow.draw(matrixStack, 23, 1);
     }
 
     @Override
     public void setIngredients(RoostRecipe recipe, IIngredients iIngredients) {
-        iIngredients.setInputs(VanillaTypes.ITEM, recipe.getInputs());
-        iIngredients.setOutputs(VanillaTypes.ITEM, recipe.getOutputs().dissolve());
+        iIngredients.setInputs(VanillaTypes.ITEM, recipe.getInput());
+        iIngredients.setOutputs(VanillaTypes.ITEM, recipe.getOutputs());
     }
 
     @Override
-    public void setRecipe(IRecipeLayout iRecipeLayout, RoostRecipe recipe, IIngredients iIngredients) {
+    public void setRecipe(IRecipeLayout iRecipeLayout, @NotNull RoostRecipe recipe, @NotNull IIngredients iIngredients) {
         IGuiItemStackGroup guiItemStacks = iRecipeLayout.getItemStacks();
         guiItemStacks.init(0, true, 0, 0);
         guiItemStacks.init(1, false, 54, 0);
@@ -80,6 +87,17 @@ public class RoostCategory implements IRecipeCategory<RoostRecipe> {
         guiItemStacks.init(4, false, 108, 0);
         guiItemStacks.set(iIngredients);
         iRecipeLayout.getItemStacks().addTooltipCallback(new RoostTooltipCallback(recipe));
+    }
+
+    public static Collection<?> getRoostRecipes() {
+        List<RoostRecipe> recipes = new ArrayList<>();
+        ChickenRegistry.getChickenRegistry().getChickens().forEach(((chickenName, customChickenData) -> {
+            RoostData roostData = customChickenData.getRoostData();
+            if(roostData.canRoost()) {
+                recipes.add(new RoostRecipe(customChickenData));
+            }
+        }));
+        return recipes;
     }
 
 }

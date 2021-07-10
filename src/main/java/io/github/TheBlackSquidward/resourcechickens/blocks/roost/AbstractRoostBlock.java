@@ -27,8 +27,10 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 public abstract class AbstractRoostBlock extends Block {
 
@@ -58,19 +60,22 @@ public abstract class AbstractRoostBlock extends Block {
         return true;
     }
 
+    @NotNull
+    @ParametersAreNonnullByDefault
     @Override
-    public ActionResultType use(BlockState p_225533_1_, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult p_225533_6_) {
+    public ActionResultType use(@NotNull BlockState p_225533_1_, World world, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand hand, @NotNull BlockRayTraceResult p_225533_6_) {
         if (!world.isClientSide) {
             TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof AbstractRoostTE) {
                 INamedContainerProvider containerProvider = new INamedContainerProvider() {
+                    @NotNull
                     @Override
                     public ITextComponent getDisplayName() {
                         return new TranslationTextComponent("gui.resourcechickens.roost");
                     }
 
                     @Override
-                    public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+                    public Container createMenu(int i, @NotNull PlayerInventory playerInventory, @NotNull PlayerEntity playerEntity) {
                         return new RoostContainer(i, world, pos, playerInventory, playerEntity);
                     }
                 };
@@ -84,8 +89,10 @@ public abstract class AbstractRoostBlock extends Block {
         }
     }
 
+    @NotNull
+    @ParametersAreNonnullByDefault
     @Override
-    public BlockRenderType getRenderShape(BlockState p_149645_1_) {
+    public BlockRenderType getRenderShape(@NotNull BlockState p_149645_1_) {
         return BlockRenderType.MODEL;
     }
 

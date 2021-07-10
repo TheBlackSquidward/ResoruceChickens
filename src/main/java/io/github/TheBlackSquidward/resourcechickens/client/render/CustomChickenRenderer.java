@@ -1,34 +1,32 @@
 package io.github.TheBlackSquidward.resourcechickens.client.render;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
-import io.github.TheBlackSquidward.resourcechickens.client.model.CustomChickenModel;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.model.ChickenModel;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
+@OnlyIn(Dist.CLIENT)
+public class CustomChickenRenderer extends MobRenderer<CustomChickenEntity, ChickenModel<CustomChickenEntity>> {
 
-public class CustomChickenRenderer extends MobRenderer<CustomChickenEntity, CustomChickenModel<CustomChickenEntity>> {
     public CustomChickenRenderer(EntityRendererManager rendererManager) {
-        super(rendererManager, new CustomChickenModel<>(), 0.3f);
+        super(rendererManager, new ChickenModel<>(), 0.3F);
     }
 
-    @ParametersAreNonnullByDefault
-    @Nullable
-    @Override
-    protected RenderType getRenderType(CustomChickenEntity customChickenEntity, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
-        return RenderType.entityTranslucent(this.getTextureLocation(customChickenEntity));
+    @NotNull
+    public ResourceLocation getTextureLocation(CustomChickenEntity customChickenEntity) {
+        return new ResourceLocation(ResourceChickens.MOD_ID, "textures/entity/" + customChickenEntity.getChickenName() + "_chicken.png");
     }
 
-    @ParametersAreNonnullByDefault
-    @Override
-    public ResourceLocation getTextureLocation(CustomChickenEntity entity) {
-        ChickenRegistryObject chickenRegistryObject = ChickenRegistry.getChickenRegistryObjectbyEntity(entity);
-        return new ResourceLocation(ResourceChickens.MOD_ID, "textures/entity/" + chickenRegistryObject.getEntityName() + ".png");
+    protected float getBob(CustomChickenEntity customChickenEntity, float partialTicks) {
+        float f = MathHelper.lerp(partialTicks, customChickenEntity.oFlap, customChickenEntity.flap);
+        float f1 = MathHelper.lerp(partialTicks, customChickenEntity.oFlapSpeed, customChickenEntity.flapSpeed);
+        return (MathHelper.sin(f) + 1.0F) * f1;
     }
+
 }

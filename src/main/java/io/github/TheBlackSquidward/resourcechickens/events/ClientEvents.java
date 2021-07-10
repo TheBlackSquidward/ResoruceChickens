@@ -1,8 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.events;
 
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistryObject;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
+import io.github.TheBlackSquidward.resourcechickens.init.ModEntities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,9 +12,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void onAttributeCreation(EntityAttributeCreationEvent e) {
-        for(ChickenRegistryObject chicken : ChickenRegistry.getChickenRegistry()) {
-            e.put(chicken.getChickenEntityRegistryObject().get(), CustomChickenEntity.setCustomAttributes().build());
-        }
+        ModEntities.getModChickens().forEach((s, customChicken) -> e.put(customChicken.get(), CustomChickenEntity.createAttributes().build()));
     }
 
 }

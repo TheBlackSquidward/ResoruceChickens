@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "P P",
+    "HHH"
+  ],
+  "key": {
+    "P": { "item": "minecraft:crimson_planks" },
+    "H": { "item": "minecraft:hay_block" }
+  },
+  "result": {
+    "item": "resourcechickens:crimson_roost",
+    "count": 1
+  }
+}

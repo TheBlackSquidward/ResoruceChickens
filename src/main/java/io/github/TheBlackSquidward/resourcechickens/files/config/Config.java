@@ -8,8 +8,7 @@ import java.nio.file.Path;
 
 public class Config {
 
-    public static BooleanValue generateChickenBreederRecipes;
-    public static BooleanValue generateRoostRecipes;
+    public static BooleanValue generateDefaultChickenFiles;
 
     public static class CommonConfig {
         public static final Path PATH = FMLPaths.CONFIGDIR.get().resolve("resourcechickens.toml");
@@ -17,9 +16,8 @@ public class Config {
         static {
             Builder commonConfigBuidler = new Builder();
 
-            commonConfigBuidler.push("Recipe Options");
-            generateChickenBreederRecipes = commonConfigBuidler.comment("\n Set to false to disable the generation of default chicken breeding recipes.").define("generateChickenBreederRecipes", true);
-            generateRoostRecipes = commonConfigBuidler.comment("\n Set to false to disable the generation of default roost recipes.").define("generateRoostRecipes", true);
+            commonConfigBuidler.push("Mod Options");
+            generateDefaultChickenFiles = commonConfigBuidler.comment("\n Set to false to disable the generation of default chicken files.").define("generateDefaultChickenFiles", true);
             commonConfigBuidler.pop();
 
             commonConfig = commonConfigBuidler.build();

@@ -21,7 +21,7 @@ public class DataGeneration {
         dataGenerator.addProvider(new ResourceChickensRecipeProvider(dataGenerator));
         dataGenerator.addProvider(new ResourceChickensLootTableProvider(dataGenerator));
         dataGenerator.addProvider(new ResourceChickensItemModelProvider(dataGenerator, existingFileHelper));
-        //dataGenerator.addProvider(new ResourceChickensLangProvider(dataGenerator));
+        dataGenerator.addProvider(new ResourceChickensLangProvider(dataGenerator));
     }
 
 }

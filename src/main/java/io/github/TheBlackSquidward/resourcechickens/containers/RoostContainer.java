@@ -1,6 +1,5 @@
 package io.github.TheBlackSquidward.resourcechickens.containers;
 
-import io.github.TheBlackSquidward.resourcechickens.commands.AbstractCommand;
 import io.github.TheBlackSquidward.resourcechickens.init.ModContainers;
 import io.github.TheBlackSquidward.resourcechickens.te.roost.AbstractRoostTE;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,6 +12,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.NotNull;
 
 public class RoostContainer extends Container {
 
@@ -63,7 +63,7 @@ public class RoostContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity player) {
+    public boolean stillValid(@NotNull PlayerEntity player) {
         return true;
     }
 
@@ -74,7 +74,7 @@ public class RoostContainer extends Container {
     }
 
     @Override
-    public ItemStack quickMoveStack(PlayerEntity playerEntity, int index) {
+    public @NotNull ItemStack quickMoveStack(@NotNull PlayerEntity playerEntity, int index) {
         //TODO
         return ItemStack.EMPTY;
     }

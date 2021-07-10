@@ -1,0 +1,27 @@
+{
+  "coreData": {
+    "name": "light_gray",
+    "chickenType": "DYE",
+    "hasFeather": false
+  },
+  "breedData": {
+    "canBreed": true,
+    "totalBreedTime": 2400,
+    "parent1": "gray",
+    "parent2": "white"
+  },
+  "roostData": {
+    "canRoost": true,
+    "totalRoostTime": 300,
+    "roostOutput": [
+      {
+        "itemOutput": {
+          "id": "minecraft:light_gray_dye",
+          "minAmount": 1,
+          "maxAmount" : 3
+        },
+        "chance": 1.0
+      }
+    ]
+  }
+}
