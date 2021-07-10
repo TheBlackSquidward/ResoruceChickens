@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "P P",
+    "HHH"
+  ],
+  "key": {
+    "P": { "item": "minecraft:birch_planks" },
+    "H": { "item": "minecraft:hay_block" }
+  },
+  "result": {
+    "item": "resourcechickens:birch_roost",
+    "count": 1
+  }
+}

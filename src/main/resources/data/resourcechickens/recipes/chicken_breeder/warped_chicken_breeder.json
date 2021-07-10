@@ -6,12 +6,12 @@
     "HHH"
   ],
   "key": {
-    "P": { "tag": "minecraft:planks" },
+    "P": { "item": "minecraft:warped_planks" },
     "S": { "item": "minecraft:wheat_seeds" },
     "H": { "item": "minecraft:hay_block" }
   },
   "result": {
-    "item": "resourcechickens:chicken_breeder",
+    "item": "resourcechickens:warped_chicken_breeder",
     "count": 1
   }
 }
