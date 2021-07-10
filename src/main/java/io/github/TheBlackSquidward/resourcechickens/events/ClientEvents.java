@@ -12,7 +12,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void onAttributeCreation(EntityAttributeCreationEvent e) {
-        ModEntities.getModChickens().forEach((s, customChicken) -> e.put(customChicken.get(), CustomChickenEntity.setCustomAttributes().build()));
+        ModEntities.getModChickens().forEach((s, customChicken) -> e.put(customChicken.get(), CustomChickenEntity.createAttributes().build()));
     }
 
 }
