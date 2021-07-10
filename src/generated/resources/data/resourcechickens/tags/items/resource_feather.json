@@ -1,6 +1,14 @@
 {
   "replace": false,
   "values": [
-    "resourcechickens:gold_chicken_feather"
+    "resourcechickens:blackstone_chicken_feather",
+    "resourcechickens:diamond_chicken_feather",
+    "resourcechickens:emerald_chicken_feather",
+    "resourcechickens:gold_chicken_feather",
+    "resourcechickens:iron_chicken_feather",
+    "resourcechickens:lapis_chicken_feather",
+    "resourcechickens:netherite_chicken_feather",
+    "resourcechickens:redstone_chicken_feather",
+    "resourcechickens:stone_chicken_feather"
   ]
 }
