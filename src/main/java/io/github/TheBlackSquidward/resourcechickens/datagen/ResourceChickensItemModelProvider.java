@@ -1,10 +1,8 @@
 package io.github.TheBlackSquidward.resourcechickens.datagen;
 
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
+import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -16,17 +14,13 @@ public class ResourceChickensItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-
+        ChickenRegistry.getChickenRegistry().getChickens().forEach((chickenName, customChickenData) -> spawnEggBuidler(chickenName + "_chicken_spawn_egg"));
     }
 
-    public ItemModelBuilder simpleTexture(Item item, String texture) {
-        return singleTexture(name(item), mcLoc("item/generated"), "layer0", modLoc(texture));
-    }
-    public ItemModelBuilder simpleTexture(Item item, ResourceLocation texture) {
-        return singleTexture(name(item), mcLoc("item/generated"), texture);
-    }
-    public String name(Item item) {
-        return item.getRegistryName().getPath();
+    public void spawnEggBuidler(String name) {
+        getBuilder(name).parent(getExistingFile(mcLoc("item/generated")))
+                .texture("layer0", modLoc("items/spawn_egg"))
+                .texture("layer1", modLoc("items/spawn_egg_overlay"));
     }
 
 }

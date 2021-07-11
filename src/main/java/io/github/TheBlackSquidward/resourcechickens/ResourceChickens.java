@@ -101,7 +101,7 @@ public class ResourceChickens {
                         .sized(1.0f, 1.0f)
                         .build(new ResourceLocation(ResourceChickens.MOD_ID, chickenName +  "_chicken").toString()));
         ModItems.ITEMS.register(chickenName + "_chicken_item", () -> new ResourceChickenItem(customChickenEntity, chickenName, new Item.Properties().stacksTo(16)));
-        ModItems.ITEMS.register(chickenName + "_chicken_spawn_egg", () -> new ChickenSpawnEggItem(customChickenEntity, chickenName, new Item.Properties()));
+        ModItems.ITEMS.register(chickenName + "_chicken_spawn_egg", () -> new ChickenSpawnEggItem(customChickenEntity, 0xffcc33, 0x303030,  chickenName,  new Item.Properties()));
         if (hasFeather) {
             ModItems.ITEMS.register(chickenName + "_chicken_feather", () -> new FeatherItem(new Item.Properties()));
         }

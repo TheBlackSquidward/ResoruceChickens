@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "resourcechickens:items/spawn_eggs/blazing_chicken_spawn_egg"
-  }
-}

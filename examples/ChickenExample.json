@@ -4,6 +4,12 @@
     "chickenType": "SPECIAL",
     "hasFeather": false
   },
+  "renderData": {
+    "isGlowing": false,
+    "hasGlint": false,
+    "spawnEggPrimaryColor": "#00ffff",
+    "spawnEggSecondaryColor": "#303030"
+  },
   "breedData": {
     "canBreed": false,
     "totalBreedTime": 2400,
@@ -13,6 +19,18 @@
   "roostData": {
     "canRoost": false,
     "totalRoostTime": 300,
-    "roostOutputs":
+    "roostOutput": [
+      {
+        "itemOutput": {
+          "id": "minecraft:water_bucket",
+          "minAmount": 1,
+          "maxAmount" : 3
+        },
+        "chance": 1.0
+      }
+    ]
+  },
+  "spawnData": {
+
   }
 }

@@ -16,20 +16,24 @@ import java.util.function.Consumer;
 
 public class CustomChickenData {
 
-    public static CustomChickenData DEFAULT = new CustomChickenData(CoreData.DEFAULT, BreedData.DEFAULT, RoostData.DEFAULT);
+    public static CustomChickenData DEFAULT = new CustomChickenData(CoreData.DEFAULT, RenderData.DEFAULT, BreedData.DEFAULT, RoostData.DEFAULT, SpawnData.DEFAULT);
 
     public static Codec<CustomChickenData> CODEC(String chickenName) {
         return RecordCodecBuilder.create(instance -> instance.group(
-            CoreData.CODEC(chickenName).fieldOf("coreData").orElseGet((Consumer<String>) s -> ResourceChickens.LOGGER.error("CoreData is REQUIRED!"),null).forGetter(CustomChickenData::getCoreData),
-            BreedData.CODEC.fieldOf("breedData").orElse(BreedData.DEFAULT).forGetter(CustomChickenData::getBreedData),
-            RoostData.CODEC.fieldOf("roostData").orElse(RoostData.DEFAULT).forGetter(CustomChickenData::getRoostData)
+                CoreData.CODEC(chickenName).fieldOf("coreData").orElseGet((Consumer<String>) s -> ResourceChickens.LOGGER.error("CoreData is REQUIRED!"),null).forGetter(CustomChickenData::getCoreData),
+                RenderData.CODEC.fieldOf("renderData").orElse(RenderData.DEFAULT).forGetter(CustomChickenData::getRenderData),
+                BreedData.CODEC.fieldOf("breedData").orElse(BreedData.DEFAULT).forGetter(CustomChickenData::getBreedData),
+                RoostData.CODEC.fieldOf("roostData").orElse(RoostData.DEFAULT).forGetter(CustomChickenData::getRoostData),
+                SpawnData.CODEC.fieldOf("spawnData").orElse(SpawnData.DEFAULT).forGetter(CustomChickenData::getSpawnData)
         ).apply(instance, CustomChickenData::new));
     }
 
-    private CustomChickenData(CoreData coreData, BreedData breedData, RoostData roostData) {
+    private CustomChickenData(CoreData coreData, RenderData renderData, BreedData breedData, RoostData roostData, SpawnData spawnData) {
         this.coreData = coreData;
+        this.renderData = renderData;
         this.breedData = breedData;
         this.roostData = roostData;
+        this.spawnData = spawnData;
 
         this.rawData = ChickenRegistry.getChickenRegistry().getRawCustomChickenObject(coreData.getName());
         this.registryID = new ResourceLocation(ResourceChickens.MOD_ID + ":" + coreData.getName() + "_chicken");
@@ -85,7 +89,6 @@ public class CustomChickenData {
     public ItemStack getChickenSpawnEgg() {
         return new ItemStack(ChickenUtisl.getItem(ResourceChickens.MOD_ID + ":" + getCoreData().getName() + "_chicken_spawn_egg"));
     }
-
     public ItemStack getChickenFeather() {
         if(coreData.hasFeather()) {
             return new ItemStack(ChickenUtisl.getItem(ResourceChickens.MOD_ID + ":" + getCoreData().getName() + "_chicken_feather"));

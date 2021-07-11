@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "resourcechickens:items/spawn_egg",
+    "layer1": "resourcechickens:items/spawn_egg_overlay"
+  }
+}

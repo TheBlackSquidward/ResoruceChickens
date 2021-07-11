@@ -1,8 +1,10 @@
 package io.github.TheBlackSquidward.resourcechickens.items;
 
+import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.CustomChickenData;
 import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.BreedData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.RenderData;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityType;
@@ -10,6 +12,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -27,13 +30,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.Objects;
 
-public class ChickenSpawnEggItem extends BaseItem {
+public class ChickenSpawnEggItem extends SpawnEggItem {
 
     private final Lazy<? extends EntityType<?>> entityType;
     private final CustomChickenData chickenData;
 
-    public ChickenSpawnEggItem(RegistryObject<? extends EntityType<?>> entityTypeSupplier, String chickenName, Properties properties) {
-        super(properties);
+    public ChickenSpawnEggItem(RegistryObject<? extends EntityType<?>> entityTypeSupplier, int firstColor, int secondColor, String chickenName, Properties properties) {
+        super(null, firstColor, secondColor, properties.tab(ResourceChickens.ITEM_GROUP));
         this.chickenData = ChickenRegistry.getChickenRegistry().getChickenData(chickenName);
         this.entityType = Lazy.of(entityTypeSupplier);
     }
@@ -86,4 +89,8 @@ public class ChickenSpawnEggItem extends BaseItem {
         return ActionResultType.SUCCESS;
     }
 
+    public static int getColor(ItemStack itemStack, int tintIndex) {
+        RenderData renderData = ((ChickenSpawnEggItem)itemStack.getItem()).getChickenData().getRenderData();
+        return tintIndex == 0 ? renderData.getSpawnEggPrimaryColor().getValue() : renderData.getSpawnEggSecondaryColor().getValue();
+    }
 }
