@@ -2,7 +2,7 @@ package io.github.TheBlackSquidward.resourcechickens.items;
 
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.CustomChickenData;
-import io.github.TheBlackSquidward.resourcechickens.api.data.BreedData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.BreedData;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityType;

@@ -3,7 +3,7 @@ package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
-import io.github.TheBlackSquidward.resourcechickens.api.data.RoostData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.RoostData;
 import io.github.TheBlackSquidward.resourcechickens.init.ModItems;
 import io.github.TheBlackSquidward.resourcechickens.recipes.RoostRecipe;
 import mezz.jei.api.constants.VanillaTypes;

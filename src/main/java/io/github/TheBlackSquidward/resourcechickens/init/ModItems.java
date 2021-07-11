@@ -64,6 +64,11 @@ public class ModItems {
     public static final RegistryObject<UpgradeItem> luckUpgrade = ITEMS.register("luck_upgrade", () -> new UpgradeItem(new Item.Properties()));
     public static final RegistryObject<UpgradeItem> speedUpgrade = ITEMS.register("speed_upgrade", () -> new UpgradeItem(new Item.Properties()));
     public static final RegistryObject<UpgradeItem> energyUpgrade = ITEMS.register("energy_upgrade", () -> new UpgradeItem(new Item.Properties()));
+    public static final RegistryObject<UpgradeItem> bountifulUpgrade = ITEMS.register("bountiful_upgrade", () -> new UpgradeItem(new Item.Properties()));
+    public static final RegistryObject<UpgradeItem> containemntUpgrade = ITEMS.register("containment_upgrade", () -> new UpgradeItem(new Item.Properties()));
+    public static final RegistryObject<UpgradeItem> filterUpgrade = ITEMS.register("filter_upgrade", () -> new UpgradeItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> poweredUpgradeKit = ITEMS.register("powered_upgrade_kit", () -> new PoweredUpgradeKit(new Item.Properties()));
 
     //Chickens - Vanilla
     public static final RegistryObject<ChickenItem> vanillaChickenItem = ITEMS.register("vanilla_chicken_item", () -> new VanillaChickenItem(new Item.Properties().stacksTo(16)));

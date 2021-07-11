@@ -1,9 +1,7 @@
 package io.github.TheBlackSquidward.resourcechickens.api;
 
 import com.google.gson.JsonObject;
-import io.github.TheBlackSquidward.resourcechickens.api.data.BreedData;
-import io.github.TheBlackSquidward.resourcechickens.api.data.CoreData;
-import io.github.TheBlackSquidward.resourcechickens.api.data.RoostData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.*;
 
 public interface IResourceChicken {
 
@@ -13,8 +11,12 @@ public interface IResourceChicken {
 
     CoreData getCoreData();
 
+    RenderData getRenderData();
+
     BreedData getBreedData();
 
     RoostData getRoostData();
+
+    SpawnData getSpawnData();
 
 }

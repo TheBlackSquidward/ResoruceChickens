@@ -1,7 +1,8 @@
-package io.github.TheBlackSquidward.resourcechickens.api.data;
+package io.github.TheBlackSquidward.resourcechickens.api.data.chickenData;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.github.TheBlackSquidward.resourcechickens.api.data.RoostOutputData;
 
 import java.util.ArrayList;
 import java.util.Collections;

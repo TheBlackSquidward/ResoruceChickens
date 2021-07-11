@@ -1,6 +1,6 @@
 package io.github.TheBlackSquidward.resourcechickens.compat.jei;
 
-import io.github.TheBlackSquidward.resourcechickens.api.data.RoostData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.RoostData;
 import io.github.TheBlackSquidward.resourcechickens.recipes.RoostRecipe;
 import mezz.jei.api.gui.ingredient.ITooltipCallback;
 import net.minecraft.item.ItemStack;

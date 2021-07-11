@@ -2,7 +2,7 @@ package io.github.TheBlackSquidward.resourcechickens;
 
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.ResourceChickensAPI;
-import io.github.TheBlackSquidward.resourcechickens.api.data.CoreData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.CoreData;
 import io.github.TheBlackSquidward.resourcechickens.compat.top.TopCompat;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.entities.ResourceChicken;

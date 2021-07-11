@@ -4,9 +4,7 @@ import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
-import io.github.TheBlackSquidward.resourcechickens.api.data.BreedData;
-import io.github.TheBlackSquidward.resourcechickens.api.data.CoreData;
-import io.github.TheBlackSquidward.resourcechickens.api.data.RoostData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.*;
 import io.github.TheBlackSquidward.resourcechickens.api.utils.ChickenUtisl;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
@@ -39,8 +37,10 @@ public class CustomChickenData {
     }
 
     protected CoreData coreData;
+    protected RenderData renderData;
     protected BreedData breedData;
     protected RoostData roostData;
+    protected SpawnData spawnData;
 
     protected JsonObject rawData;
     protected ResourceLocation registryID;
@@ -49,11 +49,17 @@ public class CustomChickenData {
     public CoreData getCoreData() {
         return coreData;
     }
+    public RenderData getRenderData() {
+        return renderData;
+    }
     public BreedData getBreedData() {
         return breedData;
     }
     public RoostData getRoostData() {
         return roostData;
+    }
+    public SpawnData getSpawnData() {
+        return spawnData;
     }
 
     public EntityType<?> getEntityType() {
