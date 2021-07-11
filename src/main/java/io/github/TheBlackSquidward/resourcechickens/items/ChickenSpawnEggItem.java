@@ -4,7 +4,7 @@ import io.github.TheBlackSquidward.resourcechickens.ResourceChickens;
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.CustomChickenData;
 import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.BreedData;
-import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.RenderData;
+import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.ColorData;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityType;
@@ -90,7 +90,7 @@ public class ChickenSpawnEggItem extends SpawnEggItem {
     }
 
     public static int getColor(ItemStack itemStack, int tintIndex) {
-        RenderData renderData = ((ChickenSpawnEggItem)itemStack.getItem()).getChickenData().getRenderData();
-        return tintIndex == 0 ? renderData.getSpawnEggPrimaryColor().getValue() : renderData.getSpawnEggSecondaryColor().getValue();
+        ColorData colorData = ((ChickenSpawnEggItem)itemStack.getItem()).getChickenData().getRenderData().getColorData();
+        return tintIndex == 0 ? colorData.getSpawnEggPrimaryColor().getValue() : colorData.getSpawnEggSecondaryColor().getValue();
     }
 }

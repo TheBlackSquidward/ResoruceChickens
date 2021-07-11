@@ -4,6 +4,14 @@
     "chickenType": "VANILLA",
     "hasFeather": false
   },
+  "renderData": {
+    "isGlowing": false,
+    "hasGlint": false,
+    "colorData": {
+      "spawnEggPrimaryColor": "#8C8C8C",
+      "spawnEggSecondaryColor": "#2C2C2C"
+    }
+  },
   "breedData": {
     "canBreed": false,
     "totalBreedTime": 2400,

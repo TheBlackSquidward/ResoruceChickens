@@ -2,6 +2,7 @@ package io.github.TheBlackSquidward.resourcechickens.events;
 
 import io.github.TheBlackSquidward.resourcechickens.api.ChickenRegistry;
 import io.github.TheBlackSquidward.resourcechickens.api.IChickenRegistry;
+import io.github.TheBlackSquidward.resourcechickens.api.data.chickenData.ColorData;
 import io.github.TheBlackSquidward.resourcechickens.entities.CustomChickenEntity;
 import io.github.TheBlackSquidward.resourcechickens.init.ModEntities;
 import io.github.TheBlackSquidward.resourcechickens.items.ChickenSpawnEggItem;
@@ -28,7 +29,8 @@ public class ClientEvents {
     public static void onItemColor(ColorHandlerEvent.Item e) {
         ItemColors colors = e.getItemColors();
         chickenRegistry.getChickens().forEach((chickenName, customChickenData) -> {
-            if(!customChickenData.getRenderData().getSpawnEggSecondaryColor().isDefault() && !customChickenData.getRenderData().getSpawnEggPrimaryColor().isDefault()) {
+            ColorData colorData = customChickenData.getRenderData().getColorData();
+            if(!colorData.getSpawnEggSecondaryColor().isDefault() && !colorData.getSpawnEggPrimaryColor().isDefault()) {
                 registerItems(colors, ChickenSpawnEggItem::getColor, customChickenData.getChickenSpawnEgg().getItem());
             }
         });
