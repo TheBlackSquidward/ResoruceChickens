@@ -138,7 +138,7 @@ public class Color {
         return DataResult.error("Color input not valid!");
     }
 
-    public static void initRainbow() { new Timer().scheduleAtFixedRate(new ColorChange(), 0, 40); }
+    public static void initRainbow() { new Timer().scheduleAtFixedRate(new ColorChange(), 0, 20); }
 
     private static class ColorChange extends TimerTask {
         @Override

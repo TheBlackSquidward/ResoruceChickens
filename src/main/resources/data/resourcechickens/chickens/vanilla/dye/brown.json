@@ -4,6 +4,14 @@
     "chickenType": "DYE",
     "hasFeather": false
   },
+  "renderData": {
+    "isGlowing": false,
+    "hasGlint": false,
+    "colorData": {
+      "spawnEggPrimaryColor": "#FFFFFF",
+      "spawnEggSecondaryColor": "#825432"
+    }
+  },
   "breedData": {
     "canBreed": false,
     "totalBreedTime": 2400,
