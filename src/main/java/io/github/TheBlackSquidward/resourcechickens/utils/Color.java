@@ -11,8 +11,7 @@ import net.minecraftforge.fml.DistExecutor;
 import java.util.*;
 
 public class Color {
-
-
+    
     //TODO proof!!!!!!
 
     protected static final Map<String, Color> colorsWithNames = new HashMap<>();
@@ -20,7 +19,6 @@ public class Color {
     public static final Codec<Color> CODEC = Codec.PASSTHROUGH.comapFlatMap(Color::decodeColor, color -> new Dynamic<>(JsonOps.INSTANCE, new JsonPrimitive(color.value)));
     public static final Color DEFAULT = defaultColor();
     public static final Color RAINBOW;
-    private float[] rgbaValue;
 
     static {
         RAINBOW = createRainbowColor();
@@ -41,53 +39,15 @@ public class Color {
         this.g = (value >> 8) & 0xFF;
         this.b = value & 0xFF;
         this.value = value;
-
-        updateFloats();
-    }
-
-    public Color(int r, int g, int b, int a) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = a;
-
-        updateValue();
-        updateFloats();
-    }
-
-    private void updateFloats(){
-        rgbaValue = new float[4];
-        rgbaValue[0] = this.getFloatRed();
-        rgbaValue[1] = this.getFloatGreen();
-        rgbaValue[2] = this.getFloatBlue();
-        rgbaValue[3] = this.getFloatAlpha();
     }
 
     private void updateValue(){
         this.value = (this.a << 24) | (this.r << 16) | (this.g << 8) | this.b;
     }
 
-    public float getFloatRed() { return r / 255f; }
-
-    public float getFloatGreen() { return g / 255f; }
-
-    public float getFloatBlue() { return b / 255f; }
-
-    public float getFloatAlpha() { return a / 255f; }
-
-    public int getIntRed() { return r; }
-
-    public int getIntGreen() { return g; }
-
-    public int getIntBlue() { return b; }
-
-    public int getIntAlpha() { return a; }
-
     public int getValue() { return value; }
 
     public boolean isDefault(){ return defaultValue; }
-
-    public boolean isRainbow(){ return isRainbow; }
 
     @Override
     public String toString() {
@@ -105,12 +65,6 @@ public class Color {
         Color color = new Color(0xff0000);
         color.isRainbow = true;
         colorsWithNames.put("rainbow", color);
-        return color;
-    }
-
-    public static Color createNamedColor(String name, int value) {
-        Color color = new Color(value);
-        colorsWithNames.putIfAbsent(name.toLowerCase(Locale.ENGLISH), color);
         return color;
     }
 
@@ -157,7 +111,6 @@ public class Color {
             }
 
             RAINBOW.updateValue();
-            RAINBOW.updateFloats();
         }
     }
 
